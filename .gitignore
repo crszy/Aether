@@ -1,0 +1,36 @@
+# build output
+*.obj
+*.pdb
+*.exe
+*.lib
+*.map
+*.ilk
+luaobj/
+installer/Aether-Setup-stub.exe
+sidecar/bin/
+sidecar/obj/
+sensors/
+sensors-sc/
+
+# runtime data - never commit a personal setup
+config/
+config.json
+config.json.bak
+config.backup-*.json
+*.log
+stall.txt
+uidump.txt
+texdump.txt
+perflog.txt
+blur_src.png
+blur_out.png
+crash *.dmp
+hang *.dmp
+*.dmp
+plugins/status.log
+_backups/
+pkg/
+
+# large third-party data that ships in the release installer instead of git (see README > Building)
+linux/
+reference/

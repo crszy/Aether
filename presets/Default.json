@@ -1,0 +1,28 @@
+{
+  "appearance": { "scheme": "catppuccin-mocha", "themeMode": "auto", "customAccent": false, "accent": [96,81,147],
+                   "dynamicColor": true, "hideTaskbar": true, "rounding": 1, "opacity": 0.956863, "uiScale": 1 },
+  "background": { "mode": "acrylic", "image": "", "blur": true, "opacity": 0.55, "wallpaperDir": "",
+                  "transition": "slide_right", "transitionMs": 900, "transitionPos": "mouse" },
+  "desktop": { "bubble": true, "gap": 10, "radius": 22 },
+  "bar": { "autoHide": false, "width": 48, "hideOnFullscreen": true, "sameMonitor": true, "previews": true },
+  "layout": {
+    "bar": { "edge": "left", "size": 48, "span": 1, "spanMax": 0, "anchor": 0.5, "gap": 10, "order": 0, "visible": true },
+    "dashboard": { "edge": "top", "size": 424, "span": 0.46, "spanMax": 880, "anchor": 0.5, "gap": 0, "order": 0, "visible": true },
+    "quickSettings": { "edge": "right", "size": 384, "span": 0, "spanMax": 0, "anchor": 1, "gap": 10, "order": 0, "visible": true }
+  },
+  "motion": { "speed": 0.662868, "reduce": false, "tilt": 0.18 },
+  "region": { "clock24": false, "firstDay": 0 },
+  "notifications": { "suppressNative": true, "doNotDisturb": false },
+  "launcher": { "descriptions": true, "maxResults": 8 },
+  "dashboard": { "tabs": [true,true,true,true] },
+  "sensors": { "lhmUrl": "http://localhost:8085/data.json" },
+  "power": { "autoDim": true, "dimAfter": 120, "dimLevel": 0.6 },
+  "wallpaper": { "folders": [], "recursive": false, "showName": true, "showExt": true,
+                  "cardW": 308, "cardH": 182, "nearW": 196, "nearH": 116, "cardGap": 22,
+                  "depthShadow": true, "hoverZoom": false, "hoverAmount": 8,
+                  "slideshowSec": 0, "shuffle": true, "paletteExport": false,
+                  "restoreOnLaunch": false, "postApply": "",
+                  "prevTransition": "slide_right", "nextTransition": "slide_left", "last": "" },
+  "plugins": { "enabled": true, "disabled": [] },
+  "profile": { "name": "" }
+}

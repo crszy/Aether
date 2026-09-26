@@ -1,0 +1,4 @@
+nebula.mp4
+  Cut from "Hubble's Cosmic Reef Image Flyby" (NASA Scientific Visualization Studio, https://svs.gsfc.nasa.gov/13599).
+  Credit: Space Telescope Science Institute (G. Bacon, J. DePasquale, L. Hustak, J. Olmsted, A. Pagan, D. Player, F. Summers).
+  NASA media is used under NASA's media usage guidelines. Segment 0:11-0:29, scaled to 960x540, played forward then backward so it loops, no audio.

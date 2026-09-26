@@ -1,0 +1,76 @@
+# Aether custom widget - Caelestia's Resources column: three rings with icons,
+# plus a morphing shape that changes with CPU load and a shell-command data source.
+
+[widget]
+name = "Resource rings"
+size = [0.12, 0.62]
+refresh_ms = 500
+background = "card"
+
+# run a command every 30s and use its output as {src.uptime}
+[[source]]
+name = "procs"
+command = "tasklist /nh | find /c /v \"\""
+interval_ms = 30000
+
+[[item]]
+type = "ring"
+x = "50%"
+y = "h*0.18"
+radius = "min(w*0.36, h*0.13)"
+thickness = 6
+value = "{cpu}"
+color = "primary"
+
+[[item]]
+type = "icon"
+name = "memory"
+x = "50%"
+y = "h*0.18"
+size = 26
+color = "primary"
+
+[[item]]
+type = "ring"
+x = "50%"
+y = "h*0.47"
+radius = "min(w*0.36, h*0.13)"
+thickness = 6
+value = "{mem}"
+color = "tertiary"
+
+[[item]]
+type = "icon"
+name = "memory_alt"
+x = "50%"
+y = "h*0.47"
+size = 26
+color = "tertiary"
+
+[[item]]
+type = "ring"
+x = "50%"
+y = "h*0.76"
+radius = "min(w*0.36, h*0.13)"
+thickness = 6
+value = "{disk}"
+color = "secondary"
+
+[[item]]
+type = "icon"
+name = "hard_disk"
+x = "50%"
+y = "h*0.76"
+size = 26
+color = "secondary"
+
+[[item]]
+type = "text"
+text = "{cpu%} · {src.procs} procs"
+x = "50%"
+y = "h - 14"
+size = 12
+align = "center"
+valign = "middle"
+color = "ink2"
+max_width = "w - 8"

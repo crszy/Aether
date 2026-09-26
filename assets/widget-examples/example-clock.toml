@@ -1,0 +1,66 @@
+# ==============================================================================
+# Aether custom widget - a Caelestia-style stacked clock on a cookie shape.
+# Copy this file, rename it, and edit: the dashboard reloads it as soon as you save.
+# Full reference: README.md in this folder.
+# ==============================================================================
+
+[widget]
+name = "Cookie clock"
+description = "Stacked hours and minutes on a slowly turning cookie"
+size = [0.17, 0.62]          # default size as fractions of the dashboard area
+refresh_ms = 500
+background = "card"          # card | none | "#rrggbbaa" | (or set image = "C:/path/to.gif")
+radius = 28
+
+# a turning cookie behind the time - spin is in degrees, t is seconds since boot
+[[item]]
+type = "shape"
+shape = "cookie12"
+x = "50%"
+y = "50%"
+size = "min(w,h)*0.42"
+color = "secondary"
+alpha = 0.35
+spin = "t*6"
+
+[[item]]
+type = "text"
+text = "{time:%H}"
+x = "50%"
+y = "h/2 - 34"
+size = 40
+font = "bold"
+align = "center"
+valign = "middle"
+color = "secondary"
+
+[[item]]
+type = "text"
+text = "•••"
+x = "50%"
+y = "50%"
+size = 26
+align = "center"
+valign = "middle"
+color = "primary"
+
+[[item]]
+type = "text"
+text = "{time:%M}"
+x = "50%"
+y = "h/2 + 34"
+size = 40
+font = "bold"
+align = "center"
+valign = "middle"
+color = "secondary"
+
+[[item]]
+type = "text"
+text = "{date:%a, %d}"
+x = "50%"
+y = "h - 22"
+size = 14
+align = "center"
+valign = "middle"
+color = "ink2"
