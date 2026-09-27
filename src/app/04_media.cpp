@@ -212,20 +212,26 @@ static void FetchLyricsAsync(std::string title,std::string artist,std::string al
                 if(!ln.empty()&&ln.back()=='\r') ln.pop_back(); plain.push_back(ln); if(e==std::string::npos) break; i=e+1; } };
         // ---- cache ----
         bool fromCache=false;
+        std::vector<LyricLine> stale; int staleSrc=0;          // pre-"#v2" lyrics: re-checked, kept if the check cannot run
         if(!cache.empty()){
             FILE* f=_wfopen(cache.c_str(),L"rb");
             if(f){ std::string c; char buf[4096]; size_t r; while((r=fread(buf,1,sizeof(buf),f))>0) c.append(buf,r); fclose(f);
                 if(c.rfind("#none2",0)==0){ fromCache=true; }             // "#none" (no NetEase try yet) is retried
                 else if(c.rfind("#plain2\n",0)==0){ splitPlain(c.substr(8)); fromCache=!plain.empty(); }
                 else if(c.rfind("#none",0)==0 || c.rfind("#plain",0)==0){ fromCache=false; }
-                else { if(c.rfind("#ne\n",0)==0){ g_lyricsSrc.store(2); c=c.substr(4); } else g_lyricsSrc.store(1);
-                       ParseLrc(c,synced); fromCache=!synced.empty(); } }
+                else {
+                    // Entries from before the title/artist check (no "#v2") may be another song's lyrics - the
+                    // lookup used to accept the first timed result of a fuzzy search. Look them up again once.
+                    bool v2=c.rfind("#v2\n",0)==0; if(v2) c=c.substr(4);
+                    int src=1; if(c.rfind("#ne\n",0)==0){ src=2; c=c.substr(4); }
+                    if(v2){ g_lyricsSrc.store(src); ParseLrc(c,synced); fromCache=!synced.empty(); }
+                    else { ParseLrc(c,stale); staleSrc=src; } } }
         }
         if(!fromCache){
             auto tryResp=[&](const std::string& resp,double wantDur)->bool{
                 if(resp.empty()) return false; answered=true;
                 // a /get reply is one object; a /search reply is an array of them - walk every "id"
-                size_t pos=0; double bestD=1e9; std::string bestSync, bestPlain;
+                size_t pos=0; double bestD=1e9; int bestScore=-1; std::string bestSync, bestPlain;
                 std::vector<size_t> starts; { size_t k=0; while((k=resp.find("\"id\"",k))!=std::string::npos){ starts.push_back(k); k+=4; } }
                 if(starts.empty()) starts.push_back(0);
                 for(size_t si=0;si<starts.size();si++){
@@ -233,10 +239,31 @@ static void FetchLyricsAsync(std::string title,std::string artist,std::string al
                     std::string obj=resp.substr(a,b-a);
                     double d=jnum(obj,"duration"); double diff=(wantDur>1 && !std::isnan(d))? fabs(d-wantDur) : 0.0;
                     if(wantDur>1 && !std::isnan(d) && diff>8.0) continue;          // a different recording
+                    int matchScore=0;
+                    // Is it even this song? A fuzzy search happily returns another artist's song of the same name,
+                    // and with no length to compare (browsers often report none) that one was taken. Title must
+                    // match; the artist must match too unless the length agrees to within 2 s.
+                    { std::string tn, an; size_t k2;
+                      if((k2=jkey(obj,"trackName"))!=std::string::npos) JsonStrAt(obj,k2,tn);
+                      if((k2=jkey(obj,"artistName"))!=std::string::npos) JsonStrAt(obj,k2,an);
+                      std::string wt=LyrNorm(LyrCleanTitle(title)), gt=LyrNorm(LyrCleanTitle(tn));
+                      std::string wa=LyrNorm(artist), ga=LyrNorm(an);
+                      if(wt.empty() && title.find(" - ")!=std::string::npos) wt=LyrNorm(LyrCleanTitle(title.substr(title.find(" - ")+3)));
+                      bool titleOk = gt.empty() || wt.empty() || gt==wt || gt.find(wt)!=std::string::npos || wt.find(gt)!=std::string::npos
+                                     || (title.find(" - ")!=std::string::npos && LyrNorm(title).find(gt)!=std::string::npos);
+                      // no artist from the player (a browser video): the result's artist has to be named in the title
+                      bool artistOk = !ga.empty() && ( (!wa.empty() && (ga.find(wa)!=std::string::npos || wa.find(ga)!=std::string::npos))
+                                                       || LyrNorm(title).find(ga)!=std::string::npos );
+                      bool lengthOk = wantDur>1 && !std::isnan(d) && diff<=2.0;
+                      if(!titleOk) continue;
+                      if(!artistOk && !lengthOk) continue;
+                      // rank: an exact title beats a longer one containing it ("Hello" over "Hello Hello Hello"),
+                      // a matching artist beats a matching length, then the closer length wins
+                      matchScore = (gt==wt? 4 : 0) + (artistOk? 2 : 0) + (lengthOk? 1 : 0); }
                     std::string sy, pl; size_t kp;
                     if((kp=jkey(obj,"syncedLyrics"))!=std::string::npos) JsonStrAt(obj,kp,sy);
                     if((kp=jkey(obj,"plainLyrics"))!=std::string::npos)  JsonStrAt(obj,kp,pl);
-                    if(!sy.empty() && diff<bestD){ bestD=diff; bestSync=sy; }
+                    if(!sy.empty() && (matchScore>bestScore || (matchScore==bestScore && diff<bestD))){ bestScore=matchScore; bestD=diff; bestSync=sy; }
                     if(bestPlain.empty() && !pl.empty()) bestPlain=pl;
                     (void)pos;
                 }
@@ -267,13 +294,14 @@ static void FetchLyricsAsync(std::string title,std::string artist,std::string al
             if(!cache.empty() && answered){
                 FILE* f=_wfopen(cache.c_str(),L"wb");
                 if(f){
-                    if(!synced.empty()){ if(fromNe) fputs("#ne\n",f);
+                    if(!synced.empty()){ fputs("#v2\n",f); if(fromNe) fputs("#ne\n",f);
                         for(auto& L:synced){ int mm=(int)(L.t/60); double ss=L.t-mm*60; fprintf(f,"[%02d:%05.2f]%s\n",mm,ss,L.text.c_str()); } }
                     else if(!plain.empty()){ fputs("#plain2\n",f); for(auto& l:plain){ fputs(l.c_str(),f); fputc('\n',f); } }
                     else fputs("#none2\n",f);
                     fclose(f); }
             }
         }
+        if(synced.empty() && !answered && !stale.empty()){ synced=std::move(stale); g_lyricsSrc.store(staleSrc); }   // offline: keep what we had
         if(gen!=g_lyricsGen.load()) return;                           // the song changed while we were asking
         { std::lock_guard<std::mutex> lk(g_lyricsMtx); g_lyrics=std::move(synced); g_lyricsPlain=std::move(plain); }
         std::lock_guard<std::mutex> lk(g_lyricsMtx);
@@ -281,13 +309,24 @@ static void FetchLyricsAsync(std::string title,std::string artist,std::string al
     }).detach();
 }
 // Called from the draw thread each frame; kicks off a fetch when the track changes.
+// A player hands over the new TITLE before it refreshes the song's LENGTH (Spotify updates its timeline on its
+// own schedule), and the lookup used the length to pick the right recording - so right after a skip it filtered
+// by the PREVIOUS song's length and could take a different version, or turn the right one down, and cache that.
+// The fetch now waits until the length has changed too (or 2.5 s, for two songs of the same length).
 static void LyricsMaybeFetch(){
+    static ULONGLONG changedAt=0; static double durAtChange=0; static bool pending=false;
     bool has=g_md.has&&!g_md.title.empty();
     std::string key = has? (g_md.title+"|"+g_md.artist) : "";
+    const ULONGLONG now=GetTickCount64();
     if(key!=g_lyricsKey){ g_lyricsKey=key;
         { std::lock_guard<std::mutex> lk(g_lyricsMtx); g_lyrics.clear(); g_lyricsPlain.clear(); }
-        g_lyricsState.store(0); ++g_lyricsGen;
-        if(has) FetchLyricsAsync(g_md.title,g_md.artist,g_md.album,g_md.dur); }
+        g_lyricsState.store(has? 1 : 0); ++g_lyricsGen;
+        changedAt=now; durAtChange=g_md.dur; pending=has; }
+    if(pending && has){
+        const ULONGLONG since=now-changedAt;
+        const bool lengthMoved = g_md.dur>0.0 && fabs(g_md.dur-durAtChange)>0.5;
+        if((since>=350 && lengthMoved) || since>=2500 || (since>=350 && durAtChange<=0.0 && g_md.dur>0.0)){
+            pending=false; FetchLyricsAsync(g_md.title,g_md.artist,g_md.album,g_md.dur); } }
 }
 static ID3D11ShaderResourceView* g_mdArt=nullptr;      // album cover texture (published by the media thread)
 static std::atomic<ULONGLONG> g_medUntil{0}; static HWND g_medWake=nullptr;   // "Now Playing" flyout trigger

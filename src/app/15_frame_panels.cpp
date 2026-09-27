@@ -550,6 +550,15 @@ static void DrawUI() {
             ImVec2 ws=V(std::max(20.0f,w.w*ar.x), std::max(20.0f,w.h*ar.y));
             DrawWidget(dl,io,w,wo,ws);
         }
+        // an empty tab said nothing at all, and read as a tab that failed to load
+        if(t.widgets.empty() && !edit){
+            const char* l1="This tab is empty";
+            const char* l2=t.builtin? "Edit the dashboard and press \"Restore page\" to bring it back" : "Edit the dashboard and use \"+ Add widget\"";
+            ImVec2 c=V(o.x+ar.x*0.5f, o.y+ar.y*0.5f);
+            MsIcon(dl,"dashboard_customize",V(c.x,c.y-34),30,WithA(COL_INK2,160));
+            TextAt(dl,g_fMed,18,V(c.x-TextW(g_fMed,18,l1)*0.5f,c.y-6),COL_INK,l1);
+            TextAt(dl,g_fSml,14,V(c.x-TextW(g_fSml,14,l2)*0.5f,c.y+20),COL_INK2,l2);
+        }
         if(veil>0.004f)
             dl->AddRectFilled(V(o.x-10,o.y-10),V(o.x+ar.x+10,o.y+ar.y+10),
                               PanelCol((int)(std::clamp(veil,0.0f,1.0f)*236)),14);

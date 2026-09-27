@@ -1461,6 +1461,12 @@ static void LoadConfig(){
                   dt.widgets.push_back(w);
                   q=we+1;
               }
+              // A stock tab with nothing on it draws an empty panel - the Performance tab was found saved
+              // that way ("widgets": []), which read as "the tab does not load". Put its page back, exactly
+              // what the editor's "Restore page" does; custom tabs are left as they are.
+              if(dt.builtin && dt.widgets.empty()){
+                  Widget p; p.kind=WK_PAGE_DASH+std::clamp(dt.icon,0,3); p.x=p.y=0.0f; p.w=p.h=1.0f;
+                  dt.widgets.push_back(p); }
               g_tabs.push_back(dt);
               p=e+1;
           }

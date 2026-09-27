@@ -1,5 +1,20 @@
 # Changelog
 
+## v1.6.2 - 2026-09-26
+
+### Fixed
+
+-   **The Performance tab did not load.** A built-in tab could be left with no widgets (the page is one big widget,
+    and its delete ✕ in edit mode emptied the tab), which drew an empty panel. A stock tab with nothing on it now
+    gets its page back when Aether starts, and a custom tab that is empty says so instead of showing nothing.
+-   **Lyrics could belong to a different song.**
+    -   The lookup started the instant the title changed, while the player was still reporting the *previous*
+        song's length - and the length is what picks the right recording. It now waits for the new length.
+    -   A search result was accepted if it had timed lyrics, even another artist's song of the same name
+        ("Hello" could come back as "Hello, Dolly!"). The title and the artist must now match, or the length must
+        agree to within 2 s, and an exact title beats a longer one.
+    -   Lyrics cached before this release are looked up again once, and kept if you are offline.
+
 ## v1.6.1 - 2026-09-26
 
 ### Added

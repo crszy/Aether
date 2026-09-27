@@ -49,7 +49,7 @@
 #pragma comment(lib,"cabinet.lib")
 
 static const wchar_t* APPNAME   = L"Aether";
-static const wchar_t* VERSION   = L"1.6.1";
+static const wchar_t* VERSION   = L"1.6.2";
 static const wchar_t* EXENAME   = L"Aether.exe";
 static const wchar_t* SHELLCLS  = L"AetherClass";   // must match main.cpp's RegisterClassExW
 static const wchar_t* UNINSTKEY = L"Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\Aether";
