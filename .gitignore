@@ -13,7 +13,7 @@ sensors/
 sensors-sc/
 
 # runtime data - never commit a personal setup
-config/
+/config/
 config.json
 config.json.bak
 config.backup-*.json

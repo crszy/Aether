@@ -35,6 +35,7 @@ if (-not (Test-Path $vcvars)) {
 if (-not (Test-Path $vcvars)) { Write-Host "Visual Studio 2022 with the C++ workload was not found." -ForegroundColor Red; exit 1 }
 
 if (-not (Test-Path "$root\Aether.exe")) { & "$root\build.ps1" }
+if (-not (Test-Path "$root\Aether.exe")) { Write-Host "Aether.exe did not build - not packing an installer." -ForegroundColor Red; exit 1 }
 
 # ---- what ships --------------------------------------------------------------------------------
 # Everything the shell resolves at runtime relative to its own exe. Miss one of these and the
