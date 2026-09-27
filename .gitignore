@@ -32,5 +32,7 @@ _backups/
 pkg/
 
 # large third-party data that ships in the release installer instead of git (see README > Building)
-linux/
+linux/*
+!linux/nanosvg.h
+!linux/nanosvgrast.h
 reference/

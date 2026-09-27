@@ -69,3 +69,8 @@ These ship with Aether and remain under their owners' terms:
 - **bongocat.gif, kurukuru.gif, dino.png, vfx/nebula.mp4** - belong to their creators; used as small decorative widgets.
 
 No *Guilty Gear* assets are included: the Strive-style motion is drawn entirely from code.
+
+## NanoSVG
+
+<https://github.com/memononen/nanosvg> — zlib licence. `linux/nanosvg.h` and `linux/nanosvgrast.h`
+are vendored unmodified (SVG icon parsing and rasterising); the licence notice is at the top of each file.
