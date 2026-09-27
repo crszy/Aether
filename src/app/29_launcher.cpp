@@ -812,6 +812,13 @@ static void RunShellCommand(const std::string& n){
     // -s blur_dump: capture this monitor through the frost path and save blur_src.png / blur_out.png
     if(n=="blur_dump"){ g_blurDump=true; if(auto t=CaptureRegionBlur(g_mx,g_my,g_mw,g_mh)) t->Release(); return; }
     // Strive previews (they play whether or not the option is on): -s strive_intro | strive_banner=<n>
+    // -s bar_hitdump: what the bar window thinks is clickable (its WM_NCHITTEST rects), for click-through bugs
+    if(n=="bar_hitdump"){ RECT wr{}; GetWindowRect(g_barHwnd,&wr);
+        AetherLog("bar_hitdump: scale=%.3f window=%ld,%ld..%ld,%ld monitors=%d bars=%d",g_uiScale,wr.left,wr.top,wr.right,wr.bottom,(int)g_mons.size(),(int)g_bars.size());
+        for(size_t i=0;i<g_bars.size();i++){ const BarState& b=g_bars[i];
+            AetherLog("bar_hitdump:   bar %d reveal=%.2f shown=%d rect(logical)=%ld,%ld..%ld,%ld  on=%d",(int)i,b.reveal,(int)b.shown,
+                      b.rect.left,b.rect.top,b.rect.right,b.rect.bottom,(int)(i<g_mons.size()? BarOnMon((int)i) : 0)); }
+        return; }
     if(n=="strive_intro"){ StvIntroStart(); return; }
     if(n=="strive_intro_solid"){ StvSetSolid(); StvIntroStart(); return; }
     if(n.rfind("strive_banner_solid=",0)==0){ StvSetSolid(); StvBannerFire(atoi(n.substr(20).c_str()),""); return; }

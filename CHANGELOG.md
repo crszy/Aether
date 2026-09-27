@@ -1,5 +1,19 @@
 # Changelog
 
+## Unreleased
+
+### Fixed
+
+-   **An invisible band around the bar swallowed clicks.** Every overlay's window shape was padded (36 px around
+    the bar) so shadows would not be clipped, but that padding is also where clicks land, and Windows never passes
+    them on to another app - so a window pushed up against the bar could not be clicked along its edge. The
+    padding now drops away while the pointer is in that band. Quick settings, notifications, the media toast and
+    the dock had the same band.
+
+### Added
+
+-   `-s bar_hitdump` logs the bar's clickable areas.
+
 ## v1.6.0 - 2026-09-26
 
 A stability release. Every freeze on record was traced to its cause and fixed, everything was then

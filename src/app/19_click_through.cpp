@@ -15,8 +15,29 @@
 // The region is the panel's hit rect grown by `pad` so drop shadows and glows survive.
 // =========================================================================================
 static std::unordered_map<HWND,RECT> g_rgnCache;
+// The pad is VISUAL only (shadows, glows) - but a window region is also the hit area, and a click on an
+// overlay that answers HTTRANSPARENT is only offered to windows of the SAME thread, never to another app.
+// So the pad was a band around every panel where clicks vanished: an app dragged up against the bar could
+// not be clicked along its edge (measured: a 36 px dead band under a top bar). While the cursor is IN that
+// band (inside the padded shape, outside every real rect) the region shrinks to the real rects, so the
+// pixel under the cursor is not Aether's and Windows hands the click straight to the app. The shadow is
+// clipped only for as long as the pointer sits right beside the panel.
+static int PadFor(HWND h,const RECT* rects,size_t n,int pad){
+    if(pad<=0 || n==0) return pad;
+    POINT c; RECT wr;
+    if(!GetCursorPos(&c) || !GetWindowRect(h,&wr)) return pad;
+    const float s=g_uiScale; const LONG x=c.x-wr.left, y=c.y-wr.top;
+    bool inPad=false;
+    for(size_t i=0;i<n;i++){ const RECT& lr=rects[i];
+        if(lr.right<=lr.left || lr.bottom<=lr.top) continue;
+        LONG l=(LONG)(lr.left*s), t=(LONG)(lr.top*s), r=(LONG)(lr.right*s), b=(LONG)(lr.bottom*s);
+        if(x>=l && x<r && y>=t && y<b) return pad;              // on a real, clickable part: keep the glow
+        if(x>=l-pad && x<r+pad && y>=t-pad && y<b+pad) inPad=true; }
+    return inPad? 0 : pad;
+}
 static void ApplyHitRegion(HWND h,const RECT& logical,int pad){
     if(!h) return;
+    pad=PadFor(h,&logical,1,pad);
     RECT want;
     if(logical.right<=logical.left || logical.bottom<=logical.top) want=RECT{0,0,0,0};
     else{
@@ -38,6 +59,7 @@ static void ApplyHitRegion(HWND h,const RECT& logical,int pad){
 static std::unordered_map<HWND,std::vector<RECT>> g_rgnMultiCache;
 static void ApplyHitRegions(HWND h,const std::vector<RECT>& logicals,int pad){
     if(!h) return;
+    pad=PadFor(h,logicals.data(),logicals.size(),pad);
     std::vector<RECT> want;
     for(const RECT& lr:logicals){
         if(lr.right<=lr.left||lr.bottom<=lr.top) continue;
