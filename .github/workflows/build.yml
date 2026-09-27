@@ -1,0 +1,64 @@
+name: Build
+
+# Every push and pull request builds Aether and its installer on a clean Windows machine.
+# Pushing a version tag (git tag v1.6.3 && git push origin v1.6.3) also publishes the release, with
+# that version's section of CHANGELOG.md as the notes - no executable is ever uploaded by hand.
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: windows-2022
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Fetch the icon themes and fonts
+        # 28,000 files kept out of git; see the build-data release
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release download build-data --pattern linux-data.zip --dir $env:RUNNER_TEMP
+          tar -xf "$env:RUNNER_TEMP\linux-data.zip" -C .
+
+      - name: Build the sensor sidecar
+        shell: pwsh
+        run: dotnet publish sidecar -c Release -o sensors
+
+      - name: Build Aether
+        shell: pwsh
+        run: ./build.ps1
+
+      - name: Build the installer
+        shell: pwsh
+        run: ./build-installer.ps1 -NoWallpapers
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Aether-Setup
+          path: Aether-Setup.exe
+
+      - name: Publish the release
+        if: startsWith(github.ref, 'refs/tags/v')
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $tag = "${{ github.ref_name }}"
+          $log = Get-Content CHANGELOG.md -Raw
+          $m = [regex]::Match($log, "(?ms)^## $([regex]::Escape($tag))\b[^\n]*\n(.*?)(?=^## v|\z)")
+          $notes = if ($m.Success) { $m.Groups[1].Value.Trim() } else { "See CHANGELOG.md." }
+          $notes += "`n`n---`n**Install / update:** download ``Aether-Setup.exe`` below and run it (per-user, no admin). Your settings are kept.`n`nBuilt by GitHub Actions from commit ${{ github.sha }}."
+          Set-Content -Path notes.md -Value $notes -Encoding utf8
+          gh release create $tag Aether-Setup.exe --title "Aether $tag" --notes-file notes.md --verify-tag

@@ -12,6 +12,15 @@ if (Test-Path "$PSScriptRoot\Aether.exe") {
 }
 
 $vcvars = "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvars64.bat"
+# Any other edition (Build Tools, Professional, the Enterprise that GitHub's runners carry): ask vswhere where it is.
+if (-not (Test-Path $vcvars)) {
+  $vsw = "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe"
+  if (Test-Path $vsw) {
+    $vsi = & $vsw -latest -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath
+    if ($vsi) { $vcvars = "$vsi\VC\Auxiliary\Build\vcvars64.bat" }
+  }
+}
+if (-not (Test-Path $vcvars)) { Write-Host "Visual Studio 2022 with the C++ workload was not found." -ForegroundColor Red; exit 1 }
 # the Settings search index (every control label on every page) is generated from main.cpp
 if (Get-Command python -EA SilentlyContinue) { python "$PSScriptRoot\tools\gen_settings_index.py" | Out-Null }
 $dir    = $PSScriptRoot                     # wherever the repo was cloned
@@ -22,7 +31,7 @@ if (-not (Test-Path "$PSScriptRoot\lua54.lib")) {
   Write-Host "Building lua54.lib..." -ForegroundColor Cyan
   $luaSrc = (Get-ChildItem "$PSScriptRoot\lua\*.c" | Where-Object { $_.Name -notin @("lua.c","luac.c","onelua.c") } |
              ForEach-Object { "lua\" + $_.Name }) -join " "
-  $lcmd = "`"C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvars64.bat`" >nul 2>&1 && " +
+  $lcmd = "`"$vcvars`" >nul 2>&1 && " +
           "cd /d `"$PSScriptRoot`" && cl /nologo /c /O2 /MT /DWIN32 /D_CRT_SECURE_NO_WARNINGS /Ilua /Foluaobj\ $luaSrc && " +
           "lib /nologo /OUT:lua54.lib luaobj\*.obj"
   New-Item -ItemType Directory -Force "$PSScriptRoot\luaobj" | Out-Null

@@ -1,4 +1,4 @@
-# Builds Aether-Setup.exe — one self-contained, self-extracting installer.  (V1.5)
+﻿# Builds Aether-Setup.exe — one self-contained, self-extracting installer.  (V1.5)
 #
 # V1 embedded every shipped file as its own RCDATA resource. That stopped scaling the moment Aether
 # started shipping the icon theme: 28,000 resources is a .rc file rc.exe takes minutes to chew on.
@@ -24,6 +24,15 @@ $inst   = "$root\installer"
 $stub   = "$inst\Aether-Setup-stub.exe"
 $outExe = "$root\Aether-Setup.exe"
 $vcvars = "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvars64.bat"
+# Any other edition (Build Tools, Professional, the Enterprise that GitHub's runners carry): ask vswhere where it is.
+if (-not (Test-Path $vcvars)) {
+  $vsw = "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe"
+  if (Test-Path $vsw) {
+    $vsi = & $vsw -latest -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath
+    if ($vsi) { $vcvars = "$vsi\VC\Auxiliary\Build\vcvars64.bat" }
+  }
+}
+if (-not (Test-Path $vcvars)) { Write-Host "Visual Studio 2022 with the C++ workload was not found." -ForegroundColor Red; exit 1 }
 
 if (-not (Test-Path "$root\Aether.exe")) { & "$root\build.ps1" }
 
