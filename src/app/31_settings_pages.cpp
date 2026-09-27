@@ -1260,7 +1260,7 @@ static void DrawSettings(){
             if(g_helloOn){ HelloProbe(); int av=g_helloAvail.load();
                 note(g_helloBroken.load()? g_helloBrokenWhy.c_str()
                    : av==1? "Hello is ready on this PC."
-                   : av==0? "Checkingâ¦" : HelloWhyNot(-av-2)); }
+                   : av==0? "Checking…" : HelloWhyNot(-av-2)); }
         }
         bool il=g_idleLock;
         if(toggle("Lock when inactive","Locks after a longer idle spell (custom overlay if enabled above, else native)",il)){ g_idleLock=il; SaveConfig(); }
@@ -1296,7 +1296,7 @@ static void DrawSettings(){
     } break;
     case SP_TASKBAR: {   // Taskbar
         header("Panel presets");
-        note("The shapes other desktops' panels have. The bar is already an ordered list of items with flexible spacers and alignment â the model waybar and polybar use â so most panels are not a different bar, they are a different ORDER. Picking one is a starting point: everything it sets stays editable, and items it does not use are turned off rather than lost.");
+        note("The shapes other desktops' panels have. The bar is already an ordered list of items with flexible spacers and alignment — the model waybar and polybar use — so most panels are not a different bar, they are a different ORDER. Picking one is a starting point: everything it sets stays editable, and items it does not use are turned off rather than lost.");
         for(int pi=0; pi<BAR_PRESET_N; pi++){
             const BarPreset& pr=BAR_PRESETS[pi];
             bool hv=rowHit(my,38); float ha=HoverAnim(4700+pi,hv);
@@ -1414,10 +1414,53 @@ static void DrawSettings(){
         { const char* lopts[NBARLOGOS]; int lcur=0;
           for(int i=0;i<NBARLOGOS;i++){ lopts[i]=BAR_LOGOS[i].label; if(g_barLogo==BAR_LOGOS[i].key) lcur=i; }
           int lp=choice(lopts,NBARLOGOS,lcur);
-          if(lp>=0 && lp!=lcur){ g_barLogo=BAR_LOGOS[lp].key; SaveConfig(); } }
+          auto pickLogo=[]{ PickFileAsync(L"Images (png, jpg, gif, bmp, ico)\0*.png;*.jpg;*.jpeg;*.gif;*.bmp;*.ico\0All files\0*.*\0",
+                                          L"Choose a logo for the bar",
+                                          [](const std::string& p){ g_barLogoImage=p; g_barLogo="custom"; SaveConfig(); }); };
+          if(lp>=0 && lp!=lcur){ g_barLogo=BAR_LOGOS[lp].key; SaveConfig();
+              if(g_barLogo=="custom" && g_barLogoImage.empty()) pickLogo(); }      // nothing chosen yet: ask straight away
+          if(g_barLogo=="custom"){
+              std::string nm=g_barLogoImage.empty()? std::string("No image chosen yet") : g_barLogoImage.substr(g_barLogoImage.find_last_of("\\/")+1);
+              note(nm.c_str());
+              if(buttons({"Choose image\xE2\x80\xA6"},170)==0) pickLogo();
+              note("Square images look best. Turn off \"Tint the logo\" below to keep your image's own colours.");
+          } }
         { bool lt=g_barLogoTint;
           if(toggle("Tint the logo with the accent","Off: the distro artwork keeps its own colours",lt)){
               g_barLogoTint=lt; SaveConfig(); } }
+        my+=10; dl->AddLine(V(mx,my),V(mx+rowW,my),WithA(COL_INK2,(int)(al*0.25f)),1); my+=12;
+        TextAt(dl,g_fMed,18,V(mx,my),WithA(COL_INK,al),"Colours"); my+=26;
+        note("By default the bar wears the colour scheme. Give it its own background, text and accent here.");
+        { bool bt=g_barTheme; if(toggle("Custom bar colours","Anything left on \"Scheme\" still follows the colour scheme",bt)){ g_barTheme=bt; SaveConfig(); } }
+        if(g_barTheme){
+            // one row per colour: a #rrggbb field plus swatches; "Scheme" hands that colour back to the theme
+            static const char* SW[]={ "#0b0b10","#11111b","#1e1e2e","#313244","#f5f5f7","#cba6f7","#f38ba8","#e2243a",
+                                      "#fab387","#f9e2af","#a6e3a1","#94e2d5","#89b4fa","#b4befe" };
+            auto colourRow=[&](const char* label,std::string& val,char* buf,size_t cap,int fid){
+                if(val!=buf && fid!=0){ /* keep the field in step when a swatch or the config changed it */ }
+                textField(label,buf,cap,fid,false);
+                { std::string b=buf; ImU32 cc; if(b!=val && (b.empty() || BarHexCol(b,cc))){ val=b; SaveConfig(); } }
+                const float sz=24.0f, gap=7.0f; float sx=mx;
+                for(int i=0;i<(int)(sizeof(SW)/sizeof(SW[0]));i++){
+                    ImU32 cc; BarHexCol(SW[i],cc); ImVec2 c0=V(sx+sz*0.5f,my+sz*0.5f);
+                    bool hv=io.MousePos.x>=sx && io.MousePos.x<sx+sz && io.MousePos.y>=my && io.MousePos.y<my+sz;
+                    dl->AddCircleFilled(c0,sz*0.5f-(hv?0.0f:1.5f),WithA(cc,al),24);
+                    dl->AddCircle(c0,sz*0.5f,WithA(COL_INK2,(int)(al*0.4f)),24,1.0f);
+                    if(_stricmp(val.c_str(),SW[i])==0) dl->AddCircle(c0,sz*0.5f+3.0f,WithA(COL_GOLD,al),24,2.0f);
+                    if(hv && click){ snprintf(buf,cap,"%s",SW[i]); val=SW[i]; SaveConfig(); }
+                    sx+=sz+gap; }
+                { const char* lb="Scheme"; float tw=TextW(g_fSml,13,lb)+18; ImVec2 a0=V(sx+4,my), a1=V(sx+4+tw,my+sz);
+                  bool hv=io.MousePos.x>=a0.x && io.MousePos.x<a1.x && io.MousePos.y>=a0.y && io.MousePos.y<a1.y;
+                  dl->AddRectFilled(a0,a1,WithA(val.empty()? COL_GOLD : COL_CARD2,(int)(al*(hv?1.0f:0.85f))),sz*0.5f);
+                  TextAt(dl,g_fSml,13,V(a0.x+9,a0.y+5),WithA(val.empty()? COL_PANELL : COL_INK,al),lb);
+                  if(hv && click){ buf[0]=0; val.clear(); SaveConfig(); } }
+                my+=sz+14; };
+            static char bPanel[16]={0}, bInk[16]={0}, bAcc[16]={0}; static bool bInit=false;
+            if(!bInit){ bInit=true; snprintf(bPanel,16,"%s",g_barColPanel.c_str()); snprintf(bInk,16,"%s",g_barColInk.c_str()); snprintf(bAcc,16,"%s",g_barColAccent.c_str()); }
+            colourRow("Background (#rrggbb)",g_barColPanel,bPanel,sizeof(bPanel),9201);
+            colourRow("Text and icons (#rrggbb)",g_barColInk,bInk,sizeof(bInk),9202);
+            colourRow("Accent (#rrggbb)",g_barColAccent,bAcc,sizeof(bAcc),9203);
+        }
         my+=10; dl->AddLine(V(mx,my),V(mx+rowW,my),WithA(COL_INK2,(int)(al*0.25f)),1); my+=12;
         TextAt(dl,g_fMed,18,V(mx,my),WithA(COL_INK,al),"Workspaces"); my+=26;
         // Status first, because "komorebi is not installed" and "komorebi is installed but not
@@ -1522,7 +1565,7 @@ static void DrawSettings(){
         }
         my+=10; dl->AddLine(V(mx,my),V(mx+rowW,my),WithA(COL_INK2,(int)(al*0.25f)),1); my+=12;
         TextAt(dl,g_fMed,18,V(mx,my),WithA(COL_INK,al),"workspace overview"); my+=26;
-        note("A 3-D view of every workspace on the screen you are on â the desktop cube. The workspace you are on is captured live; the others show the last picture taken while they were showing. Drag to spin or slide, scroll to zoom, click a window to go straight to it.");
+        note("A 3-D view of every workspace on the screen you are on — the desktop cube. The workspace you are on is captured live; the others show the last picture taken while they were showing. Drag to spin or slide, scroll to zoom, click a window to go straight to it.");
         { bool ov=g_ovEnable;
           if(toggle("Workspace overview","Needs komorebi and a Windows build that allows screen capture",ov)){ g_ovEnable=ov; SaveConfig(); } }
         if(g_ovEnable){
@@ -1530,8 +1573,8 @@ static void DrawSettings(){
               if(cycler("Overview shape","Cube: the workspaces wrap around a vertical axis, like Compiz. Flat plane: they lie in a row and you slide along them",v,OS,2)){ g_ovStyle=v; SaveConfig(); } }
             { bool st=g_ovSuperTab;
               if(toggle("Open it with Super+Tab","Takes the gesture from Windows' Task View. Windows will not hand Super+Tab over as an ordinary hotkey, so the shell intercepts it the same way it intercepts Alt+Tab for the switcher",st)){ g_ovSuperTab=st; SaveConfig(); } }
-            note(g_hk[HK_OVERVIEW].ok? "Its hotkey is also registered â see the Hotkeys page to change it."
-                                     : "Its hotkey could not be registered â something else already owns that combination. Change it on the Hotkeys page.");
+            note(g_hk[HK_OVERVIEW].ok? "Its hotkey is also registered — see the Hotkeys page to change it."
+                                     : "Its hotkey could not be registered — something else already owns that combination. Change it on the Hotkeys page.");
         }
         my+=10; dl->AddLine(V(mx,my),V(mx+rowW,my),WithA(COL_INK2,(int)(al*0.25f)),1); my+=12;
         TextAt(dl,g_fMed,18,V(mx,my),WithA(COL_INK,al),"niri mode"); my+=26;
@@ -1700,7 +1743,7 @@ static void DrawSettings(){
               g_confineApps=ca; SaveConfig(); g_bubbleGeomDirty=true; } }
         { bool hd=g_hostDesktop;
           if(toggle("Desktop icons and Wallpaper Engine",
-                    "Runs Explorer purely as the desktop host. Without it there is nothing to draw desktop icons or to host a live wallpaper â its taskbar stays hidden either way.",hd)){
+                    "Runs Explorer purely as the desktop host. Without it there is nothing to draw desktop icons or to host a live wallpaper — its taskbar stays hidden either way.",hd)){
               g_hostDesktop=hd; SaveConfig();
               if(g_hostDesktop) EnsureDesktopHost(); } }
         my+=10;
@@ -2240,7 +2283,7 @@ static void DrawSettings(){
     case SP_WINDOWS: {   // Plasma's "Window Behavior", mapped to the Windows knobs
         header("Corners");
         { bool rc=g_roundWindows;
-          if(toggle("Round app-window corners","Uses DWM's own rounding â antialiased, and it never clips the window",rc)){
+          if(toggle("Round app-window corners","Uses DWM's own rounding — antialiased, and it never clips the window",rc)){
               g_roundWindows=rc; SaveConfig(); SweepWindowRounds(); } }
         { bool dc=g_deepCorners;
           if(toggle("Deeper corners (clips the window)",
@@ -3005,7 +3048,7 @@ static void DrawSettings(){
         note("music is playing and rest when it is paused.");
         { std::string cur = g_catPath.empty()? std::string("(the drawn cat)") : g_catPath;
           kv("Current", cur); }
-        { int b5=buttons({"Choose an imageâ¦","Use the drawn cat"},190);
+        { int b5=buttons({"Choose an image…","Use the drawn cat"},190);
           if(b5==0){
               wchar_t file[MAX_PATH]={0};
               OPENFILENAMEW ofn={}; ofn.lStructSize=sizeof(ofn); ofn.hwndOwner=g_setHwnd;

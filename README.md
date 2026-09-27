@@ -41,7 +41,7 @@
 
 ## Features
 
--   **Bar** - vertical or horizontal, any edge, per-monitor, workspaces, running apps with live previews, a real system tray (it hosts the icons itself) with the apps' own menus
+-   **Bar** - vertical or horizontal, any edge, per-monitor, workspaces, running apps with live previews, a real system tray (it hosts the icons itself) with the apps' own menus, your own logo and its own colours
 -   **Dashboard** - weather, calendar, media, performance, custom tabs and freely placed widgets
 -   **Launcher** - fuzzy app search, clipboard history, wallpaper picker, calculator, commands
 -   **Lock screen** - a real blur of your desktop, Windows Hello and password, media and notifications

@@ -812,6 +812,10 @@ static void RunShellCommand(const std::string& n){
     // -s blur_dump: capture this monitor through the frost path and save blur_src.png / blur_out.png
     if(n=="blur_dump"){ g_blurDump=true; if(auto t=CaptureRegionBlur(g_mx,g_my,g_mw,g_mh)) t->Release(); return; }
     // Strive previews (they play whether or not the option is on): -s strive_intro | strive_banner=<n>
+    // -s bar_logo=<key>: default | cachyos | arch | ... | custom (with bar.logo_image set) - for scripts and themes
+    if(n.rfind("bar_logo=",0)==0){ std::string k=n.substr(9);
+        for(int i=0;i<NBARLOGOS;i++) if(k==BAR_LOGOS[i].key){ g_barLogo=k; SaveConfig(); break; }
+        return; }
     // -s bar_hitdump: what the bar window thinks is clickable (its WM_NCHITTEST rects), for click-through bugs
     if(n=="bar_hitdump"){ RECT wr{}; GetWindowRect(g_barHwnd,&wr);
         AetherLog("bar_hitdump: scale=%.3f window=%ld,%ld..%ld,%ld monitors=%d bars=%d",g_uiScale,wr.left,wr.top,wr.right,wr.bottom,(int)g_mons.size(),(int)g_bars.size());

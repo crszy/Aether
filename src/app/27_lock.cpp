@@ -179,7 +179,7 @@ static void DrawLock(){
           float infoY=pyy+ph2+14;
           if(g_helloOn && g_helloAvail.load()==1 && !g_helloBroken.load()){
               int hs=g_helloState.load();
-              const char* hl = hs==HELLO_ASKING? "Waiting for Windows Helloâ¦"
+              const char* hl = hs==HELLO_ASKING? "Waiting for Windows Hello…"
                              : hs==HELLO_OK    ? "Verified"
                                                : "Unlock with Windows Hello";
               float hw=mono->CalcTextSizeA(14,FLT_MAX,0,hl).x+58, hh=38;

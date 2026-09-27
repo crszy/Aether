@@ -8,7 +8,7 @@
 #include "src/SettingsIndex.h"
 #include "src/components/VideoLoop.h"   // the real nebula footage
 
-static const char* AETHER_VERSION = "1.6";
+static const char* AETHER_VERSION = "1.6.1";
 static const char* AETHER_AUTHOR  = "Fora";
 
 static ImU32 FxHue(float h,float s,float v,int a){

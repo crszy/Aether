@@ -378,6 +378,7 @@ S_E("bar.edge",              g_pn[PN_BAR].edge, EDGE_NAMES, "Which screen edge t
 S_F("bar.size",              g_pn[PN_BAR].size, 28,160, "Thickness of the bar in px (its width when vertical, height when horizontal)."),
 S_F("bar.margin",            g_pn[PN_BAR].gap,  0,60,   "Gap between the bar and the screen edge. The bubble's inset on this edge is derived from it."),
 S_F("bar.anchor",            g_pn[PN_BAR].anchor,0,1,   "Position along the edge: 0 = start, 0.5 = centre, 1 = end."),
+S_S("bar.logo_image",        g_barLogoImage, "An image of your own for the bar logo (PNG, JPG, GIF, BMP or ICO). Used when the logo is set to \"Your own image\" in Settings > Taskbar."),
 S_B("bar.custom_colours",    g_barTheme, "Give the bar its own colours instead of the ones the colour scheme picks. The three keys below take effect only while this is on; anything left empty still follows the scheme."),
 S_S("bar.colour_panel",      g_barColPanel,  "The bar's background, as #rrggbb. Its card and track shades are derived from it. Empty = follow the scheme."),
 S_S("bar.colour_ink",        g_barColInk,    "The bar's text and icon colour, as #rrggbb. Empty = follow the scheme."),

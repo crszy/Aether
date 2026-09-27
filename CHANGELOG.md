@@ -1,6 +1,15 @@
 # Changelog
 
-## Unreleased
+## v1.6.1 - 2026-09-26
+
+### Added
+
+-   **Your own bar logo.** *Settings > Taskbar > Logo > Your own image* takes any PNG, JPG, GIF, BMP or ICO
+    (`bar.logo_image`). Square images look best.
+-   **Bar colours in Settings.** *Settings > Taskbar > Colours* gives the bar its own background, text and accent
+    - type a `#rrggbb` or tap a swatch; "Scheme" hands a colour back to the theme. (The keys existed before, but
+    only in the config file, so the bar always wore the main colour scheme.)
+-   `-s bar_logo=<name>` switches the bar logo from scripts; `-s bar_hitdump` logs the bar's clickable areas.
 
 ### Fixed
 
@@ -9,10 +18,8 @@
     them on to another app - so a window pushed up against the bar could not be clicked along its edge. The
     padding now drops away while the pointer is in that band. Quick settings, notifications, the media toast and
     the dock had the same band.
-
-### Added
-
--   `-s bar_hitdump` logs the bar's clickable areas.
+-   Ten labels in Settings and on the lock screen showed garbled characters (`â€”`) instead of dashes and
+    ellipses - double-encoded UTF-8 in the source.
 
 ## v1.6.0 - 2026-09-26
 

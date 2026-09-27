@@ -123,6 +123,7 @@ static const SetIndexEntry SET_INDEX[] = {
     { SP_TASKBAR, "Gauges in quick settings", "toggle" },
     { SP_TASKBAR, "Player in quick settings", "toggle" },
     { SP_TASKBAR, "Tint the logo with the accent", "toggle" },
+    { SP_TASKBAR, "Custom bar colours", "toggle" },
     { SP_TASKBAR, "Adopt already-open windows", "toggle" },
     { SP_TASKBAR, "Start komorebi with the shell", "toggle" },
     { SP_TASKBAR, "Focus follows mouse", "toggle" },
@@ -161,6 +162,7 @@ static const SetIndexEntry SET_INDEX[] = {
     { SP_TASKBAR, "Keep apps inside the bubble", "toggle" },
     { SP_TASKBAR, "Desktop icons and Wallpaper Engine", "toggle" },
     { SP_TASKBAR, "Run as the Windows shell", "toggle" },
+    { SP_TASKBAR, "Choose image\xE2\x80\xA6", "button" },
     { SP_TASKBAR, "Send them all back to the tray", "button" },
     { SP_TASKBAR, "Match Caelestia's vertical bar", "button" },
     { SP_TASKBAR, "Reset bar items", "button" },
@@ -474,7 +476,7 @@ static const SetIndexEntry SET_INDEX[] = {
     { SP_DASHBOARD, "Export config.toml", "button" },
     { SP_DASHBOARD, "Import config.toml", "button" },
     { SP_DASHBOARD, "Open folder", "button" },
-    { SP_DASHBOARD, "Choose an imageâ¦", "button" },
+    { SP_DASHBOARD, "Choose an image…", "button" },
     { SP_DASHBOARD, "Use the drawn cat", "button" },
 };
 static const int SET_INDEX_N = (int)(sizeof(SET_INDEX)/sizeof(SET_INDEX[0]));

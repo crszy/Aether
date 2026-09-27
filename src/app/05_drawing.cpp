@@ -616,9 +616,11 @@ static const BarLogoDef BAR_LOGOS[]={
     {"fedora",  "Fedora",                 "fedora.png"        },
     {"garuda",  "Garuda Linux",           "garuda-linux.png"  },
     {"windows", "Windows 11",             "windows-11.png"    },
+    {"custom",  "Your own image",         nullptr             },   // bar.logo_image
 };
 static const int NBARLOGOS=(int)(sizeof(BAR_LOGOS)/sizeof(BAR_LOGOS[0]));
 static std::string g_barLogo="cachyos";   // the user dual-boots CachyOS; "default" restores the ring+dot
+static std::string g_barLogoImage;        // bar.logo_image: any PNG/JPG/GIF/BMP/ICO, used when the logo is "custom"
 // OsIcon.qml puts the distro mark behind a ColouredIcon tinted m3tertiary, so upstream shows a flat
 // accent silhouette. Off gives the vendor artwork its own colours.
 static bool g_barLogoTint = true;
@@ -659,9 +661,17 @@ static int g_barLogoW=0, g_barLogoH=0;
 // Lazy + cached: the texture is only rebuilt when the chosen key actually changes, so this is safe
 // to call from the render loop on every frame and on every monitor's bar.
 static ID3D11ShaderResourceView* BarLogoTex(int& lw,int& lh){
-    if(g_barLogoTexKey!=g_barLogo){
+    // a custom logo is keyed by its path too, so picking a different image reloads it
+    const std::string key = g_barLogo=="custom"? "custom:"+g_barLogoImage : g_barLogo;
+    if(g_barLogoTexKey!=key){
         if(g_barLogoTex){ g_barLogoTex->Release(); g_barLogoTex=nullptr; }
-        g_barLogoW=g_barLogoH=0; g_barLogoTexKey=g_barLogo;
+        g_barLogoW=g_barLogoH=0; g_barLogoTexKey=key;
+        if(g_barLogo=="custom"){
+            std::vector<uint8_t> px; int w=0,h=0;
+            if(!g_barLogoImage.empty() && DecodeFirstFrame(U82W(g_barLogoImage),256,px,w,h) && w>0 && h>0){
+                g_barLogoTex=MakeTextureBGRA(px.data(),w,h); g_barLogoW=w; g_barLogoH=h; }
+            lw=g_barLogoW; lh=g_barLogoH; return g_barLogoTex;   // no image yet: the bar falls back to its glyph
+        }
         const BarLogoDef* d=nullptr;
         for(int i=0;i<NBARLOGOS;i++) if(g_barLogo==BAR_LOGOS[i].key){ d=&BAR_LOGOS[i]; break; }
         if(d && d->file){
