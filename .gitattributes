@@ -1,0 +1,6 @@
+* text=auto
+*.png binary
+*.gif binary
+*.ttf binary
+*.mp4 binary
+*.msstyles binary
