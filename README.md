@@ -13,6 +13,11 @@
 </div>
 
 <p align=center>
+  <a href="docs/aether-demo.mp4"><img src="docs/aether-demo.webp" width="100%" alt="Aether in motion - click for the full video"></a>
+  <br><sub>▶ <a href="docs/aether-demo.mp4">Watch the full demo</a></sub>
+</p>
+
+<p align=center>
   <img src="docs/screenshots/strive-intro-morph.png" width="100%" alt="The Strive fight-opening intro">
 </p>
 
