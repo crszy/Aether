@@ -1,0 +1,141 @@
+{
+  "_about": "Windows fixes install-config.ps1 applies to known Quickshell shells after every download / update (by repo link). Each patch: file (relative to the folder with shell.qml), find (exact text), replace, why (shown while installing). Keep them tiny; real fixes belong in Aether's Quickshell. \"keybinds\": binds written to <config>/defaults/windows/keybinds.json when it has none (Aether's format; ipc targets may use {screen}), plus Super+Escape = back to Aether. \"wallpaper\": true copies AetherWallpaper.qml next to shell.qml (a patch must add AetherWallpaper {}). Replace texts may use {cpu} {gpu} {ram} {os} {osVersion} {user} {userPicture} (this PC's, filled in at install).",
+  "shells": [
+    {
+      "url": "https://github.com/axenide/ambxst",
+      "patches": [
+        {
+          "file": "modules/services/AppSearch.qml",
+          "find": "        iconCache[value] = candidate;\n        return \"image://icon/application-x-executable\";",
+          "replace": "        iconCache[value] = candidate;\n        // Aether (Windows): its Linux helper isn't there to look icons up; Quickshell draws the app's own icon\n        return \"image://icon/\" + value;",
+          "why": "app icons come from Windows (Ambxst's Linux helper isn't there)"
+        }
+      ],
+      "keybinds": [
+        {
+          "keys": "Super",
+          "action": "ipc",
+          "target": "ambxst",
+          "function": "run",
+          "args": [
+            "launcher"
+          ],
+          "onRelease": true,
+          "description": "its launcher"
+        }
+      ]
+    },
+    {
+      "url": "https://github.com/diinki/linux-retroism",
+      "patches": [
+        {
+          "file": "settings.json",
+          "find": "\"files\": \"nemo\"",
+          "replace": "\"files\": \"explorer.exe\"",
+          "why": "the Files button opens Explorer (nemo is a Linux app)"
+        },
+        {
+          "file": "settings.json",
+          "find": "\"terminal\": \"kitty\"",
+          "replace": "\"terminal\": \"wt.exe\"",
+          "why": "the Terminal button opens Windows Terminal (kitty is a Linux app)"
+        },
+        {
+          "file": "shell.qml",
+          "find": "    Taskbar.Bar {}",
+          "replace": "    Taskbar.Bar {}\n    AetherWallpaper {} // Aether (Windows): your wallpaper - Retroism draws none",
+          "why": "your Aether wallpaper under it"
+        },
+        {
+          "file": "settings.json",
+          "find": "\"cpu\": \"CPU Name\"",
+          "replace": "\"cpu\": \"{cpu}\"",
+          "why": "its Start menu shows this PC (cpu)"
+        },
+        {
+          "file": "settings.json",
+          "find": "\"gpu\": \"GPU Name\"",
+          "replace": "\"gpu\": \"{gpu}\"",
+          "why": "its Start menu shows this PC (gpu)"
+        },
+        {
+          "file": "settings.json",
+          "find": "\"osName\": \"Linux Distro\"",
+          "replace": "\"osName\": \"{os}\"",
+          "why": "its Start menu shows this PC (osName)"
+        },
+        {
+          "file": "settings.json",
+          "find": "\"osVersion\": \"Distro Version\"",
+          "replace": "\"osVersion\": \"{osVersion}\"",
+          "why": "its Start menu shows this PC (osVersion)"
+        },
+        {
+          "file": "settings.json",
+          "find": "\"ram\": \"Ram\"",
+          "replace": "\"ram\": \"{ram}\"",
+          "why": "its Start menu shows this PC (ram)"
+        },
+        {
+          "file": "settings.json",
+          "find": "\"systemProfileImageSource\": \"/home/username/Pictures/system_profile_picture.png\"",
+          "replace": "\"systemProfileImageSource\": \"file:///{userPicture}\"",
+          "why": "its Start menu shows this PC (systemProfileImageSource)"
+        }
+      ],
+      "keybinds": [
+        {
+          "keys": "Super",
+          "action": "ipc",
+          "target": "appLauncher_{screen}",
+          "function": "toggleAppLauncher",
+          "onRelease": true,
+          "description": "its app launcher"
+        }
+      ],
+      "wallpaper": true
+    },
+    {
+      "url": "https://github.com/ahmedsaadi0/nibrasshell",
+      "patches": [],
+      "keybinds": [
+        {
+          "keys": "Super",
+          "action": "ipc",
+          "target": "LeftBar",
+          "function": "toggleDashboardMenu",
+          "onRelease": true,
+          "description": "its dashboard"
+        }
+      ]
+    },
+    {
+      "url": "https://github.com/nucleus-hq/nucleus-shell",
+      "patches": [],
+      "keybinds": [
+        {
+          "keys": "Super",
+          "action": "ipc",
+          "target": "launcher",
+          "function": "toggle",
+          "onRelease": true,
+          "description": "its launcher"
+        }
+      ]
+    },
+    {
+      "url": "https://github.com/duxlabs-dev/dux-shell",
+      "patches": [],
+      "keybinds": [
+        {
+          "keys": "Super",
+          "action": "ipc",
+          "target": "launcher",
+          "function": "toggle",
+          "onRelease": true,
+          "description": "its launcher"
+        }
+      ]
+    }
+  ]
+}

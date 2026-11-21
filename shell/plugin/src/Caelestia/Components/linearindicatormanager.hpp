@@ -1,0 +1,90 @@
+#pragma once
+
+#include <qcolor.h>
+#include <qeasingcurve.h>
+#include <qobject.h>
+#include <qqmlengine.h>
+#include <qqmlintegration.h>
+#include <qqmllist.h>
+#undef CAE_MACRO_API
+#define CAE_MACRO_API CAE_COMPONENTS_API
+
+
+namespace caelestia::shell::components {
+
+class LinearIndicatorManager;
+
+class CAE_COMPONENTS_API LinearIndicatorSegment : public QObject {
+    Q_OBJECT
+    QML_ELEMENT
+    QML_UNCREATABLE("LinearIndicatorSegments can only be retrieved from a "
+                    "LinearIndicatorManager.")
+
+    Q_PROPERTY(qreal startFraction READ startFraction NOTIFY updated FINAL)
+    Q_PROPERTY(qreal endFraction READ endFraction NOTIFY updated FINAL)
+    Q_PROPERTY(int gapSize READ gapSize NOTIFY updated FINAL)
+
+public:
+    explicit LinearIndicatorSegment(int gap, QObject* parent = nullptr);
+
+    [[nodiscard]] qreal startFraction() const;
+    [[nodiscard]] qreal endFraction() const;
+    [[nodiscard]] int gapSize() const;
+
+signals:
+    void updated();
+
+private:
+    qreal m_startFraction;
+    qreal m_endFraction;
+    int m_gapSize;
+
+    friend LinearIndicatorManager;
+};
+
+class CAE_COMPONENTS_API LinearIndicatorManager : public QObject {
+    Q_OBJECT
+    QML_ELEMENT
+
+    Q_PROPERTY(QQmlListProperty<caelestia::shell::components::LinearIndicatorSegment> activeIndicators READ
+            activeIndicators CONSTANT FINAL)
+
+    Q_PROPERTY(qreal progress READ progress WRITE update NOTIFY updated FINAL)
+    Q_PROPERTY(qreal completeEndProgress READ completeEndProgress WRITE updateCompleteEndProgress NOTIFY updated FINAL)
+    Q_PROPERTY(int gap READ gap WRITE setGap NOTIFY updated FINAL)
+
+    Q_PROPERTY(qreal duration READ duration CONSTANT FINAL)
+    Q_PROPERTY(qreal completeEndDuration READ completeEndDuration CONSTANT FINAL)
+
+public:
+    explicit LinearIndicatorManager(QObject* parent = nullptr);
+
+    [[nodiscard]] QQmlListProperty<LinearIndicatorSegment> activeIndicators();
+
+    [[nodiscard]] qreal progress() const;
+    [[nodiscard]] qreal completeEndProgress() const;
+
+    [[nodiscard]] int gap() const;
+    void setGap(int gap);
+
+    [[nodiscard]] static int duration();
+    [[nodiscard]] static int completeEndDuration();
+
+    void update(qreal progress);
+    void updateCompleteEndProgress(qreal progress);
+
+signals:
+    void updated();
+
+private:
+    static constexpr int k_segments = 2;
+
+    std::array<QEasingCurve, 4> m_interpolators;
+    qreal m_progress;
+    qreal m_completeEndProgress;
+    int m_gap;
+
+    std::array<LinearIndicatorSegment*, k_segments> m_activeIndicators;
+};
+
+} // namespace caelestia::shell::components

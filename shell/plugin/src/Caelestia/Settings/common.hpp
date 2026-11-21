@@ -1,0 +1,97 @@
+#pragma once
+
+#include <qjsonvalue.h>
+#include <qlist.h>
+#include <qloggingcategory.h>
+#include <qobject.h>
+#include <qqmlintegration.h>
+#undef CAE_MACRO_API
+#define CAE_MACRO_API CAE_SETTINGS_API
+
+
+namespace caelestia::shell::settings {
+
+Q_DECLARE_LOGGING_CATEGORY(lcSettings)
+
+class Node;
+
+enum class WriteOrigin : quint8 {
+    Init,      // On init
+    File,      // From the JSON file
+    FileReset, // When option not present in file
+    Layer,     // From the fallback layer
+    Qml,       // From QML
+    QmlReset,  // On option reset
+};
+
+class WriteScope {
+public:
+    explicit WriteScope(Node* node, WriteOrigin origin);
+    ~WriteScope();
+
+private:
+    Node* const m_root;
+    const WriteOrigin m_previous;
+
+    Q_DISABLE_COPY_MOVE(WriteScope)
+};
+
+class InternalRead {
+public:
+    explicit InternalRead(Node* node);
+    ~InternalRead();
+
+private:
+    Node* const m_root;
+    const bool m_previous;
+
+    Q_DISABLE_COPY_MOVE(InternalRead)
+};
+
+class CAE_SETTINGS_API DiagnosticType : public QObject {
+    Q_OBJECT
+    QML_NAMED_ELEMENT(DiagnosticType)
+    QML_SINGLETON
+
+public:
+    enum Type : quint8 {
+        UnknownOption = 0,
+        GlobalOption,
+        TypeMismatch,
+        InvalidValue,
+    };
+    Q_ENUM(Type)
+
+    Q_INVOKABLE static QString toString(caelestia::shell::settings::DiagnosticType::Type t);
+};
+
+enum class ExpectedType : quint8 {
+    Bool,
+    Int,
+    Real,
+    String,
+    Array,
+    Object,
+};
+
+struct Diagnostic {
+    Q_GADGET
+    QML_VALUE_TYPE(diagnostic)
+
+    Q_PROPERTY(DiagnosticType::Type type MEMBER type)
+    Q_PROPERTY(QString option MEMBER option)
+    Q_PROPERTY(QString message MEMBER message)
+
+public:
+    DiagnosticType::Type type = DiagnosticType::UnknownOption;
+    QString option;
+    QString message;
+
+    static Diagnostic mismatch(ExpectedType expected, const QJsonValue& value, const QString& option = {});
+    static Diagnostic mismatch(
+        const QList<ExpectedType>& expected, const QJsonValue& value, const QString& option = {});
+
+    bool operator==(const Diagnostic& other) const = default;
+};
+
+} // namespace caelestia::shell::settings
