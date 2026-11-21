@@ -1,7 +1,8 @@
-build/
-out/
-target/
-target-*/
+/build/
+/out/
+/engine/build/
+/aetherwm/target/
+/aetherwm/target-*/
 node_modules/
 __pycache__/
 *.log
