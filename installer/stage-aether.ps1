@@ -1,4 +1,4 @@
-# Puts together what Aether's installer installs, in dist\Aether, from the working install (CaelestiaShell,
+﻿# Puts together what Aether's installer installs, in dist\Aether, from the working install (CaelestiaShell,
 # kept current by the deploy) plus the extras. Then make-installer.ps1 packs it into AetherSetup.exe.
 #   powershell -File stage-aether.ps1
 $ErrorActionPreference = 'Stop'
@@ -31,7 +31,7 @@ if (Test-Path $video) { Copy-Item $video "$dist\media\aether-background.mp4" }
 # 4. AetherWM (grown from a komorebi fork): SOURCE only - the Komorebi License allows sharing source, not builds.
 #    Built on the friend's PC by build-aether-tiling.ps1 after they agree to the license.
 $tiling = "$dist\extras\aether-tiling"
-robocopy "$root\aether-tiling" $tiling /E /NFL /NDL /NJH /NJS /NP /XD "$root\aether-tiling\target" "$root\aether-tiling\target-gnu" "$root\aether-tiling\fork-patches\before-aetherwm" "$root\aether-tiling\.git" /XF demo.mp4 | Out-Null
+robocopy "$root\aether-tiling" $tiling /E /NFL /NDL /NJH /NJS /NP /XD target* media .git "$root\aether-tiling\fork-patches\before-aetherwm" /XF demo.mp4 *.before-* AGENTS.md   # every Rust build folder (target, target-gnu2...) and the demo media stay out | Out-Null
 if ($LASTEXITCODE -ge 8) { throw "robocopy (tiling) failed ($LASTEXITCODE)" }
 Copy-Item "$here\build-aether-tiling.ps1" "$tiling\"
 Copy-Item "$here\starter-hyprland.conf" "$tiling\"
