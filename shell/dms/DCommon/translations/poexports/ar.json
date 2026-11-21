@@ -1,0 +1,392 @@
+{
+  "%1 items": {
+    "%1 items": "%1 عناصر"
+  },
+  "%1 of %2": {
+    "%1 of %2": ""
+  },
+  "%1 selected": {
+    "%1 selected": "تم تحديد %1"
+  },
+  "%1 × %2": {
+    "%1 × %2": ""
+  },
+  "%1, %2": {
+    "%1, %2": ""
+  },
+  "1 item": {
+    "1 item": "عنصر واحد"
+  },
+  "1 selected": {
+    "1 selected": "تم تحديد 1"
+  },
+  "A file with this name already exists. Do you want to overwrite it?": {
+    "A file with this name already exists. Do you want to overwrite it?": "يوجد ملف بهذا الاسم بالفعل. هل تريد استبداله؟"
+  },
+  "A name cannot be empty or contain a slash": {
+    "A name cannot be empty or contain a slash": "لا يمكن أن يكون الاسم فارغاً أو يحتوي على شرطة مائلة"
+  },
+  "AM": {
+    "AM": "صباحاً"
+  },
+  "Actions": {
+    "Actions": "الإجراءات"
+  },
+  "Ascending": {
+    "Ascending": "تصاعدي"
+  },
+  "B": {
+    "B": "ب"
+  },
+  "Back": {
+    "Back": "رجوع"
+  },
+  "Backspace": {
+    "Backspace": "Backspace"
+  },
+  "Binary file": {
+    "Binary file": "ملف ثنائي"
+  },
+  "Broken link": {
+    "Broken link": "رابط معطل"
+  },
+  "Cancel": {
+    "Cancel": "إلغاء"
+  },
+  "Choose icon": {
+    "Choose icon": "اختيار أيقونة"
+  },
+  "Clear": {
+    "Clear": "مسح"
+  },
+  "Clear the selection": {
+    "Clear the selection": "مسح التحديد"
+  },
+  "Close": {
+    "Close": "اغلاق"
+  },
+  "Color": {
+    "Color": "اللون"
+  },
+  "Communication": {
+    "Communication": "اتصال"
+  },
+  "Confirm": {
+    "Confirm": "تأكيد"
+  },
+  "Copy path": {
+    "Copy path": "نسخ المسار"
+  },
+  "Create": {
+    "Create": "إنشاء"
+  },
+  "Created": {
+    "Created": "تم الإنشاء"
+  },
+  "Decrease": {
+    "Decrease": "إنقاص"
+  },
+  "Deleted": {
+    "Deleted": ""
+  },
+  "Descending": {
+    "Descending": "تنازلي"
+  },
+  "Development": {
+    "Development": "البرمجة"
+  },
+  "Dimensions": {
+    "Dimensions": ""
+  },
+  "Drag to reorder": {
+    "Drag to reorder": "اسحب لإعادة الترتيب"
+  },
+  "Edit": {
+    "Edit": "تعديل"
+  },
+  "Enter": {
+    "Enter": "إدخال"
+  },
+  "Enter filename...": {
+    "Enter filename...": "أدخل اسم الملف..."
+  },
+  "File": {
+    "File": "ملف"
+  },
+  "File Already Exists": {
+    "File Already Exists": "الملف موجود بالفعل"
+  },
+  "File System": {
+    "File System": "نظام الملفات"
+  },
+  "Files - %1": {
+    "Files - %1": "الملفات - %1"
+  },
+  "Files are unavailable because the file service is not running": {
+    "Files are unavailable because the file service is not running": "الملفات غير متوفرة لأن خدمة الملفات لا تعمل"
+  },
+  "First %1 of %2": {
+    "First %1 of %2": "أول %1 من %2"
+  },
+  "Folder": {
+    "Folder": "مجلد"
+  },
+  "Folder name": {
+    "Folder name": "اسم المجلد"
+  },
+  "Forward": {
+    "Forward": "إلى الأمام"
+  },
+  "Fun": {
+    "Fun": "مرح"
+  },
+  "GB": {
+    "GB": "جيجابايت"
+  },
+  "Grid view": {
+    "Grid view": "عرض الشبكة"
+  },
+  "Hibernate": {
+    "Hibernate": "إسبات"
+  },
+  "Hide keyboard": {
+    "Hide keyboard": "إخفاء لوحة المفاتيح"
+  },
+  "Hide password": {
+    "Hide password": "إخفاء كلمة المرور"
+  },
+  "Hide preview": {
+    "Hide preview": ""
+  },
+  "Hold longer to confirm": {
+    "Hold longer to confirm": "اضغط لفترة أطول للتأكيد"
+  },
+  "Hold to confirm (%1 ms)": {
+    "Hold to confirm (%1 ms)": "استمر في الضغط للتأكيد (%1 مللي ثانية)"
+  },
+  "Hold to confirm (%1s)": {
+    "Hold to confirm (%1s)": "اضغط مطولاً للتأكيد (%1 ث)"
+  },
+  "Home": {
+    "Home": "الرئيسية"
+  },
+  "Hour": {
+    "Hour": "ساعة"
+  },
+  "Increase": {
+    "Increase": "زيادة"
+  },
+  "Jump to a folder you visited": {
+    "Jump to a folder you visited": ""
+  },
+  "Last used": {
+    "Last used": ""
+  },
+  "List view": {
+    "List view": "عرض القائمة"
+  },
+  "Location": {
+    "Location": "الموقع"
+  },
+  "Log Out": {
+    "Log Out": "تسجيل الخروج"
+  },
+  "MB": {
+    "MB": "ميجابايت"
+  },
+  "Maximize": {
+    "Maximize": "تكبير"
+  },
+  "Media": {
+    "Media": "الوسائط"
+  },
+  "Minimize": {
+    "Minimize": "تصغير"
+  },
+  "Minute": {
+    "Minute": "دقيقة"
+  },
+  "Modified": {
+    "Modified": "معدل"
+  },
+  "Move to Trash": {
+    "Move to Trash": "نقل إلى المهملات"
+  },
+  "Name": {
+    "Name": "الاسم"
+  },
+  "Navigation": {
+    "Navigation": "التنقل"
+  },
+  "New folder": {
+    "New folder": "مجلد جديد"
+  },
+  "No locations found": {
+    "No locations found": "لم يتم العثور على مواقع"
+  },
+  "Nothing is at this location": {
+    "Nothing is at this location": ""
+  },
+  "Numbers": {
+    "Numbers": "أرقام"
+  },
+  "OK": {
+    "OK": "موافق"
+  },
+  "Open": {
+    "Open": "فتح"
+  },
+  "Original location": {
+    "Original location": ""
+  },
+  "Overwrite": {
+    "Overwrite": "استبدال"
+  },
+  "Owner": {
+    "Owner": "المالك"
+  },
+  "PM": {
+    "PM": "م"
+  },
+  "Permissions": {
+    "Permissions": "الأذونات"
+  },
+  "Power Off": {
+    "Power Off": "إيقاف التشغيل"
+  },
+  "Power Options": {
+    "Power Options": "خيارات الطاقة"
+  },
+  "Quick Access": {
+    "Quick Access": "وصول سريع"
+  },
+  "Reboot": {
+    "Reboot": "اعادة التشغيل"
+  },
+  "Refresh": {
+    "Refresh": "إعادة تحميل"
+  },
+  "Rename": {
+    "Rename": "إعادة تسمية"
+  },
+  "Restore": {
+    "Restore": "استعادة"
+  },
+  "Review changes": {
+    "Review changes": "مراجعة التغييرات"
+  },
+  "Saturation %1%, brightness %2%": {
+    "Saturation %1%, brightness %2%": "التشبع %1%، السطوع %2%"
+  },
+  "Save": {
+    "Save": "حفظ"
+  },
+  "Search for a location...": {
+    "Search for a location...": "البحث عن موقع..."
+  },
+  "Search...": {
+    "Search...": "ابحث هنا..."
+  },
+  "Searching...": {
+    "Searching...": "جارٍ البحث..."
+  },
+  "Select File": {
+    "Select File": "اختيار ملف"
+  },
+  "Select time": {
+    "Select time": "اختر الوقت"
+  },
+  "Shift": {
+    "Shift": "Shift"
+  },
+  "Show hidden files": {
+    "Show hidden files": "إظهار الملفات المخفية"
+  },
+  "Show password": {
+    "Show password": "عرض كلمة المرور"
+  },
+  "Size": {
+    "Size": "الحجم"
+  },
+  "Sort By": {
+    "Sort By": "ترتيب حسب"
+  },
+  "Space": {
+    "Space": "Space"
+  },
+  "Status": {
+    "Status": "الحالة"
+  },
+  "Suspend": {
+    "Suspend": "سكون"
+  },
+  "Switch User": {
+    "Switch User": "تبديل الحساب"
+  },
+  "System": {
+    "System": "النظام"
+  },
+  "TB": {
+    "TB": "تيرابايت"
+  },
+  "This folder could not be opened": {
+    "This folder could not be opened": "تعذر فتح هذا المجلد"
+  },
+  "This folder is empty": {
+    "This folder is empty": "هذا المجلد فارغ"
+  },
+  "This folder no longer exists": {
+    "This folder no longer exists": "هذا المجلد لم يعد موجوداً"
+  },
+  "This item already exists": {
+    "This item already exists": "هذا العنصر موجود بالفعل"
+  },
+  "This item cannot be moved here directly": {
+    "This item cannot be moved here directly": "لا يمكن نقل هذا العنصر إلى هنا مباشرة"
+  },
+  "This item could not be handled": {
+    "This item could not be handled": "تعذر التعامل مع هذا العنصر"
+  },
+  "This item is in use": {
+    "This item is in use": "هذا العنصر قيد الاستخدام"
+  },
+  "This item no longer exists": {
+    "This item no longer exists": "هذا العنصر لم يعد موجوداً"
+  },
+  "This kind of location is not supported": {
+    "This kind of location is not supported": ""
+  },
+  "Today, %1": {
+    "Today, %1": ""
+  },
+  "Type": {
+    "Type": "نوع"
+  },
+  "Type a path, ~ or an address such as sftp://host": {
+    "Type a path, ~ or an address such as sftp://host": ""
+  },
+  "Unknown": {
+    "Unknown": "غير معروف"
+  },
+  "Use this folder": {
+    "Use this folder": "استخدام هذا المجلد"
+  },
+  "Use ~ for your own home folder or type the full path": {
+    "Use ~ for your own home folder or type the full path": ""
+  },
+  "Workspace": {
+    "Workspace": "سطح المكتب"
+  },
+  "Yesterday, %1": {
+    "Yesterday, %1": ""
+  },
+  "You do not have permission to do this": {
+    "You do not have permission to do this": "ليس لديك إذن للقيام بذلك"
+  },
+  "You do not have permission to view this folder": {
+    "You do not have permission to view this folder": "ليس لديك إذن لعرض هذا المجلد"
+  },
+  "kB": {
+    "kB": "كيلوبايت"
+  }
+}

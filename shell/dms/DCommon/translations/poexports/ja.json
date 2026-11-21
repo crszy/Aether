@@ -1,0 +1,392 @@
+{
+  "%1 items": {
+    "%1 items": ""
+  },
+  "%1 of %2": {
+    "%1 of %2": ""
+  },
+  "%1 selected": {
+    "%1 selected": ""
+  },
+  "%1 × %2": {
+    "%1 × %2": ""
+  },
+  "%1, %2": {
+    "%1, %2": ""
+  },
+  "1 item": {
+    "1 item": ""
+  },
+  "1 selected": {
+    "1 selected": ""
+  },
+  "A file with this name already exists. Do you want to overwrite it?": {
+    "A file with this name already exists. Do you want to overwrite it?": ""
+  },
+  "A name cannot be empty or contain a slash": {
+    "A name cannot be empty or contain a slash": ""
+  },
+  "AM": {
+    "AM": ""
+  },
+  "Actions": {
+    "Actions": "アクション"
+  },
+  "Ascending": {
+    "Ascending": ""
+  },
+  "B": {
+    "B": ""
+  },
+  "Back": {
+    "Back": "戻る"
+  },
+  "Backspace": {
+    "Backspace": ""
+  },
+  "Binary file": {
+    "Binary file": ""
+  },
+  "Broken link": {
+    "Broken link": ""
+  },
+  "Cancel": {
+    "Cancel": "キャンセル"
+  },
+  "Choose icon": {
+    "Choose icon": ""
+  },
+  "Clear": {
+    "Clear": "クリア"
+  },
+  "Clear the selection": {
+    "Clear the selection": ""
+  },
+  "Close": {
+    "Close": "閉じる"
+  },
+  "Color": {
+    "Color": "色"
+  },
+  "Communication": {
+    "Communication": ""
+  },
+  "Confirm": {
+    "Confirm": "確認"
+  },
+  "Copy path": {
+    "Copy path": "パスをコピー"
+  },
+  "Create": {
+    "Create": "作成"
+  },
+  "Created": {
+    "Created": ""
+  },
+  "Decrease": {
+    "Decrease": ""
+  },
+  "Deleted": {
+    "Deleted": ""
+  },
+  "Descending": {
+    "Descending": ""
+  },
+  "Development": {
+    "Development": "開発"
+  },
+  "Dimensions": {
+    "Dimensions": ""
+  },
+  "Drag to reorder": {
+    "Drag to reorder": ""
+  },
+  "Edit": {
+    "Edit": "編集"
+  },
+  "Enter": {
+    "Enter": ""
+  },
+  "Enter filename...": {
+    "Enter filename...": ""
+  },
+  "File": {
+    "File": "ファイル"
+  },
+  "File Already Exists": {
+    "File Already Exists": ""
+  },
+  "File System": {
+    "File System": ""
+  },
+  "Files - %1": {
+    "Files - %1": ""
+  },
+  "Files are unavailable because the file service is not running": {
+    "Files are unavailable because the file service is not running": ""
+  },
+  "First %1 of %2": {
+    "First %1 of %2": ""
+  },
+  "Folder": {
+    "Folder": "フォルダー"
+  },
+  "Folder name": {
+    "Folder name": ""
+  },
+  "Forward": {
+    "Forward": ""
+  },
+  "Fun": {
+    "Fun": ""
+  },
+  "GB": {
+    "GB": ""
+  },
+  "Grid view": {
+    "Grid view": ""
+  },
+  "Hibernate": {
+    "Hibernate": "休止状態"
+  },
+  "Hide keyboard": {
+    "Hide keyboard": ""
+  },
+  "Hide password": {
+    "Hide password": ""
+  },
+  "Hide preview": {
+    "Hide preview": ""
+  },
+  "Hold longer to confirm": {
+    "Hold longer to confirm": "確認するにはさらに長く押してください"
+  },
+  "Hold to confirm (%1 ms)": {
+    "Hold to confirm (%1 ms)": "長押しで確認（%1 ms）"
+  },
+  "Hold to confirm (%1s)": {
+    "Hold to confirm (%1s)": "長押しで確認（%1秒）"
+  },
+  "Home": {
+    "Home": ""
+  },
+  "Hour": {
+    "Hour": ""
+  },
+  "Increase": {
+    "Increase": ""
+  },
+  "Jump to a folder you visited": {
+    "Jump to a folder you visited": ""
+  },
+  "Last used": {
+    "Last used": ""
+  },
+  "List view": {
+    "List view": ""
+  },
+  "Location": {
+    "Location": "位置"
+  },
+  "Log Out": {
+    "Log Out": "ログアウト"
+  },
+  "MB": {
+    "MB": ""
+  },
+  "Maximize": {
+    "Maximize": "最大化"
+  },
+  "Media": {
+    "Media": "メディア"
+  },
+  "Minimize": {
+    "Minimize": ""
+  },
+  "Minute": {
+    "Minute": ""
+  },
+  "Modified": {
+    "Modified": "変更済み"
+  },
+  "Move to Trash": {
+    "Move to Trash": ""
+  },
+  "Name": {
+    "Name": "名称"
+  },
+  "Navigation": {
+    "Navigation": ""
+  },
+  "New folder": {
+    "New folder": ""
+  },
+  "No locations found": {
+    "No locations found": ""
+  },
+  "Nothing is at this location": {
+    "Nothing is at this location": ""
+  },
+  "Numbers": {
+    "Numbers": ""
+  },
+  "OK": {
+    "OK": "OK"
+  },
+  "Open": {
+    "Open": "開ける"
+  },
+  "Original location": {
+    "Original location": ""
+  },
+  "Overwrite": {
+    "Overwrite": ""
+  },
+  "Owner": {
+    "Owner": ""
+  },
+  "PM": {
+    "PM": ""
+  },
+  "Permissions": {
+    "Permissions": ""
+  },
+  "Power Off": {
+    "Power Off": "電源オフ"
+  },
+  "Power Options": {
+    "Power Options": ""
+  },
+  "Quick Access": {
+    "Quick Access": ""
+  },
+  "Reboot": {
+    "Reboot": "再起動"
+  },
+  "Refresh": {
+    "Refresh": "更新"
+  },
+  "Rename": {
+    "Rename": "名前を変更"
+  },
+  "Restore": {
+    "Restore": ""
+  },
+  "Review changes": {
+    "Review changes": ""
+  },
+  "Saturation %1%, brightness %2%": {
+    "Saturation %1%, brightness %2%": ""
+  },
+  "Save": {
+    "Save": "保存"
+  },
+  "Search for a location...": {
+    "Search for a location...": ""
+  },
+  "Search...": {
+    "Search...": "検索..."
+  },
+  "Searching...": {
+    "Searching...": ""
+  },
+  "Select File": {
+    "Select File": ""
+  },
+  "Select time": {
+    "Select time": ""
+  },
+  "Shift": {
+    "Shift": ""
+  },
+  "Show hidden files": {
+    "Show hidden files": ""
+  },
+  "Show password": {
+    "Show password": ""
+  },
+  "Size": {
+    "Size": "サイズ"
+  },
+  "Sort By": {
+    "Sort By": "並べ替え方法"
+  },
+  "Space": {
+    "Space": ""
+  },
+  "Status": {
+    "Status": "状態"
+  },
+  "Suspend": {
+    "Suspend": "スリープ"
+  },
+  "Switch User": {
+    "Switch User": "ユーザーを切り替える"
+  },
+  "System": {
+    "System": "システム"
+  },
+  "TB": {
+    "TB": ""
+  },
+  "This folder could not be opened": {
+    "This folder could not be opened": ""
+  },
+  "This folder is empty": {
+    "This folder is empty": ""
+  },
+  "This folder no longer exists": {
+    "This folder no longer exists": ""
+  },
+  "This item already exists": {
+    "This item already exists": ""
+  },
+  "This item cannot be moved here directly": {
+    "This item cannot be moved here directly": ""
+  },
+  "This item could not be handled": {
+    "This item could not be handled": ""
+  },
+  "This item is in use": {
+    "This item is in use": ""
+  },
+  "This item no longer exists": {
+    "This item no longer exists": ""
+  },
+  "This kind of location is not supported": {
+    "This kind of location is not supported": ""
+  },
+  "Today, %1": {
+    "Today, %1": ""
+  },
+  "Type": {
+    "Type": "種類"
+  },
+  "Type a path, ~ or an address such as sftp://host": {
+    "Type a path, ~ or an address such as sftp://host": ""
+  },
+  "Unknown": {
+    "Unknown": "不明"
+  },
+  "Use this folder": {
+    "Use this folder": ""
+  },
+  "Use ~ for your own home folder or type the full path": {
+    "Use ~ for your own home folder or type the full path": ""
+  },
+  "Workspace": {
+    "Workspace": "ワークスペース"
+  },
+  "Yesterday, %1": {
+    "Yesterday, %1": ""
+  },
+  "You do not have permission to do this": {
+    "You do not have permission to do this": ""
+  },
+  "You do not have permission to view this folder": {
+    "You do not have permission to view this folder": ""
+  },
+  "kB": {
+    "kB": ""
+  }
+}

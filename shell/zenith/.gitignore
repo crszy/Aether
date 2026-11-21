@@ -1,0 +1,45 @@
+# ---------------------------------------------------------------------------
+# Personal data. Never commit these -- they are yours, not the project's.
+# ---------------------------------------------------------------------------
+wifi_secrets.json
+
+# Credentials normally live in ~/.config/zenith/, outside the repo. These are
+# guards in case one is ever generated, copied or dropped in-tree -- a leaked
+# app password or API key is not something you get to take back.
+todoist.json
+mail.json
+ai_keys.json
+*_secrets.json
+*.key
+*.pem
+
+# Personal state: what you have read, ticked and worked on.
+roadmap_progress.json
+todo.json
+
+# ---------------------------------------------------------------------------
+# Runtime state written by the shell while it runs, not configuration.
+# Tracking these means a permanently dirty worktree and a conflict on every
+# pull, for data that gets rebuilt automatically anyway.
+# ---------------------------------------------------------------------------
+
+# per-app launch counts
+app_usage.json
+
+# pomodoro / focus session history
+productivity.json
+
+# holidays for YOUR country, refetched by scripts/fetch_events.sh
+events.json
+
+zenith.log
+
+# ---------------------------------------------------------------------------
+# Build / editor noise
+# ---------------------------------------------------------------------------
+__pycache__/
+*.pyc
+*.tmp
+*.new
+*.bak
+.qmlls.ini

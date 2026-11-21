@@ -1,0 +1,563 @@
+pragma Singleton
+pragma ComponentBehavior: Bound
+
+import QtQuick
+import Quickshell
+import Quickshell.Io
+import Quickshell.Wayland
+import qs.dms.Common
+import qs.dms.Services
+
+Singleton {
+    id: root
+    readonly property var log: Log.scoped("ClipboardService")
+
+    readonly property int longTextThreshold: 200
+
+    readonly property bool clipboardAvailable: DMSService.isConnected && (DMSService.capabilities.length === 0 || DMSService.capabilities.includes("clipboard"))
+    property bool pasteSupported: false
+    readonly property bool pasteAvailable: clipboardAvailable && pasteSupported
+
+    readonly property var terminalAppIds: ["kitty", "foot", "footclient", "alacritty", "st", "org.wezfurlong.wezterm", "com.mitchellh.ghostty", "ghostty", "org.kde.konsole", "konsole", "org.gnome.terminal", "gnome-terminal-server", "org.gnome.console", "kgx", "com.gexperts.tilix", "tilix", "terminator", "xfce4-terminal", "lxterminal", "deepin-terminal", "io.elementary.terminal", "rio", "contour", "wayst", "urxvt", "rxvt"]
+
+    readonly property int pageSize: 100
+    property var allPinnedEntries: []
+    property var pinnedEntries: []
+    property var unpinnedEntries: []
+    property int unpinnedTotal: 0
+    readonly property bool hasMoreUnpinned: unpinnedEntries.length < unpinnedTotal
+    property int pinnedCount: 0
+    property int historyCount: 0
+    property string searchText: ""
+    property string activeFilter: "all"
+    property string activeTab: "recents"
+    readonly property bool filterActive: searchText.trim().length > 0 || activeFilter !== "all"
+    property int selectedIndex: 0
+    property bool keyboardNavigationActive: false
+    property int refCount: 0
+    property bool _pasteSupportChecked: false
+    property bool _launcherCacheValid: false
+    property string _launcherCachedQuery: ""
+    property var _launcherCachedEntries: []
+    property int _launcherSearchSeq: 0
+    property int _unpinnedSeq: 0
+    property int _pinnedSeq: 0
+    property int _allPinnedSeq: 0
+    property bool _loadingMore: false
+    property bool _fetchFromTop: false
+    property bool _fetchPinned: false
+
+    signal historyCopied
+    signal historyCleared
+    signal launcherSearchReady(string query)
+
+    Timer {
+        id: pasteTimer
+        interval: 200
+        repeat: false
+        onTriggered: root.sendPasteKeystroke()
+    }
+
+    Process {
+        id: pasteCommand
+        onExited: pasteTimer.start()
+    }
+
+    Connections {
+        target: DMSService
+        function onIsConnectedChanged() {
+            root.refreshPasteSupport();
+        }
+    }
+
+    // subscribed for the shell's lifetime; resubscribing replays every service's snapshot
+    Component.onCompleted: DMSService.addSubscription("clipboard")
+
+    onRefCountChanged: {
+        if (refCount > 0 && !_pasteSupportChecked)
+            refreshPasteSupport();
+    }
+
+    function refreshPasteSupport() {
+        if (!DMSService.isConnected) {
+            pasteSupported = false;
+            _pasteSupportChecked = false;
+            return;
+        }
+        _pasteSupportChecked = true;
+        DMSService.sendRequest("clipboard.pasteSupported", null, function (response) {
+            root.pasteSupported = !response.error && response.result && response.result.supported === true;
+        });
+    }
+
+    function isTerminalFocused() {
+        const appId = (ToplevelManager.activeToplevel?.appId ?? "").toLowerCase();
+        if (!appId) {
+            return false;
+        }
+        return terminalAppIds.includes(appId) || appId.endsWith("term") || appId.includes("terminal");
+    }
+
+    function pasteAfterCommand(command) {
+        pasteCommand.command = command;
+        pasteCommand.running = true;
+    }
+
+    function sendPasteKeystroke() {
+        DMSService.sendRequest("clipboard.sendPaste", {
+            "shift": isTerminalFocused()
+        }, function (response) {
+            if (response.error) {
+                ToastService.showError(I18n.tr("Paste failed: %1", "clipboard error toast, %1 is the error message").arg(response.error));
+            }
+        });
+    }
+
+    function updateFilteredModel() {
+        queueFetch(true, false);
+    }
+
+    function refresh() {
+        queueFetch(false, true);
+    }
+
+    function queueFetch(fromTop, withAllPinned) {
+        if (!clipboardAvailable)
+            return;
+        _fetchFromTop = _fetchFromTop || fromTop;
+        _fetchPinned = _fetchPinned || withAllPinned;
+        Qt.callLater(root.fetchEntries);
+    }
+
+    function fetchEntries() {
+        const keepSelection = !_fetchFromTop;
+        const limit = _fetchFromTop ? pageSize : Math.max(pageSize, unpinnedEntries.length);
+        if (_fetchPinned)
+            fetchAllPinned(keepSelection);
+        _fetchFromTop = false;
+        _fetchPinned = false;
+        _loadingMore = false;
+
+        const pinnedSeq = ++_pinnedSeq;
+        if (filterActive) {
+            DMSService.sendRequest("clipboard.search", entryQuery(true, 0, 5000), function (response) {
+                if (pinnedSeq !== root._pinnedSeq)
+                    return;
+                if (response.error) {
+                    log.warn("Failed to search pinned entries:", response.error);
+                    return;
+                }
+                root.applyEntries(true, (response.result || {}).entries || [], keepSelection);
+            });
+        } else {
+            applyEntries(true, allPinnedEntries, keepSelection);
+        }
+
+        const seq = ++_unpinnedSeq;
+        DMSService.sendRequest("clipboard.search", entryQuery(false, 0, limit), function (response) {
+            if (seq !== root._unpinnedSeq)
+                return;
+            if (response.error) {
+                log.warn("Failed to get history:", response.error);
+                return;
+            }
+            const result = response.result || {};
+            root.unpinnedTotal = result.total || 0;
+            root.applyEntries(false, result.entries || [], keepSelection);
+        });
+    }
+
+    function fetchAllPinned(keepSelection) {
+        const seq = ++_allPinnedSeq;
+        DMSService.sendRequest("clipboard.search", {
+            "pinned": true,
+            "limit": 5000
+        }, function (response) {
+            if (seq !== root._allPinnedSeq)
+                return;
+            if (response.error) {
+                log.warn("Failed to get pinned entries:", response.error);
+                return;
+            }
+            root.allPinnedEntries = (response.result || {}).entries || [];
+            if (!root.filterActive)
+                root.applyEntries(true, root.allPinnedEntries, keepSelection);
+        });
+    }
+
+    function loadMore() {
+        if (_loadingMore || !hasMoreUnpinned || !clipboardAvailable)
+            return;
+        _loadingMore = true;
+        const seq = _unpinnedSeq;
+        DMSService.sendRequest("clipboard.search", entryQuery(false, unpinnedEntries.length, pageSize), function (response) {
+            if (seq !== root._unpinnedSeq)
+                return;
+            root._loadingMore = false;
+            if (response.error) {
+                log.warn("Failed to load more history:", response.error);
+                return;
+            }
+            const result = response.result || {};
+            const loaded = new Set(root.unpinnedEntries.map(e => e.id));
+            root.unpinnedEntries = root.unpinnedEntries.concat((result.entries || []).filter(e => !loaded.has(e.id)));
+            root.unpinnedTotal = result.total || 0;
+        });
+    }
+
+    function entryQuery(pinned, offset, limit) {
+        return {
+            "query": searchText.trim(),
+            "type": activeFilter === "all" ? "" : activeFilter,
+            "pinned": pinned,
+            "offset": offset,
+            "limit": limit
+        };
+    }
+
+    // a refresh keeps the selection on the same entry when rows shift around it
+    function applyEntries(pinned, entries, keepSelection) {
+        const savedTab = activeTab === "saved";
+        const shown = savedTab ? pinnedEntries : unpinnedEntries;
+        const selectedId = keepSelection && savedTab === pinned ? shown[selectedIndex]?.id : undefined;
+
+        if (pinned)
+            pinnedEntries = entries;
+        else
+            unpinnedEntries = entries;
+
+        const index = selectedId === undefined ? -1 : entries.findIndex(e => e.id === selectedId);
+        if (index >= 0)
+            selectedIndex = index;
+        clampSelection();
+    }
+
+    function clampSelection() {
+        const activeCount = (activeTab === "saved" ? pinnedEntries : unpinnedEntries).length;
+        if (activeCount === 0) {
+            keyboardNavigationActive = false;
+            selectedIndex = 0;
+            return;
+        }
+        if (selectedIndex >= activeCount)
+            selectedIndex = activeCount - 1;
+    }
+
+    function removeLocalEntry(entry) {
+        const before = unpinnedEntries.length;
+        unpinnedEntries = unpinnedEntries.filter(e => e.id !== entry.id);
+        unpinnedTotal -= before - unpinnedEntries.length;
+        allPinnedEntries = allPinnedEntries.filter(e => e.id !== entry.id);
+        pinnedEntries = pinnedEntries.filter(e => e.id !== entry.id);
+        clampSelection();
+    }
+
+    function requestLauncherSearch(query, limit) {
+        if (!clipboardAvailable) {
+            return;
+        }
+        if (!_pasteSupportChecked)
+            refreshPasteSupport();
+
+        const trimmed = (query || "").toString().trim();
+        const maxItems = limit > 0 ? limit : 20;
+        if (_launcherCacheValid && _launcherCachedQuery === trimmed) {
+            return;
+        }
+
+        _launcherSearchSeq++;
+        const seq = _launcherSearchSeq;
+        DMSService.sendRequest("clipboard.search", {
+            "query": trimmed,
+            "limit": maxItems
+        }, function (response) {
+            if (seq !== _launcherSearchSeq) {
+                return;
+            }
+            if (response.error) {
+                log.warn("Launcher clipboard search failed:", response.error);
+                _launcherCacheValid = true;
+                _launcherCachedQuery = trimmed;
+                _launcherCachedEntries = [];
+                launcherSearchReady(trimmed);
+                return;
+            }
+            const result = response.result || {};
+            _launcherCacheValid = true;
+            _launcherCachedQuery = trimmed;
+            _launcherCachedEntries = result.entries || [];
+            launcherSearchReady(trimmed);
+        });
+    }
+
+    function getCachedLauncherSearchEntries(query, limit) {
+        if (!clipboardAvailable) {
+            return [];
+        }
+
+        const trimmed = (query || "").toString().trim();
+        const maxItems = limit > 0 ? limit : 20;
+        if (!_launcherCacheValid || _launcherCachedQuery !== trimmed) {
+            requestLauncherSearch(trimmed, maxItems);
+            return [];
+        }
+        return _launcherCachedEntries.slice(0, maxItems);
+    }
+
+    function invalidateLauncherSearchCache() {
+        _launcherCacheValid = false;
+        _launcherCachedQuery = "";
+        _launcherCachedEntries = [];
+        _launcherSearchSeq++;
+    }
+
+    function reset() {
+        searchText = "";
+        selectedIndex = 0;
+        keyboardNavigationActive = false;
+        unpinnedEntries = [];
+        unpinnedTotal = 0;
+        allPinnedEntries = [];
+        pinnedEntries = [];
+        _unpinnedSeq++;
+        _pinnedSeq++;
+        _allPinnedSeq++;
+        _loadingMore = false;
+        if (refCount > 0)
+            queueFetch(true, true);
+    }
+
+    function copyEntry(entry, closeCallback, textOnly) {
+        const asText = textOnly === true;
+        DMSService.sendRequest("clipboard.copyEntry", {
+            "id": entry.id,
+            "textOnly": asText
+        }, function (response) {
+            if (response.error) {
+                ToastService.showError(I18n.tr("Failed to copy entry"));
+                return;
+            }
+            ToastService.showInfo(entry.isImage && !asText ? I18n.tr("Image copied to clipboard") : I18n.tr("Copied to clipboard"));
+            historyCopied();
+            if (closeCallback) {
+                closeCallback();
+            }
+        });
+    }
+
+    function pasteClipboard(closeCallback) {
+        if (closeCallback) {
+            closeCallback();
+        }
+        if (pasteAvailable) {
+            pasteTimer.start();
+        }
+    }
+
+    function pasteEntry(entry, closeCallback) {
+        if (!pasteAvailable) {
+            copyEntry(entry, closeCallback);
+            return;
+        }
+        DMSService.sendRequest("clipboard.copyEntry", {
+            "id": entry.id
+        }, function (response) {
+            if (response.error) {
+                ToastService.showError(I18n.tr("Failed to copy entry"));
+                return;
+            }
+            if (closeCallback) {
+                closeCallback();
+            }
+            pasteTimer.start();
+        });
+    }
+
+    function deleteEntry(entry) {
+        DMSService.sendRequest("clipboard.deleteEntry", {
+            "id": entry.id
+        }, function (response) {
+            if (response.error) {
+                log.warn("Failed to delete entry:", response.error);
+                return;
+            }
+            removeLocalEntry(entry);
+        });
+    }
+
+    function deletePinnedEntry(entry, confirmDialog) {
+        if (!confirmDialog) {
+            return;
+        }
+        confirmDialog.show(I18n.tr("Delete Saved Item?"), I18n.tr("This will permanently remove this saved clipboard item. This action cannot be undone."), function () {
+            DMSService.sendRequest("clipboard.deleteEntry", {
+                "id": entry.id
+            }, function (response) {
+                if (response.error) {
+                    log.warn("Failed to delete entry:", response.error);
+                    return;
+                }
+                removeLocalEntry(entry);
+                ToastService.showInfo(I18n.tr("Saved item deleted"));
+            });
+        }, function () {});
+    }
+
+    function pinEntry(entry) {
+        DMSService.sendRequest("clipboard.pinEntry", {
+            "id": entry.id
+        }, function (response) {
+            if (response.error) {
+                // error text from core/internal/server/clipboard
+                const limit = /^maximum pinned entries reached \((\d+)\)/.exec(response.error);
+                ToastService.showError(limit ? I18n.tr("Maximum pinned entries reached") + " (" + limit[1] + ")" : I18n.tr("Failed to pin entry"));
+                return;
+            }
+            ToastService.showInfo(I18n.tr("Entry pinned"));
+        });
+    }
+
+    function unpinEntry(entry) {
+        DMSService.sendRequest("clipboard.unpinEntry", {
+            "id": entry.id
+        }, function (response) {
+            if (response.error) {
+                ToastService.showError(I18n.tr("Failed to unpin entry"));
+                return;
+            }
+            ToastService.showInfo(I18n.tr("Entry unpinned"));
+        });
+    }
+
+    function editEntry(entry, text, callback) {
+        if (!entry || typeof entry.id !== "number") {
+            if (callback) {
+                callback({
+                    "error": "Invalid entry"
+                });
+            }
+            return;
+        }
+        DMSService.sendRequest("clipboard.editEntry", {
+            "id": entry.id,
+            "text": text
+        }, function (response) {
+            if (response.error) {
+                log.warn("Failed to edit entry:", response.error);
+                if (callback) {
+                    callback(response);
+                }
+                return;
+            }
+            refresh();
+            if (callback) {
+                callback(response);
+            }
+        });
+    }
+
+    function clearAll() {
+        const hasPinned = pinnedCount > 0;
+        const savedCount = pinnedCount;
+        DMSService.sendRequest("clipboard.clearHistory", null, function (response) {
+            if (response.error) {
+                log.warn("Failed to clear history:", response.error);
+                return;
+            }
+            refresh();
+            historyCleared();
+            if (hasPinned) {
+                ToastService.showInfo(I18n.tr("History cleared. %1 pinned entries kept.", "clipboard toast, %1 is a count of pinned entries").arg(savedCount));
+            }
+        });
+    }
+
+    function clearFiltered() {
+        if (unpinnedTotal === 0) {
+            return;
+        }
+        const filter = entryQuery(false, 0, 0);
+        DMSService.sendRequest("clipboard.deleteMatching", {
+            "query": filter.query,
+            "type": filter.type
+        }, function (response) {
+            if (response.error) {
+                log.warn("Failed to clear filtered entries:", response.error);
+                return;
+            }
+            refresh();
+            historyCleared();
+        });
+    }
+
+    function getEntryPreview(entry) {
+        return entry.preview || "";
+    }
+
+    function isTextMimeType(mimeType) {
+        if (!mimeType || mimeType.startsWith("text/plain")) {
+            return true;
+        }
+        return mimeType === "UTF8_STRING" || mimeType === "STRING" || mimeType === "TEXT";
+    }
+
+    function canEditEntry(entry) {
+        return !!entry && !(entry.isImage ?? false) && isTextMimeType(entry.mimeType);
+    }
+
+    function isImageMimeType(mimeType) {
+        return (mimeType || "").toString().toLowerCase().startsWith("image/");
+    }
+
+    function canPreviewEntry(entry) {
+        return !!entry && !!(entry.isImage ?? false) && typeof entry.id === "number" && isImageMimeType(entry.mimeType);
+    }
+
+    function imageDataUrl(data, mimeType) {
+        const rawData = (data || "").toString();
+        if (rawData.length === 0)
+            return "";
+        if (rawData.startsWith("data:"))
+            return rawData.startsWith("data:image/") ? rawData : "";
+        if (!isImageMimeType(mimeType))
+            return "";
+        return "data:" + mimeType + ";base64," + rawData;
+    }
+
+    function getEntryType(entry) {
+        if (entry.isImage) {
+            return "image";
+        }
+        if (entry.size > longTextThreshold) {
+            return "long_text";
+        }
+        return "text";
+    }
+
+    function getPinnedEntryByHash(entryHash) {
+        if (!entryHash) {
+            return null;
+        }
+        return allPinnedEntries.find(entry => entry.hash === entryHash) || null;
+    }
+
+    function hashedPinnedEntry(entryHash) {
+        return getPinnedEntryByHash(entryHash) !== null;
+    }
+
+    onClipboardAvailableChanged: {
+        if (!clipboardAvailable || refCount <= 0)
+            return;
+        refresh();
+    }
+
+    Connections {
+        target: DMSService
+        function onClipboardStateUpdate(data) {
+            root.pinnedCount = data.pinnedCount || 0;
+            root.historyCount = data.historyCount || 0;
+            if (root.refCount > 0)
+                root.refresh();
+        }
+    }
+}

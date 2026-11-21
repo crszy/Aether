@@ -1,0 +1,392 @@
+{
+  "%1 items": {
+    "%1 items": "%1 elementoj"
+  },
+  "%1 of %2": {
+    "%1 of %2": ""
+  },
+  "%1 selected": {
+    "%1 selected": "%1 elektitaj"
+  },
+  "%1 × %2": {
+    "%1 × %2": ""
+  },
+  "%1, %2": {
+    "%1, %2": ""
+  },
+  "1 item": {
+    "1 item": "1 elemento"
+  },
+  "1 selected": {
+    "1 selected": "1 elektita"
+  },
+  "A file with this name already exists. Do you want to overwrite it?": {
+    "A file with this name already exists. Do you want to overwrite it?": "Dosiero kun tiu nomo jam ekzistas. Ĉu vi volas anstataŭigi ĝin?"
+  },
+  "A name cannot be empty or contain a slash": {
+    "A name cannot be empty or contain a slash": "Nomo ne povas esti malplena aŭ enhavi oblikvon"
+  },
+  "AM": {
+    "AM": "AM"
+  },
+  "Actions": {
+    "Actions": "Agoj"
+  },
+  "Ascending": {
+    "Ascending": "Kreskanta"
+  },
+  "B": {
+    "B": "B"
+  },
+  "Back": {
+    "Back": "Reen"
+  },
+  "Backspace": {
+    "Backspace": "Retropaŝo"
+  },
+  "Binary file": {
+    "Binary file": "Duuma dosiero"
+  },
+  "Broken link": {
+    "Broken link": "Rompita ligilo"
+  },
+  "Cancel": {
+    "Cancel": "Nuligi"
+  },
+  "Choose icon": {
+    "Choose icon": "Elekti piktogramon"
+  },
+  "Clear": {
+    "Clear": "Viŝi"
+  },
+  "Clear the selection": {
+    "Clear the selection": "Vakigi la elekton"
+  },
+  "Close": {
+    "Close": "Fermi"
+  },
+  "Color": {
+    "Color": "Koloro"
+  },
+  "Communication": {
+    "Communication": "Komunikado"
+  },
+  "Confirm": {
+    "Confirm": "Konfirmi"
+  },
+  "Copy path": {
+    "Copy path": "Kopii vojon"
+  },
+  "Create": {
+    "Create": "Krei"
+  },
+  "Created": {
+    "Created": "Kreita"
+  },
+  "Decrease": {
+    "Decrease": "Malpliigi"
+  },
+  "Deleted": {
+    "Deleted": ""
+  },
+  "Descending": {
+    "Descending": "Malkreskanta"
+  },
+  "Development": {
+    "Development": "Evoluigo"
+  },
+  "Dimensions": {
+    "Dimensions": ""
+  },
+  "Drag to reorder": {
+    "Drag to reorder": "Trenu por reordigi"
+  },
+  "Edit": {
+    "Edit": "Redakti"
+  },
+  "Enter": {
+    "Enter": "Enen"
+  },
+  "Enter filename...": {
+    "Enter filename...": "Enigu dosiernomon..."
+  },
+  "File": {
+    "File": "Dosiero"
+  },
+  "File Already Exists": {
+    "File Already Exists": "Dosiero jam ekzistas"
+  },
+  "File System": {
+    "File System": "Dosiersistemo"
+  },
+  "Files - %1": {
+    "Files - %1": "Dosieroj - %1"
+  },
+  "Files are unavailable because the file service is not running": {
+    "Files are unavailable because the file service is not running": "Dosieroj estas nedisponeblaj ĉar la dosierservo ne funkcias"
+  },
+  "First %1 of %2": {
+    "First %1 of %2": "Unuaj %1 el %2"
+  },
+  "Folder": {
+    "Folder": "Dosierujo"
+  },
+  "Folder name": {
+    "Folder name": "Dosieruja nomo"
+  },
+  "Forward": {
+    "Forward": "Antaŭen"
+  },
+  "Fun": {
+    "Fun": "Amuzo"
+  },
+  "GB": {
+    "GB": "GB"
+  },
+  "Grid view": {
+    "Grid view": "Krada vido"
+  },
+  "Hibernate": {
+    "Hibernate": "Pasivigi"
+  },
+  "Hide keyboard": {
+    "Hide keyboard": "Kaŝi klavaron"
+  },
+  "Hide password": {
+    "Hide password": "Kaŝi pasvorton"
+  },
+  "Hide preview": {
+    "Hide preview": ""
+  },
+  "Hold longer to confirm": {
+    "Hold longer to confirm": "Tenu pli longe por konfirmi"
+  },
+  "Hold to confirm (%1 ms)": {
+    "Hold to confirm (%1 ms)": "Tenu por konfirmi (%1 ms)"
+  },
+  "Hold to confirm (%1s)": {
+    "Hold to confirm (%1s)": "Tenu por konfirmi (%1s)"
+  },
+  "Home": {
+    "Home": "Hejmo"
+  },
+  "Hour": {
+    "Hour": "Horo"
+  },
+  "Increase": {
+    "Increase": "Pliigi"
+  },
+  "Jump to a folder you visited": {
+    "Jump to a folder you visited": ""
+  },
+  "Last used": {
+    "Last used": ""
+  },
+  "List view": {
+    "List view": "Lista vido"
+  },
+  "Location": {
+    "Location": "Loko"
+  },
+  "Log Out": {
+    "Log Out": "Seancfino"
+  },
+  "MB": {
+    "MB": "MB"
+  },
+  "Maximize": {
+    "Maximize": "Maksimumigi"
+  },
+  "Media": {
+    "Media": "Aŭdvidaĵo"
+  },
+  "Minimize": {
+    "Minimize": "Minimumigi"
+  },
+  "Minute": {
+    "Minute": "Minuto"
+  },
+  "Modified": {
+    "Modified": "Modifita"
+  },
+  "Move to Trash": {
+    "Move to Trash": "movi rubujen"
+  },
+  "Name": {
+    "Name": "Nomo"
+  },
+  "Navigation": {
+    "Navigation": "Navigado"
+  },
+  "New folder": {
+    "New folder": "Nova dosierujo"
+  },
+  "No locations found": {
+    "No locations found": "Neniuj lokoj trovitaj"
+  },
+  "Nothing is at this location": {
+    "Nothing is at this location": ""
+  },
+  "Numbers": {
+    "Numbers": "Numeroj"
+  },
+  "OK": {
+    "OK": "Bone"
+  },
+  "Open": {
+    "Open": "Malfermi"
+  },
+  "Original location": {
+    "Original location": ""
+  },
+  "Overwrite": {
+    "Overwrite": "Anstataŭigi"
+  },
+  "Owner": {
+    "Owner": "Posedanto"
+  },
+  "PM": {
+    "PM": "PM"
+  },
+  "Permissions": {
+    "Permissions": "Permesoj"
+  },
+  "Power Off": {
+    "Power Off": "Malŝalti"
+  },
+  "Power Options": {
+    "Power Options": "Elektraj opcioj"
+  },
+  "Quick Access": {
+    "Quick Access": "Rapida aliro"
+  },
+  "Reboot": {
+    "Reboot": "Restartigi"
+  },
+  "Refresh": {
+    "Refresh": "Refreŝigi"
+  },
+  "Rename": {
+    "Rename": "Renomi"
+  },
+  "Restore": {
+    "Restore": "Restaŭri"
+  },
+  "Review changes": {
+    "Review changes": "Revizii ŝanĝojn"
+  },
+  "Saturation %1%, brightness %2%": {
+    "Saturation %1%, brightness %2%": "Saturo %1%, brileco %2%"
+  },
+  "Save": {
+    "Save": "Konservi"
+  },
+  "Search for a location...": {
+    "Search for a location...": "Serĉi lokon..."
+  },
+  "Search...": {
+    "Search...": "Serĉi..."
+  },
+  "Searching...": {
+    "Searching...": "Serĉante..."
+  },
+  "Select File": {
+    "Select File": "Elekti dosieron"
+  },
+  "Select time": {
+    "Select time": "Elekti horon"
+  },
+  "Shift": {
+    "Shift": "Majuskligo"
+  },
+  "Show hidden files": {
+    "Show hidden files": "Montri kaŝitajn dosierojn"
+  },
+  "Show password": {
+    "Show password": "Montri pasvorton"
+  },
+  "Size": {
+    "Size": "Grando"
+  },
+  "Sort By": {
+    "Sort By": "Ordigi laŭ"
+  },
+  "Space": {
+    "Space": "Spaco"
+  },
+  "Status": {
+    "Status": "Stato"
+  },
+  "Suspend": {
+    "Suspend": "Dormeti"
+  },
+  "Switch User": {
+    "Switch User": "Ŝanĝi uzanton"
+  },
+  "System": {
+    "System": "Sistemo"
+  },
+  "TB": {
+    "TB": "TB"
+  },
+  "This folder could not be opened": {
+    "This folder could not be opened": "Ĉi tiu dosierujo ne povis esti malfermita"
+  },
+  "This folder is empty": {
+    "This folder is empty": "Ĉi tiu dosierujo estas malplena"
+  },
+  "This folder no longer exists": {
+    "This folder no longer exists": "Ĉi tiu dosierujo ne plu ekzistas"
+  },
+  "This item already exists": {
+    "This item already exists": "Ĉi tiu elemento jam ekzistas"
+  },
+  "This item cannot be moved here directly": {
+    "This item cannot be moved here directly": "Ĉi tiu elemento ne povas esti movita ĉi tien rekte"
+  },
+  "This item could not be handled": {
+    "This item could not be handled": "Ĉi tiu elemento ne povis esti traktita"
+  },
+  "This item is in use": {
+    "This item is in use": "Ĉi tiu elemento estas uzata"
+  },
+  "This item no longer exists": {
+    "This item no longer exists": "Ĉi tiu elemento ne plu ekzistas"
+  },
+  "This kind of location is not supported": {
+    "This kind of location is not supported": ""
+  },
+  "Today, %1": {
+    "Today, %1": ""
+  },
+  "Type": {
+    "Type": "Tipo"
+  },
+  "Type a path, ~ or an address such as sftp://host": {
+    "Type a path, ~ or an address such as sftp://host": ""
+  },
+  "Unknown": {
+    "Unknown": "Nekonata"
+  },
+  "Use this folder": {
+    "Use this folder": "Uzi ĉi tiun dosierujon"
+  },
+  "Use ~ for your own home folder or type the full path": {
+    "Use ~ for your own home folder or type the full path": ""
+  },
+  "Workspace": {
+    "Workspace": "Laborspaco"
+  },
+  "Yesterday, %1": {
+    "Yesterday, %1": ""
+  },
+  "You do not have permission to do this": {
+    "You do not have permission to do this": "Vi ne havas permeson fari tion"
+  },
+  "You do not have permission to view this folder": {
+    "You do not have permission to view this folder": "Vi ne havas permeson vidi ĉi tiun dosierujon"
+  },
+  "kB": {
+    "kB": "kB"
+  }
+}

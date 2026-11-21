@@ -1,0 +1,392 @@
+{
+  "%1 items": {
+    "%1 items": "%1 פריטים"
+  },
+  "%1 of %2": {
+    "%1 of %2": ""
+  },
+  "%1 selected": {
+    "%1 selected": "נבחרו %1"
+  },
+  "%1 × %2": {
+    "%1 × %2": ""
+  },
+  "%1, %2": {
+    "%1, %2": ""
+  },
+  "1 item": {
+    "1 item": "פריט אחד"
+  },
+  "1 selected": {
+    "1 selected": "פריט אחד נבחר"
+  },
+  "A file with this name already exists. Do you want to overwrite it?": {
+    "A file with this name already exists. Do you want to overwrite it?": "קובץ בשם זה כבר קיים. האם ברצונך להחליף אותו?"
+  },
+  "A name cannot be empty or contain a slash": {
+    "A name cannot be empty or contain a slash": "השם לא יכול להיות ריק או להכיל לוכסן"
+  },
+  "AM": {
+    "AM": "AM"
+  },
+  "Actions": {
+    "Actions": "פעולות"
+  },
+  "Ascending": {
+    "Ascending": "סדר עולה"
+  },
+  "B": {
+    "B": "B"
+  },
+  "Back": {
+    "Back": "חזרה"
+  },
+  "Backspace": {
+    "Backspace": "Backspace"
+  },
+  "Binary file": {
+    "Binary file": "קובץ בינארי"
+  },
+  "Broken link": {
+    "Broken link": "קישור שבור"
+  },
+  "Cancel": {
+    "Cancel": "ביטול"
+  },
+  "Choose icon": {
+    "Choose icon": "בחר/י סמל"
+  },
+  "Clear": {
+    "Clear": "ניקוי"
+  },
+  "Clear the selection": {
+    "Clear the selection": "ניקוי הבחירה"
+  },
+  "Close": {
+    "Close": "סגירה"
+  },
+  "Color": {
+    "Color": "צבע"
+  },
+  "Communication": {
+    "Communication": "תקשורת"
+  },
+  "Confirm": {
+    "Confirm": "אשר/י"
+  },
+  "Copy path": {
+    "Copy path": "העתק/י נתיב"
+  },
+  "Create": {
+    "Create": "יצירה"
+  },
+  "Created": {
+    "Created": "נוצר"
+  },
+  "Decrease": {
+    "Decrease": "הפחת/י"
+  },
+  "Deleted": {
+    "Deleted": ""
+  },
+  "Descending": {
+    "Descending": "סדר יורד"
+  },
+  "Development": {
+    "Development": "פיתוח"
+  },
+  "Dimensions": {
+    "Dimensions": ""
+  },
+  "Drag to reorder": {
+    "Drag to reorder": "גרירה בכדי לסדר מחדש"
+  },
+  "Edit": {
+    "Edit": "עריכה"
+  },
+  "Enter": {
+    "Enter": "Enter"
+  },
+  "Enter filename...": {
+    "Enter filename...": "הזן/י שם קובץ..."
+  },
+  "File": {
+    "File": "קובץ"
+  },
+  "File Already Exists": {
+    "File Already Exists": "הקובץ כבר קיים"
+  },
+  "File System": {
+    "File System": "מערכת הקבצים"
+  },
+  "Files - %1": {
+    "Files - %1": "קבצים - %1"
+  },
+  "Files are unavailable because the file service is not running": {
+    "Files are unavailable because the file service is not running": "הקבצים אינם זמינים משום ששירות הקבצים אינו פועל"
+  },
+  "First %1 of %2": {
+    "First %1 of %2": "%1 הראשונים מתוך %2"
+  },
+  "Folder": {
+    "Folder": "תיקייה"
+  },
+  "Folder name": {
+    "Folder name": "שם התיקייה"
+  },
+  "Forward": {
+    "Forward": "קדימה"
+  },
+  "Fun": {
+    "Fun": "כיף"
+  },
+  "GB": {
+    "GB": "GB"
+  },
+  "Grid view": {
+    "Grid view": "תצוגת רשת"
+  },
+  "Hibernate": {
+    "Hibernate": "שינה עמוקה"
+  },
+  "Hide keyboard": {
+    "Hide keyboard": "הסתרת המקלדת"
+  },
+  "Hide password": {
+    "Hide password": "הסתר/י סיסמה"
+  },
+  "Hide preview": {
+    "Hide preview": ""
+  },
+  "Hold longer to confirm": {
+    "Hold longer to confirm": "החזק/י לחוץ זמן רב יותר כדי לאשר"
+  },
+  "Hold to confirm (%1 ms)": {
+    "Hold to confirm (%1 ms)": "החזק/י לחוץ לאישור (%1 מילישניות)"
+  },
+  "Hold to confirm (%1s)": {
+    "Hold to confirm (%1s)": "החזק/י לחוץ כדי לאשר (%1 שניות)"
+  },
+  "Home": {
+    "Home": "בית"
+  },
+  "Hour": {
+    "Hour": "שעה"
+  },
+  "Increase": {
+    "Increase": "הגדל/י"
+  },
+  "Jump to a folder you visited": {
+    "Jump to a folder you visited": ""
+  },
+  "Last used": {
+    "Last used": ""
+  },
+  "List view": {
+    "List view": "תצוגת רשימה"
+  },
+  "Location": {
+    "Location": "מיקום"
+  },
+  "Log Out": {
+    "Log Out": "התנתקות"
+  },
+  "MB": {
+    "MB": "MB"
+  },
+  "Maximize": {
+    "Maximize": "ממוקסם"
+  },
+  "Media": {
+    "Media": "מדיה"
+  },
+  "Minimize": {
+    "Minimize": "מזעור"
+  },
+  "Minute": {
+    "Minute": "דקה"
+  },
+  "Modified": {
+    "Modified": "שונה"
+  },
+  "Move to Trash": {
+    "Move to Trash": "העברה לאשפה"
+  },
+  "Name": {
+    "Name": "שם"
+  },
+  "Navigation": {
+    "Navigation": "ניווט"
+  },
+  "New folder": {
+    "New folder": "תיקייה חדשה"
+  },
+  "No locations found": {
+    "No locations found": "לא נמצאו מיקומים"
+  },
+  "Nothing is at this location": {
+    "Nothing is at this location": ""
+  },
+  "Numbers": {
+    "Numbers": "מספרים"
+  },
+  "OK": {
+    "OK": "תקין"
+  },
+  "Open": {
+    "Open": "פתח/י"
+  },
+  "Original location": {
+    "Original location": ""
+  },
+  "Overwrite": {
+    "Overwrite": "החלפה"
+  },
+  "Owner": {
+    "Owner": "בעלים"
+  },
+  "PM": {
+    "PM": "PM"
+  },
+  "Permissions": {
+    "Permissions": "הרשאות"
+  },
+  "Power Off": {
+    "Power Off": "כיבוי"
+  },
+  "Power Options": {
+    "Power Options": "אפשרויות כיבוי והפעלה"
+  },
+  "Quick Access": {
+    "Quick Access": "גישה מהירה"
+  },
+  "Reboot": {
+    "Reboot": "הפעלה מחדש"
+  },
+  "Refresh": {
+    "Refresh": "רענון"
+  },
+  "Rename": {
+    "Rename": "שנה/י שם"
+  },
+  "Restore": {
+    "Restore": "שחזור"
+  },
+  "Review changes": {
+    "Review changes": "סקירת שינויים"
+  },
+  "Saturation %1%, brightness %2%": {
+    "Saturation %1%, brightness %2%": "רוויה %1%, בהירות %2%"
+  },
+  "Save": {
+    "Save": "שמירה"
+  },
+  "Search for a location...": {
+    "Search for a location...": "חפש/י מיקום..."
+  },
+  "Search...": {
+    "Search...": "חיפוש..."
+  },
+  "Searching...": {
+    "Searching...": "מחפש..."
+  },
+  "Select File": {
+    "Select File": "בחר/י קובץ"
+  },
+  "Select time": {
+    "Select time": "בחירת שעה"
+  },
+  "Shift": {
+    "Shift": "Shift"
+  },
+  "Show hidden files": {
+    "Show hidden files": "הצגת קבצים מוסתרים"
+  },
+  "Show password": {
+    "Show password": "הצג/י סיסמה"
+  },
+  "Size": {
+    "Size": "גודל"
+  },
+  "Sort By": {
+    "Sort By": "מיין/י לפי"
+  },
+  "Space": {
+    "Space": "Space"
+  },
+  "Status": {
+    "Status": "מצב"
+  },
+  "Suspend": {
+    "Suspend": "השהיה"
+  },
+  "Switch User": {
+    "Switch User": "החלף/י משתמש"
+  },
+  "System": {
+    "System": "מערכת"
+  },
+  "TB": {
+    "TB": "TB"
+  },
+  "This folder could not be opened": {
+    "This folder could not be opened": "לא ניתן לפתוח את התיקייה הזו"
+  },
+  "This folder is empty": {
+    "This folder is empty": "תיקייה זו ריקה"
+  },
+  "This folder no longer exists": {
+    "This folder no longer exists": "תיקייה זו אינה קיימת עוד"
+  },
+  "This item already exists": {
+    "This item already exists": "פריט זה כבר קיים"
+  },
+  "This item cannot be moved here directly": {
+    "This item cannot be moved here directly": "לא ניתן להעביר את הפריט הזה לכאן ישירות"
+  },
+  "This item could not be handled": {
+    "This item could not be handled": "לא ניתן לטפל בפריט הזה"
+  },
+  "This item is in use": {
+    "This item is in use": "הפריט הזה כבר נמצא בשימוש"
+  },
+  "This item no longer exists": {
+    "This item no longer exists": "הפריט הזה אינו קיים עוד"
+  },
+  "This kind of location is not supported": {
+    "This kind of location is not supported": ""
+  },
+  "Today, %1": {
+    "Today, %1": ""
+  },
+  "Type": {
+    "Type": "סוג"
+  },
+  "Type a path, ~ or an address such as sftp://host": {
+    "Type a path, ~ or an address such as sftp://host": ""
+  },
+  "Unknown": {
+    "Unknown": "לא ידוע"
+  },
+  "Use this folder": {
+    "Use this folder": "השתמש/י בתיקייה זו"
+  },
+  "Use ~ for your own home folder or type the full path": {
+    "Use ~ for your own home folder or type the full path": ""
+  },
+  "Workspace": {
+    "Workspace": "סביבת עבודה"
+  },
+  "Yesterday, %1": {
+    "Yesterday, %1": ""
+  },
+  "You do not have permission to do this": {
+    "You do not have permission to do this": "אין לך הרשאה לבצע את הפעולה הזו"
+  },
+  "You do not have permission to view this folder": {
+    "You do not have permission to view this folder": "אין לך הרשאה לצפות בתיקייה הזו"
+  },
+  "kB": {
+    "kB": "kB"
+  }
+}

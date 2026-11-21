@@ -1,0 +1,15 @@
+# Root module: design tokens only.
+#
+# This file used to also re-register every service and settings singleton that
+# services/qmldir and Settings/qmldir already register. In QML a singleton
+# registered by two different modules is two *distinct types with separate
+# instances*, so a file resolving CenterState through the root import got a
+# different object -- with different state -- from one resolving it through
+# "services". Which one you got depended on the order of the import statements
+# at the top of each file, so adding or reordering an import could silently
+# split the shell's state in half.
+#
+# Services are registered in exactly one place: services/qmldir.
+# Settings likewise in Settings/qmldir.
+singleton Colors Colors.qml
+singleton Theme Theme.qml

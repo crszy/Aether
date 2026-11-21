@@ -1,0 +1,392 @@
+{
+  "%1 items": {
+    "%1 items": "Элементов: %1"
+  },
+  "%1 of %2": {
+    "%1 of %2": ""
+  },
+  "%1 selected": {
+    "%1 selected": "Выбрано: %1"
+  },
+  "%1 × %2": {
+    "%1 × %2": ""
+  },
+  "%1, %2": {
+    "%1, %2": ""
+  },
+  "1 item": {
+    "1 item": "1 элемент"
+  },
+  "1 selected": {
+    "1 selected": "Выбрано: 1"
+  },
+  "A file with this name already exists. Do you want to overwrite it?": {
+    "A file with this name already exists. Do you want to overwrite it?": "Файл с таким именем уже существует. Перезаписать его?"
+  },
+  "A name cannot be empty or contain a slash": {
+    "A name cannot be empty or contain a slash": "Имя не может быть пустым или содержать косую черту"
+  },
+  "AM": {
+    "AM": "AM"
+  },
+  "Actions": {
+    "Actions": "Действия"
+  },
+  "Ascending": {
+    "Ascending": "По возрастанию"
+  },
+  "B": {
+    "B": "Б"
+  },
+  "Back": {
+    "Back": "Назад"
+  },
+  "Backspace": {
+    "Backspace": "Backspace"
+  },
+  "Binary file": {
+    "Binary file": "Двоичный файл"
+  },
+  "Broken link": {
+    "Broken link": "Повреждённая ссылка"
+  },
+  "Cancel": {
+    "Cancel": "Отмена"
+  },
+  "Choose icon": {
+    "Choose icon": "Выбрать значок"
+  },
+  "Clear": {
+    "Clear": "Очистить"
+  },
+  "Clear the selection": {
+    "Clear the selection": "Снять выделение"
+  },
+  "Close": {
+    "Close": "Закрыть"
+  },
+  "Color": {
+    "Color": "Цвет"
+  },
+  "Communication": {
+    "Communication": "Общение"
+  },
+  "Confirm": {
+    "Confirm": "Подтвердить"
+  },
+  "Copy path": {
+    "Copy path": "Копировать путь"
+  },
+  "Create": {
+    "Create": "Создать"
+  },
+  "Created": {
+    "Created": "Создан"
+  },
+  "Decrease": {
+    "Decrease": "Уменьшить"
+  },
+  "Deleted": {
+    "Deleted": ""
+  },
+  "Descending": {
+    "Descending": "По убыванию"
+  },
+  "Development": {
+    "Development": "Разработка"
+  },
+  "Dimensions": {
+    "Dimensions": ""
+  },
+  "Drag to reorder": {
+    "Drag to reorder": "Менять порядок перетаскиванием"
+  },
+  "Edit": {
+    "Edit": "Редактировать"
+  },
+  "Enter": {
+    "Enter": "Enter"
+  },
+  "Enter filename...": {
+    "Enter filename...": "Введите имя файла…"
+  },
+  "File": {
+    "File": "Файл"
+  },
+  "File Already Exists": {
+    "File Already Exists": "Файл уже существует"
+  },
+  "File System": {
+    "File System": "Файловая система"
+  },
+  "Files - %1": {
+    "Files - %1": "Файлы — %1"
+  },
+  "Files are unavailable because the file service is not running": {
+    "Files are unavailable because the file service is not running": "Файлы недоступны: служба файлов не запущена"
+  },
+  "First %1 of %2": {
+    "First %1 of %2": "Первые %1 из %2"
+  },
+  "Folder": {
+    "Folder": "Папка"
+  },
+  "Folder name": {
+    "Folder name": "Имя папки"
+  },
+  "Forward": {
+    "Forward": "Вперёд"
+  },
+  "Fun": {
+    "Fun": "Развлечения"
+  },
+  "GB": {
+    "GB": "ГБ"
+  },
+  "Grid view": {
+    "Grid view": "Значки"
+  },
+  "Hibernate": {
+    "Hibernate": "Гибернация"
+  },
+  "Hide keyboard": {
+    "Hide keyboard": "Скрыть клавиатуру"
+  },
+  "Hide password": {
+    "Hide password": "Скрыть пароль"
+  },
+  "Hide preview": {
+    "Hide preview": ""
+  },
+  "Hold longer to confirm": {
+    "Hold longer to confirm": "Удерживайте дольше для подтверждения"
+  },
+  "Hold to confirm (%1 ms)": {
+    "Hold to confirm (%1 ms)": "Удерживать для подтверждения (%1 мс)"
+  },
+  "Hold to confirm (%1s)": {
+    "Hold to confirm (%1s)": "Удерживать для подтверждения (%1 с)"
+  },
+  "Home": {
+    "Home": "Домашняя папка"
+  },
+  "Hour": {
+    "Hour": "Часы"
+  },
+  "Increase": {
+    "Increase": "Увеличить"
+  },
+  "Jump to a folder you visited": {
+    "Jump to a folder you visited": ""
+  },
+  "Last used": {
+    "Last used": ""
+  },
+  "List view": {
+    "List view": "Список"
+  },
+  "Location": {
+    "Location": "Местоположение"
+  },
+  "Log Out": {
+    "Log Out": "Выйти"
+  },
+  "MB": {
+    "MB": "МБ"
+  },
+  "Maximize": {
+    "Maximize": "Развернуть"
+  },
+  "Media": {
+    "Media": "Медиа"
+  },
+  "Minimize": {
+    "Minimize": "Свернуть"
+  },
+  "Minute": {
+    "Minute": "Минуты"
+  },
+  "Modified": {
+    "Modified": "Изменено"
+  },
+  "Move to Trash": {
+    "Move to Trash": "Переместить в корзину"
+  },
+  "Name": {
+    "Name": "Имя"
+  },
+  "Navigation": {
+    "Navigation": "Навигация"
+  },
+  "New folder": {
+    "New folder": "Новая папка"
+  },
+  "No locations found": {
+    "No locations found": "Местоположения не найдены"
+  },
+  "Nothing is at this location": {
+    "Nothing is at this location": ""
+  },
+  "Numbers": {
+    "Numbers": "Числа"
+  },
+  "OK": {
+    "OK": "ОК"
+  },
+  "Open": {
+    "Open": "Открыть"
+  },
+  "Original location": {
+    "Original location": ""
+  },
+  "Overwrite": {
+    "Overwrite": "Перезаписать"
+  },
+  "Owner": {
+    "Owner": "Владелец"
+  },
+  "PM": {
+    "PM": "PM"
+  },
+  "Permissions": {
+    "Permissions": "Права доступа"
+  },
+  "Power Off": {
+    "Power Off": "Выключить"
+  },
+  "Power Options": {
+    "Power Options": "Действия с питанием"
+  },
+  "Quick Access": {
+    "Quick Access": "Быстрый доступ"
+  },
+  "Reboot": {
+    "Reboot": "Перезагрузить"
+  },
+  "Refresh": {
+    "Refresh": "Обновить"
+  },
+  "Rename": {
+    "Rename": "Переименовать"
+  },
+  "Restore": {
+    "Restore": "Восстановить"
+  },
+  "Review changes": {
+    "Review changes": "Просмотреть изменения"
+  },
+  "Saturation %1%, brightness %2%": {
+    "Saturation %1%, brightness %2%": "Насыщенность %1%, яркость %2%"
+  },
+  "Save": {
+    "Save": "Сохранить"
+  },
+  "Search for a location...": {
+    "Search for a location...": "Поиск местоположения…"
+  },
+  "Search...": {
+    "Search...": "Поиск..."
+  },
+  "Searching...": {
+    "Searching...": "Поиск…"
+  },
+  "Select File": {
+    "Select File": "Выберите файл"
+  },
+  "Select time": {
+    "Select time": "Выбор времени"
+  },
+  "Shift": {
+    "Shift": "Shift"
+  },
+  "Show hidden files": {
+    "Show hidden files": "Показывать скрытые файлы"
+  },
+  "Show password": {
+    "Show password": "Показать пароль"
+  },
+  "Size": {
+    "Size": "Размер"
+  },
+  "Sort By": {
+    "Sort By": "Сортировка"
+  },
+  "Space": {
+    "Space": "Пробел"
+  },
+  "Status": {
+    "Status": "Статус"
+  },
+  "Suspend": {
+    "Suspend": "Спящий режим"
+  },
+  "Switch User": {
+    "Switch User": "Переключить пользователя"
+  },
+  "System": {
+    "System": "Система"
+  },
+  "TB": {
+    "TB": "ТБ"
+  },
+  "This folder could not be opened": {
+    "This folder could not be opened": "Не удалось открыть папку"
+  },
+  "This folder is empty": {
+    "This folder is empty": "Папка пуста"
+  },
+  "This folder no longer exists": {
+    "This folder no longer exists": "Эта папка больше не существует"
+  },
+  "This item already exists": {
+    "This item already exists": "Элемент с таким именем уже существует"
+  },
+  "This item cannot be moved here directly": {
+    "This item cannot be moved here directly": "Этот элемент нельзя переместить сюда напрямую"
+  },
+  "This item could not be handled": {
+    "This item could not be handled": "Не удалось выполнить операцию с элементом"
+  },
+  "This item is in use": {
+    "This item is in use": "Этот элемент используется"
+  },
+  "This item no longer exists": {
+    "This item no longer exists": "Этот элемент больше не существует"
+  },
+  "This kind of location is not supported": {
+    "This kind of location is not supported": ""
+  },
+  "Today, %1": {
+    "Today, %1": ""
+  },
+  "Type": {
+    "Type": "Тип"
+  },
+  "Type a path, ~ or an address such as sftp://host": {
+    "Type a path, ~ or an address such as sftp://host": ""
+  },
+  "Unknown": {
+    "Unknown": "Неизвестно"
+  },
+  "Use this folder": {
+    "Use this folder": "Выбрать эту папку"
+  },
+  "Use ~ for your own home folder or type the full path": {
+    "Use ~ for your own home folder or type the full path": ""
+  },
+  "Workspace": {
+    "Workspace": "Рабочее пространство"
+  },
+  "Yesterday, %1": {
+    "Yesterday, %1": ""
+  },
+  "You do not have permission to do this": {
+    "You do not have permission to do this": "Недостаточно прав для этого действия"
+  },
+  "You do not have permission to view this folder": {
+    "You do not have permission to view this folder": "Недостаточно прав для просмотра папки"
+  },
+  "kB": {
+    "kB": "кБ"
+  }
+}

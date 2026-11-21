@@ -1,0 +1,392 @@
+{
+  "%1 items": {
+    "%1 items": ""
+  },
+  "%1 of %2": {
+    "%1 of %2": ""
+  },
+  "%1 selected": {
+    "%1 selected": ""
+  },
+  "%1 × %2": {
+    "%1 × %2": ""
+  },
+  "%1, %2": {
+    "%1, %2": ""
+  },
+  "1 item": {
+    "1 item": ""
+  },
+  "1 selected": {
+    "1 selected": ""
+  },
+  "A file with this name already exists. Do you want to overwrite it?": {
+    "A file with this name already exists. Do you want to overwrite it?": ""
+  },
+  "A name cannot be empty or contain a slash": {
+    "A name cannot be empty or contain a slash": ""
+  },
+  "AM": {
+    "AM": ""
+  },
+  "Actions": {
+    "Actions": "Eylemler"
+  },
+  "Ascending": {
+    "Ascending": ""
+  },
+  "B": {
+    "B": ""
+  },
+  "Back": {
+    "Back": "Geri"
+  },
+  "Backspace": {
+    "Backspace": ""
+  },
+  "Binary file": {
+    "Binary file": ""
+  },
+  "Broken link": {
+    "Broken link": ""
+  },
+  "Cancel": {
+    "Cancel": "İptal"
+  },
+  "Choose icon": {
+    "Choose icon": ""
+  },
+  "Clear": {
+    "Clear": "Temizle"
+  },
+  "Clear the selection": {
+    "Clear the selection": ""
+  },
+  "Close": {
+    "Close": "Kapat"
+  },
+  "Color": {
+    "Color": "Renk"
+  },
+  "Communication": {
+    "Communication": "İletişim"
+  },
+  "Confirm": {
+    "Confirm": "Onayla"
+  },
+  "Copy path": {
+    "Copy path": "Yolu Kopyala"
+  },
+  "Create": {
+    "Create": "Yap"
+  },
+  "Created": {
+    "Created": ""
+  },
+  "Decrease": {
+    "Decrease": "Azalt"
+  },
+  "Deleted": {
+    "Deleted": ""
+  },
+  "Descending": {
+    "Descending": ""
+  },
+  "Development": {
+    "Development": "Geliştirme"
+  },
+  "Dimensions": {
+    "Dimensions": ""
+  },
+  "Drag to reorder": {
+    "Drag to reorder": ""
+  },
+  "Edit": {
+    "Edit": "Düzenle"
+  },
+  "Enter": {
+    "Enter": ""
+  },
+  "Enter filename...": {
+    "Enter filename...": ""
+  },
+  "File": {
+    "File": "Dosya"
+  },
+  "File Already Exists": {
+    "File Already Exists": "Dosya Zaten Mevcut"
+  },
+  "File System": {
+    "File System": ""
+  },
+  "Files - %1": {
+    "Files - %1": "Dosyalar - %1"
+  },
+  "Files are unavailable because the file service is not running": {
+    "Files are unavailable because the file service is not running": ""
+  },
+  "First %1 of %2": {
+    "First %1 of %2": ""
+  },
+  "Folder": {
+    "Folder": "Klasör"
+  },
+  "Folder name": {
+    "Folder name": ""
+  },
+  "Forward": {
+    "Forward": ""
+  },
+  "Fun": {
+    "Fun": ""
+  },
+  "GB": {
+    "GB": ""
+  },
+  "Grid view": {
+    "Grid view": ""
+  },
+  "Hibernate": {
+    "Hibernate": "Hazırda Beklet"
+  },
+  "Hide keyboard": {
+    "Hide keyboard": ""
+  },
+  "Hide password": {
+    "Hide password": ""
+  },
+  "Hide preview": {
+    "Hide preview": ""
+  },
+  "Hold longer to confirm": {
+    "Hold longer to confirm": "Onaylamak için daha uzun süre basılı tutun"
+  },
+  "Hold to confirm (%1 ms)": {
+    "Hold to confirm (%1 ms)": "Onaylamak için basılı tutun (%1ms)"
+  },
+  "Hold to confirm (%1s)": {
+    "Hold to confirm (%1s)": "Onaylamak için basılı tutun (%1s)"
+  },
+  "Home": {
+    "Home": "Ev"
+  },
+  "Hour": {
+    "Hour": ""
+  },
+  "Increase": {
+    "Increase": ""
+  },
+  "Jump to a folder you visited": {
+    "Jump to a folder you visited": ""
+  },
+  "Last used": {
+    "Last used": ""
+  },
+  "List view": {
+    "List view": ""
+  },
+  "Location": {
+    "Location": "Konum"
+  },
+  "Log Out": {
+    "Log Out": "Çıkış"
+  },
+  "MB": {
+    "MB": ""
+  },
+  "Maximize": {
+    "Maximize": "Maksimize et"
+  },
+  "Media": {
+    "Media": "Medya"
+  },
+  "Minimize": {
+    "Minimize": ""
+  },
+  "Minute": {
+    "Minute": ""
+  },
+  "Modified": {
+    "Modified": "Değiştirilmiş"
+  },
+  "Move to Trash": {
+    "Move to Trash": "Çöp Kovasına Taşı"
+  },
+  "Name": {
+    "Name": "İsim"
+  },
+  "Navigation": {
+    "Navigation": ""
+  },
+  "New folder": {
+    "New folder": ""
+  },
+  "No locations found": {
+    "No locations found": ""
+  },
+  "Nothing is at this location": {
+    "Nothing is at this location": ""
+  },
+  "Numbers": {
+    "Numbers": ""
+  },
+  "OK": {
+    "OK": "Tamam"
+  },
+  "Open": {
+    "Open": "Aç"
+  },
+  "Original location": {
+    "Original location": ""
+  },
+  "Overwrite": {
+    "Overwrite": ""
+  },
+  "Owner": {
+    "Owner": ""
+  },
+  "PM": {
+    "PM": ""
+  },
+  "Permissions": {
+    "Permissions": ""
+  },
+  "Power Off": {
+    "Power Off": "Kapat"
+  },
+  "Power Options": {
+    "Power Options": "Güç Ayarları"
+  },
+  "Quick Access": {
+    "Quick Access": ""
+  },
+  "Reboot": {
+    "Reboot": "Yeniden Başlat"
+  },
+  "Refresh": {
+    "Refresh": "Yenile"
+  },
+  "Rename": {
+    "Rename": "Yeniden Adlandır"
+  },
+  "Restore": {
+    "Restore": ""
+  },
+  "Review changes": {
+    "Review changes": ""
+  },
+  "Saturation %1%, brightness %2%": {
+    "Saturation %1%, brightness %2%": ""
+  },
+  "Save": {
+    "Save": "Kaydet"
+  },
+  "Search for a location...": {
+    "Search for a location...": ""
+  },
+  "Search...": {
+    "Search...": "Ara..."
+  },
+  "Searching...": {
+    "Searching...": ""
+  },
+  "Select File": {
+    "Select File": "Dosya Seç"
+  },
+  "Select time": {
+    "Select time": ""
+  },
+  "Shift": {
+    "Shift": ""
+  },
+  "Show hidden files": {
+    "Show hidden files": ""
+  },
+  "Show password": {
+    "Show password": "Şifreyi göster"
+  },
+  "Size": {
+    "Size": "Boyut"
+  },
+  "Sort By": {
+    "Sort By": "Şuna Göre Sırala"
+  },
+  "Space": {
+    "Space": ""
+  },
+  "Status": {
+    "Status": "Durum"
+  },
+  "Suspend": {
+    "Suspend": "Askıya Al"
+  },
+  "Switch User": {
+    "Switch User": "Kullanıcı Değiştir"
+  },
+  "System": {
+    "System": "Sistem"
+  },
+  "TB": {
+    "TB": ""
+  },
+  "This folder could not be opened": {
+    "This folder could not be opened": ""
+  },
+  "This folder is empty": {
+    "This folder is empty": ""
+  },
+  "This folder no longer exists": {
+    "This folder no longer exists": ""
+  },
+  "This item already exists": {
+    "This item already exists": ""
+  },
+  "This item cannot be moved here directly": {
+    "This item cannot be moved here directly": ""
+  },
+  "This item could not be handled": {
+    "This item could not be handled": ""
+  },
+  "This item is in use": {
+    "This item is in use": ""
+  },
+  "This item no longer exists": {
+    "This item no longer exists": ""
+  },
+  "This kind of location is not supported": {
+    "This kind of location is not supported": ""
+  },
+  "Today, %1": {
+    "Today, %1": ""
+  },
+  "Type": {
+    "Type": "Tip"
+  },
+  "Type a path, ~ or an address such as sftp://host": {
+    "Type a path, ~ or an address such as sftp://host": ""
+  },
+  "Unknown": {
+    "Unknown": "Bilinmeyen"
+  },
+  "Use this folder": {
+    "Use this folder": ""
+  },
+  "Use ~ for your own home folder or type the full path": {
+    "Use ~ for your own home folder or type the full path": ""
+  },
+  "Workspace": {
+    "Workspace": "Çalışma Alanı"
+  },
+  "Yesterday, %1": {
+    "Yesterday, %1": ""
+  },
+  "You do not have permission to do this": {
+    "You do not have permission to do this": ""
+  },
+  "You do not have permission to view this folder": {
+    "You do not have permission to view this folder": ""
+  },
+  "kB": {
+    "kB": ""
+  }
+}

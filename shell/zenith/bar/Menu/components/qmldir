@@ -1,0 +1,29 @@
+BatteryContent BatteryContent.qml
+BluetoothContent BluetoothContent.qml
+CalendarWidget CalendarWidget.qml
+DismissOverlay DismissOverlay.qml
+MprisPlayer MprisPlayer.qml
+NotificationItem NotificationItem.qml
+NotificationList NotificationList.qml
+NotificationPopup NotificationPopup.qml
+OsdPopup OsdPopup.qml
+PomodoroContent PomodoroContent.qml
+TimerContent TimerContent.qml
+TodoContent TodoContent.qml
+PowerContent PowerContent.qml
+PowerProfileContent PowerProfileContent.qml
+VolumeContent VolumeContent.qml
+VolumeSlider VolumeSlider.qml
+WallpaperContent WallpaperContent.qml
+WeatherWidget WeatherWidget.qml
+WifiContent WifiContent.qml
+RoadmapContent RoadmapContent.qml
+FastWheel FastWheel.qml
+MailContent MailContent.qml
+RoadmapDetail RoadmapDetail.qml
+ThemeContent ThemeContent.qml
+QuickActionsContent QuickActionsContent.qml
+ServicesContent ServicesContent.qml
+
+
+

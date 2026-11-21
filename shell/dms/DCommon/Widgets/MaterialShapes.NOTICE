@@ -1,0 +1,8 @@
+MaterialShapeData.js contains normalized cubic geometry exported from AndroidX MaterialShapes.
+Copyright 2024 The Android Open Source Project
+Licensed under the Apache License, Version 2.0.
+
+Source: https://github.com/androidx/androidx/blob/androidx-main/compose/material3/material3/src/commonMain/kotlin/androidx/compose/material3/MaterialShapes.kt
+Retrieved: 2026-09-08
+Geometry: androidx.graphics:graphics-shapes-android:1.0.1
+License: Apache-2.0.txt in this directory.

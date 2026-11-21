@@ -1,0 +1,392 @@
+{
+  "%1 items": {
+    "%1 items": "%1 items"
+  },
+  "%1 of %2": {
+    "%1 of %2": ""
+  },
+  "%1 selected": {
+    "%1 selected": "%1 geselecteerd"
+  },
+  "%1 × %2": {
+    "%1 × %2": ""
+  },
+  "%1, %2": {
+    "%1, %2": ""
+  },
+  "1 item": {
+    "1 item": "1 item"
+  },
+  "1 selected": {
+    "1 selected": "1 geselecteerd"
+  },
+  "A file with this name already exists. Do you want to overwrite it?": {
+    "A file with this name already exists. Do you want to overwrite it?": "Er bestaat al een bestand met deze naam. Wil je het overschrijven?"
+  },
+  "A name cannot be empty or contain a slash": {
+    "A name cannot be empty or contain a slash": "Een naam mag niet leeg zijn of een slash bevatten"
+  },
+  "AM": {
+    "AM": "AM"
+  },
+  "Actions": {
+    "Actions": "Acties"
+  },
+  "Ascending": {
+    "Ascending": "Oplopend"
+  },
+  "B": {
+    "B": "B"
+  },
+  "Back": {
+    "Back": "Terug"
+  },
+  "Backspace": {
+    "Backspace": "Backspace"
+  },
+  "Binary file": {
+    "Binary file": "Binair bestand"
+  },
+  "Broken link": {
+    "Broken link": "Verbroken koppeling"
+  },
+  "Cancel": {
+    "Cancel": "Annuleren"
+  },
+  "Choose icon": {
+    "Choose icon": "Pictogram kiezen"
+  },
+  "Clear": {
+    "Clear": "Wissen"
+  },
+  "Clear the selection": {
+    "Clear the selection": "Selectie wissen"
+  },
+  "Close": {
+    "Close": "Sluiten"
+  },
+  "Color": {
+    "Color": "Kleur"
+  },
+  "Communication": {
+    "Communication": "Communicatie"
+  },
+  "Confirm": {
+    "Confirm": "Bevestigen"
+  },
+  "Copy path": {
+    "Copy path": "Pad kopiëren"
+  },
+  "Create": {
+    "Create": "Aanmaken"
+  },
+  "Created": {
+    "Created": "Aangemaakt"
+  },
+  "Decrease": {
+    "Decrease": "Verlagen"
+  },
+  "Deleted": {
+    "Deleted": ""
+  },
+  "Descending": {
+    "Descending": "Aflopend"
+  },
+  "Development": {
+    "Development": "Ontwikkeling"
+  },
+  "Dimensions": {
+    "Dimensions": ""
+  },
+  "Drag to reorder": {
+    "Drag to reorder": "Sleep om de volgorde te wijzigen"
+  },
+  "Edit": {
+    "Edit": "Bewerken"
+  },
+  "Enter": {
+    "Enter": "Enter"
+  },
+  "Enter filename...": {
+    "Enter filename...": "Bestandsnaam invoeren..."
+  },
+  "File": {
+    "File": "Bestand"
+  },
+  "File Already Exists": {
+    "File Already Exists": "Bestand bestaat al"
+  },
+  "File System": {
+    "File System": "Bestandssysteem"
+  },
+  "Files - %1": {
+    "Files - %1": "Bestanden - %1"
+  },
+  "Files are unavailable because the file service is not running": {
+    "Files are unavailable because the file service is not running": "Bestanden zijn niet beschikbaar omdat de bestandsservice niet draait"
+  },
+  "First %1 of %2": {
+    "First %1 of %2": "Eerste %1 van %2"
+  },
+  "Folder": {
+    "Folder": "Map"
+  },
+  "Folder name": {
+    "Folder name": "Mapnaam"
+  },
+  "Forward": {
+    "Forward": "Vooruit"
+  },
+  "Fun": {
+    "Fun": "Plezier"
+  },
+  "GB": {
+    "GB": "GB"
+  },
+  "Grid view": {
+    "Grid view": "Rasterweergave"
+  },
+  "Hibernate": {
+    "Hibernate": "Sluimerstand"
+  },
+  "Hide keyboard": {
+    "Hide keyboard": "Toetsenbord verbergen"
+  },
+  "Hide password": {
+    "Hide password": "Wachtwoord verbergen"
+  },
+  "Hide preview": {
+    "Hide preview": ""
+  },
+  "Hold longer to confirm": {
+    "Hold longer to confirm": "Langer ingedrukt houden om te bevestigen"
+  },
+  "Hold to confirm (%1 ms)": {
+    "Hold to confirm (%1 ms)": "Ingedrukt houden om te bevestigen (%1 ms)"
+  },
+  "Hold to confirm (%1s)": {
+    "Hold to confirm (%1s)": "Ingedrukt houden om te bevestigen (%1s)"
+  },
+  "Home": {
+    "Home": "Persoonlijke map"
+  },
+  "Hour": {
+    "Hour": "Uur"
+  },
+  "Increase": {
+    "Increase": "Verhogen"
+  },
+  "Jump to a folder you visited": {
+    "Jump to a folder you visited": ""
+  },
+  "Last used": {
+    "Last used": ""
+  },
+  "List view": {
+    "List view": "Lijstweergave"
+  },
+  "Location": {
+    "Location": "Locatie"
+  },
+  "Log Out": {
+    "Log Out": "Afmelden"
+  },
+  "MB": {
+    "MB": "MB"
+  },
+  "Maximize": {
+    "Maximize": "Maximaliseren"
+  },
+  "Media": {
+    "Media": "Media"
+  },
+  "Minimize": {
+    "Minimize": "Minimaliseren"
+  },
+  "Minute": {
+    "Minute": "Minuut"
+  },
+  "Modified": {
+    "Modified": "Gewijzigd"
+  },
+  "Move to Trash": {
+    "Move to Trash": "Naar prullenbak verplaatsen"
+  },
+  "Name": {
+    "Name": "Naam"
+  },
+  "Navigation": {
+    "Navigation": "Navigatie"
+  },
+  "New folder": {
+    "New folder": "Nieuwe map"
+  },
+  "No locations found": {
+    "No locations found": "Geen locaties gevonden"
+  },
+  "Nothing is at this location": {
+    "Nothing is at this location": ""
+  },
+  "Numbers": {
+    "Numbers": "Cijfers"
+  },
+  "OK": {
+    "OK": "OK"
+  },
+  "Open": {
+    "Open": "Openen"
+  },
+  "Original location": {
+    "Original location": ""
+  },
+  "Overwrite": {
+    "Overwrite": "Overschrijven"
+  },
+  "Owner": {
+    "Owner": "Eigenaar"
+  },
+  "PM": {
+    "PM": "PM"
+  },
+  "Permissions": {
+    "Permissions": "Rechten"
+  },
+  "Power Off": {
+    "Power Off": "Uitschakelen"
+  },
+  "Power Options": {
+    "Power Options": "Energieopties"
+  },
+  "Quick Access": {
+    "Quick Access": "Snelle toegang"
+  },
+  "Reboot": {
+    "Reboot": "Opnieuw opstarten"
+  },
+  "Refresh": {
+    "Refresh": "Verversen"
+  },
+  "Rename": {
+    "Rename": "Hernoemen"
+  },
+  "Restore": {
+    "Restore": "Herstellen"
+  },
+  "Review changes": {
+    "Review changes": "Wijzigingen controleren"
+  },
+  "Saturation %1%, brightness %2%": {
+    "Saturation %1%, brightness %2%": "Verzadiging %1%, helderheid %2%"
+  },
+  "Save": {
+    "Save": "Opslaan"
+  },
+  "Search for a location...": {
+    "Search for a location...": "Zoek een locatie..."
+  },
+  "Search...": {
+    "Search...": "Zoeken..."
+  },
+  "Searching...": {
+    "Searching...": "Zoeken..."
+  },
+  "Select File": {
+    "Select File": "Bestand selecteren"
+  },
+  "Select time": {
+    "Select time": "Tijd selecteren"
+  },
+  "Shift": {
+    "Shift": "Shift"
+  },
+  "Show hidden files": {
+    "Show hidden files": "Verborgen bestanden tonen"
+  },
+  "Show password": {
+    "Show password": "Wachtwoord tonen"
+  },
+  "Size": {
+    "Size": "Grootte"
+  },
+  "Sort By": {
+    "Sort By": "Sorteren op"
+  },
+  "Space": {
+    "Space": "Spatie"
+  },
+  "Status": {
+    "Status": "Status"
+  },
+  "Suspend": {
+    "Suspend": "Slaapstand"
+  },
+  "Switch User": {
+    "Switch User": "Ander account"
+  },
+  "System": {
+    "System": "Systeem"
+  },
+  "TB": {
+    "TB": "TB"
+  },
+  "This folder could not be opened": {
+    "This folder could not be opened": "Deze map kon niet worden geopend"
+  },
+  "This folder is empty": {
+    "This folder is empty": "Deze map is leeg"
+  },
+  "This folder no longer exists": {
+    "This folder no longer exists": "Deze map bestaat niet meer"
+  },
+  "This item already exists": {
+    "This item already exists": "Dit item bestaat al"
+  },
+  "This item cannot be moved here directly": {
+    "This item cannot be moved here directly": "Dit item kan niet rechtstreeks hierheen worden verplaatst"
+  },
+  "This item could not be handled": {
+    "This item could not be handled": "Dit item kon niet worden verwerkt"
+  },
+  "This item is in use": {
+    "This item is in use": "Dit item is in gebruik"
+  },
+  "This item no longer exists": {
+    "This item no longer exists": "Dit item bestaat niet meer"
+  },
+  "This kind of location is not supported": {
+    "This kind of location is not supported": ""
+  },
+  "Today, %1": {
+    "Today, %1": ""
+  },
+  "Type": {
+    "Type": "Type"
+  },
+  "Type a path, ~ or an address such as sftp://host": {
+    "Type a path, ~ or an address such as sftp://host": ""
+  },
+  "Unknown": {
+    "Unknown": "Onbekend"
+  },
+  "Use this folder": {
+    "Use this folder": "Deze map gebruiken"
+  },
+  "Use ~ for your own home folder or type the full path": {
+    "Use ~ for your own home folder or type the full path": ""
+  },
+  "Workspace": {
+    "Workspace": "Werkblad"
+  },
+  "Yesterday, %1": {
+    "Yesterday, %1": ""
+  },
+  "You do not have permission to do this": {
+    "You do not have permission to do this": "Je hebt geen toestemming om dit te doen"
+  },
+  "You do not have permission to view this folder": {
+    "You do not have permission to view this folder": "Je hebt geen toestemming om deze map te bekijken"
+  },
+  "kB": {
+    "kB": "kB"
+  }
+}

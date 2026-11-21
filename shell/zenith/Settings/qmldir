@@ -1,0 +1,15 @@
+singleton ClockSettings ClockSettings.qml
+singleton GeneralSettings GeneralSettings.qml
+singleton BarSettings BarSettings.qml
+singleton AppearanceSettings AppearanceSettings.qml
+singleton WorkspaceSettings WorkspaceSettings.qml
+singleton PillSettings PillSettings.qml
+singleton BatterySettings BatterySettings.qml
+singleton MediaSettings MediaSettings.qml
+singleton NotificationSettings NotificationSettings.qml
+singleton HyprlandSettings HyprlandSettings.qml
+singleton PathSettings PathSettings.qml
+singleton WidgetSettings WidgetSettings.qml
+singleton TaskSettings TaskSettings.qml
+singleton IdleSettings IdleSettings.qml
+

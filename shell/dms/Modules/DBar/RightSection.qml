@@ -1,0 +1,3 @@
+SideSection {
+    section: "right"
+}

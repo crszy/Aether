@@ -1,0 +1,111 @@
+
+  // ------------------------------------------------------------------------------------------
+  // Caelestia for Windows: the Linux readers above (/proc, /sys, df, nvidia-smi) are switched off by
+  // noctalia-port.js; the same properties are filled from Quickshell.Windows' SystemMonitor + SystemStats.
+  property bool _winRaisedRate: false
+
+  Connections {
+    target: root
+    function onShouldRunChanged() {
+      if (root.shouldRun) {
+        Win.SystemMonitor.active = true;
+        Win.SystemStats.active = true;
+        Win.SystemStats.networkEnabled = true;
+        if (Win.SystemMonitor.intervalMs > 2000) {
+          Win.SystemMonitor.intervalMs = 2000;
+          root._winRaisedRate = true;
+        }
+      } else if (root._winRaisedRate) {
+        Win.SystemMonitor.intervalMs = 30000;   // what Caelestia keeps it at
+        root._winRaisedRate = false;
+      }
+    }
+  }
+
+  Timer {
+    interval: 1000
+    repeat: true
+    running: root.shouldRun
+    triggeredOnStart: true
+    onTriggered: root._winTick()
+  }
+
+  property int _winTickCount: 0
+
+  function _winTick() {
+    const m = Win.SystemMonitor;
+    _winTickCount++;
+
+    // CPU (every second)
+    root.cpuUsage = Math.round((m.cpuUsage || 0) * 1000) / 10;
+    root.pushCpuHistory();
+    root.nproc = m.cpuThreads || root.nproc;
+    if (m.cpuTemperature > 0) {
+      root.cpuTemp = Math.round(m.cpuTemperature);
+      root.pushCpuTempHistory();
+    }
+    if (m.cpuMhz > 0) {
+      root.cpuFreq = (m.cpuMhz / 1000).toFixed(1) + "GHz";
+      const max = (m.cpuMaxMhz || m.cpuBaseMhz || 3500) / 1000;
+      root.cpuGlobalMaxFreq = max;
+      root.cpuFreqRatio = Math.min(1, m.cpuMhz / 1000 / max);
+    }
+
+    // network (bytes/s)
+    root.rxSpeed = Math.round(Win.SystemStats.networkDownloadBytesPerSec || 0);
+    root.txSpeed = Math.round(Win.SystemStats.networkUploadBytesPerSec || 0);
+    if (_winTickCount % 3 === 0)
+      root.pushNetworkHistory();
+
+    // memory (every 5 s)
+    if (_winTickCount % 5 === 1) {
+      const gb = 1024 * 1024 * 1024;
+      if (m.memoryTotal > 0) {
+        root.memTotalGb = Math.round(m.memoryTotal / gb * 10) / 10;
+        root.memGb = Math.round(m.memoryUsed / gb * 10) / 10;
+        root.memPercent = Math.round(m.memoryUsed / m.memoryTotal * 100);
+        root.pushMemHistory();
+      }
+      if (m.swapTotal > 0) {
+        root.swapTotalGb = Math.round(m.swapTotal / gb * 10) / 10;
+        root.swapGb = Math.round(m.swapUsed / gb * 10) / 10;
+        root.swapPercent = Math.round(m.swapUsed / m.swapTotal * 100);
+      }
+
+      // GPU temperature (the first GPU that reports one)
+      const gpu = (m.gpus || []).find(g => g && g.temperature > 0);
+      root.gpuAvailable = !!gpu;
+      if (gpu) {
+        const v = String(gpu.vendor || "").toLowerCase();
+        root.gpuType = v.includes("nvidia") ? "nvidia" : v.includes("amd") ? "amd" : v.includes("intel") ? "intel" : "";
+        root.gpuTemp = Math.round(gpu.temperature);
+        root.pushGpuHistory();
+      }
+    }
+
+    // disks (every 30 s): one entry per drive letter, keyed like a mount point ("C:\")
+    if (_winTickCount % 30 === 1) {
+      const gb = 1024 * 1024 * 1024;
+      const percents = {}, avail = {}, used = {}, availGb = {}, size = {};
+      for (const disk of (m.disks || [])) {
+        for (const vol of (disk.volumes || [])) {
+          if (!vol || !vol.mount || !(vol.totalBytes > 0))
+            continue;
+          const p = Math.round(vol.usedBytes / vol.totalBytes * 100);
+          percents[vol.mount] = p;
+          avail[vol.mount] = 100 - p;
+          used[vol.mount] = Math.round(vol.usedBytes / gb * 10) / 10;
+          availGb[vol.mount] = Math.round((vol.totalBytes - vol.usedBytes) / gb * 10) / 10;
+          size[vol.mount] = Math.round(vol.totalBytes / gb * 10) / 10;
+        }
+      }
+      root.diskPercents = percents;
+      root.diskAvailPercents = avail;
+      root.diskUsedGb = used;
+      root.diskAvailableGb = availGb;
+      root.diskSizeGb = size;
+      root.pushDiskHistory();
+    }
+
+    // Windows has no load average; leave it at 0
+  }

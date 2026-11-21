@@ -1,0 +1,392 @@
+{
+  "%1 items": {
+    "%1 items": "%1 елементів"
+  },
+  "%1 of %2": {
+    "%1 of %2": ""
+  },
+  "%1 selected": {
+    "%1 selected": "%1 вибрано"
+  },
+  "%1 × %2": {
+    "%1 × %2": ""
+  },
+  "%1, %2": {
+    "%1, %2": ""
+  },
+  "1 item": {
+    "1 item": "1 елемент"
+  },
+  "1 selected": {
+    "1 selected": "1 вибрано"
+  },
+  "A file with this name already exists. Do you want to overwrite it?": {
+    "A file with this name already exists. Do you want to overwrite it?": "Файл з такою назвою вже існує. Ви хочете перезаписати його?"
+  },
+  "A name cannot be empty or contain a slash": {
+    "A name cannot be empty or contain a slash": "Ім'я не може бути порожнім або містити косу риску"
+  },
+  "AM": {
+    "AM": "ДП"
+  },
+  "Actions": {
+    "Actions": "Дії"
+  },
+  "Ascending": {
+    "Ascending": "За зростанням"
+  },
+  "B": {
+    "B": "Б"
+  },
+  "Back": {
+    "Back": "Назад"
+  },
+  "Backspace": {
+    "Backspace": "Назад"
+  },
+  "Binary file": {
+    "Binary file": "Бінарний файл"
+  },
+  "Broken link": {
+    "Broken link": "Пошкоджене посилання"
+  },
+  "Cancel": {
+    "Cancel": "Скасувати"
+  },
+  "Choose icon": {
+    "Choose icon": "Вибрати іконку"
+  },
+  "Clear": {
+    "Clear": "Очистити"
+  },
+  "Clear the selection": {
+    "Clear the selection": "Очистити вибір"
+  },
+  "Close": {
+    "Close": "Закрити"
+  },
+  "Color": {
+    "Color": "Колір"
+  },
+  "Communication": {
+    "Communication": "Зв'язок"
+  },
+  "Confirm": {
+    "Confirm": "Підтвердити"
+  },
+  "Copy path": {
+    "Copy path": "Копіювати шлях"
+  },
+  "Create": {
+    "Create": "Створити"
+  },
+  "Created": {
+    "Created": "Створено"
+  },
+  "Decrease": {
+    "Decrease": "Зменшити"
+  },
+  "Deleted": {
+    "Deleted": ""
+  },
+  "Descending": {
+    "Descending": "За спаданням"
+  },
+  "Development": {
+    "Development": "Розробка"
+  },
+  "Dimensions": {
+    "Dimensions": ""
+  },
+  "Drag to reorder": {
+    "Drag to reorder": "Перетягніть для зміни порядку"
+  },
+  "Edit": {
+    "Edit": "Редагувати"
+  },
+  "Enter": {
+    "Enter": "Enter"
+  },
+  "Enter filename...": {
+    "Enter filename...": "Введіть ім'я файлу..."
+  },
+  "File": {
+    "File": "Файл"
+  },
+  "File Already Exists": {
+    "File Already Exists": "Файл вже існує"
+  },
+  "File System": {
+    "File System": "Файлова система"
+  },
+  "Files - %1": {
+    "Files - %1": "Файли - %1"
+  },
+  "Files are unavailable because the file service is not running": {
+    "Files are unavailable because the file service is not running": "Файли недоступні, оскільки сервіс файлів не запущено"
+  },
+  "First %1 of %2": {
+    "First %1 of %2": "Перші %1 з %2"
+  },
+  "Folder": {
+    "Folder": "Тека"
+  },
+  "Folder name": {
+    "Folder name": "Назва теки"
+  },
+  "Forward": {
+    "Forward": "Вперед"
+  },
+  "Fun": {
+    "Fun": "Розваги"
+  },
+  "GB": {
+    "GB": "ГБ"
+  },
+  "Grid view": {
+    "Grid view": "Вигляд сіткою"
+  },
+  "Hibernate": {
+    "Hibernate": "Гібернація"
+  },
+  "Hide keyboard": {
+    "Hide keyboard": "Приховати клавіатуру"
+  },
+  "Hide password": {
+    "Hide password": "Приховати пароль"
+  },
+  "Hide preview": {
+    "Hide preview": ""
+  },
+  "Hold longer to confirm": {
+    "Hold longer to confirm": "Утримуйте довше для підтвердження"
+  },
+  "Hold to confirm (%1 ms)": {
+    "Hold to confirm (%1 ms)": "Утримуйте для підтвердження (%1 мс)"
+  },
+  "Hold to confirm (%1s)": {
+    "Hold to confirm (%1s)": "Утримуйте для підтвердження (%1 с)"
+  },
+  "Home": {
+    "Home": "Головна"
+  },
+  "Hour": {
+    "Hour": "Година"
+  },
+  "Increase": {
+    "Increase": "Збільшити"
+  },
+  "Jump to a folder you visited": {
+    "Jump to a folder you visited": ""
+  },
+  "Last used": {
+    "Last used": ""
+  },
+  "List view": {
+    "List view": "Вигляд списком"
+  },
+  "Location": {
+    "Location": "Розташування"
+  },
+  "Log Out": {
+    "Log Out": "Вийти"
+  },
+  "MB": {
+    "MB": "МБ"
+  },
+  "Maximize": {
+    "Maximize": "Максимізувати"
+  },
+  "Media": {
+    "Media": "Медіа"
+  },
+  "Minimize": {
+    "Minimize": "Згорнути"
+  },
+  "Minute": {
+    "Minute": "Хвилина"
+  },
+  "Modified": {
+    "Modified": "Змінено"
+  },
+  "Move to Trash": {
+    "Move to Trash": "Перемістити в кошик"
+  },
+  "Name": {
+    "Name": "Назва"
+  },
+  "Navigation": {
+    "Navigation": "Навігація"
+  },
+  "New folder": {
+    "New folder": "Нова тека"
+  },
+  "No locations found": {
+    "No locations found": "Локацій не знайдено"
+  },
+  "Nothing is at this location": {
+    "Nothing is at this location": ""
+  },
+  "Numbers": {
+    "Numbers": "Цифри"
+  },
+  "OK": {
+    "OK": "ОК"
+  },
+  "Open": {
+    "Open": "Відкрити"
+  },
+  "Original location": {
+    "Original location": ""
+  },
+  "Overwrite": {
+    "Overwrite": "Перезаписати"
+  },
+  "Owner": {
+    "Owner": "Власник"
+  },
+  "PM": {
+    "PM": "ПП"
+  },
+  "Permissions": {
+    "Permissions": "Дозволи"
+  },
+  "Power Off": {
+    "Power Off": "Вимкнути живлення"
+  },
+  "Power Options": {
+    "Power Options": "Параметри живлення"
+  },
+  "Quick Access": {
+    "Quick Access": "Швидкий доступ"
+  },
+  "Reboot": {
+    "Reboot": "Перезавантажити"
+  },
+  "Refresh": {
+    "Refresh": "Оновити"
+  },
+  "Rename": {
+    "Rename": "Перейменувати"
+  },
+  "Restore": {
+    "Restore": "Відновити"
+  },
+  "Review changes": {
+    "Review changes": "Переглянути зміни"
+  },
+  "Saturation %1%, brightness %2%": {
+    "Saturation %1%, brightness %2%": "Насиченість %1%, яскравість %2%"
+  },
+  "Save": {
+    "Save": "Зберегти"
+  },
+  "Search for a location...": {
+    "Search for a location...": "Пошук місця..."
+  },
+  "Search...": {
+    "Search...": "Пошук..."
+  },
+  "Searching...": {
+    "Searching...": "Пошук..."
+  },
+  "Select File": {
+    "Select File": "Вибрати файл"
+  },
+  "Select time": {
+    "Select time": "Вибрати час"
+  },
+  "Shift": {
+    "Shift": "Shift"
+  },
+  "Show hidden files": {
+    "Show hidden files": "Показувати приховані файли"
+  },
+  "Show password": {
+    "Show password": "Показати пароль"
+  },
+  "Size": {
+    "Size": "Розмір"
+  },
+  "Sort By": {
+    "Sort By": "Сортувати за"
+  },
+  "Space": {
+    "Space": "Пробіл"
+  },
+  "Status": {
+    "Status": "Статус"
+  },
+  "Suspend": {
+    "Suspend": "Призупинити"
+  },
+  "Switch User": {
+    "Switch User": "Змінити користувача"
+  },
+  "System": {
+    "System": "Система"
+  },
+  "TB": {
+    "TB": "ТБ"
+  },
+  "This folder could not be opened": {
+    "This folder could not be opened": "Цю теку не вдалося відкрити"
+  },
+  "This folder is empty": {
+    "This folder is empty": "Ця тека порожня"
+  },
+  "This folder no longer exists": {
+    "This folder no longer exists": "Цієї теки більше не існує"
+  },
+  "This item already exists": {
+    "This item already exists": "Цей елемент уже існує"
+  },
+  "This item cannot be moved here directly": {
+    "This item cannot be moved here directly": "Цей елемент не можна перемістити сюди безпосередньо"
+  },
+  "This item could not be handled": {
+    "This item could not be handled": "Цей елемент не вдалося обробити"
+  },
+  "This item is in use": {
+    "This item is in use": "Цей елемент використовується"
+  },
+  "This item no longer exists": {
+    "This item no longer exists": "Цього елемента більше не існує"
+  },
+  "This kind of location is not supported": {
+    "This kind of location is not supported": ""
+  },
+  "Today, %1": {
+    "Today, %1": ""
+  },
+  "Type": {
+    "Type": "Тип"
+  },
+  "Type a path, ~ or an address such as sftp://host": {
+    "Type a path, ~ or an address such as sftp://host": ""
+  },
+  "Unknown": {
+    "Unknown": "Невідомо"
+  },
+  "Use this folder": {
+    "Use this folder": "Використовувати цю теку"
+  },
+  "Use ~ for your own home folder or type the full path": {
+    "Use ~ for your own home folder or type the full path": ""
+  },
+  "Workspace": {
+    "Workspace": "Робочий простір"
+  },
+  "Yesterday, %1": {
+    "Yesterday, %1": ""
+  },
+  "You do not have permission to do this": {
+    "You do not have permission to do this": "У вас немає прав для цього"
+  },
+  "You do not have permission to view this folder": {
+    "You do not have permission to view this folder": "У вас немає прав для перегляду цієї теки"
+  },
+  "kB": {
+    "kB": "кБ"
+  }
+}

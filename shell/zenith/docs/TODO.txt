@@ -1,0 +1,18 @@
+add a login prompt on boot (optional)
+create our own keyring prompt
+improve boot time(systemd-analyze critical-chain)
+menu  config editor
+emoji selector
+new email detector + notification client
+settings app
+induvisual menus with keybinds
+todolist
+maybe add a fade when any audio resumes
+single app notification collapse
+maybe show focused app icon instead of the workspace number when opened
+combine mic + screen media
+Add events in calender
+Add custom location in weather, and even fix the automatic location to be precise
+remove shell bar if on full screen
+fix file manager xdg
+add multi screen resolution auto.manually handler

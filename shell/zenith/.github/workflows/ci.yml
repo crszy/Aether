@@ -1,0 +1,42 @@
+name: Zenith Shell CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  validate-and-build:
+    name: Lint & Build Zenith Shell
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@v12
+
+      - name: Setup Magic Nix Cache
+        uses: DeterminateSystems/magic-nix-cache-action@v8
+
+      - name: Check Nix Flake & Format
+        run: |
+          nix flake check --all-systems
+
+      - name: Python Lint
+        run: |
+          nix shell nixpkgs#python3Packages.flake8 -c bash -c "
+            if find scripts/ tests/ -name '*.py' | grep -q .; then
+              flake8 scripts/ tests/ --max-line-length=120 --ignore=E501,W503,E203
+            fi
+          "
+
+      - name: Behavioural Tests
+        run: |
+          nix shell nixpkgs#qt6.qtdeclarative nixpkgs#python3 -c bash tests/run.sh
+
+      - name: Build Zenith Shell Package
+        run: |
+          nix build .#zenith-shell --print-build-logs
