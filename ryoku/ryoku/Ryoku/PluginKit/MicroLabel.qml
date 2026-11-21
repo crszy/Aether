@@ -1,0 +1,33 @@
+import QtQuick
+import "Singletons"
+import Ryoku.Ui.Singletons
+
+// section eyebrow, dossier idiom: vermilion reg dot then a mono uppercase
+// letterspaced label. scales with `s`.
+Row {
+    id: ml
+
+    property string label: ""
+    property real s: 1
+
+    spacing: 8 * s
+
+    Rectangle {
+        width: 5 * ml.s
+        height: 5 * ml.s
+        radius: 1 * ml.s
+        color: Theme.brand
+        anchors.verticalCenter: parent.verticalCenter
+    }
+
+    Text {
+        anchors.verticalCenter: parent.verticalCenter
+        text: I18n.tr(ml.label)
+        color: Theme.faint
+        font.family: Theme.mono
+        font.pixelSize: 10 * ml.s
+        font.weight: Font.DemiBold
+        font.letterSpacing: 2.4 * ml.s
+        font.capitalization: Font.AllUppercase
+    }
+}
