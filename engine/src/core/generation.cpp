@@ -1,0 +1,361 @@
+#include "generation.hpp"
+#include <utility>
+
+#include <qcontainerfwd.h>
+#include <qcoreapplication.h>
+#include <qdebug.h>
+#include <qdir.h>
+#include <qfileinfo.h>
+#include <qfilesystemwatcher.h>
+#include <qhash.h>
+#include <qlist.h>
+#include <qlogging.h>
+#include <qloggingcategory.h>
+#include <qnamespace.h>
+#include <qobject.h>
+#include <qqmlcontext.h>
+#include <qqmlengine.h>
+#include <qqmlerror.h>
+#include <qqmlincubator.h>
+#include <qquickwindow.h>
+#include <qtmetamacros.h>
+
+#include "iconimageprovider.hpp"
+#include "imageprovider.hpp"
+#include "incubator.hpp"
+#include "logcat.hpp"
+#include "plugin.hpp"
+#include "qmlcache.hpp"
+#include "qsintercept.hpp"
+#include "reload.hpp"
+#include "scan.hpp"
+
+namespace {
+QS_LOGGING_CATEGORY(logScene, "scene");
+}
+
+static QHash<const QQmlEngine*, EngineGeneration*> g_generations; // NOLINT
+
+EngineGeneration::EngineGeneration(const QDir& rootPath, QmlScanner scanner)
+    : rootPath(rootPath)
+    , scanner(std::move(scanner))
+    , urlInterceptor(this->rootPath)
+    , interceptNetFactory(this->rootPath, this->scanner.fileIntercepts)
+    , engine(new QQmlEngine()) {
+	g_generations.insert(this->engine, this);
+
+	this->engine->setOutputWarningsToStandardError(false);
+	QObject::connect(this->engine, &QQmlEngine::warnings, this, &EngineGeneration::onEngineWarnings);
+
+	this->engine->addUrlInterceptor(&this->urlInterceptor);
+	this->engine->addImportPath("qs:@/");
+
+	qs::qmlcache::activate(this->rootPath, this->scanner.fileHashes, this->scanner.fileIntercepts);
+
+	this->engine->setNetworkAccessManagerFactory(&this->interceptNetFactory);
+	this->incubationController.initLoop();
+	this->engine->setIncubationController(&this->incubationController);
+
+	this->engine->addImageProvider("icon", new IconImageProvider());
+	this->engine->addImageProvider("qsimage", new QsImageProvider());
+	this->engine->addImageProvider("qspixmap", new QsPixmapProvider());
+
+	QsEnginePlugin::runConstructGeneration(*this);
+}
+
+EngineGeneration::EngineGeneration(): EngineGeneration(QDir(), QmlScanner()) {}
+
+EngineGeneration::~EngineGeneration() {
+	for (auto* extension: this->extensions.values()) {
+		delete extension;
+	}
+
+	if (this->engine != nullptr) {
+		qFatal() << this << "destroyed without calling destroy()";
+	}
+}
+
+void EngineGeneration::destroy() {
+	if (this->destroying) return;
+	this->destroying = true;
+
+	if (this->watcher != nullptr) {
+		// Multiple generations can detect a reload at the same time.
+		QObject::disconnect(this->watcher, nullptr, this, nullptr);
+		this->watcher->deleteLater();
+		this->watcher = nullptr;
+	}
+
+	if (this->root != nullptr) {
+		// prevent further js execution during teardown of the root's children, gc and the engine.
+		QObject::connect(this->root, &QObject::destroyed, this, [this]() {
+			this->engine->setInterrupted(true);
+		});
+
+		// QObject::destroyed is emitted before the root's children are destroyed.
+		// The engine must outlive them, as objects such as Loaders with in-flight
+		// incubations access it in their destructors.
+		QObject::connect(
+		    this->root,
+		    &QObject::destroyed,
+		    this,
+		    [this]() {
+			    g_generations.remove(this->engine);
+
+			    // Garbage is not collected during engine destruction.
+			    this->engine->collectGarbage();
+
+			    delete this->engine;
+			    this->engine = nullptr;
+
+			    auto terminate = this->shouldTerminate;
+			    auto code = this->exitCode;
+			    delete this;
+
+			    if (terminate) QCoreApplication::exit(code);
+		    },
+		    Qt::QueuedConnection
+		);
+
+		this->root->deleteLater();
+		this->root = nullptr;
+	} else {
+		g_generations.remove(this->engine);
+
+		// the engine has never been used, no need to clean up
+		delete this->engine;
+		this->engine = nullptr;
+
+		auto terminate = this->shouldTerminate;
+		auto code = this->exitCode;
+		delete this;
+
+		if (terminate) QCoreApplication::exit(code);
+	}
+}
+
+void EngineGeneration::shutdown() {
+	if (this->destroying) return;
+
+	delete this->root;
+	this->root = nullptr;
+	delete this->engine;
+	this->engine = nullptr;
+	delete this;
+}
+
+void EngineGeneration::onReload(EngineGeneration* old) {
+	if (old != nullptr) {
+		// if the old generation holds the window incubation controller as the
+		// new generation acquires it then incubators will hang intermittently
+		qCDebug(logIncubator) << "Locking incubation controllers of old generation" << old;
+		old->incubationControllersLocked = true;
+		old->updateIncubationMode();
+	}
+
+	QObject::connect(this->engine, &QQmlEngine::quit, this, &EngineGeneration::quit);
+	QObject::connect(this->engine, &QQmlEngine::exit, this, &EngineGeneration::exit);
+
+	if (auto* reloadable = qobject_cast<Reloadable*>(this->root)) {
+		reloadable->reload(old ? old->root : nullptr);
+	}
+
+	this->singletonRegistry.onReload(old == nullptr ? nullptr : &old->singletonRegistry);
+	this->reloadComplete = true;
+	emit this->reloadFinished();
+
+	if (old != nullptr) {
+		QObject::connect(old, &QObject::destroyed, this, [this]() { this->postReload(); });
+		old->destroy();
+	} else {
+		this->postReload();
+	}
+}
+
+void EngineGeneration::postReload() {
+	// This can be called on a generation during its destruction.
+	if (this->engine == nullptr || this->root == nullptr) return;
+
+	QsEnginePlugin::runOnReload();
+
+	emit this->firePostReload();
+	QObject::disconnect(this, &EngineGeneration::firePostReload, nullptr, nullptr);
+}
+
+void EngineGeneration::setWatchingFiles(bool watching) {
+	if (watching) {
+		if (this->watcher == nullptr) {
+			this->watcher = new QFileSystemWatcher();
+
+			for (auto& file: this->scanner.scannedFiles) {
+				this->watcher->addPath(file);
+				this->watcher->addPath(QFileInfo(file).dir().absolutePath());
+			}
+
+			for (auto& file: this->extraWatchedFiles) {
+				this->watcher->addPath(file);
+				this->watcher->addPath(QFileInfo(file).dir().absolutePath());
+			}
+
+			QObject::connect(
+			    this->watcher,
+			    &QFileSystemWatcher::fileChanged,
+			    this,
+			    &EngineGeneration::onFileChanged
+			);
+
+			QObject::connect(
+			    this->watcher,
+			    &QFileSystemWatcher::directoryChanged,
+			    this,
+			    &EngineGeneration::onDirectoryChanged
+			);
+		}
+	} else {
+		if (this->watcher != nullptr) {
+			QObject::disconnect(this->watcher, nullptr, this, nullptr);
+			this->watcher->deleteLater();
+			this->watcher = nullptr;
+		}
+	}
+}
+
+bool EngineGeneration::setExtraWatchedFiles(const QVector<QString>& files) {
+	this->extraWatchedFiles.clear();
+	for (const auto& file: files) {
+		if (!this->scanner.scannedFiles.contains(file)) {
+			this->extraWatchedFiles.append(file);
+			QByteArray data;
+			this->scanner.readAndHashFile(file, data);
+		}
+	}
+
+	if (this->watcher) {
+		this->setWatchingFiles(false);
+		this->setWatchingFiles(true);
+	}
+
+	return !this->extraWatchedFiles.isEmpty();
+}
+
+void EngineGeneration::onFileChanged(const QString& name) {
+	if (!this->watcher->files().contains(name)) {
+		this->deletedWatchedFiles.push_back(name);
+	} else {
+		// some editors (e.g vscode) perform file saving in two steps: truncate + write
+		// ignore the first event (truncate) with size 0 to prevent incorrect live reloading
+		auto fileInfo = QFileInfo(name);
+		if (fileInfo.isFile() && fileInfo.size() == 0) return;
+
+		if (!this->scanner.hasFileContentChanged(name)) {
+			qCDebug(logQmlScanner) << "Ignoring file change with unchanged content:" << name;
+			return;
+		}
+
+		emit this->filesChanged();
+	}
+}
+
+void EngineGeneration::onDirectoryChanged() {
+	// try to find any files that were just deleted from a replace operation
+	for (auto& file: this->deletedWatchedFiles) {
+		if (QFileInfo(file).exists()) {
+			if (!this->scanner.hasFileContentChanged(file)) {
+				qCDebug(logQmlScanner) << "Ignoring restored file with unchanged content:" << file;
+				continue;
+			}
+
+			emit this->filesChanged();
+			break;
+		}
+	}
+}
+
+void EngineGeneration::onEngineWarnings(const QList<QQmlError>& warnings) {
+	for (const auto& error: warnings) {
+		const auto& url = error.url();
+		auto rel = url.scheme() == "qs" && url.path().startsWith("@/qs/") ? "@" % url.path().sliced(5)
+		                                                                  : url.toString();
+
+		QString objectName;
+		auto desc = error.description();
+		if (auto i = desc.indexOf(": "); i != -1 && desc.startsWith("QML ")) {
+			objectName = desc.first(i) + " at ";
+			desc = desc.sliced(i + 2);
+		}
+
+		qCWarning(logScene).noquote().nospace()
+		    << objectName << rel << '[' << error.line() << ':' << error.column() << "]: " << desc;
+	}
+}
+
+void EngineGeneration::registerExtension(const void* key, EngineGenerationExt* extension) {
+	if (this->extensions.contains(key)) {
+		delete this->extensions.value(key);
+	}
+
+	this->extensions.insert(key, extension);
+}
+
+EngineGenerationExt* EngineGeneration::findExtension(const void* key) {
+	return this->extensions.value(key);
+}
+
+void EngineGeneration::quit() {
+	this->shouldTerminate = true;
+	this->destroy();
+}
+
+void EngineGeneration::exit(int code) {
+	this->shouldTerminate = true;
+	this->exitCode = code;
+	this->destroy();
+}
+
+void EngineGeneration::trackWindowIncubationController(QQuickWindow* window) {
+	if (this->trackedWindows.contains(window)) return;
+
+	QObject::connect(window, &QObject::destroyed, this, &EngineGeneration::onTrackedWindowDestroyed);
+	this->trackedWindows.append(window);
+	this->updateIncubationMode();
+}
+
+void EngineGeneration::onTrackedWindowDestroyed(QObject* object) {
+	this->trackedWindows.removeAll(static_cast<QQuickWindow*>(object)); // NOLINT
+	this->updateIncubationMode();
+}
+
+void EngineGeneration::updateIncubationMode() {
+	// If we're in a situation with only hidden but tracked windows this might be wrong,
+	// but it seems to at least work.
+	this->incubationController.setIncubationMode(!this->trackedWindows.empty());
+}
+
+EngineGeneration* EngineGeneration::currentGeneration() {
+	if (g_generations.size() == 1) {
+		return *g_generations.begin();
+	} else return nullptr;
+}
+
+EngineGeneration* EngineGeneration::findEngineGeneration(const QQmlEngine* engine) {
+	return g_generations.value(engine);
+}
+
+EngineGeneration* EngineGeneration::findObjectGeneration(const QObject* object) {
+	// Objects can still attempt to find their generation after it has been destroyed.
+	// if (g_generations.size() == 1) return EngineGeneration::currentGeneration();
+
+	while (object != nullptr) {
+		auto* context = QQmlEngine::contextForObject(object);
+
+		if (context != nullptr) {
+			if (auto* generation = EngineGeneration::findEngineGeneration(context->engine())) {
+				return generation;
+			}
+		}
+
+		object = object->parent();
+	}
+
+	return nullptr;
+}

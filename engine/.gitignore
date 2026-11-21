@@ -1,0 +1,18 @@
+# related repos
+/docs
+
+# build files
+/result
+/build/
+/compile_commands.json
+
+# clangd
+/.cache
+
+# direnv
+/.envrc
+/.direnv/
+
+# windows
+/.toolchain/
+/dist/

@@ -1,0 +1,274 @@
+#include "colorquantizer.hpp"
+#include <algorithm>
+#include <utility>
+
+#include <qatomic.h>
+#include <qcolor.h>
+#include <qdatetime.h>
+#include <qimage.h>
+#include <qlist.h>
+#include <qlogging.h>
+#include <qloggingcategory.h>
+#include <qminmax.h>
+#include <qnamespace.h>
+#include <qnumeric.h>
+#include <qobject.h>
+#include <qqmllist.h>
+#include <qrect.h>
+#include <qrgb.h>
+#include <qthreadpool.h>
+#include <qtmetamacros.h>
+#include <qtypes.h>
+
+#include "logcat.hpp"
+
+namespace {
+QS_LOGGING_CATEGORY(logColorQuantizer, "quickshell.colorquantizer", QtWarningMsg);
+}
+
+ColorQuantizerOperation::ColorQuantizerOperation(
+    QUrl source,
+    qreal depth,
+    QRect imageRect,
+    qreal rescaleSize
+)
+    : source(std::move(source))
+    , maxDepth(depth)
+    , imageRect(imageRect)
+    , rescaleSize(rescaleSize) {
+	this->setAutoDelete(false);
+}
+
+void ColorQuantizerOperation::quantizeImage(const QAtomicInteger<bool>& shouldCancel) {
+	if (shouldCancel.loadAcquire() || this->source.isEmpty()) return;
+
+	this->colors.clear();
+
+	auto image = QImage(this->source.toLocalFile());
+
+	if (this->imageRect.isValid()) {
+		image = image.copy(this->imageRect);
+	}
+
+	if ((image.width() > this->rescaleSize || image.height() > this->rescaleSize)
+	    && this->rescaleSize > 0)
+	{
+		image = image.scaled(
+		    static_cast<int>(this->rescaleSize),
+		    static_cast<int>(this->rescaleSize),
+		    Qt::KeepAspectRatio,
+		    Qt::SmoothTransformation
+		);
+	}
+
+	if (image.isNull()) {
+		qCWarning(logColorQuantizer) << "Failed to load image from" << this->source.toString();
+		return;
+	}
+
+	QList<QColor> pixels;
+	for (int y = 0; y != image.height(); ++y) {
+		for (int x = 0; x != image.width(); ++x) {
+			auto pixel = image.pixel(x, y);
+			if (qAlpha(pixel) == 0) continue;
+
+			pixels.append(QColor::fromRgb(pixel));
+		}
+	}
+
+	auto startTime = QDateTime::currentDateTime();
+
+	this->colors = this->quantization(pixels, 0);
+
+	auto endTime = QDateTime::currentDateTime();
+	auto milliseconds = startTime.msecsTo(endTime);
+	qCDebug(logColorQuantizer) << "Color Quantization took: " << milliseconds << "ms";
+}
+
+QList<QColor> ColorQuantizerOperation::quantization(
+    QList<QColor>& rgbValues,
+    qreal depth,
+    const QAtomicInteger<bool>& shouldCancel
+) {
+	if (shouldCancel.loadAcquire()) return QList<QColor>();
+
+	if (depth >= this->maxDepth || rgbValues.isEmpty()) {
+		if (rgbValues.isEmpty()) return QList<QColor>();
+
+		auto totalR = 0;
+		auto totalG = 0;
+		auto totalB = 0;
+
+		for (const auto& color: rgbValues) {
+			if (shouldCancel.loadAcquire()) return QList<QColor>();
+
+			totalR += color.red();
+			totalG += color.green();
+			totalB += color.blue();
+		}
+
+		auto avgColor = QColor(
+		    qRound(totalR / static_cast<double>(rgbValues.size())),
+		    qRound(totalG / static_cast<double>(rgbValues.size())),
+		    qRound(totalB / static_cast<double>(rgbValues.size()))
+		);
+
+		return QList<QColor>() << avgColor;
+	}
+
+	auto dominantChannel = findBiggestColorRange(rgbValues);
+	std::ranges::sort(rgbValues, [dominantChannel](const auto& a, const auto& b) {
+		if (dominantChannel == 'r') return a.red() < b.red();
+		else if (dominantChannel == 'g') return a.green() < b.green();
+		return a.blue() < b.blue();
+	});
+
+	auto mid = rgbValues.size() / 2;
+
+	auto leftHalf = rgbValues.mid(0, mid);
+	auto rightHalf = rgbValues.mid(mid);
+
+	QList<QColor> result;
+	result.append(this->quantization(leftHalf, depth + 1));
+	result.append(this->quantization(rightHalf, depth + 1));
+
+	return result;
+}
+
+char ColorQuantizerOperation::findBiggestColorRange(const QList<QColor>& rgbValues) {
+	if (rgbValues.isEmpty()) return 'r';
+
+	auto rMin = 255;
+	auto gMin = 255;
+	auto bMin = 255;
+	auto rMax = 0;
+	auto gMax = 0;
+	auto bMax = 0;
+
+	for (const auto& color: rgbValues) {
+		rMin = qMin(rMin, color.red());
+		gMin = qMin(gMin, color.green());
+		bMin = qMin(bMin, color.blue());
+
+		rMax = qMax(rMax, color.red());
+		gMax = qMax(gMax, color.green());
+		bMax = qMax(bMax, color.blue());
+	}
+
+	auto rRange = rMax - rMin;
+	auto gRange = gMax - gMin;
+	auto bRange = bMax - bMin;
+
+	auto biggestRange = qMax(rRange, qMax(gRange, bRange));
+	if (biggestRange == rRange) {
+		return 'r';
+	} else if (biggestRange == gRange) {
+		return 'g';
+	} else {
+		return 'b';
+	}
+}
+
+void ColorQuantizerOperation::finishRun() {
+	QMetaObject::invokeMethod(this, &ColorQuantizerOperation::finished, Qt::QueuedConnection);
+}
+
+void ColorQuantizerOperation::finished() {
+	emit this->done(this->colors);
+	delete this;
+}
+
+void ColorQuantizerOperation::run() {
+	if (!this->shouldCancel) {
+		this->quantizeImage();
+
+		if (this->shouldCancel.loadAcquire()) {
+			qCDebug(logColorQuantizer) << "Color quantization" << this << "cancelled";
+		}
+	}
+
+	this->finishRun();
+}
+
+void ColorQuantizerOperation::tryCancel() { this->shouldCancel.storeRelease(true); }
+
+ColorQuantizer::~ColorQuantizer() { this->cancelAsync(); }
+
+void ColorQuantizer::componentComplete() {
+	this->componentCompleted = true;
+	if (!this->mSource.isEmpty()) this->quantizeAsync();
+}
+
+void ColorQuantizer::setSource(const QUrl& source) {
+	if (this->mSource != source) {
+		this->mSource = source;
+		emit this->sourceChanged();
+
+		if (this->componentCompleted && !this->mSource.isEmpty()) this->quantizeAsync();
+	}
+}
+
+void ColorQuantizer::setDepth(qreal depth) {
+	if (this->mDepth != depth) {
+		this->mDepth = depth;
+		emit this->depthChanged();
+
+		if (this->componentCompleted && !this->mSource.isEmpty()) this->quantizeAsync();
+	}
+}
+
+void ColorQuantizer::setImageRect(QRect imageRect) {
+	if (this->mImageRect != imageRect) {
+		this->mImageRect = imageRect;
+		emit this->imageRectChanged();
+
+		if (this->componentCompleted && !this->mSource.isEmpty()) this->quantizeAsync();
+	}
+}
+
+void ColorQuantizer::resetImageRect() { this->setImageRect(QRect()); }
+
+void ColorQuantizer::setRescaleSize(int rescaleSize) {
+	if (this->mRescaleSize != rescaleSize) {
+		this->mRescaleSize = rescaleSize;
+		emit this->rescaleSizeChanged();
+
+		if (this->componentCompleted && !this->mSource.isEmpty()) this->quantizeAsync();
+	}
+}
+
+void ColorQuantizer::operationFinished(const QList<QColor>& result) {
+	this->bColors = result;
+	this->liveOperation = nullptr;
+	emit this->colorsChanged();
+}
+
+void ColorQuantizer::quantizeAsync() {
+	if (this->liveOperation) this->cancelAsync();
+
+	qCDebug(logColorQuantizer) << "Starting color quantization asynchronously";
+
+	this->liveOperation = new ColorQuantizerOperation(
+	    this->mSource,
+	    this->mDepth,
+	    this->mImageRect,
+	    this->mRescaleSize
+	);
+
+	QObject::connect(
+	    this->liveOperation,
+	    &ColorQuantizerOperation::done,
+	    this,
+	    &ColorQuantizer::operationFinished
+	);
+
+	QThreadPool::globalInstance()->start(this->liveOperation);
+}
+
+void ColorQuantizer::cancelAsync() {
+	if (!this->liveOperation) return;
+
+	this->liveOperation->tryCancel();
+	QObject::disconnect(this->liveOperation, nullptr, this, nullptr);
+	this->liveOperation = nullptr;
+}

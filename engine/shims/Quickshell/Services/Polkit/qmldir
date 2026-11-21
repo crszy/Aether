@@ -1,0 +1,4 @@
+module Quickshell.Services.Polkit
+PolkitAgent 1.0 PolkitAgent.qml
+AuthFlow 1.0 AuthFlow.qml
+Identity 1.0 Identity.qml

@@ -1,0 +1,50 @@
+#pragma once
+
+#include <qdatetime.h>
+#include <qlogging.h>
+#include <qstring.h>
+
+#ifdef _WIN32
+using pid_t = int;
+#else
+#include <sys/types.h>
+#endif
+
+struct InstanceInfo {
+	QString instanceId;
+	QString configPath;
+	QString shellId;
+	QString appId;
+	QDateTime launchTime;
+	pid_t pid = -1;
+	QString display;
+
+	static InstanceInfo CURRENT; // NOLINT
+};
+
+struct RelaunchInfo {
+	InstanceInfo instance;
+	bool noColor = false;
+	bool timestamp = false;
+	bool sparseLogsOnly = false;
+	QtMsgType defaultLogLevel = QtWarningMsg;
+	QString logRules;
+};
+
+QDataStream& operator<<(QDataStream& stream, const InstanceInfo& info);
+QDataStream& operator>>(QDataStream& stream, InstanceInfo& info);
+
+QDataStream& operator<<(QDataStream& stream, const RelaunchInfo& info);
+QDataStream& operator>>(QDataStream& stream, RelaunchInfo& info);
+
+namespace qs::crash {
+
+struct CrashInfo {
+	int logFd = -1;
+	int traceFd = -1;
+	int infoFd = -1;
+
+	static CrashInfo INSTANCE; // NOLINT
+};
+
+} // namespace qs::crash
