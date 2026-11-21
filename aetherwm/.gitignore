@@ -1,0 +1,15 @@
+.idea
+/dist
+/target
+CHANGELOG.md
+dummy.go
+komorebic/applications.yaml
+komorebic/applications.json
+/.vs
+/bar-schema
+/komorebi-schema
+/.wrangler
+/.xwin-cache
+result
+/.direnv
+procdump.exe

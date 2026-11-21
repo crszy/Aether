@@ -1,0 +1,284 @@
+# yasb 2.0.5 config from https://github.com/cipheroute/komorebi
+watch_stylesheet: True
+watch_config: True
+debug: False
+update_check: False
+
+bars:
+  primary-bar:
+    enabled: true
+    screens: ["*"]
+    class_name: "yasb-bar"
+    alignment:
+      position: "top"
+      center: true
+    blur_effect:
+      enabled: true
+      acrylic: true
+      dark_mode: true
+      round_corners: true
+      round_corners_type: "small"
+      border_color: None
+    window_flags:
+      always_on_top: false
+      windows_app_bar: true
+    dimensions:
+      width: "99%"
+      height: 35
+    padding:
+      top: 4
+      left: 10
+      bottom: 5
+      right: 14
+    widgets:
+      left:
+        [
+          "home",
+          "active_window",
+          "komorebi_workspaces",
+        ]
+      center: ["clock"]
+      right:
+        [
+          "cava",
+          "media-cosmic",
+          "memory",
+          "weather-acr",
+          "volume-acr",
+          "language",
+          "power_menu",
+        ]
+
+widgets:
+  home:
+    type: "yasb.home.HomeWidget"
+    options:
+      label: "<img src='C:/Users/YOUR_USER/.config/yasb/icons/audio-lines.svg' width='14' height='14'>"
+      menu_list:
+        - { title: "User Home", path: "~" }
+        - { title: "Download", path: "~\\Downloads" }
+        - { title: "Documents", path: "~\\Documents" }
+        - { title: "Pictures", path: "~\\Pictures" }
+      system_menu: true
+      power_menu: true
+      blur: true
+      border_color: "None"
+      round_corners_type: "small"
+      container_padding:
+        top: 0
+        left: 12
+        bottom: 0
+        right: 12
+
+  active_window:
+    type: "yasb.active_window.ActiveWindowWidget"
+    options:
+      label: "{win[process][name]}"
+      label_alt: "{win[process][name]}"
+      label_no_window: "~"
+      label_icon: false
+      label_icon_size: 14
+      max_length: 14
+      max_length_ellipsis: ".."
+      monitor_exclusive: false
+
+  komorebi_workspaces:
+    type: "komorebi.workspaces.WorkspaceWidget"
+    options:
+      label_offline: ""
+      label_workspace_btn: ""
+      label_workspace_active_btn: ""
+      label_workspace_populated_btn: ""
+      label_default_name: ""
+      label_zero_index: false
+      hide_empty_workspaces: false
+      hide_if_offline: true
+      enable_scroll_switching: true
+      reverse_scroll_direction: false
+      toggle_workspace_layer:
+        enabled: false
+        tiling_label: ""
+        floating_label: ""
+      app_icons:
+        enabled_populated: false
+        enabled_active: false
+        size: 12
+        max_icons: 0
+        hide_label: true
+        hide_duplicates: true
+        hide_floating: true
+
+  clock:
+    type: "yasb.clock.ClockWidget"
+    options:
+      label: "{%a, %d %b %I:%M %p}"
+      label_alt: "{%A, %d %B %Y %I:%M:%S}"
+      timezones: []
+      calendar:
+        blur: true
+        alignment: "center"
+        border_color: "None"
+        offset_top: 6
+
+  cava:
+    type: "yasb.cava.CavaWidget"
+    options:
+      bar_height: 12
+      min_bar_height: 1
+      source: ""
+      gradient: 1
+      reverse: 0
+      sensitivity: 100
+      framerate: 60
+      noise_reduction: 6
+      foreground: "#f5f5f5"
+      gradient_color_1: "#ffffff"
+      gradient_color_2: "#dcdcdc"
+      gradient_color_3: "#8a8a8a"
+      bars_number: 8
+      bar_spacing: 2
+      bar_width: 3
+      sleep_timer: 0
+      hide_empty: false
+
+  media-cosmic:
+    type: "yasb.media.MediaWidget"
+    options:
+      label: "{title} - {artist}"
+      label_alt: "{title}"
+      hide_empty: true
+      show_thumbnail: false
+      controls_left: true
+      controls_hide: true
+      thumbnail_alpha: 80
+      thumbnail_padding: 8
+      thumbnail_corner_radius: 16
+      icons:
+        prev_track: "\ue892"
+        next_track: "\ue893"
+        play: "\ue768"
+        pause: "\ue769"
+      callbacks:
+        on_left: "toggle_media_menu"
+        on_middle: "toggle_play_pause"
+        on_right: "toggle_label"
+      max_field_size:
+        label: 24
+        label_alt: 24
+      scrolling_label:
+        enabled: true
+        update_interval_ms: 45
+        style: "left"
+        separator: " | "
+        label_padding: 18
+        always_scroll: true
+        ease_slope: 12
+        ease_pos: 0.70
+        ease_min: 0.25
+      media_menu:
+        blur: true
+        round_corners: true
+        round_corners_type: "normal"
+        border_color: "None"
+        alignment: "right"
+        direction: "down"
+        offset_top: 6
+        offset_left: 0
+        thumbnail_corner_radius: 4
+        thumbnail_size: 80
+        max_title_size: 40
+        max_artist_size: 18
+        show_volume_slider: false
+      media_menu_icons:
+        play: "\ue768"
+        pause: "\ue769"
+        prev_track: "\ue892"
+        next_track: "\ue893"
+
+  memory:
+    type: "yasb.memory.MemoryWidget"
+    options:
+      label: "<span>\uf35b</span> {virtual_mem_free}"
+      label_alt: "<span>\uf35b</span> {virtual_mem_percent}%"
+
+  weather-acr:
+    type: "yasb.weather.WeatherWidget"
+    options:
+      label: "<span class='weather-glyph'>{icon}</span> {temp}"
+      label_alt: "<span class='weather-glyph'>{icon}</span> {conditions} {temp} | feels {feelslike} | hum {humidity}"
+      api_key: "YOUR_WEATHERAPI_KEY"  # free key from weatherapi.com
+      update_interval: 600
+      hide_decimal: true
+      location: "City, CC"
+      callbacks:
+        on_left: "toggle_label"
+      icons:
+        sunnyDay: "☀"
+        clearNight: "☾"
+        cloudyDay: "☁"
+        cloudyNight: "☁"
+        rainyDay: "☂"
+        rainyNight: "☂"
+        snowyDay: "❄"
+        snowyNight: "❄"
+        foggyDay: "≋"
+        foggyNight: "≋"
+        thunderstormDay: "☇"
+        thunderstormNight: "☇"
+        blizzardDay: "❄"
+        blizzardNight: "❄"
+        default: "☁"
+
+  volume-acr:
+    type: "yasb.volume.VolumeWidget"
+    options:
+      label: "<span>{icon}</span> {level}"
+      label_alt: "{volume}"
+      volume_icons:
+        - "\ueee8"
+        - "\uf026"
+        - "\uf027"
+        - "\uf027"
+        - "\uf028"
+      callbacks:
+        on_right: "exec cmd.exe /c start ms-settings:sound"
+
+  language:
+    type: "yasb.language.LanguageWidget"
+    options:
+      label: "{lang[language_code]}"
+      label_alt: "{lang[full_layout_name]}"
+      update_interval: 1
+      callbacks:
+        on_right: "toggle_label"
+      label_shadow:
+        enabled: false
+        color: "black"
+        radius: 5
+        offset: [0, 0]
+
+  power_menu:
+    type: "yasb.power_menu.PowerMenuWidget"
+    options:
+      label: "\uf011"
+      uptime: true
+      show_user: true
+      menu_style: "popup"
+      popup:
+        blur: true
+        round_corners: true
+        round_corners_type: "normal"
+        border_color: "None"
+        alignment: "right"
+        direction: "down"
+        offset_top: 6
+        offset_left: 0
+      profile_image_size: 64
+      buttons:
+        lock: ["\uea75", "Lock"]
+        signout: ["\udb80\udf43", "Sign out"]
+        sleep: ["\u23fe", "Sleep"]
+        hibernate: ["\uf28e", "Hibernate"]
+        restart: ["\uead2", "Restart"]
+        shutdown: ["\uf011", "Shut Down"]
+        cancel: ["", "Cancel"]

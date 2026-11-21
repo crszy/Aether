@@ -1,0 +1,368 @@
+{
+    "$schema": "https://raw.githubusercontent.com/LGUG2Z/komorebi/v0.1.41/schema.json",
+    "animation": {
+        "enabled": true,
+        "duration": 180,
+        "fps": 144,
+        "style": "EaseOutCubic",
+        "workspace": {
+            "kind": "Slide",
+            "duration": 350,
+            "bezier": [
+                0.05,
+                0.9,
+                0.1,
+                1.05
+            ],
+            "backdrop_blur": true,
+            "border": {
+                "width": 3,
+                "offset": -1,
+                "radius": 8,
+                "colour": "#FFFFFFFF"
+            },
+            "shadow": true,
+            "backdrop_profiles": [
+                {
+                    "exe": "WindowsTerminal.exe",
+                    "gain": [
+                        1.447,
+                        1.454,
+                        1.49
+                    ],
+                    "offset": [
+                        3.9,
+                        3.4,
+                        -0.4
+                    ]
+                },
+                {
+                    "exe": "Zed.exe",
+                    "gain": [
+                        0.922,
+                        0.926,
+                        0.939
+                    ],
+                    "offset": [
+                        6.3,
+                        6.8,
+                        4.9
+                    ]
+                }
+            ]
+        },
+        "windows": {
+            "duration": 400,
+            "bezier": [
+                0.05,
+                0.9,
+                0.1,
+                1.05
+            ]
+        }
+    },
+    "app_specific_configuration_path": "$Env:USERPROFILE/applications.json",
+    "window_hiding_behaviour": "Cloak",
+    "dynamic_workspaces": true,
+    "cross_monitor_move_behaviour": "Insert",
+    "floating_applications": [],
+    "manage_rules": [
+        [
+            {
+                "kind": "Exe",
+                "id": "claude.exe",
+                "matching_strategy": "Equals"
+            },
+            {
+                "kind": "Class",
+                "id": "Chrome_WidgetWin_1",
+                "matching_strategy": "Equals"
+            }
+        ],
+        [
+            {
+                "kind": "Exe",
+                "id": "steamwebhelper.exe",
+                "matching_strategy": "Equals"
+            },
+            {
+                "kind": "Class",
+                "id": "SDL_app",
+                "matching_strategy": "Equals"
+            },
+            {
+                "kind": "Title",
+                "id": "Steam",
+                "matching_strategy": "Equals"
+            }
+        ],
+        [
+            {
+                "kind": "Exe",
+                "id": "Clowder.exe",
+                "matching_strategy": "Equals"
+            },
+            {
+                "kind": "Class",
+                "id": "Chrome_WidgetWin_1",
+                "matching_strategy": "Equals"
+            }
+        ]
+    ],
+    "layered_applications": [
+        {
+            "kind": "Exe",
+            "id": "claude.exe",
+            "matching_strategy": "Equals"
+        }
+    ],
+    "ignore_rules": [
+        { "kind": "Exe", "id": "qsw.exe", "matching_strategy": "Equals" },
+        { "kind": "Exe", "id": "qs.exe", "matching_strategy": "Equals" },
+        [
+            {
+                "kind": "Exe",
+                "id": "claude.exe",
+                "matching_strategy": "Equals"
+            },
+            {
+                "kind": "Class",
+                "id": "IME",
+                "matching_strategy": "Equals"
+            }
+        ],
+        [
+            {
+                "kind": "Exe",
+                "id": "claude.exe",
+                "matching_strategy": "Equals"
+            },
+            {
+                "kind": "Class",
+                "id": "MSCTFIME UI",
+                "matching_strategy": "Equals"
+            }
+        ],
+        [
+            {
+                "kind": "Exe",
+                "id": "handy.exe",
+                "matching_strategy": "Equals"
+            },
+            {
+                "kind": "Title",
+                "id": "Recording",
+                "matching_strategy": "Equals"
+            }
+        ],
+        {
+            "kind": "Exe",
+            "id": "Roblox",
+            "matching_strategy": "StartsWith"
+        },
+        [
+            {
+                "kind": "Exe",
+                "id": "Spotify.exe",
+                "matching_strategy": "Equals"
+            },
+            {
+                "kind": "Class",
+                "id": "IME",
+                "matching_strategy": "Equals"
+            }
+        ],
+        [
+            {
+                "kind": "Exe",
+                "id": "Spotify.exe",
+                "matching_strategy": "Equals"
+            },
+            {
+                "kind": "Class",
+                "id": "MSCTFIME UI",
+                "matching_strategy": "Equals"
+            }
+        ],
+        {
+            "kind": "Exe",
+            "id": "GTA5.exe",
+            "matching_strategy": "Equals"
+        },
+        {
+            "kind": "Exe",
+            "id": "GTA5_Enhanced.exe",
+            "matching_strategy": "Equals"
+        },
+        {
+            "kind": "Exe",
+            "id": "obs64.exe",
+            "matching_strategy": "Equals"
+        },
+        {
+            "kind": "Exe",
+            "id": "dota2.exe",
+            "matching_strategy": "Equals"
+        },
+        {
+            "kind": "Exe",
+            "id": "GenshinImpact.exe",
+            "matching_strategy": "Equals"
+        },
+        {
+            "kind": "Exe",
+            "id": "FortniteClient-Win64-Shipping",
+            "matching_strategy": "StartsWith"
+        },
+        {
+            "kind": "Exe",
+            "id": "FortniteLauncher.exe",
+            "matching_strategy": "Equals"
+        },
+        {
+            "kind": "Exe",
+            "id": "FortniteBootstrapper.exe",
+            "matching_strategy": "Equals"
+        },
+        [
+            {
+                "kind": "Exe",
+                "id": "javaw.exe",
+                "matching_strategy": "Equals"
+            },
+            {
+                "kind": "Class",
+                "id": "GLFW30",
+                "matching_strategy": "Equals"
+            }
+        ]
+    ],
+    "default_workspace_padding": 20,
+    "default_container_padding": 20,
+    "border": false,
+    "border_implementation": "Komorebi",
+    "border_width": 5,
+    "border_offset": -1,
+    "border_style": "Rounded",
+    "theme": {
+        "palette": "Base16",
+        "name": "Ashes",
+        "single_border": "Base06",
+        "stack_border": "Base06",
+        "monocle_border": "Base06",
+        "floating_border": "Base06",
+        "unfocused_border": "Base02",
+        "unfocused_locked_border": "Base03",
+        "bar_accent": "Base0D"
+    },
+    "monitors": [
+        {
+            "workspaces": [
+                {
+                    "name": "I",
+                    "layout": "BSP"
+                },
+                {
+                    "name": "II",
+                    "layout": "VerticalStack"
+                },
+                {
+                    "name": "III",
+                    "layout": "HorizontalStack"
+                },
+                {
+                    "name": "IV",
+                    "layout": "UltrawideVerticalStack"
+                },
+                {
+                    "name": "V",
+                    "layout": "Rows"
+                },
+                {
+                    "name": "VI",
+                    "layout": "Grid"
+                },
+                {
+                    "name": "VII",
+                    "layout": "RightMainVerticalStack"
+                },
+                {
+                    "name": "VIII",
+                    "layout": "BSP"
+                }
+            ]
+        },
+        {
+            "workspaces": [
+                {
+                    "name": "M2-I",
+                    "layout": "BSP"
+                },
+                {
+                    "name": "M2-II",
+                    "layout": "VerticalStack"
+                },
+                {
+                    "name": "M2-III",
+                    "layout": "HorizontalStack"
+                },
+                {
+                    "name": "M2-IV",
+                    "layout": "UltrawideVerticalStack"
+                },
+                {
+                    "name": "M2-V",
+                    "layout": "Rows"
+                },
+                {
+                    "name": "M2-VI",
+                    "layout": "Grid"
+                },
+                {
+                    "name": "M2-VII",
+                    "layout": "RightMainVerticalStack"
+                },
+                {
+                    "name": "M2-VIII",
+                    "layout": "BSP"
+                }
+            ]
+        }
+    ],
+    "close_at_app_start_rules": [
+        [
+            {
+                "kind": "Exe",
+                "id": "steamwebhelper.exe",
+                "matching_strategy": "Equals"
+            },
+            {
+                "kind": "Class",
+                "id": "SDL_app",
+                "matching_strategy": "Equals"
+            },
+            {
+                "kind": "Title",
+                "id": "Список друзей",
+                "matching_strategy": "Equals"
+            }
+        ],
+        [
+            {
+                "kind": "Exe",
+                "id": "steamwebhelper.exe",
+                "matching_strategy": "Equals"
+            },
+            {
+                "kind": "Class",
+                "id": "SDL_app",
+                "matching_strategy": "Equals"
+            },
+            {
+                "kind": "Title",
+                "id": "Friends List",
+                "matching_strategy": "Equals"
+            }
+        ]
+    ]
+}
