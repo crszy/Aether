@@ -788,7 +788,12 @@ FloatingWindow {
                             Row_ {
                                 label: "Window Tiling"
                                 sub: "AetherWM arranges windows in columns, like niri"
-                                GSwitch { checked: Cae.WinSettings.hyprlandWm; onToggled: Cae.WinSettings.hyprlandWm = !Cae.WinSettings.hyprlandWm }
+                                // on/off = AetherWM running or not (it used to flip hyprlandWm, which left AetherWM running
+                                // bare, without hyprland.conf / config.kdl - no binds, no animations)
+                                GSwitch {
+                                    checked: !!Cae.WinSettings.komorebi
+                                    onToggled: Cae.WinSettings.komorebi = Cae.WinSettings.komorebi ? "" : (Quickshell.env("LOCALAPPDATA") + "/AetherShell/aetherwm/bin").replace(/\\/g, "/")
+                                }
                             }
                         }
                         Head_ { text: "Workspaces" }
