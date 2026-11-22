@@ -8,6 +8,7 @@ pragma ComponentBehavior: Bound
 import QtQuick
 import Quickshell
 import Quickshell.Windows as Win
+import qs.services as CaeSvc
 import qs.dms.Common
 
 Singleton {
@@ -17,7 +18,9 @@ Singleton {
     property int refCount: 0
     readonly property bool cavaAvailable: true
     readonly property bool cavaWanted: SettingsData.audioVisualizerEnabled || refCount > 0
-    readonly property bool active: refCount > 0 || lingerTimer.running
+    // Aether: off while game mode stops the visualizer (Settings > Windows extras)
+    readonly property bool paused: CaeSvc.WinSettings.gameStopVisualizer
+    readonly property bool active: (refCount > 0 || lingerTimer.running) && !paused
 
     onRefCountChanged: {
         if (refCount > 0) {

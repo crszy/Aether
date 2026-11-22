@@ -369,6 +369,26 @@
             "license": "GPL-3.0",
             "about": "Ten hyprlock.conf lock screens with their pictures and fonts. Pick one style after Get, then Lock screen > Hyprlock draws it.",
             "preview": "previews/mrvivekrajan-hyprlock-styles.jpg"
+        },
+        {
+            "id": "shadowww-dev-darkshadowshell",
+            "name": "DarkShadowShell",
+            "author": "shadowww-dev",
+            "category": "shell",
+            "builtin": "dss",
+            "url": "https://github.com/shadowww-dev/DarkShadowShell",
+            "license": "MIT",
+            "about": "A dark shell with a dynamic island bar, desktop clock, weather and resource cards, a dock and a big settings panel. Built into Aether (ported, MIT, Copyright (c) 2026 shadowww-dev): Open goes to its pages in Aether settings; pick its parts in Mix & match. Hidden while a distro look (like Debian) is on."
+        },
+        {
+            "id": "ilyamiro-serpantinum",
+            "name": "serpantinum",
+            "author": "ilyamiro (Illia Miroshnichenko)",
+            "category": "shell",
+            "builtin": "serp",
+            "url": "https://github.com/ilyamiro/serpantinum",
+            "license": "AGPL-3.0",
+            "about": "A widget bar with floating panels and a guide. Built into Aether (ported, AGPL-3.0, Copyright (C) 2026 Illia Miroshnichenko; the AI chat is left out): Open goes to its page in Aether settings; pick its parts in Mix & match. Hidden while a distro look (like Debian) is on."
         }
     ]
 }

@@ -3,6 +3,8 @@ import QtQuick
 import Quickshell
 import Quickshell.Widgets
 import qs.dms.Common
+import qs.utils as CaeU
+import Caelestia.Config as CaeCfg
 import qs.dms.Services
 import qs.dms.Modals.FileBrowser
 import qs.dms.DCommon.FileBrowser as FB
@@ -445,6 +447,13 @@ Item {
     function loadWallpaperDirectory() {
         const currentWallpaper = getCurrentWallpaper();
 
+        // Aether: open in the one wallpaper folder (Aether Settings > Wallpaper) when there is one
+        const aether = String(CaeU.Paths.wallsdir);
+        if (aether) {
+            wallpaperDir = aether;
+            return;
+        }
+
         if (!currentWallpaper || currentWallpaper.startsWith("#")) {
             wallpaperDir = wallpaperBrowserSettings.lastPath;
             return;
@@ -550,6 +559,7 @@ Item {
             onAccepted: paths => {
                 root.setCurrentWallpaper(paths[0]);
                 root.wallpaperDir = paths[0].substring(0, paths[0].lastIndexOf('/'));
+                CaeCfg.GlobalConfig.paths.wallpaperDir = root.wallpaperDir; // Aether: the folder for every shell
             }
             onDialogClosed: root.keyForwardTarget?.focusInitial()
         }

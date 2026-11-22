@@ -1,0 +1,584 @@
+// serpantinum (https://github.com/ilyamiro/serpantinum) - Copyright (C) 2026 Illia Miroshnichenko, AGPL-3.0.
+// Windows changes by dotfiles/serp-port.js (Aether, AGPL-3.0-or-later).
+import QtQuick
+import Quickshell.Windows as WinFs
+import QtQuick.Layouts
+import QtQuick.Controls
+import Quickshell
+import Quickshell.Io
+import "../"
+import "../../"
+import "../../reusables"
+import "../../reusables/guide"
+import "../../widgets"
+import "../display"
+
+GuideTab {
+    id: presetsTabRoot
+    subTabIndex: 1
+
+    property var presets: PresetsCache.presets
+
+    readonly property string presetsDir: Caching.stateDir + "/presets"
+    readonly property string widgetsDir: Caching.stateDir + "/widgets"
+
+    property var pendingRuns: []
+
+    readonly property var machineSpecificPaths: [["general", "location"], ["general", "avatarPath"], ["notifications", "soundFile"], ["wallpaperDir"], ["wallpaper_dir"], ["screenshotDir"]]
+    readonly property string stripSettingsFilter: "del(.general.location, .general.avatarPath, .notifications.soundFile, .wallpaperDir, .wallpaper_dir, .screenshotDir)"
+    readonly property string stripPresetFilter: "del(.wallpapers) | if (.settings | type) == \"object\" then .settings |= " + stripSettingsFilter + " else . end"
+
+    function runPresets(args) {
+        if (presetsProc.running) {
+            pendingRuns = pendingRuns.concat([args]);
+            return;
+        }
+        presetsProc.command = ["where.exe", "/q", "serp-linux-only", "serpantinum-core", "presets"].concat(args);
+        presetsProc.running = true;
+    }
+
+    function reloadPresets() {
+        runPresets(["list", presetsDir, widgetsDir]);
+    }
+
+    function presetPath(id) {
+        return presetsDir + "/" + id + ".json";
+    }
+
+    function presetIdFor(name) {
+        let lower = name.toLowerCase();
+        for (let i = 0; i < presets.length; i++) {
+            if (String(presets[i].name || "").toLowerCase() === lower) return presets[i].id;
+        }
+        let id = lower.replace(/[^a-z0-9_\- ]/g, "").trim().replace(/ +/g, "_");
+        if (id === "" || presets.some(p => p.id === id)) id = "preset_" + Date.now();
+        return id;
+    }
+
+    readonly property var paletteKeys: ["base", "mantle", "crust", "surface0", "surface1", "surface2", "overlay0", "overlay1", "overlay2", "_text", "_subtext0", "_subtext1", "blue", "sapphire", "teal", "green", "yellow", "peach", "maroon", "red", "pink", "mauve"]
+
+    function currentPalette() {
+        let palette = {};
+        for (let i = 0; i < paletteKeys.length; i++) {
+            let key = paletteKeys[i];
+            palette[key.replace(/^_/, "")] = String(ThemeBackend[key]);
+        }
+        return palette;
+    }
+
+    function surfaceRect(win, screenWidth, screenHeight) {
+        let a = win.anchors;
+        let m = win.margins;
+        let w = win.width;
+        let h = win.height;
+        return {
+            x: a.left ? m.left : (a.right ? screenWidth - w - m.right : (screenWidth - w) / 2),
+            y: a.top ? m.top : (a.bottom ? screenHeight - h - m.bottom : (screenHeight - h) / 2),
+            w: w,
+            h: h
+        };
+    }
+
+    function captureSurfaces(id, onDone) {
+        let screen = Quickshell.screens.length > 0 ? Quickshell.screens[0] : null;
+        if (!screen) {
+            onDone(null);
+            return;
+        }
+        let snapshot = { screen: screen.name, width: screen.width, height: screen.height };
+        let surfaces = [
+            { key: "bar", win: ShellSurfaces.bars[screen.name] },
+            { key: "dock", win: ShellSurfaces.docks[screen.name] }
+        ];
+        let pending = 1;
+        let finish = function() {
+            pending--;
+            if (pending === 0) onDone(snapshot);
+        };
+        surfaces.forEach(function(surface) {
+            let win = surface.win;
+            if (!win || !win.visible || !win.snapshotItem || win.width <= 0 || win.height <= 0) return;
+            let file = id + "_" + surface.key + ".png";
+            let target = presetsTabRoot.presetsDir + "/" + file;
+            let started = win.snapshotItem.grabToImage(function(result) {
+                result.saveToFile(target);
+                finish();
+            });
+            if (!started) return;
+            pending++;
+            snapshot[surface.key] = Object.assign({ file: file }, presetsTabRoot.surfaceRect(win, screen.width, screen.height));
+        });
+
+        finish();
+    }
+
+    function getScreen(monName) {
+        let target = String(monName || "").toLowerCase();
+        for (let i = 0; i < Quickshell.screens.length; i++) {
+            let scr = Quickshell.screens[i];
+            let name = String(scr.name).toLowerCase();
+            if (name === target || name.replace(/[^a-zA-Z0-9_-]/g, "_") === target) return scr;
+        }
+        return Quickshell.screens.length > 0 ? Quickshell.screens[0] : null;
+    }
+
+    function resolveDimension(val, screenDim, defVal) {
+        return WidgetRegistry.resolveDimension(val, screenDim, defVal);
+    }
+
+    function resolvePosition(cfg, sw, sh, w, h) {
+        return WidgetRegistry.resolvePosition(cfg, sw, sh, w, h);
+    }
+
+    function getFaceUrl(type, variant) {
+        return WidgetRegistry.faceFile(type, variant || "");
+    }
+
+    property var widgetCaptureQueue: []
+    property var capturedWidgets: ({})
+
+    function startWidgetCapture() {
+        if (widgetStage.preset) return;
+        while (widgetCaptureQueue.length > 0) {
+            let id = widgetCaptureQueue[0];
+            widgetCaptureQueue = widgetCaptureQueue.slice(1);
+            let preset = presets.find(p => p.id === id);
+            let snapshot = preset ? preset.snapshot : null;
+            let list = (snapshot && preset.widgets) ? preset.widgets[snapshot.screen.replace(/[^a-zA-Z0-9_-]/g, "_")] : null;
+            if (list && list.length > 0) {
+                widgetStage.preset = preset;
+                widgetStage.widgets = list;
+                widgetStage.waited = 0;
+                widgetStage.settled = 0;
+                widgetStageTimer.restart();
+                return;
+            }
+        }
+    }
+
+    Item {
+        id: widgetStage
+        property var preset: null
+        property var widgets: []
+        property int waited: 0
+        property int settled: 0
+        x: -width - 100
+        width: preset ? preset.snapshot.width : 0
+        height: preset ? preset.snapshot.height : 0
+
+        Repeater {
+            id: widgetStageRepeater
+            model: widgetStage.widgets
+            delegate: WidgetPresetMiniWidget {
+                tab: presetsTabRoot
+                monName: widgetStage.preset ? widgetStage.preset.snapshot.screen : ""
+                previewWidth: widgetStage.width
+                previewHeight: widgetStage.height
+            }
+        }
+
+        function finish() {
+            preset = null;
+            widgets = [];
+            Qt.callLater(presetsTabRoot.startWidgetCapture);
+        }
+    }
+
+    Timer {
+        id: widgetStageTimer
+        interval: 50
+        repeat: true
+        onTriggered: {
+            widgetStage.waited += interval;
+            let ready = widgetStageRepeater.count === widgetStage.widgets.length;
+            for (let i = 0; ready && i < widgetStageRepeater.count; i++) {
+                let face = widgetStageRepeater.itemAt(i).children[0];
+                if (face.status === Loader.Loading || face.status === Loader.Null) ready = false;
+            }
+            if (ready) widgetStage.settled += interval;
+            if (widgetStage.settled < 300 && widgetStage.waited < 3000) return;
+            stop();
+            let id = widgetStage.preset.id;
+            let file = id + "_widgets.png";
+            let layer = { file: file, x: 0, y: 0, w: widgetStage.width, h: widgetStage.height };
+            let started = widgetStage.grabToImage(function(result) {
+                if (result.saveToFile(presetsTabRoot.presetsDir + "/" + file)) {
+                    let captured = Object.assign({}, presetsTabRoot.capturedWidgets);
+                    captured[id] = layer;
+                    presetsTabRoot.capturedWidgets = captured;
+                    presetsTabRoot.runPresets(["widgets", presetsTabRoot.presetsDir, presetsTabRoot.widgetsDir, presetsTabRoot.presetPath(id), JSON.stringify(layer)]);
+                }
+                widgetStage.finish();
+            });
+            if (!started) widgetStage.finish();
+        }
+    }
+
+    function savePreset(name) {
+        let id = presetIdFor(name);
+        let payload = {
+            name: name,
+            created: Date.now(),
+            palette: currentPalette(),
+            settings: JSON.parse(JSON.stringify(Config.rawSettings || {})),
+            wallpapers: Object.assign({}, Wallpaper.screenWallpaperPaths)
+        };
+        if (capturedWidgets[id]) {
+            let captured = Object.assign({}, capturedWidgets);
+            delete captured[id];
+            capturedWidgets = captured;
+        }
+        captureSurfaces(id, function(snapshot) {
+            payload.snapshot = snapshot;
+            if (snapshot) widgetCaptureQueue = widgetCaptureQueue.concat([id]);
+            presetsTabRoot.runPresets(["save", presetsTabRoot.presetsDir, presetsTabRoot.widgetsDir, presetsTabRoot.presetPath(id), JSON.stringify(payload)]);
+        });
+    }
+
+    property var exportTarget: null
+
+    function exportPreset(preset) {
+        if (!preset || !preset.id) return;
+        exportTarget = preset;
+        let name = String(preset.name || preset.id).replace(/[^A-Za-z0-9_\- ]/g, "").trim().replace(/ +/g, "_") || preset.id;
+        let home = ((Quickshell.env("HOME") || Quickshell.env("USERPROFILE") || "").split("\\").join("/")) || "";
+        let dir = Quickshell.env("XDG_DOWNLOAD_DIR") || (home + "/Downloads");
+        exportPicker.openSave(dir, name + ".json");
+    }
+
+    function deletePreset(preset) {
+        if (!preset || !preset.id) return;
+        presets = presets.filter(p => p.id !== preset.id);
+        PresetsCache.presets = presets;
+        PresetsCache.raw = "";
+        runPresets(["delete", presetsDir, widgetsDir, presetPath(preset.id)]);
+    }
+
+    property bool skipConfirm: false
+    readonly property string skipConfirmPath: Caching.stateDir + "/guide/skip_preset_confirm"
+
+    FileView {
+        path: presetsTabRoot.skipConfirmPath
+        printErrors: false
+        watchChanges: true
+        onFileChanged: reload()
+        onLoaded: presetsTabRoot.skipConfirm = text().trim() === "1"
+    }
+
+    function requestApply(preset) {
+        if (skipConfirm) {
+            applyPreset(preset);
+        } else {
+            confirmPopup.openFor(preset);
+        }
+    }
+
+    function desktopEntryExists(id) {
+        id = String(id || "");
+        return id !== "" && !!(DesktopEntries.byId(id) || DesktopEntries.byId(id.replace(/\.desktop$/, "")));
+    }
+
+    function withInstalledDockApps(settings) {
+        let entries = DesktopEntries.applications ? DesktopEntries.applications.values : [];
+        if (!settings.dock || !Array.isArray(settings.dock.apps) || !entries || entries.length === 0) return settings;
+        let result = JSON.parse(JSON.stringify(settings));
+        result.dock.apps = result.dock.apps.filter(app => app && desktopEntryExists(app.desktop_id || app.id));
+        return result;
+    }
+
+    function withLocalMachineSettings(settings) {
+        let result = JSON.parse(JSON.stringify(settings));
+        let current = Config.rawSettings || {};
+        for (let i = 0; i < machineSpecificPaths.length; i++) {
+            let path = machineSpecificPaths[i];
+            let key = path[path.length - 1];
+            let src = path.length > 1 ? current[path[0]] : current;
+            if (!src || src[key] === undefined) continue;
+            let dst = result;
+            if (path.length > 1) {
+                if (!dst[path[0]] || typeof dst[path[0]] !== "object") dst[path[0]] = {};
+                dst = dst[path[0]];
+            }
+            if (dst[key] === undefined) dst[key] = src[key];
+        }
+        return result;
+    }
+
+    function applyPreset(preset) {
+        preset = presets.find(p => preset && p.id === preset.id) || preset;
+        if (!preset || !preset.settings) return;
+        Config.replaceSettings(withLocalMachineSettings(withInstalledDockApps(preset.settings)));
+
+        let widgets = preset.widgets || {};
+        for (let mon in widgets) {
+            let list = (Array.isArray(widgets[mon]) ? widgets[mon] : []).map((w, i) => Object.assign({}, w, {
+                wId: "w_" + Date.now() + "_" + i + "_" + Math.floor(Math.random() * 1000)
+            }));
+            Quickshell.execDetached(["where.exe", "/q", "serp-linux-only", "bash", "-c",
+                "mkdir -p \"$1\" && printf '%s' \"$2\" > \"$1/layout.json\"",
+                "_", Caching.getStateDir("widgets/" + mon), JSON.stringify(list)]);
+            if (list.length > 0) {
+                WidgetSync.applyPreset(mon, list, true);
+            } else {
+                WidgetSync.clearWidgets(mon);
+            }
+        }
+
+        let walls = preset.wallpapers || {};
+        for (let scr in walls) {
+            let path = walls[scr];
+            if (path && Wallpaper.getWallpaperPath(scr) !== path) {
+                Wallpaper.setWallpaper(scr, path, "fade");
+            }
+        }
+    }
+
+    Process {
+        id: presetsProc
+        running: false
+        onExited: {
+            if (presetsTabRoot.pendingRuns.length === 0) return;
+            let next = presetsTabRoot.pendingRuns[0];
+            presetsTabRoot.pendingRuns = presetsTabRoot.pendingRuns.slice(1);
+            Qt.callLater(() => presetsTabRoot.runPresets(next));
+        }
+        stdout: StdioCollector {
+            onStreamFinished: {
+                let out = this.text.trim();
+                if (!out) return;
+                if (out !== PresetsCache.raw) {
+                    try {
+                        let res = JSON.parse(out);
+                        let list = Array.isArray(res) ? res : [];
+                        presetsTabRoot.presets = list;
+                        PresetsCache.presets = list;
+                        PresetsCache.raw = out;
+                    } catch (e) {}
+                }
+                presetsTabRoot.startWidgetCapture();
+            }
+        }
+    }
+
+    onVisibleChanged: {
+        if (visible) {
+            reloadPresets();
+        } else {
+            savePresetPopup.close();
+            confirmPopup.close();
+            exportPicker.close();
+        }
+    }
+
+    ApplyPresetConfirmPopup {
+        id: confirmPopup
+        rootObj: presetsTabRoot.rootObj
+        onConfirmed: function(preset, dontShowAgain) {
+            if (dontShowAgain) {
+                presetsTabRoot.skipConfirm = true;
+                Quickshell.execDetached(["where.exe", "/q", "serp-linux-only", "bash", "-c", "mkdir -p \"$(dirname \"$1\")\" && printf '1\\n' > \"$1\"", "_", presetsTabRoot.skipConfirmPath]);
+            }
+            presetsTabRoot.applyPreset(preset);
+        }
+    }
+
+    Component.onCompleted: {
+        WinFs.FsUtils.makePath(presetsDir);
+        if (visible) reloadPresets();
+    }
+
+    Process {
+        id: exportProc
+        running: false
+    }
+
+    FilePicker {
+        id: exportPicker
+        rootObj: presetsTabRoot.rootObj
+        titleText: I18n.t("guide.general.presets.export.dialog", "Export preset")
+        doneButtonText: I18n.t("guide.general.presets.export.button", "Export")
+        nameFilters: ["*.json"]
+        onFileSelected: function(filePath, fileName) {
+            if (!presetsTabRoot.exportTarget) return;
+            let dest = /\.json$/i.test(filePath) ? filePath : filePath + ".json";
+            exportProc.command = ["where.exe", "/q", "serp-linux-only", "bash", "-c", "jq \"$2\" \"$1\" > \"$3\"", "_", presetsTabRoot.presetPath(presetsTabRoot.exportTarget.id), presetsTabRoot.stripPresetFilter, dest];
+            exportProc.running = true;
+        }
+    }
+
+    Process {
+        id: importProc
+        onExited: presetsTabRoot.reloadPresets()
+    }
+
+    FilePicker {
+        id: importPicker
+        rootObj: presetsTabRoot.rootObj
+        titleText: I18n.t("guide.general.presets.import.picker", "Select preset file")
+        nameFilters: ["*.json"]
+        onFileSelected: function(filePath, fileName) {
+            let path = String(filePath).replace(/^file:\/\//, "");
+            importProc.command = ["where.exe", "/q", "serp-linux-only", "bash", "-c", "mkdir -p \"$2\" && jq -e \"$3\" \"$1\" > \"$2/.import.tmp\" && mv -f \"$2/.import.tmp\" \"$2/$(basename \"$1\")\"", "_", path, presetsTabRoot.presetsDir, presetsTabRoot.stripPresetFilter];
+            importProc.running = true;
+        }
+    }
+
+    SaveSettingsPresetPopup {
+        id: savePresetPopup
+        rootObj: presetsTabRoot.rootObj
+        onSaveRequested: function(presetName) {
+            presetsTabRoot.savePreset(presetName);
+        }
+    }
+
+    Flickable {
+        anchors.fill: parent
+        anchors.topMargin: rootObj.s(8)
+        anchors.leftMargin: rootObj.s(8)
+        anchors.rightMargin: rootObj.s(8)
+        anchors.bottomMargin: rootObj.s(8)
+        contentHeight: settingsCol.implicitHeight
+        clip: true
+        boundsBehavior: Flickable.StopAtBounds
+
+        ColumnLayout {
+            id: settingsCol
+            width: parent.width
+            spacing: rootObj.s(6)
+
+            SettingsRow {
+                rootObj: presetsTabRoot.rootObj
+                settingId: "presets_save"
+                icon: "󰆓"
+                title: I18n.t("guide.general.presets.save.title", "Save current setup")
+                description: I18n.t("guide.general.presets.save.desc", "Save all settings, widgets and wallpapers as a preset")
+                searchKeywords: "presets preset save snapshot profile settings widgets theme wallpaper"
+
+                ClickButton {
+                    Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
+                    implicitHeight: rootObj.s(32)
+                    buttonText: I18n.t("guide.general.presets.save.button", "Save preset")
+                    buttonIcon: "󰐕"
+                    accentColor: ThemeBackend.mauve
+                    textColor: ThemeBackend.crust
+                    cornerRadius: ThemeBackend.borderRadius
+                    horizontalPadding: rootObj.s(14)
+                    iconFontSize: rootObj.s(15)
+                    textFontSize: rootObj.s(12)
+                    onTriggered: {
+                        presetsTabRoot.reloadPresets();
+                        savePresetPopup.openPopup();
+                    }
+                }
+            }
+
+            SettingsRow {
+                rootObj: presetsTabRoot.rootObj
+                settingId: "presets_import"
+                icon: "󰋺"
+                title: I18n.t("guide.general.presets.import.title", "Import and export presets")
+                description: I18n.t("guide.general.presets.import.desc", "Add a preset from a JSON file. Use the export button on a preset to save a shareable copy")
+                searchKeywords: "presets preset import export file load save share json"
+
+                ClickButton {
+                    Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
+                    implicitHeight: rootObj.s(32)
+                    buttonText: I18n.t("guide.general.presets.import.button", "Import")
+                    buttonIcon: "󰋺"
+                    accentColor: ThemeBackend.surface0
+                    textColor: ThemeBackend.text
+                    cornerRadius: ThemeBackend.borderRadius
+                    horizontalPadding: rootObj.s(14)
+                    iconFontSize: rootObj.s(15)
+                    textFontSize: rootObj.s(12)
+                    onTriggered: importPicker.openWithOptionalPath("")
+                }
+            }
+
+            SettingsRow {
+                rootObj: presetsTabRoot.rootObj
+                settingId: "copy_settings"
+                icon: "󰆏"
+                title: I18n.t("guide.general.copysettings.title", "Copy settings")
+                description: I18n.t("guide.general.copysettings.desc", "Copy configuration JSON to clipboard. This includes sensitive data such as your location and custom paths")
+                searchKeywords: "copy export settings json clipboard"
+
+                ClickButton {
+                    Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
+                    implicitHeight: rootObj.s(32)
+                    buttonText: I18n.t("guide.general.copysettings.title", "Copy settings")
+                    buttonIcon: "󰆏"
+                    accentColor: ThemeBackend.surface0
+                    textColor: ThemeBackend.text
+                    cornerRadius: ThemeBackend.borderRadius
+                    horizontalPadding: rootObj.s(14)
+                    iconFontSize: rootObj.s(15)
+                    textFontSize: rootObj.s(12)
+                    onTriggered: {
+                        Quickshell.execDetached(["where.exe", "/q", "serp-linux-only", "bash", "-c", "wl-copy < \"$1\"", "_", Config.settingsJsonPath]);
+                    }
+                }
+            }
+
+            Rectangle {
+                id: presetsCard
+                Layout.fillWidth: true
+                implicitHeight: presetsCol.implicitHeight + rootObj.s(24)
+                radius: ThemeBackend.borderRadius
+                color: presetsCardGlass.active ? "transparent" : Qt.alpha(ThemeBackend.surface0, 0.4)
+
+                GlassFill {
+                    id: presetsCardGlass
+                    anchors.fill: parent
+                    radius: parent.radius
+                    tintColor: Qt.alpha(ThemeBackend.surface0, 0.4)
+                    tintAmount: 0.25
+                }
+
+                Column {
+                    id: presetsCol
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    anchors.top: parent.top
+                    anchors.margins: rootObj.s(12)
+
+                    readonly property int gridColumns: Math.min(2, Math.max(1, Math.floor(width / rootObj.s(260))))
+                    readonly property real tileWidth: Math.max(0, (width - rootObj.s(8) * (gridColumns - 1)) / gridColumns)
+
+                    Grid {
+                        width: parent.width
+                        columns: presetsCol.gridColumns
+                        rowSpacing: rootObj.s(8)
+                        columnSpacing: rootObj.s(8)
+                        visible: presetsTabRoot.presets.length > 0
+
+                        Repeater {
+                            model: presetsTabRoot.presets
+                            delegate: SettingsPresetCard {
+                                tab: presetsTabRoot
+                                tileWidth: presetsCol.tileWidth
+                            }
+                        }
+                    }
+
+                    Item {
+                        width: parent.width
+                        height: rootObj.s(40)
+                        visible: presetsTabRoot.presets.length === 0
+
+                        Text {
+                            anchors.centerIn: parent
+                            width: parent.width
+                            horizontalAlignment: Text.AlignHCenter
+                            wrapMode: Text.WordWrap
+                            text: I18n.t("guide.general.presets.empty", "No presets yet. Save your current setup to create one")
+                            font.family: ThemeBackend.fontFamily
+                            font.pixelSize: rootObj.s(12)
+                            color: ThemeBackend.subtext0
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

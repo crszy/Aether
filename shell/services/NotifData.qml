@@ -56,12 +56,12 @@ QtObject {
 
     readonly property bool hasFullscreen: {
         const monitor = Hypr.focusedMonitor;
-        const specialName = monitor?.lastIpcObject.specialWorkspace?.name;
-        if (specialName) {
-            const specialWs = Hypr.workspaces.values.find(ws => ws.name === specialName);
-            return specialWs?.toplevels.values.some(t => t.lastIpcObject.fullscreen > 1) ?? false;
-        }
-        return monitor?.activeWorkspace?.toplevels.values.some(t => t.lastIpcObject.fullscreen > 1) ?? false;
+        // every step can be missing on Windows (no Hyprland IPC objects yet): a throw here made the binding undefined
+        const full = ws => (ws?.toplevels?.values ?? []).some(t => (t?.lastIpcObject?.fullscreen ?? 0) > 1);
+        const specialName = monitor?.lastIpcObject?.specialWorkspace?.name;
+        if (specialName)
+            return full((Hypr.workspaces?.values ?? []).find(ws => ws.name === specialName));
+        return full(monitor?.activeWorkspace);
     }
 
     readonly property Timer timer: Timer {

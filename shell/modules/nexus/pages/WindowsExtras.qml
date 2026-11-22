@@ -53,7 +53,8 @@ ColumnLayout {
         MenuItem { text: "White"; value: "#f2f2f5" }
     ]
     readonly property list<MenuItem> styleItems: [
-        MenuItem { text: "Aether (all shells)"; value: "rice" },
+        MenuItem { text: "Aether (all shells)"; value: "aether" },
+        MenuItem { text: "Aether classic"; value: "rice" },
         MenuItem { text: "Caelestia"; value: "caelestia" },
         MenuItem { text: "Noctalia"; value: "noctalia" },
         MenuItem { text: "DMS"; value: "dms" }
@@ -105,6 +106,34 @@ ColumnLayout {
         subtext: Tr.tr("While a game or another fullscreen app has focus: no window animations, blur or shadows, and video wallpapers pause to free GPU memory. Back to normal when you leave it")
         checked: WinSettings.autoGameMode
         onToggled: WinSettings.autoGameMode = checked
+    }
+
+    ToggleRow {
+        text: Tr.tr("Game mode: window effects off")
+        subtext: Tr.tr("No window animations, blur or shadows while game mode is on")
+        checked: WinSettings.gmWmEffects
+        onToggled: WinSettings.gmWmEffects = checked
+    }
+
+    ToggleRow {
+        text: Tr.tr("Game mode: window borders off")
+        subtext: Tr.tr("Hides the focus borders around windows while game mode is on")
+        checked: WinSettings.gmBorders
+        onToggled: WinSettings.gmBorders = checked
+    }
+
+    ToggleRow {
+        text: Tr.tr("Game mode: audio visualizer off")
+        subtext: Tr.tr("Stops the bar's music bars and the sound capture behind them. They redraw the bar 25 times a second")
+        checked: WinSettings.gmVisualizer
+        onToggled: WinSettings.gmVisualizer = checked
+    }
+
+    ToggleRow {
+        text: Tr.tr("Game mode: pause moving wallpapers")
+        subtext: Tr.tr("Video and animated wallpapers stop and free their GPU memory")
+        checked: WinSettings.gmWallpaper
+        onToggled: WinSettings.gmWallpaper = checked
     }
 
     SelectRow {

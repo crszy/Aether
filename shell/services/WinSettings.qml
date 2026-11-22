@@ -8,7 +8,9 @@ import Quickshell.Io
 import Quickshell.Services.UPower
 import Quickshell.Windows as Win
 import Caelestia.Config
+import Caelestia.State as CaeState
 import qs.utils
+import "../distros/catalog.js" as DistroCatalog
 
 Singleton {
     id: root
@@ -44,12 +46,46 @@ Singleton {
     property alias nexusBackdrop: adapter.nexusBackdrop      // "blur" | "acrylic" | "mica" | "tabbed" | "none"
     property alias configIntroShown: adapter.configIntroShown   // the first-start list of config files was closed
     property bool loaded: false                                  // windows.json was read (or written the first time)
-    // Mix & match: which shell draws each part - "caelestia", "noctalia", "zenith", "dms", "end4" (built in), or "off"
+    // Mix & match: which shell draws each part - "caelestia", "noctalia", "zenith", "dms", "end4", "serp", "dss" (built in), or "off"
     property alias mixBar: adapter.mixBar
     property alias mixNotifs: adapter.mixNotifs
     property alias mixOsd: adapter.mixOsd
     property alias mixLock: adapter.mixLock
     property alias mixWallpaper: adapter.mixWallpaper
+    // Wallpaper Engine draws into the same desktop layer as Aether's wallpaper (WorkerW). While it runs, Aether's
+    // wallpaper steps aside so Wallpaper Engine shows ("wallpaperEngine": "auto"); "ignore" keeps Aether's on top.
+    property alias wallpaperEngine: adapter.wallpaperEngine
+    property bool wallpaperEngineRunning: false
+    readonly property string wallpaperLayer: wallpaperEngineRunning && adapter.wallpaperEngine !== "ignore" ? "off" : distroMode ? "distro" : adapter.mixWallpaper
+    // a whole Linux distro (distros/catalog.js): "distro": "debian" - no Caelestia frame, bar, launcher, notifications,
+    // OSD or wallpaper, and no other ported shell; the distro draws everything. "" = Mix & match as usual.
+    property alias distro: adapter.distro
+    property alias distroAccent: adapter.distroAccent        // the distro's accent colour ("" = its own)
+    property alias distroWallpaper: adapter.distroWallpaper  // a picture instead of the distro's wallpaper ("" = its own)
+    property alias distroClock: adapter.distroClock          // "24h" | "12h"
+    property alias distroSearchSettings: adapter.distroSearchSettings  // Settings panels in overview search
+    property alias distroReduceMotion: adapter.distroReduceMotion      // Accessibility > Reduce Animation
+    property alias distroHotCorner: adapter.distroHotCorner            // Multitasking > Hot Corner (top-left opens Activities)
+    property alias distroBatteryPercent: adapter.distroBatteryPercent  // Power > Show Battery Percentage
+    property alias distroBreaks: adapter.distroBreaks                  // Digital Wellbeing > Break Reminders
+    property alias distroBreakEvery: adapter.distroBreakEvery          // minutes of screen use between breaks
+    property alias distroScreenLimit: adapter.distroScreenLimit        // Digital Wellbeing > daily limit in minutes (0 = off)
+    property alias distroLockNotifs: adapter.distroLockNotifs          // Notifications > Lock Screen Notifications
+    property alias distroNightLight: adapter.distroNightLight          // Displays > Night Light
+    property alias distroNightTemp: adapter.distroNightTemp            // its colour temperature (K)
+    // "off" | "liquid": Apple-style Liquid Glass (lens edges, rim light, light blur) on Aether's own panels,
+    // drawn by Aether from the wallpaper behind them (components/LiquidGlass.qml). Other apps can't get it.
+    property alias glass: adapter.glass
+    readonly property bool distroMode: !!DistroCatalog.get(adapter.distro)
+    signal distroCommand(string cmd)   // launcher key -> "overview", session key -> "power"
+    Timer {
+        // one process-list snapshot every 4 s (about a millisecond); stops while the setting is "ignore"
+        interval: 4000
+        repeat: true
+        triggeredOnStart: true
+        running: adapter.wallpaperEngine !== "ignore" && typeof Win.FsUtils.processRunning === "function"
+        onTriggered: root.wallpaperEngineRunning = Win.FsUtils.processRunning(["wallpaper32.exe", "wallpaper64.exe"])
+    }
     property alias mixLauncher: adapter.mixLauncher
     property alias mixDock: adapter.mixDock                  // "noctalia" | "dms" | "end4" | "off"
     property alias mixDesktopWidgets: adapter.mixDesktopWidgets  // "noctalia" | "dms" | "end4" | "off"
@@ -79,20 +115,25 @@ Singleton {
     property color titleBarTint: "transparent"
     property color titleBarTextTint: "transparent"
     readonly property bool saving: batterySaver === "auto" && UPower.onBattery
-    property alias settingsStyle: adapter.settingsStyle      // the Settings window: "rice" (all shells) | "caelestia" | "noctalia"
+    property alias settingsStyle: adapter.settingsStyle      // the Settings window: "aether" (all shells) | "rice" (Aether classic) | "caelestia" | "noctalia" | "dms"
     property alias riceBackground: adapter.riceBackground    // rice settings panel background (video/picture; "" = wallpaper)
     property alias riceDim: adapter.riceDim                  // 0..0.95 dimming over that background
     // Noctalia's bar/panels window is needed for its bar, launcher and control centre
     readonly property bool noctaliaPanels: mixBar === "noctalia" || mixLauncher === "noctalia"
     // Noctalia is loaded at all only when some part uses it
-    readonly property bool noctaliaAny: noctaliaPanels || mixNotifs === "noctalia" || mixOsd === "noctalia" || mixLock === "noctalia"
-        || mixWallpaper === "noctalia" || mixDock === "noctalia" || mixDesktopWidgets === "noctalia" || settingsStyle === "noctalia"
+    readonly property bool noctaliaAny: !distroMode && (noctaliaPanels || mixNotifs === "noctalia" || mixOsd === "noctalia" || mixLock === "noctalia"
+        || mixWallpaper === "noctalia" || mixDock === "noctalia" || mixDesktopWidgets === "noctalia" || settingsStyle === "noctalia")
 
     // the other ported shells: loaded only while a part uses them
     function uses(shell: string): bool {
+        if (distroMode)
+            return false;
         return [mixBar, mixNotifs, mixOsd, mixLock, mixWallpaper, mixLauncher, mixDock, mixDesktopWidgets, settingsStyle].includes(shell);
     }
     readonly property bool zenithAny: uses("zenith")
+    readonly property bool serpAny: uses("serp")
+    readonly property bool dssAny: uses("dss")
+    readonly property bool distroAny: distroMode || [mixBar, mixNotifs, mixOsd, mixLock, mixWallpaper, mixLauncher, mixDock, mixDesktopWidgets].some(v => DistroCatalog.ids.includes(v))
     readonly property bool dmsAny: uses("dms") || titleBars === "dms"
     // title-bar styles drawn by the shell over apps (modules/captions/styles/<Name>Caption.qml)
     readonly property list<string> captionStyles: ["dms", "discord", "kde"]
@@ -101,7 +142,7 @@ Singleton {
 
     // how a Caelestia key reaches the shell that draws a part: [ipc target, function]
     readonly property var partIpc: ({
-        launcher: { noctalia: ["launcher", "toggle"], zenith: ["zenith:menu", "launcher"], dms: ["dms:spotlight", "toggle"], end4: ["end4:search", "toggle"], ryoku: ["shell", "openSurface", ["", "launcher"], "ryoku"] },
+        launcher: { noctalia: ["launcher", "toggle"], zenith: ["zenith:menu", "launcher"], dms: ["dms:spotlight", "toggle"], end4: ["end4:search", "toggle"], ryoku: ["shell", "openSurface", ["", "launcher"], "ryoku"], serp: ["serp:main", "handleCommand", ["toggle", "launcher", ""]], dss: ["dss:main", "toggle", ["launcher"]] },
         lock: { noctalia: ["lockScreen", "lock"], zenith: ["zenith:menu", "lock"], dms: ["dms:lock", "lock"], end4: ["end4:lock", "activate"] }
     })
     function callPart(part: string, shell: string): bool {
@@ -188,6 +229,13 @@ Singleton {
     property alias osdAllMonitors: adapter.osdAllMonitors
     // game mode turns itself on while a game / fullscreen app has focus
     property alias autoGameMode: adapter.autoGameMode
+    // Aether: what game mode turns off - each one its own switch (Settings > Windows extras)
+    property alias gmWmEffects: adapter.gmWmEffects
+    property alias gmBorders: adapter.gmBorders
+    property alias gmVisualizer: adapter.gmVisualizer
+    property alias gmWallpaper: adapter.gmWallpaper
+    readonly property bool gameStopVisualizer: CaeState.RuntimeState.gameMode && adapter.gmVisualizer
+    readonly property bool gamePauseWallpaper: CaeState.RuntimeState.gameMode && adapter.gmWallpaper
 
     readonly property bool useWindowsLock: adapter.lockStyle === "windows"
     // lock PIN of this shell, stored only as PBKDF2-SHA256 (see Quickshell.Windows.PasswordCheck);
@@ -288,6 +336,22 @@ Singleton {
             property string mixOsd: "caelestia"
             property string mixLock: "caelestia"
             property string mixWallpaper: "caelestia"
+            property string distro: ""
+            property string distroAccent: ""
+            property string distroWallpaper: ""
+            property string distroClock: "24h"
+            property bool distroSearchSettings: true
+            property bool distroReduceMotion: false
+            property bool distroHotCorner: true
+            property bool distroBatteryPercent: false
+            property bool distroBreaks: false
+            property int distroBreakEvery: 30
+            property int distroScreenLimit: 0
+            property bool distroLockNotifs: true
+            property bool distroNightLight: false
+            property int distroNightTemp: 4000
+            property string glass: "off"
+            property string wallpaperEngine: "auto"
             property string mixLauncher: "caelestia"
             property string mixDock: "off"
             property string titleBars: "system"
@@ -298,7 +362,7 @@ Singleton {
             property string batterySaver: "auto"
             property bool setupPending: false
             property string mixDesktopWidgets: "off"
-            property string settingsStyle: "rice"       // Aether Settings (all shells) by default
+            property string settingsStyle: "aether"     // Aether settings (DarkShadowShell style, all shells) by default
             property string riceBackground: ""
             property real riceDim: 0.45
             property bool waybar: false
@@ -335,6 +399,10 @@ Singleton {
             // OSD / notification popups on every monitor (off: only the focused one)
             property bool osdAllMonitors: false
             property bool autoGameMode: true
+            property bool gmWmEffects: true
+            property bool gmBorders: false
+            property bool gmVisualizer: true
+            property bool gmWallpaper: true
             onHyprlandAltChanged: root.apply()
             property bool hyprlandWm: false
             onHyprlandWmChanged: {

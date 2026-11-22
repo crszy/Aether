@@ -19,6 +19,7 @@ import qs.components
 import qs.services
 import qs.utils
 import qs.modules.userpanel
+import qs.modules.aethersettings as AS
 import "pieceCatalog.js" as Pieces
 
 FloatingWindow {
@@ -39,28 +40,30 @@ FloatingWindow {
         { id: "dms", name: "DankMaterialShell", colour: "#c39bff", ported: true, blurb: "Dank bar, dash, islands" },
         { id: "zenith", name: "Zenith", colour: "#7ee0c3", ported: true, blurb: "Dynamic island, focus tools" },
         { id: "end4", name: "end-4 illogical-impulse", colour: "#ffb4ab", ported: true, blurb: "Material bar, sidebars, overview" },
-        { id: "ryoku", name: "Ryoku", colour: "#e86a6a", ported: true, blurb: "A whole desktop: top bar, Stage, dock" }
+        { id: "ryoku", name: "Ryoku", colour: "#e86a6a", ported: true, blurb: "A whole desktop: top bar, Stage, dock" },
+        { id: "debian", name: "Debian (GNOME)", colour: "#d70a53", ported: true, blurb: "Debian 13 GNOME: black top bar, calendar, quick settings" },
+        { id: "serp", name: "serpantinum", colour: "#b8a4ff", ported: true, blurb: "Widget bar, floating panels, guide (AGPL-3.0)" }
     ]
 
     // the pieces. mix = the WinSettings choice; from = which shells can draw it; options = config sources
     readonly property var tabs: [
         { id: "overview", name: "Overview", icon: "dashboard", desc: "Your rice at a glance" },
-        { id: "bar", name: "Bar", icon: "toolbar", desc: "The bar along the screen edge", mix: "mixBar", from: ["caelestia", "noctalia", "zenith", "dms", "end4", "ryoku"],
+        { id: "bar", name: "Bar", icon: "toolbar", desc: "The bar along the screen edge", mix: "mixBar", from: ["caelestia", "noctalia", "zenith", "dms", "end4", "ryoku", "debian", "serp"],
           options: [{ shell: "caelestia", file: "windows.json", include: "^barPieces$", title: "Widgets from the other shells (in the end-4, Noctalia, DMS and Zenith bars)", multiChoices: { barPieces: Pieces.barWidgets } },
               { shell: "caelestia", file: "bar.json" }, { shell: "caelestia", file: "taskbar.json", title: "Caelestia · running apps" }, { shell: "noctalia", section: "bar" }] },
-        { id: "notifs", name: "Notifications", icon: "notifications", desc: "Pop-ups and history", mix: "mixNotifs", from: ["caelestia", "noctalia", "zenith", "dms", "end4", "ryoku"],
+        { id: "notifs", name: "Notifications", icon: "notifications", desc: "Pop-ups and history", mix: "mixNotifs", from: ["caelestia", "noctalia", "zenith", "dms", "end4", "ryoku", "serp"],
           options: [{ shell: "caelestia", file: "notifs.json" }, { shell: "caelestia", file: "windows.json", include: "^notif", title: "Caelestia · which monitor" }, { shell: "noctalia", section: "notifications" }] },
-        { id: "osd", name: "On-screen display", icon: "tune", desc: "Volume and brightness pop-up", mix: "mixOsd", user: "osd", from: ["caelestia", "noctalia", "zenith", "dms", "end4", "ryoku"],
+        { id: "osd", name: "On-screen display", icon: "tune", desc: "Volume and brightness pop-up", mix: "mixOsd", user: "osd", from: ["caelestia", "noctalia", "zenith", "dms", "end4", "ryoku", "serp"],
           options: [{ shell: "caelestia", file: "osd.json" }, { shell: "noctalia", section: "osd" }] },
-        { id: "launcher", name: "Launcher", icon: "apps", desc: "What the launcher key opens", mix: "mixLauncher", from: ["caelestia", "noctalia", "zenith", "dms", "end4", "ryoku"],
+        { id: "launcher", name: "Launcher", icon: "apps", desc: "What the launcher key opens", mix: "mixLauncher", from: ["caelestia", "noctalia", "zenith", "dms", "end4", "ryoku", "serp"],
           options: [{ shell: "caelestia", file: "launcher.json" }, { shell: "noctalia", section: "appLauncher" }] },
         { id: "lock", name: "Lock screen", icon: "lock", desc: "What locking shows - and its features", mix: "mixLock", user: "lock", from: ["caelestia", "noctalia", "zenith", "dms", "end4", "ryoku"],
           options: [{ shell: "caelestia", file: "lock.json" }, { shell: "caelestia", file: "windows.json", include: "^lock", title: "Caelestia · pieces from other shells, live monitors, blur, style", choices: { lockClock: Pieces.lockPieces, lockMedia: Pieces.lockPieces, lockWallpaper: Pieces.lockWallpaper } }, { shell: "noctalia", section: "general", include: "lock", title: "Noctalia · lock screen" }] },
-        { id: "wallpaper", name: "Wallpaper & desktop", icon: "wallpaper", desc: "Wallpaper, desktop clock", mix: "mixWallpaper", from: ["caelestia", "noctalia", "dms", "end4", "ryoku"],
+        { id: "wallpaper", name: "Wallpaper & desktop", icon: "wallpaper", desc: "Wallpaper, desktop clock", mix: "mixWallpaper", from: ["caelestia", "noctalia", "dms", "end4", "ryoku", "serp"],
           options: [{ shell: "caelestia", file: "background.json" }, { shell: "noctalia", section: "wallpaper" }] },
-        { id: "dock", name: "Dock", icon: "dock_to_bottom", desc: "A dock of your apps", mix: "mixDock", from: ["noctalia", "dms", "end4", "ryoku"],
+        { id: "dock", name: "Dock", icon: "dock_to_bottom", desc: "A dock of your apps", mix: "mixDock", from: ["noctalia", "dms", "end4", "ryoku", "serp"],
           options: [{ shell: "noctalia", section: "dock" }] },
-        { id: "widgets", name: "Desktop widgets", icon: "widgets", desc: "Clocks, media and more on the desktop", mix: "mixDesktopWidgets", from: ["noctalia", "dms", "ryoku"],
+        { id: "widgets", name: "Desktop widgets", icon: "widgets", desc: "Clocks, media and more on the desktop", mix: "mixDesktopWidgets", from: ["noctalia", "dms", "ryoku", "serp"],
           options: [{ shell: "noctalia", section: "desktopWidgets" }] },
         { id: "titlebars", name: "Title bars", icon: "web_asset", desc: "The title bar Windows draws on apps - theme it Linux-style or strip it for a Hyprland look", mix: "titleBars",
           choices: [{ id: "system", name: "Windows", colour: "#8a8f98", ported: true, blurb: "As Windows draws them" }, { id: "themed", name: "Themed", colour: "#9ecbff", ported: true, blurb: "Linux-style, in your colours" }, { id: "strip", name: "Stripped", colour: "#ffb4ab", ported: true, blurb: "Gone; Super+drag moves windows" }],
@@ -80,7 +83,7 @@ FloatingWindow {
         { id: "general", name: "General", icon: "settings", desc: "Everything else",
           options: [{ shell: "caelestia", file: "general.json" }, { shell: "caelestia", file: "paths.json" }, { shell: "noctalia", section: "general", exclude: "lock|pinHash|pinSalt" }] },
         { id: "windows", name: "Windows", icon: "desktop_windows", desc: "Taskbar, startup, Settings window",
-          options: [{ shell: "caelestia", file: "windows.json", exclude: "^(lock|notif|mix|pin|settingsStyle|rice|shellConfig|ryokuPieces)" }] },
+          options: [{ shell: "caelestia", file: "windows.json", exclude: "^(lock|notif|mix|pin|settingsStyle|rice|shellConfig|ryokuPieces|wallpaperPicker)" }] },
         { id: "yours", name: "Your pieces", icon: "extension", desc: "Everything in your user folder (~/.config/caelestia/user): put a widget on your bar, switch desktop widgets, mods and dashboard tabs on or off, use a lock screen, volume pop-up or skin, open a panel" },
         { id: "store", name: "AetherStore", icon: "storefront", desc: "Rices from anywhere - Linux dotfiles, Hyprland configs for AetherWM, terminals, fastfetch, browsers, shells, lock screens. Everything it replaces is backed up" },
         { id: "configs", name: "Quickshell configs", icon: "code", desc: "Every shell here is a Quickshell config in your own folder - change how it looks and works, or run another config" },
@@ -178,7 +181,7 @@ FloatingWindow {
     }
     function configBlurb(name: string): string {
         if (name === "aether")
-            return "Aether: Caelestia's code plus the ported DMS (dms/), Noctalia (noctalia/), end-4 (end4/) and Zenith (zenith/)";
+            return "Aether: Caelestia's code plus the ported DMS (dms/), Noctalia (noctalia/), end-4 (end4/), Zenith (zenith/) and serpantinum (serp/, AGPL-3.0)";
         if (name === "ryoku")
             return "Ryoku: runs next to Aether while a Ryoku piece is picked - edits show the next time it starts";
         return "A Quickshell config - running it replaces Aether until you switch back";
@@ -224,6 +227,13 @@ FloatingWindow {
                 if (xhr.status === 200) {
                     const j = JSON.parse(xhr.responseText);
                     if (j && Array.isArray(j.items)) {
+                        // built-in shells the online list doesn't have yet (they are part of Aether, not downloads)
+                        try {
+                            const have = new Set(j.items.map(i => i.id));
+                            for (const i of JSON.parse(bundledIndex.text()).items ?? [])
+                                if (i.builtin && !have.has(i.id))
+                                    j.items.push(i);
+                        } catch (e) {}
                         storeIndexRemote = true;
                         storeIndex = j;
                         return;
@@ -256,6 +266,8 @@ FloatingWindow {
         return item?.category === "shell";
     }
     function storeShellInstalled(item: var): bool {
+        if (item?.builtin)   // a shell ported into Aether (DarkShadowShell, serpantinum): always there
+            return true;
         configsTick;
         return !!item?.config && Win.FsUtils.classify(`${qsConfigDir}/${item.config}`) === "dir";
     }
@@ -263,6 +275,10 @@ FloatingWindow {
     property string storeGetting: ""        // the card whose Get is running (its button shows it; other Gets wait)
     readonly property bool storeGetBusy: storeGetting !== "" && (storeProc.running || (installProc.running && installFromStore))
     function storeGet(item: var): void {
+        if (item?.builtin) {   // nothing to download: open its pages in Aether settings
+            AS.AetherSettings.open(item.builtin);
+            return;
+        }
         if (storeGetBusy || storeProc.running || installProc.running)
             return;
         storeGetting = item.id;
@@ -410,7 +426,9 @@ FloatingWindow {
         { id: "zenith", name: "Zenith", colour: "#7ee0c3", icon: "blur_circular", blurb: "A dynamic island and focus tools",
           mix: { mixBar: "zenith", mixLauncher: "zenith", mixNotifs: "zenith", mixOsd: "zenith", mixLock: "caelestia", mixWallpaper: "caelestia", mixDock: "off", mixDesktopWidgets: "off" } },
         { id: "ryoku", name: "Ryoku", colour: "#e86a6a", icon: "landscape", blurb: "A whole desktop: top bar, Stage, dock, sidebar",
-          mix: { mixBar: "ryoku", mixLauncher: "ryoku", mixNotifs: "ryoku", mixOsd: "ryoku", mixLock: "ryoku", mixWallpaper: "ryoku", mixDock: "ryoku", mixDesktopWidgets: "ryoku" } }
+          mix: { mixBar: "ryoku", mixLauncher: "ryoku", mixNotifs: "ryoku", mixOsd: "ryoku", mixLock: "ryoku", mixWallpaper: "ryoku", mixDock: "ryoku", mixDesktopWidgets: "ryoku" } },
+        { id: "serp", name: "serpantinum", colour: "#b8a4ff", icon: "widgets", blurb: "A widget bar with floating panels and serp's guide",
+          mix: { mixBar: "serp", mixLauncher: "serp", mixNotifs: "serp", mixOsd: "serp", mixLock: "caelestia", mixWallpaper: "caelestia", mixDock: "off", mixDesktopWidgets: "off" } }
     ]
     function presetActive(p: var): bool {
         return Object.keys(p.mix).every(k => WinSettings[k] === p.mix[k]);
@@ -1172,9 +1190,9 @@ FloatingWindow {
                                             readonly property bool getting: win.storeGetBusy && win.storeGetting === card.modelData.id
                                             highlighted: !card.isInstalled && !getting
                                             enabled: card.isInstalled || getting || !win.storeGetBusy
-                                            icon: getting ? "hourglass_top" : card.isInstalled ? "check" : "download"
-                                            text: getting ? "Getting…" : card.isInstalled ? "Installed" : "Get"
-                                            onClicked: if (getting) return; else if (!card.isInstalled) win.storeGet(card.modelData); else if (win.storeIsShell(card.modelData)) win.tab = "configs"
+                                            icon: getting ? "hourglass_top" : card.modelData.builtin ? "settings" : card.isInstalled ? "check" : "download"
+                                            text: getting ? "Getting…" : card.modelData.builtin ? "Open" : card.isInstalled ? "Installed" : "Get"
+                                            onClicked: if (getting) return; else if (!card.isInstalled) win.storeGet(card.modelData); else if (card.modelData.builtin) win.storeGet(card.modelData); else if (win.storeIsShell(card.modelData)) win.tab = "configs"
                                         }
                                     }
                                 }
@@ -1668,7 +1686,7 @@ FloatingWindow {
                             RowLayout {
                                 spacing: 6
                                 Repeater {
-                                    model: [["rice", "This panel"], ["caelestia", "Caelestia's"], ["noctalia", "Noctalia's"]]
+                                    model: [["aether", "Aether"], ["rice", "Aether classic"], ["caelestia", "Caelestia's"], ["noctalia", "Noctalia's"]]
                                     GlassButton {
                                         required property var modelData
                                         text: modelData[1]

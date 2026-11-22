@@ -47,6 +47,8 @@ ColumnLayout {
     label: "Settings style"
     description: "Which settings window the settings button opens"
     model: [
+      { "key": "aether", "name": "Aether (all shells)" },
+      { "key": "rice", "name": "Aether classic" },
       { "key": "caelestia", "name": "Caelestia" },
       { "key": "noctalia", "name": "Noctalia" }
     ]

@@ -31,7 +31,7 @@ Scope {
     readonly property bool notifs: Cae.WinSettings.mixNotifs === "end4"
     readonly property bool osd: Cae.WinSettings.mixOsd === "end4"
     readonly property bool lock: Cae.WinSettings.mixLock === "end4"
-    readonly property bool wallpaper: Cae.WinSettings.mixWallpaper === "end4"
+    readonly property bool wallpaper: Cae.WinSettings.wallpaperLayer === "end4"
     readonly property bool dock: Cae.WinSettings.mixDock === "end4"
 
     Component.onCompleted: {

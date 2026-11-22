@@ -1,5 +1,6 @@
 import QtQuick
 import Caelestia.State as CaeGame
+import qs.services as CaeSvc
 import QtQuick.Effects
 import Quickshell
 import Quickshell.Hyprland
@@ -1281,7 +1282,7 @@ Variants {
                 id: videoLoader
                 anchors.fill: parent
                 // Stays loaded until the outgoing video has faded off the still frame below.
-                active: !CaeGame.RuntimeState.gameMode && (root.isVideoSource || (item?.opacity ?? 0) > 0) // Aether: off in game mode
+                active: !CaeSvc.WinSettings.gamePauseWallpaper && (root.isVideoSource || (item?.opacity ?? 0) > 0) // Aether: off in game mode
                 // By url, so without QtMultimedia only this layer fails and the still frame stays.
                 source: "VideoWallpaperLayer.qml"
                 onStatusChanged: {

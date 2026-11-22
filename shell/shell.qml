@@ -20,6 +20,7 @@ import qs.modules.welcome
 import qs.modules.nexus
 import qs.modules.captions
 import qs.modules.userpanel   // your own panels (~/.config/caelestia/user/panels)
+import qs.modules.aetherbar   // the Aether shell's own bar, island dock and dashboard (Mix & match > "Aether")
 import qs.modules.aether      // Aether style parts (AetherCard, AetherWavy, AetherBlobs, AetherLogo) - your files can use them
 import qs.shims      // Windows stand-ins the ported shells use (IdleMonitor ...)
 import qs.dms        // the same for DMS
@@ -61,10 +62,33 @@ ShellRoot {
 
     // Modules
     LazyLoader {   // Mix & match: Caelestia's wallpaper/desktop unless Noctalia's is picked
-        active: WinSettings.mixWallpaper === "caelestia"
+        active: WinSettings.wallpaperLayer === "caelestia" // off while Wallpaper Engine runs
         Background {}
     }
-    Drawers {}
+    LazyLoader {   // Caelestia's frame, bar, launcher, notifications, OSD... - not in a whole-distro desktop
+        active: !WinSettings.distroMode
+        Drawers {}
+    }
+    LazyLoader {   // the Aether shell's bar (Ryoku-style rail) - while Mix & match > Bar is "aether"
+        active: !WinSettings.distroMode && WinSettings.mixBar === "aether"
+        AetherBar {}
+    }
+    LazyLoader {   // the Aether shell's island dock on the left edge - while Mix & match > Dock is "aether"
+        active: !WinSettings.distroMode && WinSettings.mixDock === "aether"
+        AetherDock {}
+    }
+    LazyLoader {   // the Aether dashboard (opened from the Aether bar, or Settings > Aether shell > Dashboard)
+        active: !WinSettings.distroMode && (WinSettings.mixBar === "aether" || AetherBarConfig.dashOpen)
+        AetherDash {}
+    }
+    LazyLoader {   // the desktop right-click menu (Aether)
+        active: !WinSettings.distroMode && AetherBarConfig.menuOpen
+        AetherDeskMenu {}
+    }
+    LazyLoader {   // the wallpaper picker (Super+W)
+        active: !WinSettings.distroMode && AetherBarConfig.pickerOpen
+        AetherWallPicker {}
+    }
     AreaPicker {}
     AetherPicker {}
     Lock {
@@ -84,9 +108,21 @@ ShellRoot {
         active: WinSettings.zenithAny
         source: Quickshell.shellPath("zenith/ZenithShell.qml")
     }
+    LazyLoader {   // serpantinum (built in, AGPL-3.0) - only while Mix & match uses one of its parts
+        active: WinSettings.serpAny
+        source: Quickshell.shellPath("serp/SerpShell.qml")
+    }
+    LazyLoader {   // DarkShadowShell (built in, MIT) - only while Mix & match uses one of its parts
+        active: WinSettings.dssAny
+        source: Quickshell.shellPath("dss/DssShell.qml")
+    }
     LazyLoader {   // Noctalia v4 (built in, MIT) - only loaded (even compiled) when Settings > Mix & match uses one of its parts
         active: WinSettings.noctaliaAny
         source: Quickshell.shellPath("noctalia/NoctaliaShell.qml")
+    }
+    LazyLoader {   // Linux distro looks (Debian GNOME, ...) - only while Mix & match uses one of them
+        active: WinSettings.distroAny
+        source: Quickshell.shellPath("distros/DistroHost.qml")
     }
     Splash {}
     UserPanels {}

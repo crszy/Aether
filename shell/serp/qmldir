@@ -1,0 +1,90 @@
+Dock 1.0 dock/Dock.qml
+Dim 1.0 Dim.qml
+Main 1.0 Main.qml
+
+Bar 1.0 bar/Bar.qml
+Floating 1.0 quickactions/Floating.qml
+FloatingEdgeTrigger 1.0 quickactions/FloatingEdgeTrigger.qml
+Clipboard 1.0 clipboard/Clipboard.qml
+Dashboard 1.0 calendar/Dashboard.qml
+Launcher 1.0 launcher/Launcher.qml
+WallpaperEngine 1.0 wallpaper/WallpaperEngine.qml
+Idle 1.0 idle/Idle.qml
+Lock 1.0 lock/Lock.qml
+LockRedactor 1.0 lock/redactor/LockRedactor.qml
+
+Start 1.0 serp/Start.qml
+Serpantinum 1.0 serp/Serpantinum.qml
+
+Osd 1.0 popouts/Osd.qml
+PopoutManager 1.0 popouts/PopoutManager.qml
+SideMusicPopout 1.0 popouts/SideMusicPopout.qml
+TrayBase 1.0 popouts/TrayBase.qml
+DesktopMenu 1.0 popouts/DesktopMenu.qml
+DockAppMenu 1.0 popouts/DockAppMenu.qml
+
+WidgetLoader 1.0 widgets/WidgetLoader.qml
+WidgetRedactor 1.0 widgets/redactor/WidgetRedactor.qml
+
+WellbeingLimitOverlay 1.0 guide/wellbeing/WellbeingLimitOverlay.qml
+singleton NotificationManager 1.0 notifications/NotificationManager.qml
+
+singleton Audio 1.0 singletons/audio/Audio.qml
+singleton Spectrum 1.0 singletons/audio/Spectrum.qml
+singleton MprisController 1.0 singletons/audio/MprisController.qml
+singleton Sounds 1.0 singletons/audio/Sounds.qml
+singleton Lyrics 1.0 singletons/audio/Lyrics.qml
+
+singleton AppTheming 1.0 singletons/theme/AppTheming.qml
+singleton Matugen 1.0 singletons/theme/Matugen.qml
+singleton Scaler 1.0 singletons/theme/Scaler.qml
+singleton ThemeBackend 1.0 singletons/theme/ThemeBackend.qml
+singleton Wallpaper 1.0 singletons/theme/Wallpaper.qml
+
+singleton Gamma 1.0 singletons/environment/Gamma.qml
+singleton Location 1.0 singletons/environment/Location.qml
+singleton Weather 1.0 singletons/environment/Weather.qml
+singleton WeatherAlerts 1.0 singletons/environment/WeatherAlerts.qml
+singleton GovAlerts 1.0 singletons/environment/GovAlerts.qml
+
+singleton AppMatcher 1.0 singletons/system/AppMatcher.qml
+singleton Caching 1.0 singletons/system/Caching.qml
+singleton Compositor 1.0 singletons/system/Compositor.qml
+singleton Config 1.0 singletons/system/Config.qml
+singleton CurrentFocus 1.0 singletons/system/CurrentFocus.qml
+singleton DateTime 1.0 singletons/system/DateTime.qml
+singleton FirstLaunch 1.0 singletons/system/FirstLaunch.qml
+singleton I18n 1.0 singletons/system/I18n.qml
+singleton KeyboardLayout 1.0 singletons/system/KeyboardLayout.qml
+CompositorStateBase 1.0 singletons/system/CompositorStateBase.qml
+singleton MangoState 1.0 singletons/system/MangoState.qml
+singleton UmbrielState 1.0 singletons/system/UmbrielState.qml
+singleton NiriState 1.0 singletons/system/NiriState.qml
+singleton SwayState 1.0 singletons/system/SwayState.qml
+singleton RecordingState 1.0 singletons/system/RecordingState.qml
+singleton SysNotif 1.0 singletons/system/SysNotif.qml
+singleton TimerState 1.0 singletons/system/TimerState.qml
+singleton FocusTimer 1.0 singletons/system/FocusTimer.qml
+singleton Updater 1.0 singletons/system/Updater.qml
+singleton WindowTracker 1.0 singletons/system/WindowTracker.qml
+singleton ShellSurfaces 1.0 singletons/system/ShellSurfaces.qml
+singleton SurfaceField 1.0 singletons/system/SurfaceField.qml
+
+singleton SysData 1.0 singletons/info/SysData.qml
+singleton SystemInfo 1.0 singletons/info/SystemInfo.qml
+
+ScreenToggleController 1.0 singletons/widgetcontrols/ScreenToggleController.qml
+HoverMenuController 1.0 singletons/widgetcontrols/HoverMenuController.qml
+
+singleton ClipboardController 1.0 singletons/widgetcontrols/ClipboardController.qml
+singleton DashboardController 1.0 singletons/widgetcontrols/DashboardController.qml
+singleton FloatingController 1.0 singletons/widgetcontrols/FloatingController.qml
+singleton LauncherController 1.0 singletons/widgetcontrols/LauncherController.qml
+singleton OsdController 1.0 singletons/widgetcontrols/OsdController.qml
+singleton SideMusicController 1.0 singletons/widgetcontrols/SideMusicController.qml
+singleton TrayMenuController 1.0 singletons/widgetcontrols/TrayMenuController.qml
+singleton WidgetSync 1.0 singletons/widgetcontrols/WidgetSync.qml
+singleton DesktopMenuController singletons/widgetcontrols/DesktopMenuController.qml
+singleton DockAppMenuController 1.0 singletons/widgetcontrols/DockAppMenuController.qml
+
+singleton SerpWin 1.0 SerpWin.qml

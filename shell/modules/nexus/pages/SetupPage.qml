@@ -35,7 +35,9 @@ PageBase {
         { id: "zenith", name: "Zenith", sub: Tr.tr("Dynamic island bar, focus tools"),
           mix: { mixBar: "zenith", mixLauncher: "zenith", mixNotifs: "zenith", mixOsd: "zenith", mixLock: "caelestia", mixWallpaper: "caelestia", mixDock: "off", mixDesktopWidgets: "off" } },
         { id: "ryoku", name: "Ryoku", sub: Tr.tr("Top bar, Stage desktop, dock, control sidebar"),
-          mix: { mixBar: "ryoku", mixLauncher: "ryoku", mixNotifs: "ryoku", mixOsd: "ryoku", mixLock: "ryoku", mixWallpaper: "ryoku", mixDock: "ryoku", mixDesktopWidgets: "ryoku" } }
+          mix: { mixBar: "ryoku", mixLauncher: "ryoku", mixNotifs: "ryoku", mixOsd: "ryoku", mixLock: "ryoku", mixWallpaper: "ryoku", mixDock: "ryoku", mixDesktopWidgets: "ryoku" } },
+        { id: "serp", name: "serpantinum", sub: Tr.tr("Widget bar, floating panels, its own guide"),
+          mix: { mixBar: "serp", mixLauncher: "serp", mixNotifs: "serp", mixOsd: "serp", mixLock: "caelestia", mixWallpaper: "caelestia", mixDock: "off", mixDesktopWidgets: "off" } }
     ]
 
     function lookActive(l: var): bool {

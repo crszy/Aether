@@ -9,6 +9,7 @@ import qs.components
 import qs.services
 import qs.modules.nexus
 import qs.modules.rice
+import qs.modules.aethersettings as AS
 
 Singleton {
     id: root
@@ -18,6 +19,11 @@ Singleton {
     function create(parent: Item, props: var): void {
         // Settings style (Mix & match): Noctalia's settings window instead, unless Caelestia's was asked for
         // the rice panel (all shells in one) unless Caelestia's own was asked for
+        // Aether settings (DarkShadowShell style, every shell in one window): the default
+        if (WinSettings.settingsStyle === "aether" && !(props && props.caelestia)) {
+            AS.AetherSettings.open(props && props.startPage ? String(props.startPage).toLowerCase() : "");
+            return;
+        }
         if (WinSettings.settingsStyle === "rice" && !(props && props.caelestia)) {
             RiceFactory.open("");
             return;

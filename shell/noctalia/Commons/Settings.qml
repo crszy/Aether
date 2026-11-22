@@ -824,6 +824,9 @@ Singleton {
       return path;
     }
 
+    // Windows: typed paths come with backslashes and quotes ("C:\Users\me\Walls"); Noctalia wants C:/Users/me/Walls
+    path = path.trim().replace(/^"(.*)"$/, "$1").split("\\").join("/").replace(/\/+$/, "");
+
     // Expand "~" to user's home directory
     if (path.startsWith("~/")) {
       return ((Quickshell.env("HOME") || Quickshell.env("USERPROFILE") || "").split("\\").join("/")) + path.substring(1);

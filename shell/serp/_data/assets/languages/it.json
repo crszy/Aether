@@ -1,0 +1,2281 @@
+{
+  "guide": {
+    "about": {
+      "title": "Serpantinum",
+      "loading": "Caricamento...",
+      "unknown": "Sconosciuto",
+      "version_by": "v{version} • di {author}",
+      "hardware": {
+        "device_name": "Nome del dispositivo",
+        "processor": "Processore",
+        "graphics": "Grafica",
+        "memory": "Memoria",
+        "disk_capacity": "Capacità disco"
+      },
+      "system": {
+        "os_name": "Nome sistema operativo",
+        "kernel_version": "Versione del Kernel",
+        "desktop": "Desktop",
+        "shell": "Shell",
+        "uptime": "Tempo di attività",
+        "default_os": "Linux"
+      },
+      "github_repo": "ilyamiro/serpantinum"
+    },
+    "tabs": {
+      "welcome": "Benvenuto/a",
+      "general": "Generale",
+      "display": "Schermo",
+      "bar": "Barra",
+      "launcher": "Avviatore applicazioni",
+      "theme": "Tema",
+      "notifications": "Notifiche",
+      "idle": "Inattività",
+      "wellbeing": "Benessere",
+      "tutorial": "Tutorial",
+      "update": "Aggiorna",
+      "about": "Informazioni",
+      "display_widgets": "Widget",
+      "display_general": "Generale",
+      "osd": "OSD",
+      "dock": "Dock",
+      "bar_general": "Generale",
+      "bar_modules": "Moduli",
+      "display_lockscreen": "Schermata di blocco",
+      "screenshot": "Screenshot",
+      "theme_appearance": "Aspetto",
+      "theme_apps": "Tema delle app",
+      "theme_wallpapers": "Sfondi",
+      "general_main": "Generale",
+      "general_presets": "Preimpostazioni",
+      "general_weather": "Meteo"
+    },
+    "launcher": {
+      "position": {
+        "title": "Posizione su schermo",
+        "desc": "Seleziona il bordo dello schermo sul quale l'avviatore si aprirà",
+        "top": "Superiore",
+        "bottom": "Inferiore",
+        "left": "Sinistro",
+        "right": "Destro",
+        "center": "Centro"
+      },
+      "width": {
+        "title": "Larghezza avviatore",
+        "desc": "La larghezza totale della finestra dell'avviatore in pixel"
+      },
+      "items": {
+        "title": "Oggetti visibili",
+        "desc": "Numero dei risultati di ricerca visibili contemporaneamente"
+      },
+      "terminal": {
+        "title": "Comando del terminale",
+        "desc": "Prefisso comando usato per le > esecuzioni (es. kitty -e, alacritty -e, foot -e)"
+      },
+      "smart_ranking": {
+        "title": "Ordinamento intelligente delle app nell'avviatore",
+        "desc": "Ordina le app in base all'uso e al tempo di utilizzo"
+      },
+      "test": "Apri Avviatore",
+      "search": {
+        "title": "Motore di ricerca web",
+        "desc": "Motore usato quando la ricerca inizia con ?"
+      }
+    },
+    "notifications": {
+      "dnd": {
+        "title": "Non disturbare",
+        "desc": "Silenzia le notifiche popup ad eccezione degli avvisi critici"
+      },
+      "position": {
+        "title": "Posizione popup",
+        "desc": "Scegli su quale parte dello schermo far apparire il popup delle notifiche",
+        "top_right": "In alto a destra",
+        "top_left": "In alto a sinistra",
+        "bottom_right": "In basso a destra",
+        "bottom_left": "In basso a sinistra",
+        "top_center": "In alto al centro",
+        "bottom_center": "In basso al centro",
+        "select_on_screen": "Seleziona sullo schermo...",
+        "close_selector": "Chiudi selettore"
+      },
+      "sound": {
+        "title": "Suono delle notifiche",
+        "desc": "Riproduci un suono quando ricevi una notifica"
+      },
+      "sound_file": {
+        "title": "Suoneria",
+        "desc": "Scegli il suono da riprodurre per le notifiche in arrivo"
+      },
+      "empty_graphic": {
+        "title": "Centro notifiche vuoto",
+        "desc": "Mostra il gattino che dorme quando il centro delle notifiche è vuoto"
+      },
+      "right_click_close": {
+        "title": "Chiudi con clic destro",
+        "desc": "Chiudi una notifica con il clic destro"
+      },
+      "test": "Prova notifica",
+      "test_desc": "Questa è una notifica di prova"
+    },
+    "idle": {
+      "enabled": {
+        "title": "Abilita inattività sistema",
+        "desc": "Attiva la gestione energetica e i timeout di blocco"
+      },
+      "manual_inhibit": {
+        "title": "Non disturbare (tieni acceso)",
+        "desc": "Previeni manualmente al sistema di sospendersi"
+      },
+      "mpris_inhibit": {
+        "title": "Disattiva sospensione durante la riproduzione di media",
+        "desc": "Previene che il sistema si sospenda durante la riproduzione di un contenuto audiovisivo"
+      },
+      "respect_inhibitors": {
+        "title": "Rispetta il blocco attività delle app",
+        "desc": "Consenti alle applicazioni di impedire lo spegnimento dello schermo o la sospensione"
+      },
+      "pipeline_notice": "Ordine: Abbassa luminosità < blocca sessione < spegni schermo < sospendi. Le azioni che violano quest'ordine saranno escluse.",
+      "order_violation": "Escluso",
+      "actions_header": {
+        "title": "Timeout inattività oggetti",
+        "desc": "Configura i timeouts, azionatori (trigger) integrati e comandi personalizzati"
+      },
+      "action_name_placeholder": "Nome azione",
+      "command_placeholder": "Comando da eseguire",
+      "custom_action_default": "Azione di inattività personalizzata",
+      "custom_action_fallback": "Azione di inattività",
+      "warning_command": {
+        "title": "Comando preavviso",
+        "desc": "Tempo di anticipo e comando da eseguire prima di avviare l'azione",
+        "placeholder": "es. serpantinum-core notify 'avviso'"
+      },
+      "before_command": {
+        "title": "Prima del comando",
+        "desc": "Eseguito prima che l'azione si avvii",
+        "placeholder": "es. playerctl pause"
+      },
+      "resume_command": {
+        "title": "Comando al ripristino",
+        "desc": "Eseguito quando l'utente ritorna ad usare il dispositivo",
+        "placeholder": "es. serpantinum-core notify 'ripristinato'"
+      },
+      "dim": {
+        "title": "Oscura schermo",
+        "desc": "Riduci la luminosità dello schermo prima del blocco"
+      },
+      "dpms": {
+        "title": "Spegnimento schermo (DPMS)",
+        "desc": "Spegni il segnale dello schermo del monitor"
+      },
+      "lock": {
+        "title": "Blocca sessione",
+        "desc": "Blocca la sessione dopo un periodo di inattività"
+      },
+      "suspend": {
+        "title": "Sospensione sistema",
+        "desc": "Sospendi il sistema in modalità sospensione"
+      },
+      "hooks": {
+        "title": "Azioni automatiche (comandi shell)"
+      },
+      "custom_action_desc": "Azione e comando personalizzati per timeout",
+      "lock_on_sleep": {
+        "title": "Blocca prima della sospensione",
+        "desc": "Blocca la sessione prima che il sistema si sospenda, ad esempio chiudendo il coperchio"
+      }
+    },
+    "welcome": {
+      "by_author": "fatto da @{author}",
+      "about": "Informazioni",
+      "start_tutorial": "Avvia tutorial"
+    },
+    "tutorial": {
+      "start": "Avvia"
+    },
+    "general": {
+      "language": {
+        "title": "Lingua",
+        "desc": "Seleziona la lingua per l'interfaccia del sistema"
+      },
+      "uiscale": {
+        "title": "Scala UI",
+        "desc": "Seleziona il fattore di scala dell'interfaccia"
+      },
+      "avatar": {
+        "title": "Foto profilo",
+        "desc": "Scegli una foto del profilo",
+        "select": "Seleziona"
+      },
+      "mutesfx": {
+        "title": "Muta effetti sonori",
+        "desc": "Disabilita gli effetti sonori dell'UI"
+      },
+      "sfxvolume": {
+        "title": "Cambia il volume degli effetti sonori",
+        "desc": "Non influisce sul volume generale del sistema"
+      },
+      "quickactions": {
+        "title": "Azioni rapide",
+        "desc": "Attiva il pannello fluttuante per le azioni rapide"
+      },
+      "location": {
+        "title": "Posizione",
+        "desc": "Imposta la posizione per il meteo e l'orario solare in automatico",
+        "popup_title": "Dettagli posizione",
+        "latitude": "Latitudine",
+        "longitude": "Longitudine",
+        "apply": "Applica"
+      },
+      "weatherinterval": {
+        "title": "Frequenza di aggiornamento meteo",
+        "desc": "Frequenza aggiornamento in minuti"
+      },
+      "weatherunit": {
+        "title": "Unità di misura meteo",
+        "desc": "Scala di temperatura da mostrare nel meteo",
+        "celsius": "Celsius",
+        "fahrenheit": "Fahrenheit",
+        "kelvin": "Kelvin"
+      },
+      "copysettings": {
+        "title": "Copia impostazioni",
+        "desc": "Copia il JSON di configurazione nelle note",
+        "button": "Copia Impostazioni"
+      },
+      "screenshot_on_release": {
+        "title": "Cattura area al rilascio del mouse",
+        "desc": "Cattura lo screenshot non appena si rilascia il cursore, senza cliccare l'otturatore"
+      },
+      "presets": {
+        "save": {
+          "title": "Salva la configurazione attuale",
+          "desc": "Salva tutte le impostazioni, i widget e gli sfondi come preimpostazione",
+          "button": "Salva preimpostazione"
+        },
+        "empty": "Nessuna preimpostazione. Salva la configurazione attuale per crearne una",
+        "confirm": {
+          "title": "Applicare la preimpostazione?",
+          "desc": "Vuoi davvero applicare questa preimpostazione senza prima salvare le tue impostazioni? Sostituirà le impostazioni attuali e non potrai recuperarle.",
+          "dont_show": "Non mostrare più",
+          "apply": "Applica",
+          "cancel": "Annulla"
+        },
+        "export": {
+          "button": "Esporta",
+          "dialog": "Esporta preset",
+          "title": "Esporta preset"
+        },
+        "import": {
+          "button": "Importa",
+          "desc": "Aggiungi un preset da un file JSON. Usa il pulsante di esportazione di un preset per salvare una copia condivisibile",
+          "picker": "Seleziona file preset",
+          "title": "Importa ed esporta preset"
+        }
+      }
+    },
+    "display": {
+      "gamma": {
+        "title": "Filtro luce blu",
+        "desc": "Attiva/disattiva la luce calda dello schermo"
+      },
+      "enable": {
+        "title": "Abilita questo monitor",
+        "desc": "Disabilitarlo disabiliterebbe questo monitor"
+      },
+      "schedule": {
+        "title": "Programmazione automatizzata",
+        "desc": "Regola automaticamente la temperatura del colore in base al tramonto e all'alba"
+      },
+      "temperature": {
+        "title": "Temperatura colore",
+        "desc": "Modifica la temperatura del colore"
+      },
+      "uiscale": {
+        "title": "Scala UI",
+        "desc": "Imposta il fattore di scala del display per questo monitor"
+      },
+      "widgets": {
+        "title": "Widget desktop",
+        "desc": "Piazza e configura i Widget per questo monitor",
+        "open": "Apri configurazione",
+        "hide_bar": {
+          "title": "Nascondi barra nel redattore",
+          "desc": "Nascondi automaticamente la barra durante la modifica dei widget in modalità redattore"
+        },
+        "show_distances": {
+          "title": "Mostra distanze",
+          "desc": "Mostra le distanze tra i widget durante lo spostamento o il ridimensionamento nel redattore"
+        },
+        "hide_presets": "Nascondi predefiniti",
+        "choose_preset": "Scegli un predefinito",
+        "presets": {
+          "title": "Predefiniti widget"
+        },
+        "save_preset": {
+          "title": "Salva preset"
+        },
+        "preset_name_placeholder": "Inserisci il nome del preset...",
+        "screen_desc": "Configura e modifica i widget del desktop"
+      },
+      "lockscreen": {
+        "edit": {
+          "title": "Schermata di blocco",
+          "desc": "Personalizza il layout della schermata di blocco",
+          "button": "Modifica schermata di blocco"
+        },
+        "limits": {
+          "title": "Limiti di tentativi",
+          "desc": "Blocca temporaneamente l'inserimento della password e disattiva il lettore di impronte dopo troppi tentativi falliti"
+        },
+        "password_attempts": {
+          "title": "Tentativi password",
+          "desc": "Tentativi falliti prima che l'inserimento della password venga bloccato per 30 secondi"
+        },
+        "fingerprint_attempts": {
+          "title": "Tentativi impronta",
+          "desc": "Scansioni fallite prima che il lettore di impronte venga disattivato fino al prossimo sblocco"
+        },
+        "fingerprint": {
+          "title": "Abilita l'accesso con impronta digitale",
+          "desc": "Consenti lo sblocco della schermata con un'impronta digitale"
+        },
+        "prompt_backdrop": {
+          "title": "Sfondo della richiesta password",
+          "desc": "Mostra il desktop o lo sfondo dietro la richiesta della password",
+          "desktop": "Desktop",
+          "wallpaper": "Sfondo"
+        },
+        "background": {
+          "select": "Seleziona sfondo",
+          "follow": "Segui lo sfondo",
+          "custom": "Personalizzato",
+          "follows_hint": "Segue lo sfondo",
+          "none": "Nessuno sfondo selezionato"
+        }
+      }
+    },
+    "bar": {
+      "modules": {
+        "vis": "Visualizzatore",
+        "actions": "Azioni",
+        "workspaces": {
+          "style": {
+            "name": {
+              "pills": "Pillole",
+              "numbers": "Numeri",
+              "pacman": "Pacman"
+            }
+          },
+          "name": "Spazi di lavoro"
+        },
+        "media": "Media",
+        "tray": "Tray",
+        "keyboard": "Tastiera",
+        "network": "Rete",
+        "bluetooth": "Bluetooth",
+        "volume": "Volume",
+        "battery": "Batteria",
+        "focus": "Focus",
+        "sysmon": "Monitor sistema",
+        "timedate": {
+          "name": "Ora e data",
+          "style": {
+            "name": {
+              "classic": "Classico",
+              "material": "Material",
+              "badge": "Matrice di punti"
+            }
+          }
+        },
+        "info": "Registratore/Timer",
+        "weather": "Meteo",
+        "clock": "Orologio",
+        "notifications": "Notifiche",
+        "usage": "Utilizzo del sistema"
+      },
+      "position": {
+        "title": "Posizione barra",
+        "desc": "Posizione della barra sullo schermo",
+        "top": "In alto",
+        "bottom": "In basso",
+        "left": "A sinistra",
+        "right": "A destra"
+      },
+      "width": {
+        "title": "Larghezza barra",
+        "desc": "Imposta come percentuale la larghezza della barra"
+      },
+      "center_by_edges": {
+        "title": "Centra per i bordi",
+        "desc": "Mantiene margini uguali a sinistra e a destra della barra invece di centrare sul modulo centrale",
+        "desc_vertical": "Mantiene margini uguali in alto e in basso della barra invece di centrare sul modulo centrale"
+      },
+      "workspaces": {
+        "title": "Scegli il numero di spazi di lavoro da visualizzare",
+        "desc": "Numero di spazi di lavoro da visualizzare",
+        "hide_empty": {
+          "title": "Nascondi spazi di lavoro vuoti",
+          "desc": "Mostra solo gli spazi di lavoro occupati e quello attivo"
+        },
+        "style": {
+          "title": "Stile",
+          "desc": "Scegli lo stile visivo per gli indicatori degli spazi di lavoro"
+        },
+        "disc": "Nota: questo non influisce sul numero effettivo di spazi di lavoro nel compositor",
+        "monitor_count": {
+          "desc": "Spazi di lavoro di questo monitor"
+        },
+        "per_monitor": {
+          "desc": "Solo Hyprland. Numera gli spazi di lavoro da 1 su ogni monitor e imposta quanti ne possiede ciascun monitor",
+          "title": "Numerazione per monitor",
+          "unavailable": "Disponibile solo su Hyprland"
+        }
+      },
+      "style": {
+        "title": "Stile barra",
+        "desc": "Scegli tra modulare, solida o una barra piena",
+        "modular": "Modulare",
+        "solid": "Solida",
+        "fill": "Piena"
+      },
+      "time": {
+        "title": "Formato ora",
+        "desc": "Formato stringa (es. HH:mm:ss o hh:mm AP)"
+      },
+      "guide_button": {
+        "title": "Bottone guida",
+        "desc": "Mostra il bottone per il popup della guida sullo schermo"
+      },
+      "autohide": {
+        "title": "Nascondi automaticamente",
+        "desc": "Nascondi la barra quando il mouse non ci passa sopra"
+      },
+      "timeout": {
+        "title": "Ritardo scomparsa automatica",
+        "desc": "Delay prima che la barra scompaia"
+      },
+      "config": {
+        "title": "Configurazione barra",
+        "desc": "Fai clic con il tasto destro su un elemento per iniziare a raggruppare, poi su un altro per aggiungerlo. Fai clic con il tasto destro su un elemento raggruppato per rimuoverlo.",
+        "reset": "Resetta",
+        "available": "Disponibile",
+        "shown": "Visibili",
+        "left": "Sinistra",
+        "center": "Centro",
+        "right": "Destra"
+      },
+      "distinct_pills": {
+        "title": "Abilita uno stile modulare e compatto per i widget",
+        "desc": "Aggiunge un bordo ai moduli della barra e ne riduce le dimensioni per adattarsi a un aspetto modulare"
+      },
+      "timedate": {
+        "show_date": {
+          "title": "Mostra data",
+          "desc": "Mostra il testo della data accanto all'orologio"
+        },
+        "style": {
+          "title": "Stile",
+          "desc": "Scegli lo stile visivo per l'orologio e la data"
+        }
+      },
+      "vis": {
+        "bars": {
+          "title": "Numero di barre",
+          "desc": "Numero di barre di frequenza da visualizzare"
+        },
+        "alignment": {
+          "title": "Allineamento",
+          "desc": "Centra il visualizzatore o allinealo in alto o in basso"
+        },
+        "align": {
+          "center": "Al centro",
+          "top": "In alto",
+          "bottom": "In basso",
+          "left": "A sinistra",
+          "right": "A destra"
+        },
+        "continuous": {
+          "title": "Onda continua",
+          "desc": "Mostra un onda fluida invece di barre discrete"
+        }
+      },
+      "sysmon": {
+        "style": {
+          "title": "Stile del cerchio",
+          "desc": "Aspetto visivo degli anelli di avanzamento",
+          "wave": "Onda",
+          "circle": "Cerchio"
+        },
+        "items": {
+          "title": "Statistiche",
+          "desc": "Trascina le statistiche per riordinarle, o spostale tra le disponibili per nasconderle",
+          "cpu": "CPU",
+          "ram": "Memoria",
+          "temp": "Temperatura",
+          "disk": "Disco"
+        }
+      },
+      "bat": {
+        "show_percent": {
+          "title": "Mostra percentuale",
+          "desc": "Mostra la percentuale numerica di carica della batteria"
+        },
+        "show_icon": {
+          "title": "Mostra icona",
+          "desc": "Mostra l'icona della batteria o l'indicatore grafico"
+        },
+        "style": {
+          "title": "Stile batteria",
+          "desc": "Scegli l'aspetto visivo dell'indicatore della batteria",
+          "name": {
+            "classic": "Classico",
+            "minimal": "Minimale",
+            "text": "Testo",
+            "button": "Pulsante"
+          },
+          "classic": "Pillola con onda a gradiente",
+          "minimal": "Capsula in stile iOS/Android con cappuccio",
+          "text": "Testo e icona puliti senza sfondo",
+          "button": "Pulsante interattivo a pillola con sfondo"
+        }
+      },
+      "wifi": {
+        "show_icon": {
+          "title": "Mostra icona",
+          "desc": "Mostra l'icona di rete o l'indicatore del segnale"
+        },
+        "show_name": {
+          "title": "Mostra nome",
+          "desc": "Mostra l'SSID di rete o il testo dello stato di connessione"
+        },
+        "style": {
+          "title": "Stile",
+          "desc": "Scegli l'aspetto visivo del modulo di rete",
+          "name": {
+            "button": "Pulsante",
+            "text": "Testo"
+          },
+          "button": "Pulsante interattivo con sfondo",
+          "text": "Testo e icona puliti senza sfondo"
+        }
+      },
+      "bt": {
+        "show_icon": {
+          "title": "Mostra icona",
+          "desc": "Mostra l'icona di stato del Bluetooth"
+        },
+        "show_name": {
+          "title": "Mostra nome",
+          "desc": "Mostra il nome del dispositivo Bluetooth connesso"
+        },
+        "style": {
+          "title": "Stile",
+          "desc": "Scegli l'aspetto visivo del modulo Bluetooth",
+          "name": {
+            "button": "Pulsante",
+            "text": "Testo"
+          },
+          "button": "Pulsante interattivo con sfondo",
+          "text": "Testo e icona puliti senza sfondo"
+        }
+      },
+      "vol": {
+        "show_icon": {
+          "title": "Mostra icona",
+          "desc": "Mostra l'icona dell'altoparlante del volume"
+        },
+        "show_percent": {
+          "title": "Mostra percentuale",
+          "desc": "Mostra la percentuale numerica del volume"
+        },
+        "style": {
+          "title": "Stile",
+          "desc": "Scegli l'aspetto visivo del modulo volume",
+          "name": {
+            "button": "Pulsante",
+            "text": "Testo"
+          },
+          "button": "Pulsante interattivo con sfondo",
+          "text": "Testo e icona puliti senza sfondo"
+        }
+      },
+      "kb": {
+        "show_icon": {
+          "title": "Mostra icona",
+          "desc": "Mostra l'icona del layout della tastiera"
+        },
+        "style": {
+          "title": "Stile",
+          "desc": "Scegli l'aspetto visivo del modulo tastiera",
+          "name": {
+            "button": "Pulsante",
+            "text": "Testo"
+          },
+          "button": "Pulsante interattivo con sfondo",
+          "text": "Testo e icona puliti senza sfondo"
+        }
+      },
+      "media": {
+        "info_mode": {
+          "title": "Secondary info",
+          "desc": "Choose whether to show the song duration or its author",
+          "duration": "Duration",
+          "author": "Author"
+        },
+        "width": {
+          "title": "Width",
+          "desc": "Width of the song title area"
+        },
+        "show_icon": {
+          "title": "Mostra icona",
+          "desc": "Mostra la copertina dell'album o l'icona musicale"
+        },
+        "show_controls": {
+          "title": "Mostra controlli",
+          "desc": "Mostra i pulsanti precedente, riproduci e successivo"
+        },
+        "hide_when_idle": {
+          "title": "Nascondi quando non è in riproduzione nulla",
+          "desc": "Nasconde il widget dalla barra quando nessun contenuto è attivo"
+        },
+        "preview": {
+          "title": "Titolo del brano",
+          "author": "Song author"
+        }
+      },
+      "thickness": {
+        "title": "Spessore della barra",
+        "desc": "Cambia lo spessore della barra, i moduli si adattano"
+      },
+      "menu": {
+        "items": {
+          "title": "Pulsanti",
+          "desc": "Trascina i pulsanti per riordinarli, o spostali tra i disponibili per nasconderli",
+          "settings": "Impostazioni",
+          "launcher": "Launcher",
+          "night_light": "Luce notturna",
+          "caffeine": "Caffeina",
+          "shuffle": "Sfondo casuale"
+        },
+        "style": {
+          "title": "Stile",
+          "desc": "Scegli l'aspetto visivo del modulo menu",
+          "name": {
+            "button": "Pulsante",
+            "icon": "Icona"
+          },
+          "button": "Pulsanti con icona interattivi e sfondo",
+          "icon": "Icone pulite senza sfondo"
+        }
+      }
+    },
+    "theme": {
+      "font": {
+        "title": "Font",
+        "desc": "Scegli il font predefinito che Serpantinum userà",
+        "select": "Seleziona..."
+      },
+      "radius": {
+        "title": "Raggio dei bordi",
+        "desc": "Raggio degli angoli per gli elementi dell'interfaccia"
+      },
+      "colors": {
+        "title": "Palette colori",
+        "desc": "Scegli una combinazione di colori predefinita o crea un tema personalizzato.",
+        "search": "Cerca palette..."
+      },
+      "wallpaper": {
+        "title": "Cartella sfondi",
+        "desc": "Cartella in cui cercare gli sfondi",
+        "select_dir": "Seleziona cartella...",
+        "select_wallpaper": "Seleziona sfondo",
+        "select": "Sfondo",
+        "transition": {
+          "mode": {
+            "title": "Transizione",
+            "random": "Casuale",
+            "custom": "Selezione personalizzata",
+            "desc_random": "Usa una transizione casuale ogni volta che cambia lo sfondo",
+            "desc_custom": "Scegli a caso tra le transizioni selezionate. Fai clic sulle anteprime per aggiungerle o rimuoverle"
+          },
+          "fade": {
+            "name": "Dissolvenza",
+            "desc": "Dissolvenza morbida verso il nuovo sfondo"
+          },
+          "wipe": {
+            "name": "Apertura",
+            "desc": "Apri dal centro dello schermo"
+          },
+          "circle": {
+            "name": "Cerchio",
+            "desc": "Fai crescere un cerchio fino a coprire lo schermo"
+          },
+          "swipe": {
+            "name": "Scorrimento",
+            "desc": "Attraversa lo schermo da un bordo o da un angolo"
+          },
+          "paint": {
+            "name": "Pittura",
+            "desc": "Dipingi il nuovo sfondo cella per cella da colonie che crescono sullo schermo"
+          },
+          "wave": {
+            "name": "Onda fluida",
+            "desc": "Attraversa lo schermo con un'onda liquida sinuosa",
+            "direction_desc": "Bordo o angolo da cui parte l'onda"
+          },
+          "blinds": {
+            "name": "Veneziane",
+            "desc": "Apre lamelle parallele sullo schermo con un'onda sfalsata",
+            "orientation_desc": "Asse lungo cui si aprono le veneziane"
+          },
+          "clock": {
+            "name": "Spazzata oraria",
+            "desc": "Ruota in senso orario attorno a un punto come un raggio radar",
+            "origin_desc": "Punto attorno a cui ruota la spazzata"
+          },
+          "hex": {
+            "name": "Griglia esagonale",
+            "desc": "Rivela il nuovo sfondo attraverso un nido d'ape ondulante",
+            "size_title": "Dimensione esagoni",
+            "size_desc": "Dimensione di ciascuna tessera esagonale nella griglia"
+          },
+          "ink": {
+            "name": "Diffusione d'inchiostro",
+            "desc": "Si espande organicamente sullo schermo come inchiostro ad acquerello"
+          },
+          "orientation": {
+            "title": "Orientamento",
+            "desc": "Asse lungo cui si apre la transizione",
+            "random": "Casuale",
+            "horizontal": "Orizzontale",
+            "vertical": "Verticale"
+          },
+          "origin": {
+            "title": "Origine",
+            "desc": "Dove parte il cerchio. Il menu del desktop lo avvia sempre dove hai fatto clic",
+            "random": "Casuale",
+            "center": "Centro"
+          },
+          "direction": {
+            "title": "Direzione",
+            "desc": "Bordo o angolo da cui parte lo scorrimento",
+            "random": "Casuale",
+            "left": "Da sinistra",
+            "right": "Da destra",
+            "top": "Dall'alto",
+            "bottom": "Dal basso",
+            "top_left": "Dall'alto a sinistra",
+            "top_right": "Dall'alto a destra",
+            "bottom_left": "Dal basso a sinistra",
+            "bottom_right": "Dal basso a destra"
+          }
+        }
+      },
+      "element_opacity": {
+        "title": "Opacità degli elementi",
+        "desc": "Opacità di barra, dock, widget e di ogni altro elemento della shell"
+      },
+      "blur_background": {
+        "title": "Aggiungi uno sfondo sfocato del wallpaper",
+        "desc": "Sfoca il wallpaper dietro ogni elemento che usa la trasparenza",
+        "style": {
+          "blur": "Sfocatura",
+          "liquid": "Vetro liquido"
+        }
+      },
+      "apps": {
+        "loading": "Ricerca delle app installate...",
+        "status": {
+          "error": "Impossibile applicare: {detail}"
+        },
+        "issue": {
+          "missing_config": "Configurazione non trovata. Aggiungi questo a {file}: {line}",
+          "system_config": "La tua configurazione è {file}. Aggiungi questo: {line}",
+          "read_only": "{file} è di sola lettura. Aggiungi questo: {line}",
+          "manual": "Impossibile modificare la configurazione in sicurezza. Aggiungi questo a {file}: {line}",
+          "no_theme": "Installa il tema {line} perché anche le app GTK 3 seguano la tavolozza",
+          "env": "Imposta {line} nell'ambiente di sessione",
+          "requires": "Installa {line} per applicare il tema alle app Qt",
+          "failed": "Impossibile aggiornare la configurazione: {line}"
+        },
+        "hint": {
+          "select_in_app": "Scegli il tema Serpantinum nelle impostazioni dell'app",
+          "restart": "Riavvia le finestre aperte per vedere i nuovi colori",
+          "neovim": "Esegui :colorscheme serpantinum per usarlo",
+          "helix": "Esegui :config-reload negli editor aperti per vedere i nuovi colori",
+          "fastfetch": "Esegui fastfetch -c serpantinum per usarlo",
+          "spicetify": "Esegui spicetify config current_theme Serpantinum, poi spicetify apply",
+          "discord": "Attiva Serpantinum nelle impostazioni dei temi del client",
+          "emacs": "Esegui M-x load-theme serpantinum per usarlo",
+          "steam": "Installa Material-Theme con Millennium, poi scegli Matugen nelle sue impostazioni colore",
+          "heroic": "Imposta il percorso dei temi personalizzati di Heroic sulla sua cartella dei temi, poi scegli serpantinum",
+          "telegram": "Carica il file del tema dalle impostazioni chat di Telegram"
+        },
+        "list": {
+          "title": "App con tema",
+          "desc": "App che seguono i colori della shell. Aggiungine altre dall'elenco"
+        },
+        "add": {
+          "title": "Aggiungi app"
+        },
+        "empty": "Nessuna app con tema per ora. Aggiungine una dall'elenco"
+      },
+      "mode": {
+        "title": "Modalità colore",
+        "desc": "Passa la shell, GTK, Qt e le altre app con tema tra chiaro e scuro",
+        "light": "Chiaro",
+        "dark": "Scuro",
+        "fixed": "Fissata dal tema di colori selezionato. Scegli Matugen per cambiare modalità"
+      }
+    },
+    "file_picker": {
+      "title": "Scegli immagine",
+      "input_placeholder": "Cerca...",
+      "not_found": "Nessun file trovato",
+      "no_file_selected": "Nessun file selezionato",
+      "root": "Root",
+      "places": {
+        "home": "Home",
+        "downloads": "Download",
+        "pictures": "Immagini",
+        "music": "Musica",
+        "documents": "Documenti"
+      },
+      "done": "Fatto"
+    },
+    "font_picker": {
+      "title": "Seleziona un font",
+      "input_placeholder": "Cerca...",
+      "not_found": "Nessun risultato",
+      "places": {
+        "user_fonts": "Font dell'utente"
+      }
+    },
+    "sound_picker": {
+      "title": "Seleziona una suoneria per le notifiche",
+      "no_sound_selected": "Nessun suono selezionato",
+      "places": {
+        "user_sounds": "Suoni dell'utente",
+        "system_sounds": "Suoni di sistema"
+      }
+    },
+    "theme_editor": {
+      "title": "Nuova palette colori",
+      "name_placeholder": "Nome palette...",
+      "preview": "Anteprima",
+      "cancel": "Annulla",
+      "save": "Salva",
+      "default_name": "Palette Personalizzata",
+      "colors": {
+        "base": "Base",
+        "mantle": "Mantello",
+        "crust": "Crosta",
+        "text": "Testo",
+        "sub0": "Sub0",
+        "sub1": "Sub1",
+        "surf0": "Surf0",
+        "surf1": "Surf1",
+        "surf2": "Surf2",
+        "over0": "Over0",
+        "over1": "Over1",
+        "over2": "Over2",
+        "blue": "Blu",
+        "lavender": "Lavanda",
+        "sapphire": "Zaffiro",
+        "sky": "Cielo",
+        "teal": "Verde Acqua",
+        "green": "Verde",
+        "yellow": "Giallo",
+        "peach": "Pesca",
+        "maroon": "Bordeaux",
+        "red": "Rosso",
+        "mauve": "Mauve",
+        "pink": "Rosa",
+        "flamingo": "Fenicottero",
+        "rosewater": "Rosa Pallido"
+      }
+    },
+    "wellbeing": {
+      "desktop": "Desktop",
+      "not_available": "N/d",
+      "am": "AM",
+      "pm": "PM",
+      "today": "Oggi",
+      "week_overview": "Panoramica della settimana",
+      "daily_average": "Media giornaliera",
+      "no_data": "Nessun dato",
+      "daily_usage": "Uso giornaliero",
+      "peak_hours": "Ore di picco",
+      "time_hm": "{h}h {m}m",
+      "time_m": "{m}m",
+      "months": {
+        "january": "Gennaio",
+        "february": "Febbraio",
+        "march": "Marzo",
+        "april": "Aprile",
+        "may": "Maggio",
+        "june": "Giugno",
+        "july": "Luglio",
+        "august": "Agosto",
+        "september": "Settembre",
+        "october": "Ottobre",
+        "november": "Novembre",
+        "december": "Dicembre"
+      },
+      "days": {
+        "monday": "Lunedì",
+        "tuesday": "Martedì",
+        "wednesday": "Mercoledì",
+        "thursday": "Giovedì",
+        "friday": "Venerdì",
+        "saturday": "Sabato",
+        "sunday": "Domenica"
+      },
+      "settings": {
+        "title": "Impostazioni benessere",
+        "overall_limit": "Limite giornaliero generale",
+        "off": "Off",
+        "app_limits": "Limiti utilizzo app",
+        "app_limits_desc": "Imposta il tempo di utilizzo massimo per applicazione",
+        "excluded_apps": "App escluse",
+        "excluded_apps_desc": "Escludi le app dal tracciamento complessivo da ora in poi",
+        "overall_limit_desc": "Avvisami quando il tempo totale di utilizzo raggiunge questo valore",
+        "no_limits": "Nessun limite per le app impostato",
+        "no_excluded": "Nessuna app esclusa",
+        "picker_search": "Cerca app...",
+        "picker_empty": "Nessuna app corrispondente",
+        "picker_apply": "Applica",
+        "picker_cancel": "Annulla"
+      },
+      "notify": {
+        "title": "Benessere digitale"
+      },
+      "limit_overlay": {
+        "title": "Limite giornaliero raggiunto",
+        "hold": "Tieni premuto per continuare"
+      },
+      "day": "Giorno",
+      "less": "Meno",
+      "less_than_prev": "{time} in meno rispetto al giorno prima",
+      "limit_progress": "{used} su {limit} di limite giornaliero",
+      "limit_reached": "Limite giornaliero di {limit} raggiunto",
+      "more": "Più",
+      "more_than_prev": "{time} in più rispetto al giorno prima",
+      "peak_hour": "Ora di punta",
+      "same_as_prev": "Uguale al giorno prima",
+      "week": "Settimana",
+      "week_total": "Totale settimanale"
+    },
+    "update_available": "Aggiornamento disponibile",
+    "osd": {
+      "capslock": {
+        "title": "Mostra con Blocco Maiuscole"
+      },
+      "numlock": {
+        "title": "Mostra con Blocco Numeri"
+      },
+      "airplane": {
+        "title": "Mostra in Modalità Aereo"
+      },
+      "attach_bar": {
+        "title": "Aggancia alla barra in stile solid/fill",
+        "desc": "Aggancia l'OSD alla barra nei modi solid o fill. Se disattivato, l'OSD rimarrà sempre nella posizione configurata."
+      },
+      "test": "Testa OSD",
+      "position": {
+        "title": "Posizione sullo schermo dell'On-Screen Display",
+        "desc": "Trascina la casella di anteprima per cambiare posizione",
+        "select_on_screen": "Seleziona sullo schermo...",
+        "close_selector": "Chiudi selettore",
+        "bottom_center": "In basso al centro",
+        "bottom_left": "In basso a sinistra",
+        "bottom_right": "In basso a destra",
+        "top_center": "In alto al centro",
+        "top_left": "In alto a sinistra",
+        "top_right": "In alto a destra"
+      },
+      "orientation": {
+        "horizontal": "Orizzontale",
+        "vertical": "Verticale"
+      }
+    },
+    "common": {
+      "show_bar": "Mostra barra",
+      "unavailable": "Non disponibile"
+    },
+    "position": {
+      "custom": "Personalizzato"
+    },
+    "dock": {
+      "enabled": {
+        "title": "Abilita dock",
+        "desc": "Abilita la dock mobile delle applicazioni"
+      },
+      "position": {
+        "title": "Posizione dock",
+        "desc": "Seleziona il bordo dello schermo a cui agganciare la dock",
+        "bottom": "In basso",
+        "top": "In alto",
+        "left": "Sinistra",
+        "right": "Destra"
+      },
+      "elements": {
+        "title": "Numero di elementi",
+        "desc": "Scorciatoie totali mostrate nella dock"
+      },
+      "size": {
+        "title": "Dimensione elementi",
+        "desc": "Dimensioni dei singoli pulsanti in pixel"
+      },
+      "autohide": {
+        "title": "Nascondi automaticamente",
+        "desc": "Nascondi la dock quando il puntatore non è sul bordo"
+      },
+      "timeout": {
+        "title": "Ritardo scomparsa automatica",
+        "desc": "Durata prima di nascondere dopo l'uscita del cursore"
+      },
+      "floating": {
+        "title": "Dock fluttuante",
+        "desc": "Separa la dock dal bordo con angoli arrotondati"
+      },
+      "transparency": {
+        "title": "Trasparenza dock",
+        "desc": "Regola l'opacità dello sfondo della dock"
+      },
+      "apps": {
+        "title": "Applicazioni dock",
+        "singular": "app",
+        "plural": "app",
+        "shuffle": "Mescola app",
+        "empty": "Nessuna applicazione configurata per la dock",
+        "enter_edit": "Modalità modifica",
+        "exit_edit": "Esci da modifica"
+      },
+      "picker": {
+        "search": "Cerca applicazioni...",
+        "done": "Fatto",
+        "empty": "Nessuna applicazione trovata"
+      },
+      "override_bounds": {
+        "title": "Ignora correzione dimensioni fuori schermo",
+        "desc": "Mantieni dimensione personalizzata anche se la dock supera i limiti dello schermo"
+      },
+      "scrolling": {
+        "title": "Abilita scorrimento elementi",
+        "desc": "Limita elementi visibili e consenti lo scorrimento tramite rotellina o touchpad"
+      },
+      "visible_elements": {
+        "title": "Elementi visibili",
+        "desc": "Numero di elementi della dock visibili contemporaneamente"
+      },
+      "hover_scale": {
+        "title": "Effetto ingrandimento al passaggio",
+        "desc": "Livello di ingrandimento al passaggio del cursore sulle icone del dock"
+      },
+      "cascade_scale": {
+        "title": "Scala elementi vicini",
+        "desc": "Ingrandimento a cascata sulle icone adiacenti"
+      },
+      "exclusive": {
+        "title": "Modalità esclusiva",
+        "desc": "Impedisci alle finestre di occupare lo spazio del dock"
+      },
+      "on_top": {
+        "title": "Posiziona la dock sopra le finestre",
+        "desc": "Mantieni la dock visibile sopra le finestre delle applicazioni"
+      },
+      "smart_autohide": {
+        "title": "Nascondi automaticamente intelligente",
+        "desc": "Nascondi il dock solo quando ci sono finestre aperte, mantienilo visibile sul desktop"
+      },
+      "focus_running": {
+        "title": "Attiva finestra esistente",
+        "desc": "Facendo clic sull'icona di un'app si attiva la finestra aperta anziché avviarne una nuova istanza"
+      },
+      "show_running_indicators": {
+        "title": "Indicatori di esecuzione",
+        "desc": "Mostra indicatori a punto o barra sulle icone delle applicazioni aperte"
+      },
+      "show_running_apps": {
+        "title": "Mostra applicazioni aperte",
+        "desc": "Mostra le applicazioni aperte non bloccate nella dock"
+      },
+      "running_scope": {
+        "title": "Ambito finestre attive",
+        "desc": "Filtra le finestre in esecuzione visualizzate e controllate dalla dock",
+        "auto": "Automatico (predefinito del compositor)",
+        "all": "Tutti gli spazi di lavoro e schermi",
+        "output": "Solo schermo corrente",
+        "workspace": "Solo spazio di lavoro attivo"
+      },
+      "window_menu": {
+        "untitled": "Untitled",
+        "new_window": "Nuova finestra",
+        "pin": "Fissa al dock",
+        "unpin": "Rimuovi dal dock"
+      },
+      "background": {
+        "title": "Disegna uno sfondo dietro le app",
+        "desc": "Mostra il pannello del dock dietro le icone delle app"
+      }
+    },
+    "lyrics_picker": {
+      "title": "Seleziona file dei testi",
+      "no_lyrics_selected": "Nessun file di testo selezionato"
+    },
+    "settings": "Impostazioni",
+    "search": {
+      "placeholder": "Cerca impostazioni...",
+      "prompt": "Digita per cercare impostazioni...",
+      "no_results": "Nessuna impostazione trovata",
+      "results": "Risultati della ricerca"
+    },
+    "screenshot": {
+      "ocr": {
+        "title": "Lingue OCR",
+        "desc": "Il riconoscimento del testo rileva automaticamente la lingua tra quelle installate",
+        "search": "Cerca lingue...",
+        "install": "Installa",
+        "installing": "Installazione...",
+        "remove": "Rimuovi",
+        "removing": "Rimozione...",
+        "installed": "Installata",
+        "failed": "Download non riuscito. Controlla la connessione.",
+        "offline": "Impossibile raggiungere l'elenco delle lingue. Vengono mostrate solo le lingue installate.",
+        "loading": "Caricamento delle lingue..."
+      },
+      "directory": {
+        "title": "Cartella degli screenshot",
+        "desc": "Cartella in cui vengono salvati gli screenshot",
+        "select_dir": "Seleziona cartella..."
+      }
+    },
+    "weather": {
+      "enabled": {
+        "title": "Avvisi meteo",
+        "desc": "Invia notifiche quando il tempo cambia o vengono emessi avvisi"
+      },
+      "daily": {
+        "title": "Previsioni due volte al giorno",
+        "desc": "Invia un riepilogo del mattino e della sera sulle condizioni della giornata"
+      },
+      "government": {
+        "title": "Avvisi ufficiali",
+        "desc": "Invia avvisi ufficiali di maltempo per la tua posizione",
+        "never": "Mai",
+        "last_success": "Ultimo successo",
+        "sources": "Fonti raggiungibili",
+        "status": {
+          "title": "Stato delle fonti di avviso",
+          "ok": "Connesso",
+          "partial": "Parzialmente connesso",
+          "unavailable": "Non disponibile",
+          "disabled": "Disattivato",
+          "unknown": "Sconosciuto"
+        }
+      },
+      "quiet": {
+        "title": "Ore silenziose",
+        "desc": "Trattieni gli avvisi non urgenti in questi orari. Avvisi ufficiali gravi, temporali e ghiaccio arriveranno comunque",
+        "range": {
+          "desc": "Trascina i cursori per scegliere quando gli avvisi vengono trattenuti",
+          "title": "Periodo di silenzio"
+        }
+      },
+      "kinds": {
+        "rain_soon": {
+          "title": "Pioggia a breve",
+          "desc": "Pioggia prevista nelle prossime ore"
+        },
+        "snow_soon": {
+          "title": "Neve a breve",
+          "desc": "Neve prevista nelle prossime ore"
+        },
+        "heavy_rain": {
+          "title": "Pioggia intensa",
+          "desc": "Sono previste piogge intense"
+        },
+        "heavy_snow": {
+          "title": "Neve abbondante",
+          "desc": "Sono previste nevicate abbondanti"
+        },
+        "thunderstorm": {
+          "title": "Temporali",
+          "desc": "Sono previsti temporali"
+        },
+        "ice": {
+          "title": "Ghiaccio",
+          "desc": "Sono previste condizioni di ghiaccio"
+        },
+        "fog": {
+          "title": "Nebbia",
+          "desc": "È prevista nebbia"
+        },
+        "temp_rise": {
+          "title": "Aumento della temperatura",
+          "desc": "La temperatura dovrebbe salire rapidamente"
+        },
+        "temp_drop": {
+          "title": "Calo della temperatura",
+          "desc": "La temperatura dovrebbe scendere rapidamente"
+        },
+        "hot": {
+          "title": "Caldo",
+          "desc": "Sono previste temperature molto elevate"
+        },
+        "cold": {
+          "title": "Freddo",
+          "desc": "Sono previste temperature molto basse"
+        },
+        "wind": {
+          "title": "Vento forte",
+          "desc": "Sono previsti venti forti"
+        },
+        "uv": {
+          "title": "Indice UV",
+          "desc": "L'indice UV dovrebbe essere alto"
+        },
+        "air_quality": {
+          "title": "Qualità dell'aria",
+          "desc": "È prevista scarsa qualità dell'aria"
+        }
+      }
+    }
+  },
+  "sysnotif": {
+    "battery": {
+      "app_name": "Sistema",
+      "full_title": "Batteria completamente carica",
+      "full_body": "La batteria è completamente carica (100%).",
+      "low_title": "Batteria scarica",
+      "low_body": "La batteria è al {pct}%. Si prega di caricare il dispositivo.",
+      "critical_title": "Livello batteria critico!",
+      "critical_body": "La batteria è al {pct}%. Carica immediatamente il dispositivo."
+    }
+  },
+  "updater": {
+    "notification": {
+      "app_name": "Aggiorna",
+      "action_open_guide": "Apri guida",
+      "update_available_title": "Aggiornamento disponibile: v{remote}",
+      "update_available_body": "Versione corrente: v{local}. Clicca per vedere cosa è cambiato e per aggiornare."
+    }
+  },
+  "polkit": {
+    "title": "Autenticazione richiesta",
+    "default_message": "Un'Applicazione sta chiedendo i permessi di amministratore.",
+    "default_description": "Autenticazione necessaria per eseguire quest'app come superuser.",
+    "password_placeholder": "Password",
+    "error_failed": "Autenticazione Fallita. Si prega di Riprovare."
+  },
+  "applauncher": {
+    "search": "Cerca",
+    "placeholder": "Inizia con > per un comando...",
+    "tab_applications": "Applicazioni",
+    "tab_files": "File",
+    "placeholder_files": "Cerca file o inserisci percorso...",
+    "tab_emojis": "Emoji",
+    "placeholder_emojis": "Cerca emoji o inserisci parola chiave...",
+    "search_run": "Cerca con {provider}",
+    "search_hint": "Digita per cercare con {provider}"
+  },
+  "calendar": {
+    "loading": "Caricamento...",
+    "weather": {
+      "wind": "Vento",
+      "humid": "Umidità",
+      "rain": "Pioggia",
+      "feels": "Percepita"
+    },
+    "days": {
+      "mo": "Lun",
+      "tu": "Mar",
+      "we": "Mer",
+      "th": "Gio",
+      "fr": "Ven",
+      "sa": "Sab",
+      "su": "Dom"
+    }
+  },
+  "clipboard": {
+    "search": "Cerca",
+    "title": "Appunti",
+    "clear": "Svuota",
+    "empty": "Nessun Risultato",
+    "recent": "Recenti",
+    "pinned": "Fissati"
+  },
+  "lock": {
+    "status": {
+      "locked": "Bloccato",
+      "access_denied": "Accesso negato",
+      "authenticating": "Autenticazione...",
+      "enter_pin": "Inserisci il PIN",
+      "too_many_attempts": "Troppi tentativi"
+    },
+    "fingerprint": {
+      "ready": "Tocca il sensore",
+      "not_recognized": "Impronta non riconosciuta",
+      "recognized": "Impronta riconosciuta",
+      "blocked": "Impronta digitale disattivata"
+    },
+    "power": {
+      "suspend": "Sospendi",
+      "reboot": "Riavvia",
+      "power_off": "Spegni"
+    },
+    "default_user": "Utente",
+    "unknown": "Sconosciuto",
+    "redactor": {
+      "done": "Fatto",
+      "element": {
+        "avatar": "Avatar",
+        "user": "Utente",
+        "password": "Password",
+        "fingerprint": "Impronta digitale",
+        "notifications": "Notifiche",
+        "clock": "Orologio",
+        "lockstatus": "Stato del blocco",
+        "keyboard": "Tastiera",
+        "battery": "Batteria"
+      },
+      "variant": {
+        "avatar": {
+          "round": "Rotondo",
+          "rounded": "Arrotondato"
+        },
+        "user": {
+          "filled": "Pieno",
+          "plain": "Semplice"
+        },
+        "password": {
+          "filled": "Pieno",
+          "glass": "Vetro"
+        },
+        "fingerprint": {
+          "classic": "Classico",
+          "ring": "Anello",
+          "scanner": "Scanner",
+          "pulse": "Impulso",
+          "orbit": "Orbita",
+          "liquid": "Liquido"
+        },
+        "notifications": {
+          "card": "Scheda",
+          "plain": "Semplice"
+        },
+        "lockstatus": {
+          "filled": "Pieno",
+          "plain": "Semplice"
+        }
+      },
+      "setting": {
+        "show_text": "Mostra testo"
+      },
+      "category": {
+        "lockscreen": "Schermata di blocco"
+      }
+    }
+  },
+  "music": {
+    "nothing_playing": "Non c'è niente in riproduzione",
+    "loading": "Caricamento...",
+    "by_artist": "Di {artist}",
+    "unknown_artist": "Artista sconosciuto",
+    "speaker": "Altoparlante",
+    "via_source": "Tramite {source}",
+    "offline": "Offline",
+    "equalizer": "Equalizzatore",
+    "eq": {
+      "apply": "Applica",
+      "saved": "Salvati",
+      "dynamic": "Dinamico",
+      "dynamic_active": "Si adatta al tuo suono"
+    },
+    "audio": {
+      "title": "Audio",
+      "balance": "Bilanciamento canali",
+      "reset": "Ripristina",
+      "centered": "Centrato",
+      "left_slightly_favored": "Leggermente a sinistra",
+      "right_slightly_favored": "Leggermente a destra",
+      "left_only": "Solo sinistra",
+      "right_only": "Solo destra",
+      "left_favored": "Prevalenza a sinistra",
+      "right_favored": "Prevalenza a destra",
+      "test": "Prova",
+      "stop_test": "Ferma",
+      "mono": "Audio mono",
+      "swap": "Scambia S/D",
+      "dynamic_range": "Gamma dinamica",
+      "off": "Disattivato",
+      "balanced": "Bilanciato",
+      "night": "Notte"
+    },
+    "presets": {
+      "flat": "Piatto",
+      "bass": "Bassi",
+      "treble": "Alti",
+      "vocal": "Voci",
+      "pop": "Pop",
+      "rock": "Rock",
+      "jazz": "Jazz",
+      "classic": "Classica",
+      "custom": "Personalizzato"
+    },
+    "searching_lyrics": "Ricerca testo...",
+    "no_lyrics": "Nessun testo trovato",
+    "select_local_file": "Seleziona un file locale",
+    "lyrics": "Testo"
+  },
+  "network": {
+    "tabs": {
+      "ethernet": "Ethernet",
+      "wifi": "Wi-fi",
+      "bluetooth": "Bluetooth"
+    },
+    "status": {
+      "no_ip": "Nessun IP",
+      "unknown": "Sconosciuto",
+      "calculating": "Calcolo...",
+      "open": "Apri",
+      "current_device": "Device corrente",
+      "powering_on": "Accensione...",
+      "powering_off": "Spegnimento...",
+      "disconnected": "Disconnesso",
+      "disconnecting": "Disconnessione...",
+      "hold": "Mantieni...",
+      "connected": "Connesso"
+    },
+    "actions": {
+      "unpair": "Scollega",
+      "scan": "Scansiona",
+      "sign_in": "Accedi"
+    }
+  },
+  "notifications": {
+    "center": {
+      "reserved": "Riservato ad aggiornamenti futuri"
+    },
+    "types": {
+      "default": {
+        "fallback_summary": "Notifica",
+        "system": "Sistema",
+        "action": "Azione"
+      },
+      "weather": {
+        "fallback_summary": "Report meteo",
+        "fallback_body": "Nessun dettaglio fornito.",
+        "title": "Meteo"
+      },
+      "screenshot": {
+        "badge": "Screenshot",
+        "fallback_summary": "Schermo catturato",
+        "click_to_open": "Clicca per aprire la cartella degli screenshot"
+      },
+      "battery": {
+        "title": "Batteria"
+      }
+    }
+  },
+  "quickactions": {
+    "systemusage": {
+      "cpu": "CPU",
+      "ram": "RAM",
+      "temp": "Temp",
+      "disk": "Disco",
+      "net": "Rete"
+    },
+    "timer": {
+      "tabs": {
+        "timer": "Timer",
+        "stopwatch": "Cronometro",
+        "pomodoro": "Pomodoro"
+      },
+      "stopwatch": {
+        "lap": "Giro {number}"
+      },
+      "pomodoro": {
+        "phases": {
+          "focus": "Concentrati",
+          "short_break": "Pausa Breve",
+          "long_break": "Pausa Lunga"
+        },
+        "settings": {
+          "work": "Lavoro (m)",
+          "short_break": "Pausa corta (m)",
+          "long_break": "Pausa lunga (m)",
+          "sessions": "Sessioni"
+        }
+      },
+      "notification": {
+        "app_name": "Timer Quickshell",
+        "timer_finished_title": "Timer finito",
+        "timer_finished_body": "Il tuo timer di {time} è terminato.",
+        "focus_complete_title": "Studio completato",
+        "focus_complete_body": "Ottimo Lavoro! Ora goditi il tuo meritato riposo.",
+        "break_over_title": "Pausa Terminata",
+        "break_over_body": "La Pausa è finita. Rimettiamoci in gioco!",
+        "pomo_skipped_title": "Pomodoro saltato",
+        "pomo_skipped_focus_body": "Sessione di concentrazione saltata. Facciamo una pausa.",
+        "pomo_skipped_break_body": "Pausa saltata. Ritorniamo a concentrarci."
+      }
+    },
+    "draw": {
+      "notification": {
+        "app_name": "DrawAction",
+        "saved_title": "Disegno salvato",
+        "copied_title": "Disegno copiato",
+        "copied_body": "Disegno copiato negli appunti",
+        "failed_title": "Esportazione non riuscita",
+        "failed_body": "Impossibile salvare il disegno"
+      },
+      "hex": "Hex",
+      "palette": "Tavolozza",
+      "palette_default": "Predefinito"
+    },
+    "notes": {
+      "title": "Note",
+      "add_note": "Aggiungi nota",
+      "new_note_title": "Nuova nota",
+      "edit_note": "Modifica",
+      "preview_note": "Anteprima markdown",
+      "no_notes": "Nessuna nota presente. Fai clic su «Aggiungi nota».",
+      "title_placeholder": "Titolo della nota...",
+      "content_placeholder": "Scrivi la nota in markdown...",
+      "back": "Indietro",
+      "save": "Fatto",
+      "cancel": "Annulla",
+      "delete": "Elimina",
+      "selected_count": "{count} selezionate",
+      "pinned": "Fissati",
+      "recent": "Recenti",
+      "pin": "Fissa",
+      "unpin": "Sblocca"
+    },
+    "calculator": {
+      "history": "Cronologia",
+      "no_history": "Nessun calcolo ancora",
+      "copied": "Copiato",
+      "deg": "Deg",
+      "rad": "Rad",
+      "grad": "Gon",
+      "inv": "Inv",
+      "mode": {
+        "normal": "Normale",
+        "advanced": "Avanzata",
+        "converter": "Convertitore"
+      },
+      "clear": "AC",
+      "error": {
+        "syntax": "Espressione non valida",
+        "div0": "Impossibile dividere per zero",
+        "domain": "Input non valido",
+        "paste": "Incolla non valido"
+      },
+      "converter": {
+        "currency": "Valuta",
+        "length": "Lunghezza",
+        "mass": "Massa",
+        "temperature": "Temperatura",
+        "volume": "Volume",
+        "area": "Area",
+        "speed": "Velocità",
+        "time": "Tempo",
+        "data": "Dati",
+        "updated": "Tassi aggiornati {time}",
+        "updating": "Aggiornamento dei tassi...",
+        "offline": "Tassi non disponibili"
+      }
+    },
+    "tabs": {
+      "draw": "Disegno",
+      "system": "Sistema",
+      "timer": "Timer",
+      "notes": "Note",
+      "calculator": "Calcolatrice",
+      "tab": "Scheda"
+    }
+  },
+  "screenshot": {
+    "video_mode": "Clicca per registrare (la selezione dell'area è gestita dal portale)",
+    "select_region": "Seleziona area da catturare",
+    "no_microphones": "Nessun microfono (installa pulseaudio)",
+    "qr_timeout": "Scansione scaduta o fallita.",
+    "qr_not_found": "Nessun QR Code trovato.",
+    "notifications": {
+      "screenshot_app_name": "Screenshot",
+      "recorder_app_name": "Registrazione Schermo",
+      "system_app_name": "Sistema Screenshot",
+      "missing_deps_title": "Dipendenze Mancanti",
+      "missing_deps_body": "Impossibile avviare. Per favore installa:\n{cmds}",
+      "open_folder": "Apri cartella",
+      "recording_saved_title": "Registrazione salvata",
+      "recording_saved_body": "File: {file}\nCartella: {folder}",
+      "recording_error_title": "Errore",
+      "recording_error_body": "Impossibile salvare il file video.",
+      "recording_started_title": "Registrazione iniziata",
+      "recording_started_body": "Premi di nuovo la scorciatoia dello screenshot per interrompere.",
+      "screenshot_saved_title": "Screenshot salvato",
+      "screenshot_saved_body": "File: {file}\nCartella: {folder}",
+      "ocr_copied_title": "Testo copiato",
+      "ocr_empty_title": "Nessun testo trovato",
+      "ocr_empty_body": "Impossibile riconoscere testo nell'area selezionata",
+      "ocr_missing_title": "Dati della lingua OCR mancanti",
+      "ocr_missing_body": "Apri le impostazioni degli screenshot per installare una lingua.",
+      "ocr_uncertain_title": "Testo copiato, ma potrebbe essere impreciso",
+      "ocr_language_hint": "Il testo potrebbe essere in una lingua non installata. Aggiungi lingue nelle impostazioni degli screenshot.",
+      "ocr_open_settings": "Apri impostazioni"
+    }
+  },
+  "start": {
+    "title": "Serpantinum",
+    "made_by": "Fatto da @{author}",
+    "welcome": "Benvenuto/a",
+    "tagline": "Una shell desktop creata per",
+    "you": "Te",
+    "start_preview": "Avvia Anteprima"
+  },
+  "syspanel": {
+    "user": {
+      "default_name": "Utente",
+      "default_os": "Linux",
+      "logout": "Chiudi sessione"
+    },
+    "notifications": {
+      "title": "Notifiche",
+      "clear": "Pulisci",
+      "silent": "Silenzioso",
+      "mute": "Muta",
+      "empty": "Non c'è altro da vedere."
+    },
+    "profiles": {
+      "performance": "Prestazioni",
+      "balanced": "Bilanciato",
+      "power_saver": "Risparmio energia"
+    },
+    "battery": {
+      "fully_charged": "Completamente carico",
+      "charging": "In carica",
+      "charging_time": "In carica • {hours}h {mins}m",
+      "discharging": "In scaricamento",
+      "left_time": "{hours}h {mins}m rimasti",
+      "until_full": "alla carica completa",
+      "remaining": "rimanenti"
+    },
+    "actions": {
+      "system_name": "Sistema",
+      "hibernate_error_title": "Ibernazione non disponibile",
+      "hibernate_error_body": "Ibernazione non disponibile su questo sistema. Controlla la configurazione della swap."
+    }
+  },
+  "volumepopup": {
+    "no_device": "Nessun dispositivo",
+    "mute": "Muto",
+    "master_output_volume": "Volume principale",
+    "no_active_streams": "Nessun flusso attivo",
+    "active_default": "Predefinito attivo",
+    "tabs": {
+      "outputs": "Uscite",
+      "inputs": "Ingressi",
+      "streams": "Flussi"
+    }
+  },
+  "wallpaper": {
+    "notifications": {
+      "downloading": "Scaricamento Sfondi...",
+      "type_to_search": "Scrivi qualcosa da cercare...",
+      "search_paused": "Ricerca messa in pausa",
+      "searching_ddg": "Ricerca sfondi...",
+      "generating_thumbnails": "Generazione miniature...",
+      "no_wallpapers_found": "Nessuno sfondo trovato",
+      "videos": "Video",
+      "history": "Applicati di recente",
+      "favorites": "Preferiti",
+      "recently_added": "Aggiunti di recente"
+    },
+    "filters": {
+      "all": "Tutti",
+      "vid": "Vid",
+      "search": "Cerca",
+      "red": "Rosso",
+      "orange": "Arancione",
+      "yellow": "Giallo",
+      "green": "Verde",
+      "blue": "Blu",
+      "purple": "Viola",
+      "pink": "Rosa"
+    }
+  },
+  "weather": {
+    "desc": {
+      "sunny": "Soleggiato",
+      "clear": "Sereno",
+      "cloudy": "Nuvoloso",
+      "mist": "Nebbia Leggera",
+      "rainy": "Piovoso",
+      "snow": "Neve",
+      "storm": "Tempesta",
+      "unknown": "Sconosciuto",
+      "offline": "Offline"
+    },
+    "days": {
+      "mon": "Lun",
+      "tue": "Mar",
+      "wed": "Mer",
+      "thu": "Gio",
+      "fri": "Ven",
+      "sat": "Sab",
+      "sun": "Dom",
+      "monday": "Lunedì",
+      "tuesday": "Martedì",
+      "wednesday": "Mercoledì",
+      "thursday": "Giovedì",
+      "friday": "Venerdì",
+      "saturday": "Sabato",
+      "sunday": "Domenica"
+    },
+    "months": {
+      "jan": "Gen",
+      "feb": "Feb",
+      "mar": "Mar",
+      "apr": "Apr",
+      "may": "Mag",
+      "jun": "Giu",
+      "jul": "Lug",
+      "aug": "Ago",
+      "sep": "Set",
+      "oct": "Ott",
+      "nov": "Nov",
+      "dec": "Dic"
+    }
+  },
+  "widgets": {
+    "wallpaper": {
+      "name": "Selettore dello sfondo",
+      "desc": "Sfoglia e seleziona uno sfondo"
+    },
+    "network": {
+      "name": "Impostazioni rete",
+      "desc": "Gestisci il WiFi, Ethernet, e le connessioni di rete"
+    },
+    "volume": {
+      "name": "Volume e audio",
+      "desc": "Gestisci i dispositivi audio e i livelli del volume"
+    },
+    "guide": {
+      "name": "Impostazioni",
+      "desc": "Impostazioni Serpantinum"
+    },
+    "calendar": {
+      "name": "Calendario e orologio",
+      "desc": "Visualizza la data, l'ora e gli eventi"
+    },
+    "music": {
+      "name": "Lettore multimediale",
+      "desc": "Controlla la riproduzione multimediale"
+    },
+    "notifications": {
+      "name": "Centro notifiche",
+      "desc": "Vedi le notifiche recenti e la cronologia"
+    },
+    "system": {
+      "name": "Controlli di sistema",
+      "desc": "Monitor di prestazioni, alimentazione e impostazioni rapide"
+    },
+    "redactor": {
+      "no_widgets_active": "Nessun widget attivo",
+      "click_to_add": "Scegli una categoria o cerca nella barra in basso per aggiungere un widget",
+      "done": "Fatto",
+      "widget_singular": "widget",
+      "widgets_plural": "widgets",
+      "category": {
+        "time": "Ora e testo",
+        "media": "Media",
+        "system": "Sistema",
+        "info": "Info",
+        "other": "Altro"
+      },
+      "search": "Cerca widget",
+      "results": "Risultati",
+      "no_results": "Nessun risultato"
+    },
+    "types": {
+      "clock": "Orologio",
+      "music": "Musica",
+      "weather": "Meteo",
+      "image": "Immagine",
+      "visualizer": "Visualizzatore",
+      "user": "Utente",
+      "usage": "Utilizzo",
+      "battery": "Batteria",
+      "github": "Github",
+      "time": "Ora",
+      "notes": "Note",
+      "text": "Testo"
+    },
+    "variants": {
+      "digital": "Digitale",
+      "analog": "Analogico",
+      "full": "Full",
+      "minimal": "Minimal",
+      "round": "Rotondo",
+      "compact": "Compatto",
+      "rect": "Rettangolare",
+      "rounded": "Arrotondato",
+      "bars": "Barre",
+      "continuous": "Continuo",
+      "default": "Predefinito",
+      "material": "Material",
+      "materialAnalog": "Material analogico",
+      "lockscreen": "Schermata di blocco",
+      "stretched": "Stretched",
+      "lumen": "Lumen",
+      "lyrics": "Testo",
+      "simpleLyrics": "Testo semplice",
+      "circle": "Cerchio",
+      "graph": "Grafico"
+    },
+    "presets": {
+      "minimal": {
+        "name": "Minimale"
+      },
+      "media_station": {
+        "name": "Stazione Multimediale"
+      },
+      "dashboard": {
+        "name": "Cruscotto"
+      },
+      "desk_clock": {
+        "name": "Orologio da scrivania"
+      },
+      "system_monitor": {
+        "name": "Monitor di sistema"
+      }
+    },
+    "github": {
+      "set_user": "Imposta utente",
+      "error": "Errore",
+      "commit": "commit",
+      "commits": "commit",
+      "no_day_selected": "Nessun giorno selezionato",
+      "fetching": "Recupero dei contributi GitHub...",
+      "fetch_error": "Impossibile recuperare l'utente @{user}",
+      "enter_username": "Inserisci un nome utente GitHub",
+      "no_contributions": "Nessun contributo trovato"
+    },
+    "settings": {
+      "lyricsLines": "Righe",
+      "lyricsAlignment": "Allineamento",
+      "textContent": "Testo",
+      "hideText": "Nascondi testo",
+      "lineThickness": "Spessore",
+      "usageStyle": "Stile",
+      "visualizerStyle": "Stile del visualizzatore",
+      "updateRate": "Aggiornamenti al minuto",
+      "perMinute": "/min"
+    },
+    "align": {
+      "left": "Sinistra",
+      "center": "Centro",
+      "right": "Destra"
+    },
+    "notes": {
+      "empty": "Ancora nessuna nota"
+    },
+    "text": {
+      "placeholder": "Inserisci testo"
+    },
+    "style": {
+      "circle": "Cerchio",
+      "wave": "Onda"
+    },
+    "usageGraph": {
+      "average": "Media",
+      "peak": "Picco"
+    }
+  },
+  "cli": {
+    "usage": "Uso: serpantinum [comando] [opzioni...]",
+    "description": "Una shell desktop per compositor Wayland.",
+    "commands": "Comandi:",
+    "script_commands": "Comandi Script:",
+    "launch_desc": "Avvia componenti autonomi (start)",
+    "msg_desc": "Invia comandi o cambi di workspace al gestore dell'interfaccia",
+    "ipc_desc": "Inoltra chiamate IPC direttamente alla shell",
+    "kill_desc": "Interrompe in modo pulito il demone in esecuzione",
+    "restart_desc": "Riavvia il demone",
+    "options": "Opzioni:",
+    "verbose_desc": "Abilita il logging dettagliato (verboso)",
+    "version_desc": "Mostra le informazioni sulla versione ed esci",
+    "help_desc": "Mostra questo messaggio di aiuto ed esci",
+    "examples": "Esempi:",
+    "daemon_stopped": "Demone di Serpantinum arrestato",
+    "daemon_restarted": "Demone di Serpantinum riavviato.",
+    "starting_daemon": "Demone non in esecuzione. Avvio di serpantinumd in background...",
+    "error_missing_qml": "Errore: target da avviare mancante.",
+    "launch_usage": "Uso: serpantinum launch <start> [argomenti...]",
+    "error_qml_not_found": "Errore: impossibile trovare {NAME}.qml in {DIR}",
+    "error_shell_qml_not_found": "Errore: impossibile trovare il percorso di shell.qml in {DIR}",
+    "error_unknown_command": "Errore: comando sconosciuto '{CMD}'.",
+    "error_unknown_target": "Errore: target sconosciuto '{TARGET}'.",
+    "launch_help": {
+      "usage": "Uso: serpantinum launch <start> [argomenti...]",
+      "description": "Avvia componenti autonomi direttamente in modalità esecuzione.",
+      "available_targets": "Target disponibili:",
+      "target_start": "Avvia l'interfaccia di configurazione iniziale"
+    },
+    "msg_help": {
+      "usage": "Uso: serpantinum msg <comando|workspace> [argomenti...]",
+      "description": "Invia direttamente messaggi di gestione per layout, workspace e finestre.",
+      "available_commands": "Messaggi disponibili:",
+      "cmd_workspace": "Passa al workspace <num> (aggiungi 'move' per inviare la finestra attiva)",
+      "cmd_open": "Apre un pannello di sistema (rete, guida, sfondo, menu applicazioni)",
+      "cmd_toggle": "Mostra/nasconde un pannello di sistema",
+      "cmd_close": "Chiude qualsiasi overlay attivo della shell"
+    },
+    "ipc_help": {
+      "usage": "Uso: serpantinum ipc call <target> <metodo> [argomenti...]",
+      "description": "Invia una chiamata IPC direttamente all'istanza quickshell in esecuzione."
+    },
+    "scripts": {
+      "exit": "Termina la sessione grafica ed esce dal compositor",
+      "lock": "Attiva la schermata di blocco",
+      "volume": "Controlla il volume e lo stato del microfono/audio predefinito",
+      "reload": "Ricarica forzatamente gli elementi desktop di quickshell",
+      "weather": "Recupera e gestisce i dati e la cache delle previsioni meteo",
+      "location": "Recupera e aggiorna le coordinate geografiche",
+      "screenshot": "Cattura schermate, registra video o analizza codici QR",
+      "brightness": "Regola la luminosità dello schermo",
+      "location_manual": "Imposta manualmente le coordinate geografiche e il fuso orario",
+      "gamma": "Regola la temperatura colore e la pianificazione notte/giorno",
+      "translate": "Traduttore istantaneo per testo e selezione",
+      "suspend": "Blocca lo schermo e sospendi il sistema",
+      "hibernate": "Iberna il sistema",
+      "reboot": "Riavvia il sistema",
+      "poweroff": "Spegni il sistema",
+      "redactor": "Apri o attiva/disattiva l'editor del layout dei widget del desktop",
+      "lock_redactor": "Attiva/disattiva, apri o chiudi l'editor del layout della schermata di blocco"
+    },
+    "usage_label": "Utilizzo:",
+    "config_desc": "Leggi e modifica le impostazioni (get, set, dump, path, edit)",
+    "error_unknown_language": "Errore: lingua sconosciuta '{CODE}'.",
+    "update_available": "Aggiornamento disponibile: {LOCAL} -> {REMOTE}",
+    "up_to_date": "Serpantinum è aggiornato ({VERSION}).",
+    "state_on": "attivo",
+    "state_off": "disattivo",
+    "error_unknown_theme": "Errore: tema sconosciuto '{NAME}'.",
+    "error_no_wallpapers": "Errore: nessuno sfondo trovato nella cartella degli sfondi.",
+    "error_file_not_found": "Errore: file non trovato: {PATH}",
+    "info_desc": "Mostra lo stato attuale di un'impostazione (notifications, idle, dock, sfx, theme, lang, wallpaper, monitors, updates)",
+    "set_desc": "Modifica un'impostazione (notifications, idle, dock, sfx, theme, lang, wallpaper)",
+    "trigger_desc": "Esegui un'azione singola (idle, notifications, theme, firstlaunch)",
+    "settings_desc": "Apri la finestra delle impostazioni (facoltativamente su una scheda)",
+    "error_unknown_app": "Errore: app sconosciuta '{ID}'."
+  },
+  "daemon": {
+    "already_running": "Il demone è già in esecuzione. Uscita...",
+    "shutting_down": "Arresto del demone serpantinum...",
+    "launching": "Avvio del demone serpantinum...",
+    "cli": {
+      "usage": "Uso: serpantinumd <comando> [opzioni...]",
+      "description": "Demone di servizio in background per la shell desktop serpantinum.",
+      "commands": "Comandi:",
+      "cmd_start": "Avvia il servizio demone e i processi in background",
+      "cmd_stop": "Arresta il servizio demone in esecuzione",
+      "cmd_status": "Verifica lo stato di esecuzione del servizio demone",
+      "options": "Opzioni:",
+      "opt_verbose": "Attiva la registrazione dettagliata dell'output",
+      "opt_version": "Mostra le informazioni sulla versione ed esce",
+      "opt_help": "Mostra questo messaggio di aiuto ed esce",
+      "stopped": "Demone Serpantinum arrestato.",
+      "status_running": "Il demone Serpantinum è in esecuzione (PID: {PID}).",
+      "status_stopped": "Il demone Serpantinum non è in esecuzione.",
+      "unknown_arg": "Argomento sconosciuto: {ARG}"
+    },
+    "app_name": "Serpantinum",
+    "easyeffects": {
+      "title": "EasyEffects è ancora attivo",
+      "body": "Serpantinum ora ha un proprio motore audio ed EasyEffects può interferire. Se usavi EasyEffects solo per Serpantinum, impedisci che si avvii all'accesso."
+    }
+  },
+  "installer": {
+    "auth": {
+      "error_failed": "Autenticazione fallita."
+    },
+    "os": {
+      "error_root": "Errore: Non eseguire questo script direttamente come root/sudo. Eseguilo come utente normale.",
+      "error_unsupported": "Sistema operativo non supportato ({os}). Serpantinum supporta esclusivamente Arch Linux e derivate.",
+      "error_not_found": "Impossibile rilevare il sistema operativo. /etc/os-release non trovato.",
+      "unknown_cpu": "CPU sconosciuta",
+      "unknown_gpu": "GPU sconosciuta / Macchina virtuale",
+      "default_os": "Arch Linux"
+    },
+    "ui": {
+      "user": "Utente:",
+      "os": "SO:",
+      "cpu": "CPU:",
+      "gpu": "GPU:",
+      "target_version": "Versione di destinazione:",
+      "install_mode": "Modalità d'installazione:",
+      "github": "GitHub:",
+      "twitter": "Twitter:",
+      "reddit": "Reddit:",
+      "telegram": "Telegram:",
+      "donate": "Donazioni:",
+      "donate_sub": "(Supporta il progetto!)",
+      "packages_prompt": " Pacchetti > ",
+      "packages_header": " Premi Esc o Invio per tornare indietro ",
+      "package_missing": "{pkg} (mancante - verrà installato)",
+      "package_installed": "{pkg} (installato)",
+      "compositors_title": "=== Seleziona i compositor target ===",
+      "installed": " (installato)",
+      "not_installed": " (non installato)",
+      "done": "Fatto",
+      "sddm_title": "=== Configurazione Display Manager (SDDM) ===",
+      "sddm_detected_active": "Display manager attivo/abilitato rilevato: {dm}",
+      "sddm_detected_none": "Display manager attivo/abilitato rilevato: Nessuno",
+      "sddm_opt_install": "Installa e configura SDDM (tema Material You)",
+      "sddm_opt_disable": "Disabilita e rimuovi '{dm}'",
+      "sddm_opt_wayland": "Forza il backend Wayland",
+      "target_compositor_none": "Compositor di destinazione [obbligatorio - nessuno selezionato]",
+      "target_compositor_selected": "Compositor di destinazione [{comps}]",
+      "target_compositor_req": "Compositor di destinazione ({label}) [obbligatorio]",
+      "target_compositor_label": "Compositor di destinazione ({comps})",
+      "unsupported_compositor": "Compositor non supportato",
+      "menu_overview": "Panoramica installazione pacchetti ({count} pacchetti base)",
+      "menu_sddm": "Gestore accessi SDDM",
+      "menu_wallpapers": "Pacchetto sfondi",
+      "menu_telemetry": "Telemetria anonima",
+      "menu_update": "Aggiorna",
+      "menu_reinstall": "Reinstalla",
+      "menu_install": "Installa",
+      "menu_exit": "Esci",
+      "menu_uninstall": "Disinstalla",
+      "uninstall_title": "Vuoi davvero disinstallare Serpantinum?",
+      "uninstall_removes": "Verranno rimossi la shell, serpantinum-core, serpantinum-audio, serpantinum-gamma, il tema SDDM e le impostazioni, lo stato e la cache di Serpantinum, e le app con tema, Qt e SDDM torneranno ai valori predefiniti di sistema.",
+      "uninstall_keeps": "Ski, i compositor, le loro configurazioni, gli sfondi e i pacchetti di sistema restano invariati.",
+      "uninstall_cancel": "No, torna indietro",
+      "uninstall_confirm": "Sì, disinstalla Serpantinum",
+      "error_no_compositor": "Devi scegliere almeno un compositor supportato prima di procedere.",
+      "tagline": "Una shell desktop creata su misura per te",
+      "support_creator": "Supporta il creatore:",
+      "buy_coffee": "Se ti piace questo progetto, offrimi un caffè!",
+      "installed_success": "✔ Serpantinum {ver} ({commit}) installato con successo.",
+      "failed_packages": "Si sono verificati errori durante l'installazione dei seguenti pacchetti:",
+      "restart_prompt": "Riavvia il compositor o esegui 'serpantinumd start' per iniziare.",
+      "ask_reboot": "Vuoi riavviare ora? [y/n] "
+    },
+    "deps": {
+      "syncing": "Sincronizzazione e aggiornamento dei pacchetti di sistema (pacman -syyu)...",
+      "all_installed": "-> Tutti i pacchetti sono già installati! Download dei pacchetti ignorato.",
+      "missing_count": "-> Trovati {count} pacchetti mancanti da installare.",
+      "installing_title": "Installazione dei pacchetti di sistema e delle dipendenze...",
+      "installing_pkg": "Installazione di {pkg}...",
+      "install_ok": "Installazione di {pkg} riuscita",
+      "install_failed": "Impossibile installare {pkg}",
+      "enabling_copr": "Abilitazione del repository COPR {repo}...",
+      "enabling_repo": "Abilitazione del repository {repo}...",
+      "enabling_terra": "Abilitazione del repository Terra...",
+      "quickshell_outdated": "Quickshell {version} è troppo vecchio, è richiesta la versione {minimum} o successiva. Aggiornamento in corso...",
+      "quickshell_still_old": "Quickshell è ancora più vecchio di {minimum}. Aggiornalo manualmente, altrimenti le impostazioni non si apriranno."
+    },
+    "deploy": {
+      "configuring_sddm": "Configurazione del display manager SDDM...",
+      "disabling_dm": "-> Disabilitazione del display manager in conflitto: {dm}",
+      "sddm_success": "-> Tema SDDM Material You installato e servizio abilitato [ OK ]",
+      "sddm_no_wayland_compositor": "Nessun compositor Wayland supportato per la schermata di accesso (kwin_wayland/weston) trovato, uso di X11 per SDDM.",
+      "sddm_no_xorg": "Xorg non trovato, uso di {compositor} per SDDM.",
+      "sddm_no_backend": "Né Xorg né un compositor Wayland supportato per la schermata di accesso (kwin_wayland/weston) sono stati trovati in /usr/local/bin, /usr/bin o /bin.",
+      "sddm_skipped": "Configurazione di SDDM saltata: nessun server grafico o compositor di accesso utilizzabile trovato. Il display manager attuale resta invariato."
+    },
+    "audio": {
+      "building": "Nessun motore audio precompilato per questo sistema, compilazione dai sorgenti...",
+      "checksum_failed": "Il download del motore audio non ha superato il controllo del checksum, saltato.",
+      "download_failed": "Impossibile scaricare il motore audio di Serpantinum, saltato. Puoi installarlo più tardi da github.com/ilyamiro/serpantinum-audio.",
+      "installed": "Motore audio di Serpantinum {version} installato",
+      "install_failed": "Installazione del motore audio di Serpantinum non riuscita. L'equalizzatore non funzionerà finché non verrà installato da github.com/ilyamiro/serpantinum-audio.",
+      "installing": "Installazione del motore audio di Serpantinum...",
+      "up_to_date": "-> Il motore audio di Serpantinum {version} è già installato."
+    },
+    "core": {
+      "checksum_failed": "Il download dei servizi principali non ha superato il controllo del checksum, saltato.",
+      "download_failed": "Impossibile scaricare i servizi principali di Serpantinum, saltato. Puoi installarli più tardi da github.com/ilyamiro/serpantinum-core.",
+      "installed": "Servizi principali di Serpantinum {version} installati",
+      "install_failed": "Installazione dei servizi principali di Serpantinum non riuscita. L'utilizzo del sistema, gli indicatori di blocco della tastiera e gli appunti non funzioneranno finché non verranno installati da github.com/ilyamiro/serpantinum-core.",
+      "installing": "Installazione dei servizi principali di Serpantinum...",
+      "unsupported_arch": "I pacchetti precompilati dei servizi principali esistono solo per x86_64, saltato.",
+      "up_to_date": "-> I servizi principali di Serpantinum {version} sono già installati."
+    },
+    "gamma": {
+      "checksum_failed": "Il download del filtro luce blu non ha superato il controllo del checksum, saltato.",
+      "download_failed": "Impossibile scaricare il filtro luce blu di Serpantinum, saltato. Puoi installarlo più tardi da github.com/ilyamiro/serpantinum-gamma.",
+      "installed": "Filtro luce blu di Serpantinum {version} installato",
+      "install_failed": "Installazione del filtro luce blu di Serpantinum non riuscita. Non funzionerà finché non verrà installato da github.com/ilyamiro/serpantinum-gamma.",
+      "installing": "Installazione del filtro luce blu di Serpantinum...",
+      "unsupported_arch": "I pacchetti precompilati del filtro luce blu esistono solo per x86_64, saltato.",
+      "up_to_date": "-> Il filtro luce blu di Serpantinum {version} è già installato."
+    },
+    "ski": {
+      "checksum_failed": "Il download di Ski non ha superato il controllo del checksum, saltato.",
+      "download_failed": "Impossibile scaricare Ski, saltato. Puoi installarlo più tardi da github.com/ilyamiro/Ski.",
+      "installed": "Ski {version} installato",
+      "install_failed": "Installazione di Ski non riuscita",
+      "installing": "Installazione del file manager Ski...",
+      "unsupported_arch": "I pacchetti precompilati di Ski esistono solo per x86_64, saltato.",
+      "up_to_date": "-> Ski {version} è già installato."
+    },
+    "uninstall": {
+      "stopping": "Arresto di Serpantinum e dei suoi servizi...",
+      "resetting": "Ripristino dei temi delle app ai valori predefiniti di sistema...",
+      "removing": "Rimozione dei file di Serpantinum...",
+      "done": "Serpantinum è stato disinstallato. Rimuovi la riga di avvio automatico dalla configurazione del compositor se non ti serve più."
+    }
+  },
+  "datetime": {
+    "full_date": "dddd, d MMMM",
+    "just_now": "Proprio ora",
+    "minutes_ago": "{mins} min fa",
+    "yesterday": "Ieri {time}"
+  },
+  "gov_alerts": {
+    "status": {
+      "ok": "Tutte le fonti raggiungibili",
+      "partial": "Alcune fonti non raggiungibili",
+      "unavailable": "Fonti di avviso non raggiungibili",
+      "disabled": "Disattivato",
+      "unknown": "Non ancora verificato"
+    },
+    "coverage": {
+      "official": "Fonti nazionali ufficiali",
+      "worldwide": "Solo il server di allerta mondiale",
+      "none": "Nessuna copertura"
+    },
+    "sources": {
+      "nws": "Servizio meteorologico nazionale statunitense",
+      "eccc": "Environment Canada",
+      "dwd": "Servizio meteorologico tedesco",
+      "metno": "MET Norway",
+      "kde": "Server di allerta KDE",
+      "meteoalarm": "MeteoAlarm",
+      "feeds": "Feed ufficiali di allerta"
+    },
+    "severity": {
+      "moderate": "Moderata",
+      "severe": "Grave",
+      "extreme": "Estrema"
+    },
+    "hazard": {
+      "generic": "Avviso meteo",
+      "rain": "Pioggia intensa",
+      "flood": "Alluvione",
+      "snow": "Neve",
+      "ice": "Ghiaccio",
+      "storm": "Tempesta",
+      "wind": "Vento",
+      "fog": "Nebbia",
+      "heat": "Caldo",
+      "cold": "Freddo",
+      "fire": "Incendio",
+      "dust": "Polvere",
+      "marine": "Marino"
+    },
+    "last_success": "Ultima verifica riuscita",
+    "sources_ok": "{ok} fonti su {total} raggiungibili",
+    "refresh": "Verifica ora",
+    "no_alerts": "Nessun avviso attivo"
+  },
+  "weather_alerts": {
+    "rain_soon": {
+      "title": "Pioggia prevista",
+      "body": "Pioggia prevista intorno alle {time}."
+    },
+    "snow_soon": {
+      "title": "Neve prevista",
+      "body": "Neve prevista intorno alle {time}."
+    },
+    "heavy_rain": {
+      "title": "Pioggia intensa",
+      "body": "Pioggia intensa prevista intorno alle {time}."
+    },
+    "heavy_snow": {
+      "title": "Neve abbondante",
+      "body": "Neve abbondante prevista intorno alle {time}."
+    },
+    "thunderstorm": {
+      "title": "Temporale",
+      "body": "Temporali previsti intorno alle {time}."
+    },
+    "ice": {
+      "title": "Condizioni di ghiaccio",
+      "body": "Pioggia gelata o ghiaccio previsti intorno alle {time}."
+    },
+    "fog": {
+      "title": "Nebbia",
+      "body": "Scarsa visibilità prevista intorno alle {time}."
+    },
+    "temp_rise": {
+      "title": "Oggi più caldo",
+      "body": "Oggi farà {delta} più caldo di ieri, con una massima di {max}."
+    },
+    "temp_drop": {
+      "title": "Oggi più freddo",
+      "body": "Oggi farà {delta} più freddo di ieri, con una massima di {max}."
+    },
+    "hot": {
+      "title": "Caldo estremo",
+      "body": "Oggi la percezione sarà di {temp}. Bevi molta acqua."
+    },
+    "cold": {
+      "title": "Freddo estremo",
+      "body": "Oggi la percezione sarà di {temp}. Vestiti bene al caldo."
+    },
+    "wind": {
+      "title": "Vento forte",
+      "body": "Sono previste raffiche fino a {speed} intorno alle {time}."
+    },
+    "uv": {
+      "title": "Indice UV alto",
+      "body": "L'indice UV raggiungerà {value} intorno alle {time}. Usa la protezione solare."
+    },
+    "air_quality": {
+      "title": "Scarsa qualità dell'aria",
+      "body": "L'indice di qualità dell'aria è {value}. Limita il tempo all'aperto."
+    },
+    "daily_clear": {
+      "title": "Cielo sereno",
+      "today": "Cielo sereno oggi. Massima {max}, minima {min}.",
+      "tomorrow": "Cielo sereno domani. Massima {max}, minima {min}."
+    },
+    "daily_cloudy": {
+      "title": "Nuvoloso",
+      "today": "Nuvoloso oggi. Massima {max}, minima {min}.",
+      "tomorrow": "Nuvoloso domani. Massima {max}, minima {min}."
+    },
+    "daily_rain": {
+      "title": "Pioggia",
+      "today": "Pioggia oggi. Massima {max}, minima {min}.",
+      "tomorrow": "Pioggia domani. Massima {max}, minima {min}."
+    },
+    "daily_snow": {
+      "title": "Neve",
+      "today": "Neve oggi. Massima {max}, minima {min}.",
+      "tomorrow": "Neve domani. Massima {max}, minima {min}."
+    },
+    "daily_storm": {
+      "title": "Temporali",
+      "today": "Temporali oggi. Massima {max}, minima {min}.",
+      "tomorrow": "Temporali domani. Massima {max}, minima {min}."
+    },
+    "daily_fog": {
+      "title": "Nebbia",
+      "today": "Nebbia oggi. Massima {max}, minima {min}.",
+      "tomorrow": "Nebbia domani. Massima {max}, minima {min}."
+    }
+  },
+  "common": {
+    "select": "Seleziona..."
+  }
+}

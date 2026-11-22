@@ -2,6 +2,8 @@ pragma Singleton
 
 import QtQuick
 import qs.services as CaeWall
+import qs.utils as CaeU
+import Caelestia.Config as CaeCfg
 import Quickshell
 import Quickshell.Io
 import qs.noctalia.Commons
@@ -13,7 +15,28 @@ Singleton {
   id: root
 
   readonly property ListModel fillModeModel: ListModel {}
-  readonly property string defaultDirectory: Settings.preprocessPath(Settings.data.wallpaper.directory)
+  // Aether: one wallpaper folder for every shell (Aether Settings > Wallpaper). Noctalia's own folder setting is kept
+  // in step both ways: change it here and Aether's folder changes; change Aether's and this follows.
+  readonly property string defaultDirectory: String(CaeU.Paths.wallsdir) || Settings.preprocessPath(Settings.data.wallpaper.directory)
+
+  function _syncFromAether() {
+    const aether = String(CaeU.Paths.wallsdir);
+    if (aether && Settings.preprocessPath(Settings.data.wallpaper.directory) !== aether)
+      Settings.data.wallpaper.directory = aether;
+  }
+  Connections {
+    target: CaeU.Paths
+    function onWallsdirChanged() { root._syncFromAether(); }
+  }
+  Connections {
+    target: Settings.data.wallpaper
+    function onDirectoryChanged() {
+      const mine = Settings.preprocessPath(Settings.data.wallpaper.directory);
+      if (mine && mine !== String(CaeU.Paths.wallsdir))
+        CaeCfg.GlobalConfig.paths.wallpaperDir = mine;
+    }
+  }
+  Component.onCompleted: Qt.callLater(root._syncFromAether)
   readonly property string solidColorPrefix: "solid://"
 
   // All available wallpaper transitions

@@ -9,7 +9,7 @@ Item {
 
     readonly property MprisPlayer activePlayer: MprisController.activePlayer
     readonly property bool isPlaying: activePlayer !== null && activePlayer.playbackState === MprisPlaybackState.Playing
-    readonly property bool live: visible && enabled && (Window.window?.visible ?? false) && isPlaying
+    readonly property bool live: visible && enabled && (Window.window?.visible ?? false) && isPlaying && !CavaService.paused
     readonly property bool available: CavaService.cavaAvailable && SettingsData.audioVisualizerEnabled
     readonly property bool showBars: idleIconName === "" || (available && live)
 
