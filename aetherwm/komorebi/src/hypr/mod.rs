@@ -291,7 +291,7 @@ fn apply_dwindle(wm: &Arc<Mutex<WindowManager>>, conf: &conf::HyprConf) {
     crate::animation::FORCE_SPLIT.store(split, std::sync::atomic::Ordering::Relaxed);
     let live = conf.get_bool("aether:toggle_live_resize").unwrap_or(true);
     crate::animation::TOGGLE_LIVE_RESIZE.store(live, std::sync::atomic::Ordering::Relaxed);
-    if conf.get_bool("aether:desktop_window").unwrap_or(true) { crate::progman::ensure(); }
+    if conf.get_bool("aether:desktop_window").unwrap_or(false) { crate::progman::ensure(); }
     let layout = conf.get("general:layout").unwrap_or("dwindle").trim().to_string();
     // dwindle is Hyprland's default; canvas is not part of the window manager yet: dwindle meanwhile
     if !matches!(layout.as_str(), "dwindle" | "canvas" | "") {
