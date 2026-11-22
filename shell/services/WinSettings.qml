@@ -357,6 +357,15 @@ Singleton {
         }
     }
 
+    Timer {
+        id: retryLoad
+
+        property int tries: 0
+
+        interval: 300
+        onTriggered: file.reload()
+    }
+
     FileView {
         id: file
 
@@ -365,6 +374,13 @@ Singleton {
         onFileChanged: reload()
         onLoaded: { root.loaded = true; root.apply(); } // loaded first: apply() starts tiling only with the whole file read
         onLoadFailed: err => {
+            // a restart can catch the file mid-write: retry a few times before falling back to the defaults (they
+            // made one-time windows like "Your config files" come back after every restart)
+            if (err !== FileViewError.FileNotFound && retryLoad.tries < 5) {
+                retryLoad.tries++;
+                retryLoad.restart();
+                return;
+            }
             if (err === FileViewError.FileNotFound) writeAdapter();
             root.apply();
             root.loaded = true;

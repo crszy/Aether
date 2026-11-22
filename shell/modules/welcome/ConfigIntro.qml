@@ -16,7 +16,8 @@ import qs.utils
 LazyLoader {
     id: loader
 
-    active: WinSettings.loaded && !WinSettings.configIntroShown
+    // after the loading screen (it came up on top of the splash); Aether Settings > Home can hide or bring it back
+    active: WinSettings.loaded && !WinSettings.configIntroShown && !SplashState.showing && !SplashState.lingering
 
     FloatingWindow {
         id: win

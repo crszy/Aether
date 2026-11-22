@@ -247,6 +247,18 @@ PageScroll {
         onChosen: v => Cae.WinSettings.aetherColours = v
     }
     ToggleRow {
+        label: "Loading screen"
+        desc: "Show the splash when Aether starts or reloads"
+        checked: Cae.WinSettings.splashEnabled
+        onToggled: v => Cae.WinSettings.splashEnabled = v
+    }
+    ToggleRow {
+        label: "\"Your config files\" window"
+        desc: "Show the list of your config files after the splash (off = hidden)"
+        checked: !Cae.WinSettings.configIntroShown
+        onToggled: v => Cae.WinSettings.configIntroShown = !v
+    }
+    ToggleRow {
         label: "Battery saver"
         desc: "Laptops: pause video wallpapers while on battery"
         checked: Cae.WinSettings.batterySaver === "auto"
