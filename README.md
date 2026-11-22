@@ -4,7 +4,7 @@
 
 <p align="center">
   <img src="docs/logo.png" alt="Aether logo" width="96"><br>
-  <b>Linux rices on Windows, for real.</b><br>
+  <b>Linux rices on Windows, yeah</b><br>
   Real Quickshell desktop shells plus a Hyprland-style tiling window manager, running natively on Windows.
 </p>
 
