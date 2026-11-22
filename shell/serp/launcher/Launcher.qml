@@ -9,6 +9,7 @@ import Quickshell
 import Quickshell.Wayland
 import Quickshell.Hyprland
 import Quickshell.Io
+import qs.services as Cae
 import "../"
 import "../reusables"
 import "../WindowRegistry.js" as WindowRegistry
@@ -1096,7 +1097,10 @@ PanelWindow {
         }
 
         if (item.isCommand) {
-            if (item.command && item.command.trim().length > 0) {
+            // Aether: >aether opens Aether Settings, like every other shell
+            if (item.command && item.command.trim().toLowerCase() === "aether") {
+                Cae.WinSettings.ipc("aether", "settings", []);
+            } else if (item.command && item.command.trim().length > 0) {
                 let term = launcherWindow.terminalCommand ? launcherWindow.terminalCommand.trim() : "";
                 let fullCmd = term !== "" ? (term + " " + item.command) : item.command;
                 Quickshell.execDetached(["where.exe", "/q", "serp-linux-only", "bash", "-c", fullCmd]);

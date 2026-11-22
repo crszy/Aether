@@ -1,6 +1,7 @@
 import QtQuick
 import qs.noctalia.Commons
 import qs.noctalia.Services.UI
+import qs.services as Cae
 
 Item {
   id: root
@@ -32,6 +33,19 @@ Item {
             "isImage": false,
             "onActivate": function () {
               launcher.setSearchText(">settings ");
+            }
+          },
+          {
+            // Aether: >aether opens Aether Settings, like every other shell
+            "name": ">aether",
+            "description": "Aether Settings - all shells' settings in one window",
+            "icon": iconMode === "tabler" ? "adjustments" : "preferences-system",
+            "isTablerIcon": true,
+            "isImage": false,
+            "onActivate": function () {
+              if (launcher && launcher.close)
+                launcher.close();
+              Cae.WinSettings.ipc("aether", "settings", []);
             }
           }
         ];

@@ -2,6 +2,7 @@
 // Windows changes by dotfiles/dss-port.js.
 import Quickshell
 import Quickshell.Io
+import qs.services as Cae
 import Quickshell.Wayland
 import QtQuick
 import QtQuick.Effects
@@ -106,6 +107,9 @@ PanelWindow {
             else { const sc = score(e, q); if (sc >= 0) list.push({ e: e, s: sc + u * 4 + (fv >= 0 ? 150 : 0) }) }
         }
         list.sort(function(a, b) { return b.s !== a.s ? b.s - a.s : (a.e.name || "").localeCompare(b.e.name || "") })
+        // Aether: >aether (or typing "aether settings") opens Aether Settings, like every other shell
+        if (q === ">aether" || q === "> aether" || (q.length >= 3 && "aether settings".indexOf(q) === 0))
+            out.push({ kind: "aether", name: "Aether Settings", sub: Tr.t("All shells' settings in one window") })
         const c = q !== "" ? calc(query) : null
         if (c !== null) out.push({ kind: "calc", name: "= " + c, sub: Tr.t("Press Enter to copy the result"), val: c })
         // "10 km in mi", "100 usd pln": units and money (Conv.qml; the rates are fetched only when you type money)
@@ -197,7 +201,8 @@ PanelWindow {
         hide()
         try { Sfx.play("select") } catch (e) { }
         try {
-            if (r.kind === "app") { r.entry.execute(); bump(r.id) }
+            if (r.kind === "aether") Cae.WinSettings.ipc("aether", "settings", [])
+            else if (r.kind === "app") { r.entry.execute(); bump(r.id) }
             else if (r.kind === "calc") DssWin.run(["bash", "-c", "printf %s \"$1\" | wl-copy", "_", r.val])
             else if (r.kind === "web") DssWin.run(["xdg-open", "https://duckduckgo.com/?q=" + encodeURIComponent(r.q)])
             else if (r.kind === "file") DssWin.run(["xdg-open", r.path])

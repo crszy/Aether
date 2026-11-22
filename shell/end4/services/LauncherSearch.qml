@@ -9,6 +9,7 @@ import qs.end4 as E4Root
 import Qt.labs.folderlistmodel
 import Quickshell
 import Quickshell.Io
+import qs.services as Cae
 import Quickshell.Hyprland
 
 Singleton {
@@ -64,6 +65,12 @@ Singleton {
     }
 
     property var searchActions: [
+        {
+            action: "aether", // Aether: opens Aether Settings, like every other shell
+            execute: () => {
+                Cae.WinSettings.ipc("aether", "settings", []);
+            }
+        },
         {
             action: "accentcolor",
             execute: args => {
