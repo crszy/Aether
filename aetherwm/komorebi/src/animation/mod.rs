@@ -105,3 +105,10 @@ pub fn suppress_movement_animations_after_workspace_switch() {
 pub fn movement_animations_suppressed() -> bool {
     now_ms() < ANIMATION_SUPPRESSED_UNTIL_MS.load(std::sync::atomic::Ordering::SeqCst)
 }
+
+/// Aether: Hyprland's dwindle:force_split - 0 puts a new window on the side of the window under the mouse
+/// where the mouse is (Hyprland's default), 1 always left / top, 2 always right / bottom
+pub static FORCE_SPLIT: std::sync::atomic::AtomicU8 = std::sync::atomic::AtomicU8::new(0);
+/// Aether: togglefloating (Alt+T) resizes the windows for real at once, instead of stretching their pictures
+/// on the animation overlay (apps like Discord looked stretched). `aether { toggle_live_resize = false }` = old way
+pub static TOGGLE_LIVE_RESIZE: std::sync::atomic::AtomicBool = std::sync::atomic::AtomicBool::new(true);

@@ -222,10 +222,12 @@ Loader {
                     source: mc.p ? (mc.p.trackArtUrl || "") : ""
                     fillMode: Image.PreserveAspectCrop
                     asynchronous: true
-                    RotationAnimator on rotation {
-                        from: 0; to: 360; duration: 14000
-                        loops: Animation.Infinite
-                        running: !!mc.p && mc.p.isPlaying
+                    // the slow spin, at 20 fps: smooth enough at this speed, a third of the redraws
+                    Timer {
+                        interval: 50
+                        repeat: true
+                        running: !!mc.p && mc.p.isPlaying && !WinSettings.gameStopVisualizer
+                        onTriggered: parent.rotation = (parent.rotation + 360 * 50 / 14000) % 360
                     }
                 }
             }
@@ -247,11 +249,12 @@ Loader {
                         color: AetherStyle.primary
                         anchors.bottom: parent.bottom
                         height: 4
-                        SequentialAnimation on height {
-                            running: !!mc.p && mc.p.isPlaying
-                            loops: Animation.Infinite
-                            NumberAnimation { to: 12; duration: 260 + index * 90; easing.type: Easing.InOutSine }
-                            NumberAnimation { to: 3; duration: 300 + index * 70; easing.type: Easing.InOutSine }
+                        // the equaliser hops at 8 fps instead of animating every frame
+                        Timer {
+                            interval: 120 + index * 15
+                            repeat: true
+                            running: !!mc.p && mc.p.isPlaying && !WinSettings.gameStopVisualizer
+                            onTriggered: parent.height = 3 + Math.random() * 9
                         }
                     }
                 }

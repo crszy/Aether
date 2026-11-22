@@ -19,8 +19,14 @@ pub fn lua_path() -> PathBuf {
 
 /// the config in use: hyprland.lua when it exists (through hyprlua.exe), else hyprland.conf
 pub fn load_config() -> conf::HyprConf {
+    // Aether: niri mode reads ~/.config/niri/config.kdl, translated into the same config
+    if crate::niri::mode() {
+        return crate::niri::load_as_hypr();
+    }
+    // Hyprland's scrolling layout: a lone column fills the screen (fullscreen_on_one_column, on by default)
+    crate::niri::set_config(crate::niri::NiriConfig::default());
     let lua = lua_path();
-    let mut conf = if std::env::var_os("HYPRLAND_CONFIG").is_none() && lua.is_file() {
+    let mut conf = if std::env::var_os("HYPRLAND_CONFIG").is_none() && !crate::niri::infinitedesk() && lua.is_file() {
         lua::load(&lua)
     } else {
         conf::HyprConf::load(&config_path())
@@ -48,6 +54,17 @@ pub fn ryoku_running() -> bool {
 
 /// `%USERPROFILE%\.config\hypr\hyprland.conf` (or `$HYPRLAND_CONFIG`, like Hyprland's `--config`)
 pub fn config_path() -> PathBuf {
+    if crate::niri::mode() {
+        return crate::niri::config_path();
+    }
+    // InfiniteDesk mode: its own config next to hyprland.conf (hyprland.conf while it has none)
+    if crate::niri::infinitedesk() && std::env::var_os("HYPRLAND_CONFIG").is_none() {
+        let home = std::env::var_os("USERPROFILE").or_else(|| std::env::var_os("HOME")).map(PathBuf::from).unwrap_or_default();
+        let desk = home.join(".config").join("hypr").join("infinitedesk.conf");
+        if desk.is_file() {
+            return desk;
+        }
+    }
     if let Some(path) = std::env::var_os("HYPRLAND_CONFIG") {
         return PathBuf::from(path);
     }
@@ -270,6 +287,11 @@ fn empty_layout_options() -> crate::core::LayoutOptions {
 
 /// turns Hyprland's dwindle on for every workspace (keeps flips / ratios already made)
 fn apply_dwindle(wm: &Arc<Mutex<WindowManager>>, conf: &conf::HyprConf) {
+    let split = conf.get_f64("dwindle:force_split").unwrap_or(0.0).clamp(0.0, 2.0) as u8;
+    crate::animation::FORCE_SPLIT.store(split, std::sync::atomic::Ordering::Relaxed);
+    let live = conf.get_bool("aether:toggle_live_resize").unwrap_or(true);
+    crate::animation::TOGGLE_LIVE_RESIZE.store(live, std::sync::atomic::Ordering::Relaxed);
+    if conf.get_bool("aether:desktop_window").unwrap_or(true) { crate::progman::ensure(); }
     let layout = conf.get("general:layout").unwrap_or("dwindle").trim().to_string();
     // dwindle is Hyprland's default; canvas is not part of the window manager yet: dwindle meanwhile
     if !matches!(layout.as_str(), "dwindle" | "canvas" | "") {
