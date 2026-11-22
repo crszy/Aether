@@ -321,7 +321,11 @@ Singleton {
             return;
         Win.WindowManager.whkd = adapter.whkd;
         Win.WindowManager.komorebiHyprlandAlt = adapter.hyprlandAlt;
-        Win.WindowManager.komorebiHyprland = adapter.hyprlandWm; // before komorebi: it decides how komorebi starts
+        // AetherWM always runs its own config (hyprland.conf, or config.kdl in niri mode - ~/.config/aetherwm/mode picks).
+        // Without --hyprland it ran as bare komorebi: no binds, no animations, no mode ("stuck in niri", 2026-11-22).
+        // Only an old plain komorebi folder still follows the switch.
+        const aetherWm = /aetherwm/i.test(adapter.komorebi);
+        Win.WindowManager.komorebiHyprland = adapter.hyprlandWm || aetherWm; // before komorebi: it decides how komorebi starts
         Win.WindowManager.komorebi = adapter.komorebi;
     }
 

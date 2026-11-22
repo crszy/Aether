@@ -74,7 +74,7 @@ Searcher {
                 UserExt.run(command[1]);
             } else if (command[0] === "aether-settings") {
                 list.screenState.launcher = false;
-                RiceFactory.open("");
+                WinSettings.ipc("aether", "settings", []); // the new Aether Settings center, same as every other shell
             } else if (command[0] === "setMode" && command.length > 1) {
                 list.screenState.launcher = false;
                 Colours.setMode(command[1]);

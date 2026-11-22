@@ -23,6 +23,7 @@ Item {
     Rectangle {
         anchors.fill: parent
         radius: height / 2
+        z: -2
         color: chip.active ? AetherStyle.primaryContainer : AetherStyle.textMain
         opacity: chip.active ? 1 : (chip.hoverable && area.containsMouse ? (area.pressed ? 0.16 : 0.09) : 0)
         Behavior on opacity { NumberAnimation { duration: 160 } }
@@ -37,6 +38,9 @@ Item {
     }
     MouseArea {
         id: area
+        // under the content: widgets with their own MouseAreas (tray icons, the tray arrow) get their clicks;
+        // on top it swallowed them all and the tray did nothing (2026-11-22)
+        z: -1
         anchors.fill: parent
         hoverEnabled: true
         acceptedButtons: Qt.LeftButton | Qt.RightButton | Qt.MiddleButton

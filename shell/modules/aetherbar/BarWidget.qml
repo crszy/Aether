@@ -383,7 +383,7 @@ Loader {
                 onClicked: m => {
                     if (m.button === Qt.RightButton)
                         AetherBarConfig.trayCompact = !AetherBarConfig.trayCompact;
-                    else if (tc.compact && !console.log("tray arrow click"))
+                    else if (tc.compact)
                         trayFly.visible = !trayFly.visible;
                     else
                         tc.expanded = !tc.expanded;
