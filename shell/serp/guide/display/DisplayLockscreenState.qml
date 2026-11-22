@@ -1,0 +1,93 @@
+// serpantinum (https://github.com/ilyamiro/serpantinum) - Copyright (C) 2026 Illia Miroshnichenko, AGPL-3.0.
+// Windows changes by dotfiles/serp-port.js (Aether, AGPL-3.0-or-later).
+import QtQuick
+import Quickshell
+import Quickshell.Io
+import "../"
+import "../../"
+import "../../lock/redactor"
+
+GuideTab {
+    id: displayLockscreenRoot
+    subTabIndex: 2
+
+    property var defaultLockscreenSettings: ({
+        "fingerprintEnabled": true,
+        "attemptLimitEnabled": false,
+        "passwordMaxAttempts": 5,
+        "fingerprintMaxAttempts": 5,
+        "backgroundMode": "follow",
+        "customBackground": "",
+        "promptBackdropMode": "desktop"
+    })
+
+    property var lockscreenSettings: {
+        if (typeof Config !== "undefined" && typeof Config.getSetting === "function") {
+            return Config.getSetting("lockscreen", displayLockscreenRoot.defaultLockscreenSettings);
+        }
+        return displayLockscreenRoot.defaultLockscreenSettings;
+    }
+
+    property bool fingerprintSupported: false
+    property string currentBackgroundMode: lockscreenSettings.backgroundMode === "custom" ? "custom" : "follow"
+    property string currentCustomBackground: lockscreenSettings.customBackground ? String(lockscreenSettings.customBackground) : ""
+    property string currentPromptBackdropMode: lockscreenSettings.promptBackdropMode === "wallpaper" ? "wallpaper" : "desktop"
+    readonly property string currentWallpaperPath: {
+        Wallpaper.screenWallpaperPaths;
+        return Wallpaper.getWallpaperPath("");
+    }
+    readonly property bool customBackgroundActive: displayLockscreenRoot.currentBackgroundMode === "custom" && displayLockscreenRoot.currentCustomBackground !== ""
+    readonly property string effectiveBackgroundPath: displayLockscreenRoot.customBackgroundActive ? displayLockscreenRoot.currentCustomBackground : displayLockscreenRoot.currentWallpaperPath
+    readonly property bool effectiveBackgroundIsVideo: displayLockscreenRoot.isVideoPath(displayLockscreenRoot.effectiveBackgroundPath)
+    property bool currentFingerprintEnabled: lockscreenSettings.fingerprintEnabled !== false
+    property bool currentAttemptLimitEnabled: lockscreenSettings.attemptLimitEnabled === true
+    property int currentPasswordMaxAttempts: lockscreenSettings.passwordMaxAttempts !== undefined ? lockscreenSettings.passwordMaxAttempts : 5
+    property int currentFingerprintMaxAttempts: lockscreenSettings.fingerprintMaxAttempts !== undefined ? lockscreenSettings.fingerprintMaxAttempts : 5
+
+    Process {
+        id: fingerprintProbe
+        command: ["where.exe", "/q", "serp-linux-only", "serpantinum-core", "system", "fingerprint"]
+        onExited: (exitCode) => displayLockscreenRoot.fingerprintSupported = exitCode === 0
+    }
+
+    Component.onCompleted: fingerprintProbe.running = true
+
+    function isVideoPath(path) {
+        let lp = String(path || "").toLowerCase();
+        return lp.endsWith(".mp4") || lp.endsWith(".mkv") || lp.endsWith(".mov") || lp.endsWith(".webm");
+    }
+
+    function setBackgroundMode(mode) {
+        displayLockscreenRoot.currentBackgroundMode = mode;
+        displayLockscreenRoot.updateLockscreenSetting("backgroundMode", mode);
+    }
+
+    function setPromptBackdropMode(mode) {
+        displayLockscreenRoot.currentPromptBackdropMode = mode;
+        displayLockscreenRoot.updateLockscreenSetting("promptBackdropMode", mode);
+    }
+
+    function setCustomBackground(path) {
+        displayLockscreenRoot.currentCustomBackground = path;
+        displayLockscreenRoot.updateLockscreenSetting("customBackground", path);
+    }
+
+    function openRedactor() {
+        LockLayoutStore.openRedactor("");
+        if (rootObj && typeof rootObj.closePopup === "function") {
+            rootObj.closePopup();
+        } else {
+            let dir = (typeof Caching !== "undefined" && Caching.serpantinumDir) ? Caching.serpantinumDir : "";
+            SerpWin.qsManager(["close"]);
+        }
+    }
+
+    function updateLockscreenSetting(key, value) {
+        let current = JSON.parse(JSON.stringify((typeof Config !== "undefined" && typeof Config.getSetting === "function") ? (Config.getSetting("lockscreen", defaultLockscreenSettings) || defaultLockscreenSettings) : defaultLockscreenSettings));
+        current[key] = value;
+        if (typeof Config !== "undefined" && typeof Config.setSetting === "function") {
+            Config.setSetting("lockscreen", current);
+        }
+        displayLockscreenRoot.lockscreenSettings = current;
+    }
+}

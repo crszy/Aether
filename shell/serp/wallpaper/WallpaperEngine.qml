@@ -1,0 +1,792 @@
+// serpantinum (https://github.com/ilyamiro/serpantinum) - Copyright (C) 2026 Illia Miroshnichenko, AGPL-3.0.
+// Windows changes by dotfiles/serp-port.js (Aether, AGPL-3.0-or-later).
+import QtQuick
+import QtQuick.Effects
+import Quickshell
+import Quickshell.Wayland
+import Quickshell.Io
+import QtMultimedia
+import "../"
+
+ShellRoot {
+    id: globalRoot
+
+    Variants {
+        id: root
+        model: Quickshell.screens
+
+        delegate: Component {
+            PanelWindow {
+                id: barWindow
+
+                required property var modelData
+                screen: modelData
+
+                WlrLayershell.namespace: "wallpaper-bg"
+                WlrLayershell.layer: WlrLayer.Background
+
+                focusable: false
+                exclusionMode: ExclusionMode.Ignore
+                color: "#0a0a0f"
+
+                anchors { top: true; bottom: true; left: true; right: true }
+
+                readonly property string wpCacheDir: Caching.getCacheDir("wallpaper")
+                readonly property string wpStatePath: wpCacheDir + "/current_" + barWindow.screen.name
+                readonly property string wpCopyDir: wpCacheDir + "/copy_" + barWindow.screen.name
+                readonly property string wpSnapshotPath: wpCacheDir + "/current_wallpaper.png"
+                readonly property string wpMonitorSnapshotPath: wpCacheDir + "/current_wallpaper_" + barWindow.screen.name + ".png"
+
+                property string currentWallpaperPath: ""
+                property string originalFileName: ""
+                property int activeLayer: 0
+                property string pathA: ""
+                property bool isVideoA: false
+                property string pathB: ""
+                property bool isVideoB: false
+                property bool playbackPaused: false
+                property bool snapReadyA: false
+                property bool snapReadyB: false
+                property int snapRevA: 0
+                property int snapRevB: 0
+                readonly property string layerSnapshotPathA: wpCacheDir + "/layer_" + barWindow.screen.name + "_a.png"
+                readonly property string layerSnapshotPathB: wpCacheDir + "/layer_" + barWindow.screen.name + "_b.png"
+
+                property int activeDuration: 1000
+                property var pendingChange: null
+                property bool capturingFrame: false
+                property bool frozenActive: false
+                readonly property bool transitionBusy: transitionAnim.running || videoWarmUpTimer.running || capturingFrame
+                property real transitionProgress: 1.0
+                property bool isPreloading: false
+                property int activeTransitionType: 0
+                property bool wipeIsVertical: false
+                property int swipeDirection: 0
+                property real hexSize: 80.0
+                property real transitionOriginX: 0.5
+                property real transitionOriginY: 0.5
+                property real transitionSeed: 0.0
+                property bool isInitialLoad: true
+
+                Component.onCompleted: {
+                    restorePoller.running = true;
+                    Wallpaper.registerEngine(barWindow.screen ? barWindow.screen.name : "", barWindow);
+                }
+
+                Component.onDestruction: Wallpaper.unregisterEngine(barWindow.screen ? barWindow.screen.name : "", barWindow)
+
+                onCurrentWallpaperPathChanged: {
+                    if (barWindow.screen && barWindow.screen.name) {
+                        let map = Object.assign({}, Wallpaper.screenWallpaperPaths);
+                        map[barWindow.screen.name] = currentWallpaperPath;
+                        Wallpaper.screenWallpaperPaths = map;
+                    }
+                }
+
+                onOriginalFileNameChanged: {
+                    if (barWindow.screen && barWindow.screen.name) {
+                        let map = Object.assign({}, Wallpaper.screenWallpapers);
+                        map[barWindow.screen.name] = originalFileName;
+                        Wallpaper.screenWallpapers = map;
+                    }
+                }
+
+                Connections {
+                    target: Wallpaper
+
+                    function onWallpaperChanged(screenName, path, transition) {
+                        if (screenName === "all" || screenName === barWindow.screen.name)
+                            barWindow.changeWallpaper(path, transition);
+                    }
+
+                    function onPlaybackChanged(screenName, state) {
+                        if (screenName === "all" || screenName === barWindow.screen.name) {
+                            if (state === "pause") {
+                                barWindow.playbackPaused = true;
+                                barWindow.stopA();
+                                barWindow.stopB();
+                            } else if (state === "play") {
+                                barWindow.playbackPaused = false;
+                                if (barWindow.activeLayer === 0 && barWindow.isVideoA) barWindow.playA();
+                                if (barWindow.activeLayer === 1 && barWindow.isVideoB) barWindow.playB();
+                            }
+                        }
+                    }
+
+                    function onWallpaperCleared(screenName) {
+                        if (screenName === "all" || screenName === barWindow.screen.name) {
+                            barWindow.currentWallpaperPath = "";
+                            barWindow.pathA = "";
+                            barWindow.pathB = "";
+                            barWindow.isVideoA = false;
+                            barWindow.isVideoB = false;
+                            barWindow.originalFileName = "";
+                            barWindow.stopA();
+                            barWindow.stopB();
+                            Quickshell.execDetached(["where.exe", "/q", "serp-linux-only", "bash", "-c", "rm -f '" + barWindow.wpStatePath + "' '" + barWindow.wpStatePath + "_name'"]);
+                        }
+                    }
+                }
+
+                Process {
+                    id: restorePoller
+                    running: false
+                    command: [
+                        "where.exe", "/q", "serp-linux-only", "bash", "-c",
+                        "F1='" + barWindow.wpStatePath + "'; F2='" + barWindow.wpStatePath + "_name'; [ -f \"$F1\" ] && cat \"$F1\" || true; echo '---SPLIT---'; [ -f \"$F2\" ] && cat \"$F2\" || true"
+                    ]
+                    stdout: StdioCollector {
+                        onStreamFinished: {
+                            let parts = this.text.split("---SPLIT---");
+                            let savedPath = parts[0] ? parts[0].trim() : "";
+                            let savedName = parts[1] ? parts[1].trim() : "";
+                            if (savedPath !== "") {
+                                barWindow.originalFileName = savedName;
+                                barWindow._loadNew(savedPath, false);
+                                if (barWindow.isVideo(savedPath)) {
+                                    videoSnapshotProcess.targetPath = savedPath;
+                                    videoSnapshotProcess.running = false;
+                                    videoSnapshotProcess.running = true;
+                                }
+                                if (savedName !== "") {
+                                    let histFile = barWindow.wpCacheDir + "/history.txt";
+                                    Quickshell.execDetached(["where.exe", "/q", "serp-linux-only", "bash", "-c",
+                                        "HIST='" + histFile + "'; if [ -f \"$HIST\" ]; then if [ \"$(head -n 1 \"$HIST\" 2>/dev/null)\" != '" + savedName + "' ]; then grep -v -F -x '" + savedName + "' \"$HIST\" > \"$HIST.tmp\" 2>/dev/null || true; printf '%s\n' '" + savedName + "' | cat - \"$HIST.tmp\" > \"$HIST\"; rm -f \"$HIST.tmp\"; fi; else printf '%s\n' '" + savedName + "' > \"$HIST\"; fi"
+                                    ]);
+                                }
+                            }
+                        }
+                    }
+                }
+
+                Timer {
+                    id: videoWarmUpTimer
+                    interval: 250
+                    repeat: false
+                    onTriggered: barWindow.triggerTransition()
+                }
+
+                Process {
+                    id: layerSnapshotA
+                    running: false
+                    property string targetPath: ""
+                    command: [
+                        "where.exe", "/q", "serp-linux-only", "bash", "-c",
+                        "ffmpeg -y -hide_banner -loglevel error -ss 00:00:01 -i \"$1\" -frames:v 1 -q:v 2 \"$2\" 2>/dev/null || ffmpeg -y -hide_banner -loglevel error -i \"$1\" -frames:v 1 -q:v 2 \"$2\" 2>/dev/null",
+                        "_",
+                        targetPath,
+                        barWindow.layerSnapshotPathA
+                    ]
+                    onExited: exitCode => {
+                        if (exitCode === 0) {
+                            barWindow.snapReadyA = true;
+                            barWindow.snapRevA++;
+                        }
+                    }
+                }
+
+                Process {
+                    id: layerSnapshotB
+                    running: false
+                    property string targetPath: ""
+                    command: [
+                        "where.exe", "/q", "serp-linux-only", "bash", "-c",
+                        "ffmpeg -y -hide_banner -loglevel error -ss 00:00:01 -i \"$1\" -frames:v 1 -q:v 2 \"$2\" 2>/dev/null || ffmpeg -y -hide_banner -loglevel error -i \"$1\" -frames:v 1 -q:v 2 \"$2\" 2>/dev/null",
+                        "_",
+                        targetPath,
+                        barWindow.layerSnapshotPathB
+                    ]
+                    onExited: exitCode => {
+                        if (exitCode === 0) {
+                            barWindow.snapReadyB = true;
+                            barWindow.snapRevB++;
+                        }
+                    }
+                }
+
+                Process {
+                    id: videoSnapshotProcess
+                    running: false
+                    property string targetPath: ""
+                    command: [
+                        "where.exe", "/q", "serp-linux-only", "bash", "-c",
+                        "ffmpeg -y -hide_banner -loglevel error -ss 00:00:01 -i \"$1\" -frames:v 1 -q:v 2 \"$2\" 2>/dev/null || ffmpeg -y -hide_banner -loglevel error -i \"$1\" -frames:v 1 -q:v 2 \"$2\" 2>/dev/null; cp -f \"$2\" \"$3\" 2>/dev/null || true",
+                        "_",
+                        targetPath,
+                        barWindow.wpSnapshotPath,
+                        barWindow.wpMonitorSnapshotPath
+                    ]
+                    onExited: exitCode => {
+                        if (exitCode === 0 && typeof Matugen !== "undefined" && typeof Matugen.generate === "function") {
+                            Matugen.generate(barWindow.wpSnapshotPath);
+                        }
+                    }
+                }
+
+                function snapshotLayer(slot, path) {
+                    let proc = slot === 0 ? layerSnapshotA : layerSnapshotB;
+                    if (slot === 0) barWindow.snapReadyA = false;
+                    else barWindow.snapReadyB = false;
+                    proc.targetPath = path;
+                    proc.running = false;
+                    proc.running = true;
+                }
+
+                function isVideo(p) {
+                    let lp = p.toLowerCase();
+                    return lp.endsWith(".mp4") || lp.endsWith(".mkv") ||
+                           lp.endsWith(".mov") || lp.endsWith(".webm");
+                }
+
+                function isSupportedMedia(p) {
+                    if (!p) return false;
+                    let lp = p.toLowerCase();
+                    return lp.endsWith(".jpg") || lp.endsWith(".jpeg") || lp.endsWith(".png") ||
+                           lp.endsWith(".webp") || lp.endsWith(".gif") || lp.endsWith(".bmp") ||
+                           lp.endsWith(".avif") || barWindow.isVideo(p);
+                }
+
+                function playA() {
+                    if (videoLoaderA.item && typeof videoLoaderA.item.play === "function") {
+                        videoLoaderA.item.play();
+                    }
+                }
+
+                function stopA() {
+                    if (videoLoaderA.item && typeof videoLoaderA.item.stop === "function") {
+                        videoLoaderA.item.stop();
+                    }
+                }
+
+                function playB() {
+                    if (videoLoaderB.item && typeof videoLoaderB.item.play === "function") {
+                        videoLoaderB.item.play();
+                    }
+                }
+
+                function stopB() {
+                    if (videoLoaderB.item && typeof videoLoaderB.item.stop === "function") {
+                        videoLoaderB.item.stop();
+                    }
+                }
+
+                function triggerTransition() {
+                    videoWarmUpTimer.stop();
+                    barWindow.isPreloading = false;
+                    transitionAnim.restart();
+                }
+
+                function clearOutgoingLayer() {
+                    if (barWindow.activeLayer === 0) {
+                        barWindow.stopB();
+                        barWindow.pathB = "";
+                        barWindow.isVideoB = false;
+                    } else {
+                        barWindow.stopA();
+                        barWindow.pathA = "";
+                        barWindow.isVideoA = false;
+                    }
+                }
+
+                function completeTransition() {
+                    barWindow.clearOutgoingLayer();
+                    barWindow.frozenActive = false;
+                }
+
+                function applyFrozenFrame() {
+                    captureWait.stop();
+                    transitionAnim.stop();
+                    videoWarmUpTimer.stop();
+                    barWindow.capturingFrame = false;
+                    barWindow.frozenActive = true;
+                    let next = barWindow.pendingChange;
+                    barWindow.pendingChange = null;
+                    if (!next) return;
+                    barWindow.changeWallpaper(next.path, next.ttype);
+                    barWindow.clearOutgoingLayer();
+                }
+
+                function interruptWith(path, ttype) {
+                    if (typeof DesktopMenuController !== "undefined" && DesktopMenuController.isMenuShuffle) {
+                        let isTargetScreen = !DesktopMenuController.screen || !DesktopMenuController.screen.name || (barWindow.screen && DesktopMenuController.screen.name === barWindow.screen.name);
+                        if (isTargetScreen) {
+                            ttype = { type: 2, originX: DesktopMenuController.menuOriginX, originY: DesktopMenuController.menuOriginY };
+                        }
+                    }
+                    barWindow.pendingChange = { path: path, ttype: ttype };
+                    if (barWindow.capturingFrame) return;
+                    barWindow.capturingFrame = true;
+                    frozenFrame.scheduleUpdate();
+                    captureWait.frames = 0;
+                    captureWait.restart();
+                }
+
+                function _loadNew(path, force) {
+                    if (!path) return;
+                    if (!force && path === barWindow.currentWallpaperPath) return;
+
+                    let cleanPath = String(path).trim();
+                    let vid = barWindow.isVideo(cleanPath);
+                    if (vid) barWindow.snapshotLayer(barWindow.activeLayer === 1 ? 0 : 1, cleanPath);
+
+                    let slash = cleanPath.lastIndexOf("/");
+                    let filename = cleanPath.substring(slash + 1);
+                    if (!filename.startsWith("wallpaper.")) {
+                        barWindow.originalFileName = filename;
+                    }
+
+                    if (barWindow.isInitialLoad) {
+                        barWindow.isInitialLoad = false;
+                        barWindow.transitionProgress = 1.0;
+                        barWindow.isPreloading = false;
+                        if (barWindow.activeLayer === 1) {
+                            barWindow.pathA = cleanPath;
+                            barWindow.isVideoA = vid;
+                            barWindow.activeLayer = 0;
+                            if (vid) barWindow.playA();
+                        } else {
+                            barWindow.pathB = cleanPath;
+                            barWindow.isVideoB = vid;
+                            barWindow.activeLayer = 1;
+                            if (vid) barWindow.playB();
+                        }
+                        barWindow.currentWallpaperPath = cleanPath;
+                        return;
+                    }
+
+                    transitionAnim.stop();
+                    videoWarmUpTimer.stop();
+                    barWindow.transitionProgress = 0.0;
+                    barWindow.isPreloading = true;
+
+                    if (barWindow.activeLayer === 1) {
+                        barWindow.pathA = cleanPath;
+                        barWindow.isVideoA = vid;
+                        barWindow.activeLayer = 0;
+                        if (vid) {
+                            barWindow.playA();
+                            videoWarmUpTimer.restart();
+                        } else {
+                            barWindow.triggerTransition();
+                        }
+                    } else {
+                        barWindow.pathB = cleanPath;
+                        barWindow.isVideoB = vid;
+                        barWindow.activeLayer = 1;
+                        if (vid) {
+                            barWindow.playB();
+                            videoWarmUpTimer.restart();
+                        } else {
+                            barWindow.triggerTransition();
+                        }
+                    }
+
+                    barWindow.currentWallpaperPath = cleanPath;
+                }
+
+                function changeWallpaper(path, ttype) {
+                    if (!path) return;
+                    if (barWindow.transitionBusy) {
+                        barWindow.interruptWith(path, ttype);
+                        return;
+                    }
+
+                    barWindow.isInitialLoad = false;
+
+                    let fromMenu = false;
+                    let customOriginX = -1;
+                    let customOriginY = -1;
+                    let chosenType = -1;
+
+                    if (typeof ttype === "object" && ttype !== null) {
+                        if (ttype.type !== undefined) chosenType = Number(ttype.type);
+                        if (ttype.originX !== undefined) customOriginX = Number(ttype.originX);
+                        if (ttype.originY !== undefined) customOriginY = Number(ttype.originY);
+                        fromMenu = true;
+                    } else if (typeof ttype === "string" && ttype.indexOf("circle") !== -1) {
+                        chosenType = 2;
+                        let parts = ttype.split(":");
+                        if (parts.length >= 3) {
+                            customOriginX = parseFloat(parts[1]);
+                            customOriginY = parseFloat(parts[2]);
+                        }
+                        fromMenu = true;
+                    } else if (typeof ttype === "number" && ttype >= 0) {
+                        chosenType = ttype;
+                    }
+
+                    if (typeof DesktopMenuController !== "undefined" && DesktopMenuController.isMenuShuffle) {
+                        let isTargetScreen = !DesktopMenuController.screen || !DesktopMenuController.screen.name || (barWindow.screen && DesktopMenuController.screen.name === barWindow.screen.name);
+                        if (isTargetScreen) {
+                            fromMenu = true;
+                            chosenType = 2;
+                            customOriginX = DesktopMenuController.menuOriginX;
+                            customOriginY = DesktopMenuController.menuOriginY;
+                        }
+                    }
+
+                    let fx = Wallpaper.resolveTransition(chosenType);
+                    barWindow.activeTransitionType = fx.type;
+                    barWindow.activeDuration = fx.duration;
+                    barWindow.wipeIsVertical = fx.vertical;
+                    barWindow.swipeDirection = fx.direction;
+                    barWindow.hexSize = fx.hexSize;
+                    barWindow.transitionSeed = Math.random() * 100.0;
+
+                    if (fromMenu && customOriginX >= 0 && customOriginY >= 0) {
+                        barWindow.transitionOriginX = customOriginX;
+                        barWindow.transitionOriginY = customOriginY;
+                    } else if (fx.centered) {
+                        barWindow.transitionOriginX = 0.5;
+                        barWindow.transitionOriginY = 0.5;
+                    } else {
+                        barWindow.transitionOriginX = 0.15 + Math.random() * 0.70;
+                        barWindow.transitionOriginY = 0.15 + Math.random() * 0.70;
+                    }
+
+                    if (typeof DesktopMenuController !== "undefined") {
+                        DesktopMenuController.isMenuShuffle = false;
+                    }
+
+                    let cleanPath = String(path).trim();
+                    let slash = cleanPath.lastIndexOf("/");
+                    let origName = cleanPath.substring(slash + 1);
+                    let dot = cleanPath.lastIndexOf(".");
+                    let ext = (dot !== -1 && dot > slash) ? cleanPath.substring(dot) : "";
+                    let dest = wpCopyDir + "/wallpaper" + ext;
+                    let histFile = wpCacheDir + "/history.txt";
+                    let vid = barWindow.isVideo(cleanPath);
+                    let snapshotPath = barWindow.wpSnapshotPath;
+                    let monSnapshotPath = barWindow.wpMonitorSnapshotPath;
+                    Quickshell.execDetached(["where.exe", "/q", "serp-linux-only", "bash", "-c",
+                        "mkdir -p \"$1\" && printf '%s' \"$2\" > \"$3\" && printf '%s' \"$4\" > \"${3}_name\" && cp -f \"$2\" \"$5\"" +
+                        " && if [ \"$9\" != 1 ]; then cp -f \"$2\" \"$6\" && cp -f \"$2\" \"$7\"; fi" +
+                        " && ( HIST=\"$8\"; if [ -f \"$HIST\" ]; then grep -v -F -x -- \"$4\" \"$HIST\" > \"$HIST.tmp\" 2>/dev/null || true; printf '%s\\n' \"$4\" | cat - \"$HIST.tmp\" > \"$HIST\"; rm -f \"$HIST.tmp\"; else printf '%s\\n' \"$4\" > \"$HIST\"; fi )",
+                        "_", wpCopyDir, cleanPath, wpStatePath, origName, dest, snapshotPath, monSnapshotPath, histFile, vid ? "1" : "0"
+                    ]);
+
+                    if (vid) {
+                        videoSnapshotProcess.targetPath = cleanPath;
+                        videoSnapshotProcess.running = false;
+                        videoSnapshotProcess.running = true;
+                    } else {
+                        if (typeof Matugen !== "undefined" && typeof Matugen.generate === "function") {
+                            Matugen.generate(cleanPath);
+                        }
+                    }
+
+                    barWindow._loadNew(cleanPath, true);
+                }
+
+                function handleDrop(drop) {
+                    let raw = "";
+                    if (drop.hasUrls && drop.urls.length > 0) {
+                        raw = drop.urls[0].toString();
+                    } else if (drop.hasText && drop.text.length > 0) {
+                        let lines = drop.text.trim().split("\n");
+                        raw = lines[0].trim();
+                    }
+                    if (!raw) return;
+
+                    let cleanPath = decodeURIComponent(raw.replace(/^file:\/\//, "")).trim();
+                    if (!barWindow.isSupportedMedia(cleanPath)) return;
+
+                    let scrW = barWindow.width > 0 ? barWindow.width : (barWindow.screen && barWindow.screen.geometry ? barWindow.screen.geometry.width : 1920);
+                    let scrH = barWindow.height > 0 ? barWindow.height : (barWindow.screen && barWindow.screen.geometry ? barWindow.screen.geometry.height : 1080);
+                    let normX = scrW > 0 ? Math.max(0.0, Math.min(1.0, drop.x / scrW)) : 0.5;
+                    let normY = scrH > 0 ? Math.max(0.0, Math.min(1.0, drop.y / scrH)) : 0.5;
+
+                    barWindow.changeWallpaper(cleanPath, {
+                        type: 2,
+                        originX: normX,
+                        originY: normY
+                    });
+                }
+
+                NumberAnimation {
+                    id: transitionAnim
+                    target: barWindow
+                    property: "transitionProgress"
+                    from: 0.0
+                    to: 1.0
+                    duration: barWindow.activeDuration
+                    easing.type: Easing.InOutCubic
+                    onFinished: barWindow.completeTransition()
+                }
+
+                FrameAnimation {
+                    id: captureWait
+                    property int frames: 0
+                    onTriggered: {
+                        captureWait.frames++;
+                        if (captureWait.frames >= 60) barWindow.applyFrozenFrame();
+                    }
+                }
+
+
+                Component {
+                    id: videoLayerCompA
+                    Item {
+                        anchors.fill: parent
+                        function play() { playerA.play(); }
+                        function stop() { playerA.stop(); }
+
+                        MediaPlayer {
+                            id: playerA
+                            source: barWindow.isVideoA && barWindow.pathA ? "file:///" + barWindow.pathA : ""
+                            videoOutput: videoOutputA
+                            loops: MediaPlayer.Infinite
+                            onMediaStatusChanged: {
+                                if ((mediaStatus === MediaPlayer.LoadedMedia || mediaStatus === MediaPlayer.BufferedMedia) && barWindow.activeLayer === 0 && barWindow.isVideoA && !barWindow.playbackPaused) {
+                                    playerA.play();
+                                }
+                            }
+                        }
+
+                        VideoOutput {
+                            id: videoOutputA
+                            anchors.fill: parent
+                            fillMode: VideoOutput.PreserveAspectCrop
+                        }
+                    }
+                }
+
+                Component {
+                    id: videoLayerCompB
+                    Item {
+                        anchors.fill: parent
+                        function play() { playerB.play(); }
+                        function stop() { playerB.stop(); }
+
+                        MediaPlayer {
+                            id: playerB
+                            source: barWindow.isVideoB && barWindow.pathB ? "file:///" + barWindow.pathB : ""
+                            videoOutput: videoOutputB
+                            loops: MediaPlayer.Infinite
+                            onMediaStatusChanged: {
+                                if ((mediaStatus === MediaPlayer.LoadedMedia || mediaStatus === MediaPlayer.BufferedMedia) && barWindow.activeLayer === 1 && barWindow.isVideoB && !barWindow.playbackPaused) {
+                                    playerB.play();
+                                }
+                            }
+                        }
+
+                        VideoOutput {
+                            id: videoOutputB
+                            anchors.fill: parent
+                            fillMode: VideoOutput.PreserveAspectCrop
+                        }
+                    }
+                }
+
+                Item {
+                    id: scene
+                    anchors.fill: parent
+                    clip: true
+
+                    ShaderEffectSource {
+                        id: frozenFrame
+                        anchors.fill: parent
+                        z: 0
+                        sourceItem: (barWindow.capturingFrame || barWindow.frozenActive) ? scene : null
+                        live: false
+                        recursive: true
+                        hideSource: false
+                        visible: barWindow.capturingFrame || barWindow.frozenActive
+                        onScheduledUpdateCompleted: {
+                            if (barWindow.capturingFrame) barWindow.applyFrozenFrame();
+                        }
+                    }
+
+                    ShaderEffect {
+                        id: transitionShaderA
+                        anchors.fill: parent
+                        visible: false
+                        layer.enabled: layerA.layer.enabled
+
+                        property vector2d itemSize: Qt.vector2d(width, height)
+                        property real progress: barWindow.transitionProgress
+                        property real transitionType: barWindow.activeTransitionType
+                        property vector2d origin: Qt.vector2d(barWindow.transitionOriginX, barWindow.transitionOriginY)
+                        property vector4d params: Qt.vector4d(barWindow.activeTransitionType === 8 ? barWindow.hexSize : (barWindow.wipeIsVertical ? 1.0 : 0.0), barWindow.swipeDirection, barWindow.transitionSeed, 0.0)
+                        property color tint: "transparent"
+
+                        fragmentShader: "file:///" + Caching.serpantinumDir + "/assets/shaders/transitions/wallpaper_transition.frag.qsb"
+                    }
+
+                    Item {
+                        id: layerA
+                        width: parent.width
+                        height: parent.height
+
+                        readonly property bool isIncoming: barWindow.activeLayer === 0
+                        readonly property real p: barWindow.transitionProgress
+
+                        z: isIncoming ? 2 : 1
+                        visible: isIncoming || (p < 1.0 && !barWindow.frozenActive)
+
+                        opacity: {
+                            if (barWindow.isPreloading && isIncoming) return 0.0;
+                            if (barWindow.activeTransitionType !== 0) return 1.0;
+                            return isIncoming ? p : 1.0 - p;
+                        }
+
+                        layer.enabled: barWindow.activeTransitionType !== 0 && isIncoming && !barWindow.isPreloading && p < 1.0
+                        layer.effect: MultiEffect {
+                            maskEnabled: true
+                            maskSource: transitionShaderA
+                            maskThresholdMin: 0.0
+                            maskSpreadAtMin: 0.0
+                        }
+
+                        Image {
+                            id: imgA
+                            anchors.fill: parent
+                            source: !barWindow.isVideoA && barWindow.pathA ? "file:///" + barWindow.pathA : ""
+                            fillMode: Image.PreserveAspectCrop
+                            asynchronous: true
+                            visible: !barWindow.isVideoA && barWindow.pathA !== ""
+                            cache: true
+                            sourceSize.width: parent.width > 0 ? Math.ceil(parent.width * (Screen.devicePixelRatio || 1)) : 0
+                            sourceSize.height: parent.height > 0 ? Math.ceil(parent.height * (Screen.devicePixelRatio || 1)) : 0
+                        }
+
+                        Loader {
+                            id: videoLoaderA
+                            anchors.fill: parent
+                            active: barWindow.isVideoA && barWindow.pathA !== ""
+                            asynchronous: false
+                            sourceComponent: videoLayerCompA
+                            visible: barWindow.isVideoA
+                            onLoaded: {
+                                if (item && barWindow.activeLayer === 0 && barWindow.isVideoA && !barWindow.playbackPaused) {
+                                    item.play();
+                                }
+                            }
+                        }
+                    }
+
+                    ShaderEffect {
+                        id: transitionShaderB
+                        anchors.fill: parent
+                        visible: false
+                        layer.enabled: layerB.layer.enabled
+
+                        property vector2d itemSize: Qt.vector2d(width, height)
+                        property real progress: barWindow.transitionProgress
+                        property real transitionType: barWindow.activeTransitionType
+                        property vector2d origin: Qt.vector2d(barWindow.transitionOriginX, barWindow.transitionOriginY)
+                        property vector4d params: Qt.vector4d(barWindow.activeTransitionType === 8 ? barWindow.hexSize : (barWindow.wipeIsVertical ? 1.0 : 0.0), barWindow.swipeDirection, barWindow.transitionSeed, 0.0)
+                        property color tint: "transparent"
+
+                        fragmentShader: "file:///" + Caching.serpantinumDir + "/assets/shaders/transitions/wallpaper_transition.frag.qsb"
+                    }
+
+                    Item {
+                        id: layerB
+                        width: parent.width
+                        height: parent.height
+
+                        readonly property bool isIncoming: barWindow.activeLayer === 1
+                        readonly property real p: barWindow.transitionProgress
+
+                        z: isIncoming ? 2 : 1
+                        visible: isIncoming || (p < 1.0 && !barWindow.frozenActive)
+
+                        opacity: {
+                            if (barWindow.isPreloading && isIncoming) return 0.0;
+                            if (barWindow.activeTransitionType !== 0) return 1.0;
+                            return isIncoming ? p : 1.0 - p;
+                        }
+
+                        layer.enabled: barWindow.activeTransitionType !== 0 && isIncoming && !barWindow.isPreloading && p < 1.0
+                        layer.effect: MultiEffect {
+                            maskEnabled: true
+                            maskSource: transitionShaderB
+                            maskThresholdMin: 0.0
+                            maskSpreadAtMin: 0.0
+                        }
+
+                        Image {
+                            id: imgB
+                            anchors.fill: parent
+                            source: !barWindow.isVideoB && barWindow.pathB ? "file:///" + barWindow.pathB : ""
+                            fillMode: Image.PreserveAspectCrop
+                            asynchronous: true
+                            visible: !barWindow.isVideoB && barWindow.pathB !== ""
+                            cache: true
+                            sourceSize.width: parent.width > 0 ? Math.ceil(parent.width * (Screen.devicePixelRatio || 1)) : 0
+                            sourceSize.height: parent.height > 0 ? Math.ceil(parent.height * (Screen.devicePixelRatio || 1)) : 0
+                        }
+
+                        Loader {
+                            id: videoLoaderB
+                            anchors.fill: parent
+                            active: barWindow.isVideoB && barWindow.pathB !== ""
+                            asynchronous: false
+                            sourceComponent: videoLayerCompB
+                            visible: barWindow.isVideoB
+                            onLoaded: {
+                                if (item && barWindow.activeLayer === 1 && barWindow.isVideoB && !barWindow.playbackPaused) {
+                                    item.play();
+                                }
+                            }
+                        }
+                    }
+
+                    ShaderEffect {
+                        id: paintGlow
+                        anchors.fill: parent
+                        z: 3
+                        visible: (barWindow.activeTransitionType === 4 || barWindow.activeTransitionType === 9) && !barWindow.isPreloading && barWindow.transitionProgress < 1.0
+
+                        property vector2d itemSize: Qt.vector2d(width, height)
+                        property real progress: barWindow.transitionProgress
+                        property real transitionType: barWindow.activeTransitionType
+                        property vector2d origin: Qt.vector2d(barWindow.transitionOriginX, barWindow.transitionOriginY)
+                        property vector4d params: Qt.vector4d(barWindow.activeTransitionType === 8 ? barWindow.hexSize : (barWindow.wipeIsVertical ? 1.0 : 0.0), barWindow.swipeDirection, barWindow.transitionSeed, 1.0)
+                        property color tint: ThemeBackend.mauve
+
+                        fragmentShader: "file:///" + Caching.serpantinumDir + "/assets/shaders/transitions/wallpaper_transition.frag.qsb"
+                    }
+                }
+
+                DropArea {
+                    anchors.fill: parent
+
+                    onEntered: drag => {
+                        if (drag.hasUrls || drag.hasText) {
+                            if (typeof drag.acceptProposedAction === "function") {
+                                drag.acceptProposedAction();
+                            } else if (typeof drag.accept === "function") {
+                                drag.accept();
+                            }
+                            drag.accepted = true;
+                        }
+                    }
+
+                    onDropped: drop => {
+                        barWindow.handleDrop(drop);
+                        if (typeof drop.acceptProposedAction === "function") {
+                            drop.acceptProposedAction();
+                        } else if (typeof drop.accept === "function") {
+                            drop.accept();
+                        }
+                        drop.accepted = true;
+                    }
+
+                    MouseArea {
+                        anchors.fill: parent
+                        acceptedButtons: Qt.RightButton | Qt.LeftButton
+                        onClicked: mouse => {
+                            if (mouse.button === Qt.RightButton) {
+                                DesktopMenuController.toggle(barWindow.screen, mouse.x, mouse.y, "desktop");
+                            } else {
+                                DesktopMenuController.hide();
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

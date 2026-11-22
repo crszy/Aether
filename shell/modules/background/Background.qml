@@ -7,6 +7,7 @@ import Caelestia.Config
 import qs.components
 import qs.components.containers
 import qs.services
+import qs.modules.aetherbar as AB
 
 Variants {
     model: Screens.screens.filter(s => GlobalConfig.forScreen(s.name).background.enabled)
@@ -32,6 +33,13 @@ Variants {
             screen: win.screen
             slot: "background"
             component: win
+        }
+
+        // Aether: right-click the desktop for its menu (add widgets, wallpaper picker, settings)
+        MouseArea {
+            anchors.fill: parent
+            acceptedButtons: Qt.RightButton
+            onPressed: m => AB.AetherBarConfig.openDeskMenu(win.modelData, m.x, m.y)
         }
 
         Item {

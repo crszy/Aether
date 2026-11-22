@@ -5,8 +5,10 @@ import Caelestia
 import Caelestia.Config
 import qs.components.misc
 import qs.services
+import qs.modules.aetherbar as AB
 import qs.modules.nexus
 import qs.modules.rice
+import qs.modules.aethersettings as AS
 
 Scope {
     id: root
@@ -65,6 +67,10 @@ Scope {
         onPressed: {
             if (root.hasFullscreen)
                 return;
+            if (WinSettings.distroMode) {   // a whole distro: its own power dialog
+                WinSettings.distroCommand("power");
+                return;
+            }
             // your own session menu (windows.json "sessionMenu": "user:<Name>") replaces Caelestia's
             const mine = UserExt.userName(WinSettings.sessionMenu);
             if (mine) {
@@ -84,11 +90,35 @@ Scope {
         onPressed: root.launcherInterrupted = false
         onReleased: {
             if (!root.launcherInterrupted && !root.hasFullscreen) {
+                if (WinSettings.distroMode) {   // a whole distro: its overview (GNOME Activities ...)
+                    WinSettings.distroCommand("overview");
+                    root.launcherInterrupted = false;
+                    return;
+                }
                 const screenState = ShellState.forActive();
                 screenState.launcher = !screenState.launcher;
             }
             root.launcherInterrupted = false;
         }
+    }
+
+    // qmllint disable unresolved-type
+    CustomShortcut {
+        // qmllint enable unresolved-type
+        name: "wallpicker"
+        description: "Wallpaper picker (press again for the next one, hold to freeze)"
+        onPressed: AB.AetherBarConfig.pickerPress()
+        onReleased: AB.AetherBarConfig.pickerRelease()
+    }
+
+    // the old name, so a keybinds.json that still says caelestia:wallpaper opens the picker too
+    // qmllint disable unresolved-type
+    CustomShortcut {
+        // qmllint enable unresolved-type
+        name: "wallpaper"
+        description: "Wallpaper picker"
+        onPressed: AB.AetherBarConfig.pickerPress()
+        onReleased: AB.AetherBarConfig.pickerRelease()
     }
 
     // qmllint disable unresolved-type
@@ -127,6 +157,10 @@ Scope {
 
     IpcHandler {
         function toggle(drawer: string): void {
+            if (WinSettings.distroMode && (drawer === "launcher" || drawer === "session")) {
+                WinSettings.distroCommand(drawer === "launcher" ? "overview" : "power");
+                return;
+            }
             if (list().split("\n").includes(drawer)) {
                 if (root.hasFullscreen && ["launcher", "session", "dashboard"].includes(drawer))
                     return;
@@ -169,14 +203,35 @@ Scope {
         target: "nexus"
     }
 
-    // Aether Settings (all shells in one window): `qs ipc call aether settings`, `>aether` in the launchers
+    // Aether Settings (all shells in one window): `qs ipc call aether settings`, `>aether` in the launchers.
+    // Opens the new window (modules/aethersettings) unless Settings style is "rice" (Aether classic).
     IpcHandler {
         function settings(): void {
-            RiceFactory.open("");
+            if (WinSettings.settingsStyle === "rice")
+                RiceFactory.open("");
+            else
+                AS.AetherSettings.open("");
         }
 
+        // the store, your shells, configs and setup still live in the classic window
         function open(tab: string): void {
-            RiceFactory.open(tab);
+            if (WinSettings.settingsStyle === "rice" || ["store", "yours", "configs", "setup", "overview"].includes(tab))
+                RiceFactory.open(tab);
+            else
+                AS.AetherSettings.open(tab);
+        }
+
+        function close(): void {
+            if (AS.AetherSettings.current)
+                AS.AetherSettings.current.close();
+            if (RiceFactory.current)
+                RiceFactory.current.visible = false;
+        }
+
+        // the Aether dashboard: home | music | lyrics | walls | system (same tab again closes it)
+        function walls(): void { AB.AetherBarConfig.pickerTap(); }
+        function dash(tab: string): void {
+            AB.AetherBarConfig.toggleDash(tab || "home");
         }
 
         // AetherStore: open it and look inside a rice (link, or a folder / .zip on this PC)
@@ -184,11 +239,6 @@ Scope {
             RiceFactory.open("store");
             if (RiceFactory.current)
                 RiceFactory.current.storeLook(url);
-        }
-
-        function close(): void {
-            if (RiceFactory.current)
-                RiceFactory.current.visible = false;
         }
 
         target: "aether"

@@ -46,7 +46,7 @@ Scope {
 
     Loader {
         id: wallpaperLoader
-        active: Cae.WinSettings.mixWallpaper === "dms" // Windows: Mix & match
+        active: Cae.WinSettings.wallpaperLayer === "dms" // Windows: Mix & match (off while Wallpaper Engine runs)
         asynchronous: false
 
         sourceComponent: Scope {

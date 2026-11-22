@@ -225,7 +225,7 @@ ProgressBar {
 
         Anim on waveProgress {
             running: true
-            paused: wave.amplitudeMultiplier === 0 || root.wavePaused
+            paused: wave.amplitudeMultiplier === 0 || root.wavePaused || !root.visible // Aether: GPU
             from: 0
             to: 1
             duration: root.waveDuration

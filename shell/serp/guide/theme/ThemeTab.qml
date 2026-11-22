@@ -1,0 +1,60 @@
+// serpantinum (https://github.com/ilyamiro/serpantinum) - Copyright (C) 2026 Illia Miroshnichenko, AGPL-3.0.
+// Windows changes by dotfiles/serp-port.js (Aether, AGPL-3.0-or-later).
+import QtQuick
+import QtQuick.Layouts
+
+ThemeTabState {
+    id: themeTabRoot
+
+    property alias fontDropdown: appearanceSection.fontDropdown
+
+    property real gridAvailableWidth: Math.max(0, settingsCol.width - rootObj.s(24))
+    property real tileWidth: Math.max(rootObj.s(80), (gridAvailableWidth - 2 * rootObj.s(10)) / 3)
+
+    onVisibleChanged: {
+        if (!visible) {
+            if (fontDropdown.isOpen) fontDropdown.closePopup();
+            if (themeEditorLoader.item) themeEditorLoader.item.close();
+        }
+    }
+
+    function openThemeEditorForNew() {
+        themeEditorLoader.active = true;
+        themeEditorLoader.item.openForNew();
+    }
+
+    Loader {
+        id: themeEditorLoader
+        active: false
+        sourceComponent: ThemeEditor {
+            rootObj: themeTabRoot.rootObj
+            tileWidth: themeTabRoot.tileWidth
+            onSaveRequested: function(themeObj) {
+                themeTabRoot.saveCustomTheme(themeObj);
+                themeTabRoot.applyPreset(themeObj);
+            }
+        }
+    }
+
+    Flickable {
+        anchors.fill: parent
+        anchors.topMargin: rootObj.s(8)
+        anchors.leftMargin: rootObj.s(8)
+        anchors.rightMargin: rootObj.s(8)
+        anchors.bottomMargin: rootObj.s(4)
+        contentHeight: settingsCol.implicitHeight
+        contentWidth: width
+        clip: true
+        boundsBehavior: Flickable.StopAtBounds
+
+        ColumnLayout {
+            id: settingsCol
+            width: parent.width
+            spacing: rootObj.s(6)
+
+            ThemeAppearanceSection { id: appearanceSection; tab: themeTabRoot }
+
+            ThemePresetsSection { tab: themeTabRoot }
+        }
+    }
+}

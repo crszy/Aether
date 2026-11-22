@@ -2,6 +2,7 @@ pragma ComponentBehavior: Bound
 
 import QtQuick
 import QtQuick.Effects
+import Quickshell
 import Quickshell.Wayland
 import Caelestia.Config
 import Caelestia.Multimedia
@@ -20,7 +21,9 @@ WlSessionLockSurface {
     // a monitor that only stays locked while showing the live desktop (WinSettings.lockLiveOthers)
     readonly property bool liveHere: lock.isLive?.(screen) ?? false
     // your own lock screen: windows.json "mixLock": "user:<Name>" = ~/.config/caelestia/user/lock/<Name>.qml
-    readonly property string userLockName: UserExt.userName(WinSettings.mixLock)
+    readonly property string userLockName: WinSettings.distroMode ? "distro" : UserExt.userName(WinSettings.mixLock)
+    // a whole Linux distro brings its own lock screen (distros/<family>/...Lock.qml)
+    readonly property string distroLock: WinSettings.distroMode ? Quickshell.shellPath("distros/gnome/GnomeLock.qml") : ""
 
     contentItem.Config.screen: screen.name
     contentItem.Tokens.screen: screen.name
@@ -344,8 +347,19 @@ WlSessionLockSurface {
             anchors.fill: parent
             fill: true
             kind: "lock"
-            name: userLock.visible ? root.userLockName : ""
+            visible: !root.distroLock
+            name: userLock.visible && !root.distroLock ? root.userLockName : ""
             context: ({ pam: root.pam, lock: root, screen: root.screen })
+        }
+        Loader {
+            anchors.fill: parent
+            active: userLock.visible && !!root.distroLock
+            source: root.distroLock
+            onLoaded: {
+                item.pam = root.pam;
+                item.lock = root;
+                item.screen = root.screen;
+            }
         }
     }
 }

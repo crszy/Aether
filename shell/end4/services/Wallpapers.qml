@@ -8,6 +8,7 @@ import qs.services as Cae
 import Qt.labs.folderlistmodel
 import Quickshell
 import Quickshell.Io
+import Quickshell.Windows as WinFs
 pragma Singleton
 pragma ComponentBehavior: Bound
 
@@ -79,32 +80,18 @@ Singleton {
         root.select(filePath, darkMode);
     }
 
-    Process {
-        id: validateDirProc
-        property string nicePath: ""
-        function setDirectoryIfValid(path) {
-            validateDirProc.nicePath = FileUtils.trimFileProtocol(path).replace(/\/+$/, "")
-            if (/^\/*$/.test(validateDirProc.nicePath)) validateDirProc.nicePath = "/";
-            validateDirProc.exec([
-                "bash", "-c",
-                `if [ -d "${validateDirProc.nicePath}" ]; then echo dir; elif [ -f "${validateDirProc.nicePath}" ]; then echo file; else echo invalid; fi`
-            ])
-        }
-        stdout: StdioCollector {
-            onStreamFinished: {
-                    root.directory = Qt.resolvedUrl(validateDirProc.nicePath)
-                const result = text.trim()
-                if (result === "dir") {
-                } else if (result === "file") {
-                    root.directory = Qt.resolvedUrl(FileUtils.parentDirectory(validateDirProc.nicePath))
-                } else {
-                    // Ignore
-                }
-            }
-        }
-    }
+    // Windows: check the typed / clicked path natively. Qt.resolvedUrl("C:/x") turns the drive letter into a URL scheme
+    // ("c:"), so folders are always given as file:///C:/x; backslashes and quotes are accepted.
     function setDirectory(path) {
-        validateDirProc.setDirectoryIfValid(path)
+        let nice = FileUtils.trimFileProtocol(String(path)).trim().replace(/^"(.*)"$/, "$1").replace(/\\/g, "/").replace(/\/+$/, "")
+        nice = nice.replace(/^\/([A-Za-z]:)/, "$1")
+        if (/^[A-Za-z]:$/.test(nice)) nice += "/"
+        if (!nice) return
+        const kind = WinFs.FsUtils.classify(nice)
+        if (kind === "dir")
+            root.directory = "file:///" + nice
+        else if (kind === "file")
+            root.directory = "file:///" + FileUtils.parentDirectory(nice)
     }
     function navigateUp() {
         folderModel.navigateUp()

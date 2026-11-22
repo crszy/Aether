@@ -15,7 +15,33 @@ Scope {
     // costly looks go (animations, blur, shadows) - gaps and rounding stay, so other windows do not move; the
     // shells drop their own heavy parts (eg. a video wallpaper) while RuntimeState.gameMode is on.
     property bool autoOn: false
-    readonly property var autoOptions: ({ "animations:enabled": 0, "decoration:blur:enabled": 0, "decoration:shadow:enabled": 0 })
+    // what it turns off follows Settings > Windows extras (WinSettings.gm*)
+    readonly property var autoOptions: {
+        const o = {};
+        if (WinSettings.gmWmEffects) {
+            o["animations:enabled"] = 0;
+            o["decoration:blur:enabled"] = 0;
+            o["decoration:shadow:enabled"] = 0;
+        }
+        if (WinSettings.gmBorders)
+            o["general:border_size"] = 0;
+        return o;
+    }
+
+    // the audio visualizer's sound capture (WASAPI loopback) stops while a game runs, and comes back after
+    property bool visualizerWasOn: false
+    readonly property bool stopVisualizer: WinSettings.gameStopVisualizer
+    onStopVisualizerChanged: {
+        {
+            if (root.stopVisualizer) {
+                root.visualizerWasOn = Win.AudioVisualizer.running;
+                Win.AudioVisualizer.running = false;
+            } else if (root.visualizerWasOn) {
+                Win.AudioVisualizer.running = true;
+                root.visualizerWasOn = false;
+            }
+        }
+    }
 
     function followFullscreen(): void {
         const fullscreen = Win.WindowManager.fullscreenApp;
@@ -37,7 +63,9 @@ Scope {
     }
 
     function applyGameMode(): void {
-        Hypr.extras.applyOptions(root.autoOn ? root.autoOptions : GlobalConfig.utilities.gameMode.options);
+        const options = root.autoOn ? root.autoOptions : GlobalConfig.utilities.gameMode.options;
+        if (Object.keys(options).length > 0)
+            Hypr.extras.applyOptions(options);
     }
 
     // on/off in quick succession (a fullscreen window flickering, a screenshot overlay) collapses into the last state:

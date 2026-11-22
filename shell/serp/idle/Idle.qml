@@ -1,0 +1,485 @@
+// serpantinum (https://github.com/ilyamiro/serpantinum) - Copyright (C) 2026 Illia Miroshnichenko, AGPL-3.0.
+// Windows changes by dotfiles/serp-port.js (Aether, AGPL-3.0-or-later).
+import QtQuick
+import qs.shims
+import Quickshell
+import Quickshell.Io
+import Quickshell.Wayland
+import Quickshell.Services.Mpris
+import "../"
+
+Item {
+    id: idleRoot
+
+
+
+    property var defaultIdleSettings: ({
+        "enabled": false,
+        "manualInhibit": false,
+        "lockOnSleep": true,
+        "actions": {
+            "dim": {
+                "id": "dim",
+                "name": "Dim Screen",
+                "timeout": 120,
+                "enabled": true,
+                "respectInhibitors": true,
+                "mprisInhibit": true,
+                "warningTimeout": 0,
+                "warningCommand": "",
+                "beforeCommand": "",
+                "resumeCommand": "",
+                "isCustom": false
+            },
+            "lock": {
+                "id": "lock",
+                "name": "Lock Session",
+                "timeout": 300,
+                "enabled": true,
+                "respectInhibitors": true,
+                "mprisInhibit": true,
+                "warningTimeout": 10,
+                "warningCommand": "",
+                "beforeCommand": "",
+                "resumeCommand": "",
+                "isCustom": false
+            },
+            "dpms": {
+                "id": "dpms",
+                "name": "Display Off (DPMS)",
+                "timeout": 360,
+                "enabled": true,
+                "respectInhibitors": true,
+                "mprisInhibit": true,
+                "warningTimeout": 0,
+                "warningCommand": "",
+                "beforeCommand": "",
+                "resumeCommand": "",
+                "isCustom": false
+            },
+            "suspend": {
+                "id": "suspend",
+                "name": "System Suspend",
+                "timeout": 600,
+                "enabled": true,
+                "respectInhibitors": true,
+                "mprisInhibit": true,
+                "warningTimeout": 30,
+                "warningCommand": "",
+                "isCustom": false
+            }
+        },
+        "customActions": []
+    })
+
+    property var idleSettings: {
+        let s = (typeof Config !== "undefined" && Config.rawSettings) ? Config.rawSettings["idle"] : undefined;
+        if (s !== undefined && s !== null) return s;
+        if (typeof Config !== "undefined" && typeof Config.getSetting === "function") {
+            return Config.getSetting("idle", idleRoot.defaultIdleSettings);
+        }
+        return idleRoot.defaultIdleSettings;
+    }
+
+    Connections {
+        target: typeof Config !== "undefined" ? Config : null
+        function onSettingsLoaded() {
+            idleRoot.idleSettings = Qt.binding(function() {
+                let s = (typeof Config !== "undefined" && Config.rawSettings) ? Config.rawSettings["idle"] : undefined;
+                if (s !== undefined && s !== null) return s;
+                if (typeof Config !== "undefined" && typeof Config.getSetting === "function") {
+                    return Config.getSetting("idle", idleRoot.defaultIdleSettings);
+                }
+                return idleRoot.defaultIdleSettings;
+            });
+        }
+    }
+
+    property bool idleEnabled: idleSettings && idleSettings.enabled !== undefined ? idleSettings.enabled : false
+    property bool manualInhibit: idleSettings && idleSettings.manualInhibit !== undefined ? idleSettings.manualInhibit : false
+    property bool isIdleSystemActive: idleEnabled && !manualInhibit
+    property bool lockOnSleep: idleSettings && idleSettings.lockOnSleep !== undefined ? idleSettings.lockOnSleep : true
+    property bool isDimmed: false
+    property bool isLocked: false
+
+    property bool isMediaPlaying: {
+        try {
+            return Mpris.players && Mpris.players.values ? Mpris.players.values.some(p => p.playbackState === MprisPlaybackState.Playing) : false;
+        } catch (e) {
+            return false;
+        }
+    }
+
+    // Set while an app asks org.freedesktop.ScreenSaver not to lock (games, Steam, Wine)
+    property bool isAppInhibited: false
+
+    Process {
+        id: idleHelperProc
+        running: Caching.qsDir !== ""
+        stdinEnabled: true
+        command: ["where.exe", "/q", "serp-linux-only", "serpantinum-core", "watch", "idle", Caching.getRunDir("lock") + "/locked"]
+        stdout: SplitParser {
+            onRead: data => {
+                let line = data.trim();
+                if (line === "inhibit 1") idleRoot.isAppInhibited = true;
+                else if (line === "inhibit 0") idleRoot.isAppInhibited = false;
+                else if (line === "sleep" && idleRoot.lockOnSleep) idleRoot.lockSession(true);
+                else if (line === "wake") idleRoot.reauthLockSession();
+                else if (line.startsWith("log ")) console.info("idle_helper: " + line.slice(4));
+            }
+        }
+        onStarted: idleRoot.syncSleepLock()
+        onExited: (exitCode, exitStatus) => {
+            idleRoot.isAppInhibited = false;
+            if (exitCode !== 0) idleHelperRestartTimer.restart();
+        }
+    }
+
+    Timer {
+        id: idleHelperRestartTimer
+        interval: 10000
+        onTriggered: idleHelperProc.running = true
+    }
+
+    function syncSleepLock() {
+        if (idleHelperProc.running) idleHelperProc.write("sleep-lock " + (idleRoot.lockOnSleep ? "on" : "off") + "\n");
+    }
+
+    onLockOnSleepChanged: syncSleepLock()
+
+    property var allActions: {
+        let list = [];
+        let acts = (idleSettings && idleSettings.actions) ? idleSettings.actions : defaultIdleSettings.actions;
+        let keys = ["dim", "lock", "dpms", "suspend"];
+
+        for (let i = 0; i < keys.length; i++) {
+            let key = keys[i];
+            let act = (acts && acts[key]) ? Object.assign({}, defaultIdleSettings.actions[key], acts[key]) : defaultIdleSettings.actions[key];
+            list.push(act);
+        }
+
+        let customs = (idleSettings && idleSettings.customActions) ? idleSettings.customActions : [];
+        for (let j = 0; j < customs.length; j++) {
+            list.push(customs[j]);
+        }
+        return list;
+    }
+
+    function getActionTimeout(act) {
+        if (!act || act.timeout === undefined || act.timeout === null || isNaN(act.timeout) || act.timeout <= 0) {
+            if (act && act.id === "dim") return 120;
+            if (act && act.id === "lock") return 300;
+            if (act && act.id === "dpms") return 360;
+            if (act && act.id === "suspend") return 600;
+            return 300;
+        }
+        return Math.max(1, Math.round(Number(act.timeout)));
+    }
+
+    function isActionPipelineValid(actionObj) {
+        if (!actionObj) return false;
+        let id = (actionObj.id || "").toLowerCase();
+        let builtInOrder = ["dim", "lock", "dpms", "suspend"];
+        let idx = builtInOrder.indexOf(id);
+        if (idx === -1) return true;
+
+        let acts = (idleSettings && idleSettings.actions) ? idleSettings.actions : defaultIdleSettings.actions;
+        let myTimeout = idleRoot.getActionTimeout(actionObj);
+
+        for (let j = idx + 1; j < builtInOrder.length; j++) {
+            let nextKey = builtInOrder[j];
+            let nextAct = (acts && acts[nextKey]) ? Object.assign({}, defaultIdleSettings.actions[nextKey], acts[nextKey]) : defaultIdleSettings.actions[nextKey];
+            let nextEnabled = nextAct && nextAct.enabled !== undefined ? nextAct.enabled : true;
+            if (nextEnabled) {
+                let nextTimeout = idleRoot.getActionTimeout(nextAct);
+                if (myTimeout >= nextTimeout) return false;
+            }
+        }
+        return true;
+    }
+
+    Timer {
+        id: frameSettleTimer
+        interval: 100
+        repeat: false
+        property var pendingCallback: null
+        onTriggered: {
+            if (pendingCallback) {
+                pendingCallback();
+                pendingCallback = null;
+            }
+        }
+    }
+
+    Timer {
+        id: suspendTimer
+        interval: 200
+        repeat: false
+        onTriggered: {
+            void 0 /* Windows: Windows' own power settings */;
+        }
+    }
+
+    function runCmd(cmd) {
+        if (cmd && cmd.trim().length > 0) {
+            Quickshell.execDetached(["where.exe", "/q", "serp-linux-only", "sh", "-c", cmd]);
+        }
+    }
+
+    function lockSession(isStatic) {
+        let cmd = ["where.exe", "/q", "serp-linux-only", "bash", Caching.serpantinumDir + "/scripts/lock.sh"];
+        if (isStatic === true) cmd.push("--static");
+        Quickshell.execDetached(cmd);
+    }
+
+    function reauthLockSession() {
+        Quickshell.execDetached(["where.exe", "/q", "serp-linux-only", "bash", Caching.serpantinumDir + "/scripts/lock.sh", "--reauth"]);
+    }
+
+    function performLock() {
+        idleRoot.isLocked = true;
+        idleRoot.lockSession();
+    }
+
+    function dpmsOff() {
+        if (Compositor.name === "niri") {
+            Quickshell.execDetached(["where.exe", "/q", "serp-linux-only", "niri", "msg", "action", "power-off-monitors"]);
+        } else if (Compositor.name === "mango") {
+            Quickshell.execDetached(["where.exe", "/q", "serp-linux-only", "sh", "-c", "mmsg get all-monitors 2>/dev/null | jq -r '.monitors[]?.name' | while read -r mon; do mmsg dispatch \"sleep_monitor,$mon\"; done"]);
+        } else if (Compositor.name === "umbriel") {
+            Quickshell.execDetached(["where.exe", "/q", "serp-linux-only", "umbriel", "msg", "dpms-off"]);
+        } else if (Compositor.name === "hyprland") {
+            Quickshell.execDetached(["where.exe", "/q", "serp-linux-only", "sh", "-c", "hyprctl dispatch 'hl.dsp.dpms({ action = \"disable\" })' 2>/dev/null || hyprctl dispatch 'hl.dsp.dpms({ action = \"off\" })' 2>/dev/null || hyprctl dispatch dpms off"]);
+        }
+    }
+
+    function dpmsOn() {
+        if (Compositor.name === "niri") {
+            Quickshell.execDetached(["where.exe", "/q", "serp-linux-only", "niri", "msg", "action", "power-on-monitors"]);
+        } else if (Compositor.name === "mango") {
+            Quickshell.execDetached(["where.exe", "/q", "serp-linux-only", "sh", "-c", "mmsg get all-monitors 2>/dev/null | jq -r '.monitors[]?.name' | while read -r mon; do mmsg dispatch \"wakeup_monitor,$mon\"; done"]);
+        } else if (Compositor.name === "umbriel") {
+            Quickshell.execDetached(["where.exe", "/q", "serp-linux-only", "umbriel", "msg", "dpms-on"]);
+        } else if (Compositor.name === "hyprland") {
+            Quickshell.execDetached(["where.exe", "/q", "serp-linux-only", "sh", "-c", "hyprctl dispatch 'hl.dsp.dpms({ action = \"enable\" })' 2>/dev/null || hyprctl dispatch 'hl.dsp.dpms({ action = \"on\" })' 2>/dev/null || hyprctl dispatch dpms on"]);
+        }
+    }
+
+    function teardownVisualStates() {
+        if (idleRoot.isDimmed) {
+            idleRoot.isDimmed = false;
+        }
+    }
+
+    function triggerWarning(actionObj) {
+        if (!actionObj || !idleRoot.isActionPipelineValid(actionObj)) return;
+        if (actionObj.warningCommand && actionObj.warningCommand.trim().length > 0) {
+            idleRoot.runCmd(actionObj.warningCommand);
+        }
+    }
+
+    function triggerAction(actionObj) {
+        if (!actionObj || !idleRoot.isActionPipelineValid(actionObj)) return;
+
+        let id = (actionObj.id || "").toLowerCase();
+
+        if (id === "dim") {
+            if (!idleRoot.isLocked) {
+                if (actionObj.beforeCommand && actionObj.beforeCommand.trim().length > 0) {
+                    idleRoot.runCmd(actionObj.beforeCommand);
+                }
+                idleRoot.isDimmed = true;
+                if (actionObj.command && actionObj.command.trim().length > 0) {
+                    idleRoot.runCmd(actionObj.command);
+                }
+            }
+            return;
+        }
+
+        idleRoot.teardownVisualStates();
+
+        if (id === "lock") {
+            if (actionObj.beforeCommand && actionObj.beforeCommand.trim().length > 0) {
+                idleRoot.runCmd(actionObj.beforeCommand);
+            }
+            frameSettleTimer.pendingCallback = function() {
+                idleRoot.performLock();
+                if (actionObj.command && actionObj.command.trim().length > 0) {
+                    idleRoot.runCmd(actionObj.command);
+                }
+            };
+            frameSettleTimer.restart();
+            return;
+        }
+
+        if (id === "dpms") {
+            if (actionObj.beforeCommand && actionObj.beforeCommand.trim().length > 0) {
+                idleRoot.runCmd(actionObj.beforeCommand);
+            }
+            idleRoot.dpmsOff();
+            if (actionObj.command && actionObj.command.trim().length > 0) {
+                idleRoot.runCmd(actionObj.command);
+            }
+            return;
+        }
+
+        if (id === "suspend") {
+            if (!idleRoot.isLocked) {
+                idleRoot.performLock();
+            }
+            if (actionObj.command && actionObj.command.trim().length > 0) {
+                idleRoot.runCmd(actionObj.command);
+            }
+            suspendTimer.restart();
+            return;
+        }
+
+        if (actionObj.beforeCommand && actionObj.beforeCommand.trim().length > 0) {
+            idleRoot.runCmd(actionObj.beforeCommand);
+        }
+        if (actionObj.command && actionObj.command.trim().length > 0) {
+            idleRoot.runCmd(actionObj.command);
+        }
+    }
+
+    function resumeAction(actionObj) {
+        if (!actionObj) return;
+
+        let id = (actionObj.id || "").toLowerCase();
+        if (id === "dim") {
+            idleRoot.isDimmed = false;
+        } else if (id === "lock") {
+            frameSettleTimer.stop();
+            idleRoot.isLocked = false;
+        } else if (id === "dpms") {
+            if (actionObj.resumeCommand && actionObj.resumeCommand.trim().length > 0) {
+                idleRoot.runCmd(actionObj.resumeCommand);
+            } else {
+                idleRoot.dpmsOn();
+            }
+            return;
+        } else if (id === "suspend") {
+            suspendTimer.stop();
+            return;
+        }
+
+        if (actionObj.resumeCommand && actionObj.resumeCommand.trim().length > 0) {
+            idleRoot.runCmd(actionObj.resumeCommand);
+        }
+    }
+
+    function executeAction(name) {
+        if (!name) return;
+        let target = name.toString().trim().toLowerCase();
+        let actionObj = idleRoot.allActions.find(a => (a.id && a.id.toLowerCase() === target) || (a.name && a.name.toLowerCase() === target));
+        if (actionObj) {
+            idleRoot.triggerAction(actionObj);
+        }
+    }
+
+    IpcHandler {
+        target: "serp:idle"
+        function trigger(name: string): void { idleRoot.executeAction(name); }
+        function execute(name: string): void { idleRoot.executeAction(name); }
+        function run(name: string): void { idleRoot.executeAction(name); }
+        function status(): string { return idleRoot.statusJson(); }
+    }
+
+    function statusJson() {
+        return JSON.stringify({
+            "active": idleRoot.isIdleSystemActive,
+            "enabled": idleRoot.idleEnabled,
+            "caffeine": {
+                "on": idleRoot.manualInhibit,
+                "remaining": idleRoot.manualInhibit && Number(idleSettings.caffeineEndTime) > 0 ? Math.max(0, Math.round((Number(idleSettings.caffeineEndTime) - Date.now()) / 1000)) : 0
+            },
+            "appInhibited": idleRoot.isAppInhibited,
+            "mediaPlaying": idleRoot.isMediaPlaying,
+            "locked": idleRoot.isLocked,
+            "dimmed": idleRoot.isDimmed,
+            "actions": idleRoot.allActions.map(a => ({
+                "id": a.id,
+                "enabled": a.enabled !== undefined ? a.enabled : true,
+                "timeout": idleRoot.getActionTimeout(a),
+                "valid": idleRoot.isActionPipelineValid(a),
+                "respectInhibitors": a.respectInhibitors !== undefined ? a.respectInhibitors : true,
+                "mprisInhibit": !!a.mprisInhibit
+            }))
+        }, null, 2);
+    }
+
+    Dim {
+        active: idleRoot.isIdleSystemActive && idleRoot.isDimmed
+    }
+
+    Repeater {
+        model: idleRoot.allActions
+        delegate: Item {
+            id: monitorDelegate
+            required property var modelData
+
+            property int actionTimeout: idleRoot.getActionTimeout(monitorDelegate.modelData)
+            property int warnLead: Math.round(Number(monitorDelegate.modelData && monitorDelegate.modelData.warningTimeout ? monitorDelegate.modelData.warningTimeout : 0))
+            property int warnTimeout: Math.max(1, actionTimeout - warnLead)
+            property bool hasWarning: monitorDelegate.modelData && monitorDelegate.modelData.warningCommand && monitorDelegate.modelData.warningCommand.trim().length > 0 && warnLead > 0 && warnLead < actionTimeout
+            property bool isActionEnabled: monitorDelegate.modelData && monitorDelegate.modelData.enabled !== undefined ? monitorDelegate.modelData.enabled : true
+            property bool isValidInPipeline: idleRoot.isActionPipelineValid(monitorDelegate.modelData)
+            property bool respectsInhibitors: monitorDelegate.modelData && monitorDelegate.modelData.respectInhibitors !== undefined ? monitorDelegate.modelData.respectInhibitors : true
+
+            IdleMonitor {
+                timeout: monitorDelegate.warnTimeout
+                enabled: idleRoot.isIdleSystemActive &&
+                         monitorDelegate.isValidInPipeline &&
+                         monitorDelegate.isActionEnabled &&
+                         monitorDelegate.hasWarning &&
+                         (!monitorDelegate.modelData || !monitorDelegate.modelData.mprisInhibit || !idleRoot.isMediaPlaying) &&
+                         (!monitorDelegate.respectsInhibitors || !idleRoot.isAppInhibited)
+                respectInhibitors: monitorDelegate.respectsInhibitors
+
+                onIsIdleChanged: {
+                    if (isIdle) {
+                        idleRoot.triggerWarning(monitorDelegate.modelData);
+                    }
+                }
+            }
+
+            IdleMonitor {
+                timeout: monitorDelegate.actionTimeout
+                enabled: idleRoot.isIdleSystemActive &&
+                         monitorDelegate.isValidInPipeline &&
+                         monitorDelegate.isActionEnabled &&
+                         (!monitorDelegate.modelData || !monitorDelegate.modelData.mprisInhibit || !idleRoot.isMediaPlaying) &&
+                         (!monitorDelegate.respectsInhibitors || !idleRoot.isAppInhibited)
+                respectInhibitors: monitorDelegate.respectsInhibitors
+
+                onIsIdleChanged: {
+                    if (isIdle) {
+                        idleRoot.triggerAction(monitorDelegate.modelData);
+                    } else {
+                        idleRoot.resumeAction(monitorDelegate.modelData);
+                    }
+                }
+            }
+        }
+    }
+
+    Loader {
+        active: idleRoot.manualInhibit
+        sourceComponent: PanelWindow {
+            id: inhibitWindow
+            color: "transparent"
+            screen: (Quickshell.screens && Quickshell.screens.length > 0) ? Quickshell.screens[0] : null
+            anchors.top: true
+            anchors.left: true
+            implicitWidth: 1
+            implicitHeight: 1
+            WlrLayershell.layer: WlrLayer.Background
+            exclusionMode: ExclusionMode.Ignore
+
+            IdleInhibitor {
+                window: inhibitWindow
+                enabled: true
+            }
+        }
+    }
+}
