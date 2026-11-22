@@ -339,7 +339,7 @@ Loader {
             visible: all.length > 0
             Repeater {
                 id: trayRep
-                model: tc.all.filter(i => tc.expanded || (!tc.compact && (AetherBarConfig.trayHidden || []).indexOf(i.id) < 0))
+                model: tc.all.filter(i => (tc.expanded && !tc.compact) || (!tc.compact && (AetherBarConfig.trayHidden || []).indexOf(i.id) < 0))
                 MouseArea {
                     id: ti
                     required property var modelData
@@ -383,13 +383,85 @@ Loader {
                 onClicked: m => {
                     if (m.button === Qt.RightButton)
                         AetherBarConfig.trayCompact = !AetherBarConfig.trayCompact;
+                    else if (tc.compact && !console.log("tray arrow click"))
+                        trayFly.visible = !trayFly.visible;
                     else
                         tc.expanded = !tc.expanded;
                 }
                 Sym {
                     anchors.centerIn: parent
-                    text: tc.expanded ? "chevron_right" : "chevron_left"
-                    opacity: arrow.containsMouse ? 1 : 0.75
+                    text: tc.compact ? "keyboard_arrow_up" : (tc.expanded ? "chevron_right" : "chevron_left")
+                    rotation: tc.compact && trayFly.visible ? 180 : 0
+                    opacity: arrow.containsMouse || trayFly.visible ? 1 : 0.75
+                    Behavior on rotation { NumberAnimation { duration: 220; easing.type: Easing.OutCubic } }
+                }
+            }
+
+            // compact tray: every icon in a small panel under the arrow (left-click opens, right-click its menu)
+            PopupWindow {
+                id: trayFly
+                anchor.item: arrow
+                anchor.rect.y: arrow.height + 10
+                anchor.rect.x: arrow.width / 2 - implicitWidth / 2
+                readonly property int cols: Math.min(4, Math.max(1, tc.all.length))
+                implicitWidth: cols * 40 + 16
+                implicitHeight: Math.ceil(tc.all.length / cols) * 40 + 16
+                color: "transparent"
+                visible: false
+                Rectangle {
+                    anchors.fill: parent
+                    radius: 16
+                    color: AetherStyle.surface
+                    border.width: 1
+                    border.color: Qt.alpha(AetherStyle.outlineVar, 0.6)
+                    Grid {
+                        x: 8
+                        y: 8
+                        columns: trayFly.cols
+                        Repeater {
+                            model: trayFly.visible ? tc.all : []
+                            MouseArea {
+                                id: fi
+                                required property var modelData
+                                width: 40
+                                height: 40
+                                acceptedButtons: Qt.LeftButton | Qt.RightButton | Qt.MiddleButton
+                                hoverEnabled: true
+                                cursorShape: Qt.PointingHandCursor
+                                onClicked: m => {
+                                    if (m.button === Qt.LeftButton) {
+                                        trayFly.visible = false;
+                                        modelData.activate();
+                                    } else if (m.button === Qt.MiddleButton)
+                                        modelData.secondaryActivate();
+                                    else {
+                                        trayFly.visible = false;
+                                        modelData.secondaryActivate();
+                                    }
+                                }
+                                Rectangle {
+                                    anchors.fill: parent
+                                    anchors.margins: 2
+                                    radius: 10
+                                    color: fi.containsMouse ? Qt.alpha(AetherStyle.primary, 0.14) : "transparent"
+                                }
+                                IconImage {
+                                    anchors.centerIn: parent
+                                    width: 22
+                                    height: 22
+                                    source: Icons.getTrayIcon(fi.modelData.id, fi.modelData.icon)
+                                }
+                            }
+                        }
+                    }
+                    HoverHandler {
+                        id: flyHover
+                    }
+                }
+                Timer {    // closes once the mouse has left it for a moment
+                    running: trayFly.visible && !flyHover.hovered && !arrow.containsMouse
+                    interval: 1600
+                    onTriggered: trayFly.visible = false
                 }
             }
 

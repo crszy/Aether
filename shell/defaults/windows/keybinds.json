@@ -8,6 +8,7 @@
     {"keys": "Super+Comma", "action": "global", "name": "caelestia:nexus"},
     {"keys": "Super+Shift+Comma", "action": "global", "name": "caelestia:nexusAether"},
     {"keys": "Super+W", "action": "global", "name": "caelestia:wallpicker"},
+    {"keys": "Super+Shift+W", "action": "global", "name": "caelestia:wallpicker"},
     {"keys": "Super+Escape", "action": "global", "name": "caelestia:session"},
     {"keys": "Super+Shift+L", "action": "global", "name": "caelestia:lock"},
     {"keys": "Alt+Tab", "action": "global", "name": "caelestia:switcher"},

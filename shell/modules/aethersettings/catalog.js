@@ -173,13 +173,21 @@ function human(key) {
     return s.charAt(0).toUpperCase() + s.slice(1);
 }
 
-// shell and look logos in logos/ (each project's own mark; Debian's from Papirus, GPL-3.0). "aether" is drawn live
-// by AetherLogo; ids with no file (zenith, dss, off, your files) fall back to their Material icon.
-var logos = { caelestia: "caelestia.svg", noctalia: "noctalia.svg", dms: "dms.svg", end4: "end4.svg", ryoku: "ryoku.png",
-    debian: "debian.svg", serp: "serp.svg" };
+// shell and look logos in logos/, each project's own mark (Aether's icon by fora, DarkShadowShell's assets/icon.png,
+// Debian's from Papirus, GPL-3.0). Ids with no file (zenith, off, your files) fall back to their Material icon.
+var logos = { aether: "aether.jpg", caelestia: "caelestia.svg", noctalia: "noctalia.svg", dms: "dms.svg", end4: "end4.svg",
+    ryoku: "ryoku.png", debian: "debian.svg", serp: "serp.svg", dss: "dss.png" };
 
 function logoFile(id) {
     return logos[String(id)] || "";
 }
 // logos drawn in black, shown on a light tile
 var darkLogos = { caelestia: true, serp: true };
+
+// card headers in headers/: each shell's own README / site screenshot (credited in NOTICE.md), Aether's banner
+var headers = { aether: "aether.jpg", caelestia: "caelestia.jpg", noctalia: "noctalia.jpg", dms: "dms.jpg", end4: "end4.jpg",
+    ryoku: "ryoku.jpg", serp: "serp.jpg", dss: "dss.jpg", zenith: "zenith.jpg" };
+
+function headerFile(id) {
+    return headers[String(id)] || "";
+}

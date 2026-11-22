@@ -210,7 +210,7 @@ Singleton {
             property bool lyricsBubbles: true
             property bool lyricsFx: true
             property list<string> trayHidden: []
-            property bool trayCompact: false
+            property bool trayCompact: true
         }
     }
 }

@@ -84,7 +84,21 @@ Singleton {
         repeat: true
         triggeredOnStart: true
         running: adapter.wallpaperEngine !== "ignore" && typeof Win.FsUtils.processRunning === "function"
+        // AetherWM gives Wallpaper Engine a desktop window to draw on when Explorer is not running (progman.rs)
         onTriggered: root.wallpaperEngineRunning = Win.FsUtils.processRunning(["wallpaper32.exe", "wallpaper64.exe"])
+    }
+    // Without Explorer, Wallpaper Engine starts but never loads its wallpaper (black desktop): load it for it,
+    // and pause it in game mode (Settings > Game mode > wallpaper) so it uses no GPU or CPU while you play.
+    onWallpaperEngineRunningChanged: if (wallpaperEngineRunning) weOpenT.restart()
+    onGamePauseWallpaperChanged: if (wallpaperEngineRunning) weControl(gamePauseWallpaper ? "pause" : "play")
+    function weControl(action) {
+        Quickshell.execDetached(["powershell.exe", "-NoProfile", "-WindowStyle", "Hidden", "-ExecutionPolicy", "Bypass",
+            "-File", Quickshell.shellPath("assets/we-control.ps1"), action]);
+    }
+    Timer {
+        id: weOpenT
+        interval: 3000    // give it time to make its tray and event windows
+        onTriggered: root.weControl(root.gamePauseWallpaper ? "pause" : "open")
     }
     property alias mixLauncher: adapter.mixLauncher
     property alias mixDock: adapter.mixDock                  // "noctalia" | "dms" | "end4" | "off"
