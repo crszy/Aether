@@ -66,13 +66,24 @@ Variants {
             opacity: 1
             border.width: bar.full ? 0 : 1
             border.color: Qt.alpha(AetherStyle.outlineVar, 0.6)
-            layer.enabled: !bar.full
-            layer.effect: MultiEffect {
-                shadowEnabled: true
-                shadowColor: "#000000"
-                shadowOpacity: 0.35
-                shadowBlur: 0.6
-                shadowVerticalOffset: 3
+            // the shadow is its own plain shape under the island (z -1), so it is blurred once - not again on every
+            // frame the island's content moves (spinning cover, equaliser): that kept the GPU busy and the bar choppy
+            Rectangle {
+                z: -1
+                anchors.fill: parent
+                visible: !bar.full
+                radius: parent.radius
+                topLeftRadius: parent.topLeftRadius
+                topRightRadius: parent.topRightRadius
+                color: parent.color
+                layer.enabled: visible
+                layer.effect: MultiEffect {
+                    shadowEnabled: true
+                    shadowColor: "#000000"
+                    shadowOpacity: 0.35
+                    shadowBlur: 0.6
+                    shadowVerticalOffset: 3
+                }
             }
         }
 

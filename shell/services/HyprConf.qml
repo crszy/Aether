@@ -1036,8 +1036,12 @@ bind = $mainMod SHIFT, S, movetoworkspace, special:magic
 
 # windows that should never tile
 windowrule = float, class:^(Calculator|SnippingTool|Taskmgr)$
-# Discord and Spotify (Electron/CEF) break when another program resizes them - they float and are never resized
-windowrule = float, class:^(discord|spotify)$
+# Spotify (CEF) breaks when another program resizes it - it floats. Discord tiles (Alt+T floats it)
+windowrule = float, class:^(spotify)$
+# Aether: Alt+T (togglefloating) resizes apps for real instead of stretching their picture while they tile
+aether {
+    toggle_live_resize = true
+}
 `
 
     // ------------------------------------------------------------ files

@@ -748,6 +748,17 @@ impl Workspace {
                     effective_layout_options,
                     &self.latest_layout,
                 );
+                // Aether: niri's columns - each its own width, the view scrolling in pixels (see niri.rs)
+                if matches!(self.layout, Layout::Default(DefaultLayout::Scrolling)) {
+                    let widths: Vec<Option<f32>> = self.containers().iter().map(|c| c.column_width).collect();
+                    layouts = crate::niri::columns(
+                        &adjusted_work_area,
+                        &widths,
+                        self.focused_container_idx(),
+                        &self.latest_layout,
+                        container_padding,
+                    );
+                }
 
                 let should_remove_titlebars = REMOVE_TITLEBARS.load(Ordering::SeqCst);
                 let no_titlebar = NO_TITLEBAR.lock().clone();
@@ -1335,7 +1346,26 @@ impl Workspace {
         } else if self.containers().is_empty() {
             0
         } else {
-            self.focused_container_idx() + 1
+            // Aether: like Hyprland's dwindle, the new window splits the window under the mouse (else the focused
+            // one) and goes on the side the mouse is on - left / right, or top / bottom for a tall window
+            let target = self
+                .container_idx_from_current_point()
+                .unwrap_or_else(|| self.focused_container_idx());
+            let before = match crate::animation::FORCE_SPLIT.load(std::sync::atomic::Ordering::Relaxed) {
+                1 => true,
+                2 => false,
+                _ => match (self.latest_layout.get(target), WindowsApi::cursor_pos().ok()) {
+                    (Some(r), Some(p)) => {
+                        if r.right >= r.bottom {
+                            p.x < r.left + r.right / 2
+                        } else {
+                            p.y < r.top + r.bottom / 2
+                        }
+                    }
+                    _ => false,
+                },
+            };
+            if before { target } else { target + 1 }
         };
 
         let mut container = Container::default();

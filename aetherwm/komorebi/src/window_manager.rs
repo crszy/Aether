@@ -3060,6 +3060,9 @@ impl WindowManager {
             self.float_window()?;
         }
 
+        if crate::animation::TOGGLE_LIVE_RESIZE.load(std::sync::atomic::Ordering::Relaxed) {
+            crate::animation::suppress_movement_animations_after_workspace_switch();
+        }
         self.update_focused_workspace(is_floating_window, true)
     }
 
