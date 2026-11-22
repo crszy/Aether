@@ -1,5 +1,6 @@
 # Wallpaper Engine helper for Aether (no Explorer). "open": load each monitor's chosen wallpaper from WE's config.json
 # (WE does not do it itself without Explorer, so the desktop stays black). "pause" / "play": game mode.
+# "stop": unload every wallpaper (you picked a normal one in Aether) so WE holds no memory or GPU.
 param([string]$Action = "open")
 $dir = "C:\Program Files (x86)\Steam\steamapps\common\wallpaper_engine"
 $p = Get-Process wallpaper64, wallpaper32 -ErrorAction SilentlyContinue | Select-Object -First 1

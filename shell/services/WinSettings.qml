@@ -56,7 +56,7 @@ Singleton {
     // wallpaper steps aside so Wallpaper Engine shows ("wallpaperEngine": "auto"); "ignore" keeps Aether's on top.
     property alias wallpaperEngine: adapter.wallpaperEngine
     property bool wallpaperEngineRunning: false
-    readonly property string wallpaperLayer: wallpaperEngineRunning && adapter.wallpaperEngine !== "ignore" ? "off" : distroMode ? "distro" : adapter.mixWallpaper
+    readonly property string wallpaperLayer: weShown && adapter.wallpaperEngine !== "ignore" ? "off" : distroMode ? "distro" : adapter.mixWallpaper
     // a whole Linux distro (distros/catalog.js): "distro": "debian" - no Caelestia frame, bar, launcher, notifications,
     // OSD or wallpaper, and no other ported shell; the distro draws everything. "" = Mix & match as usual.
     property alias distro: adapter.distro
@@ -85,12 +85,54 @@ Singleton {
         triggeredOnStart: true
         running: adapter.wallpaperEngine !== "ignore" && typeof Win.FsUtils.processRunning === "function"
         // AetherWM gives Wallpaper Engine a desktop window to draw on when Explorer is not running (progman.rs)
-        onTriggered: root.wallpaperEngineRunning = Win.FsUtils.processRunning(["wallpaper32.exe", "wallpaper64.exe"])
+        onTriggered: {
+            root.wallpaperEngineRunning = Win.FsUtils.processRunning(["wallpaper32.exe", "wallpaper64.exe"]);
+            if (root.wallpaperEngineRunning)
+                root.weCheckPick();
+        }
+    }
+    // Wallpaper Engine shows only when your last pick was made in it: its selected wallpaper changed after Aether's
+    // wallpaper/path.txt. Pick a normal wallpaper in Aether and WE is stopped, so it holds no memory or GPU.
+    property bool weWanted: false
+    readonly property bool weShown: wallpaperEngineRunning && weWanted
+    FileView {
+        path: "C:/Program Files (x86)/Steam/steamapps/common/wallpaper_engine/config.json"
+        watchChanges: true
+        printErrors: false
+        onFileChanged: reload()
+        onLoaded: root.weSelection(text())
+    }
+    function weSelection(json) {
+        let cur = "";
+        try {
+            const cfg = JSON.parse(json);
+            for (const user in cfg) {
+                const sel = cfg[user] && cfg[user].general && cfg[user].general.wallpaperconfig
+                    && cfg[user].general.wallpaperconfig.selectedwallpapers;
+                if (!sel)
+                    continue;
+                cur = Object.keys(sel).sort().map(k => k + "=" + (sel[k].file || "")).join("|");
+                break;
+            }
+        } catch (e) {
+            return;
+        }
+        if (cur === adapter.weLastFile)
+            return;
+        // the first time we see WE, its old selection is not a new pick (Aether's wallpaper stays)
+        adapter.weLastPickAt = adapter.weLastFile === "" ? 0 : Date.now();
+        adapter.weLastFile = cur;
+        weCheckPick();
+    }
+    function weCheckPick() {
+        const aw = Win.FsUtils.statPath(Quickshell.env("USERPROFILE") + "/.local/state/caelestia/wallpaper/path.txt");
+        weWanted = adapter.weLastPickAt > (aw && aw.mtimeMs ? aw.mtimeMs : 0);
     }
     // Without Explorer, Wallpaper Engine starts but never loads its wallpaper (black desktop): load it for it,
     // and pause it in game mode (Settings > Game mode > wallpaper) so it uses no GPU or CPU while you play.
     onWallpaperEngineRunningChanged: if (wallpaperEngineRunning) weOpenT.restart()
-    onGamePauseWallpaperChanged: if (wallpaperEngineRunning) weControl(gamePauseWallpaper ? "pause" : "play")
+    onWeWantedChanged: if (wallpaperEngineRunning) weOpenT.restart()
+    onGamePauseWallpaperChanged: if (weShown) weControl(gamePauseWallpaper ? "pause" : "play")
     function weControl(action) {
         Quickshell.execDetached(["powershell.exe", "-NoProfile", "-WindowStyle", "Hidden", "-ExecutionPolicy", "Bypass",
             "-File", Quickshell.shellPath("assets/we-control.ps1"), action]);
@@ -98,7 +140,7 @@ Singleton {
     Timer {
         id: weOpenT
         interval: 3000    // give it time to make its tray and event windows
-        onTriggered: root.weControl(root.gamePauseWallpaper ? "pause" : "open")
+        onTriggered: root.weControl(!root.weWanted ? "stop" : root.gamePauseWallpaper ? "pause" : "open")
     }
     property alias mixLauncher: adapter.mixLauncher
     property alias mixDock: adapter.mixDock                  // "noctalia" | "dms" | "end4" | "off"
@@ -366,6 +408,8 @@ Singleton {
             property int distroNightTemp: 4000
             property string glass: "off"
             property string wallpaperEngine: "auto"
+            property string weLastFile: ""      // the wallpaper(s) last selected in Wallpaper Engine
+            property real weLastPickAt: 0       // when that selection changed (0: never seen it change)
             property string mixLauncher: "caelestia"
             property string mixDock: "off"
             property string titleBars: "system"
