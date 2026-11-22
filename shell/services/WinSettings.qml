@@ -366,26 +366,69 @@ Singleton {
         onTriggered: file.reload()
     }
 
+    // Last known good copy of windows.json. A crash, a kill mid-write or a reload that read an empty file used to
+    // leave the defaults in memory, and the next change wrote them over your look and WM (back to niri + Caelestia).
+    // Now every good read is copied here, and a bad read restores from it instead of using the defaults.
+    FileView {
+        id: goodFile
+
+        path: root.path + ".good"
+        blockLoading: true
+        printErrors: false
+    }
+
+    function validJson(t: string): bool {
+        if (!t || t.trim().length < 2) return false;
+        try { const o = JSON.parse(t); return o !== null && typeof o === "object"; } catch (e) { return false; }
+    }
+
+    function restoreGood(): bool {
+        goodFile.reload();
+        const g = goodFile.text();
+        if (!validJson(g)) return false;
+        console.warn("WinSettings: windows.json was empty or broken - restored your last saved settings");
+        file.setText(g);   // fileChanged -> reload -> onLoaded with the good text
+        return true;
+    }
+
     FileView {
         id: file
 
         path: root.path
         watchChanges: true
         onFileChanged: reload()
-        onLoaded: { root.loaded = true; root.apply(); } // loaded first: apply() starts tiling only with the whole file read
+        onLoaded: {
+            const t = text();
+            if (!root.validJson(t)) {   // read mid-write or corrupt: never run (or save) on the defaults
+                if (retryLoad.tries < 5) {
+                    retryLoad.tries++;
+                    retryLoad.restart();
+                    return;
+                }
+                retryLoad.tries = 0;
+                if (root.restoreGood()) return;
+            } else {
+                retryLoad.tries = 0;
+                goodFile.setText(t);
+            }
+            root.loaded = true;   // loaded first: apply() starts tiling only with the whole file read
+            root.apply();
+        }
         onLoadFailed: err => {
-            // a restart can catch the file mid-write: retry a few times before falling back to the defaults (they
-            // made one-time windows like "Your config files" come back after every restart)
+            // a restart can catch the file mid-write: retry a few times before falling back
             if (err !== FileViewError.FileNotFound && retryLoad.tries < 5) {
                 retryLoad.tries++;
                 retryLoad.restart();
                 return;
             }
-            if (err === FileViewError.FileNotFound) writeAdapter();
+            retryLoad.tries = 0;
+            if (root.restoreGood()) return;
+            if (err === FileViewError.FileNotFound) writeAdapter();   // first run: write the defaults once
             root.apply();
             root.loaded = true;
         }
-        onAdapterUpdated: writeAdapter()
+        // only save once the real file was read, so the defaults can never overwrite your settings
+        onAdapterUpdated: if (root.loaded) writeAdapter()
 
         JsonAdapter {
             id: adapter
