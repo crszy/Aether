@@ -1365,7 +1365,27 @@ impl Workspace {
                     _ => false,
                 },
             };
-            if before { target } else { target + 1 }
+            let next = if before { target } else { target + 1 };
+            // Aether: several windows opened quickly arrive before the retile that refreshes latest_layout, so the
+            // second one looked up the mouse in a stale layout (wrong tile, indices shifted) - "only works once".
+            // Split the target's rect here right away, so the next new window already sees this one's tile.
+            if let Some(r) = self.latest_layout.get(target).copied() {
+                let (keep, new) = if r.right >= r.bottom {
+                    let half = r.right / 2;
+                    let left = Rect { left: r.left, top: r.top, right: half, bottom: r.bottom };
+                    let right = Rect { left: r.left + half, top: r.top, right: r.right - half, bottom: r.bottom };
+                    if before { (right, left) } else { (left, right) }
+                } else {
+                    let half = r.bottom / 2;
+                    let top = Rect { left: r.left, top: r.top, right: r.right, bottom: half };
+                    let bottom = Rect { left: r.left, top: r.top + half, right: r.right, bottom: r.bottom - half };
+                    if before { (bottom, top) } else { (top, bottom) }
+                };
+                self.latest_layout[target] = keep;
+                let at = next.min(self.latest_layout.len());
+                self.latest_layout.insert(at, new);
+            }
+            next
         };
 
         let mut container = Container::default();
