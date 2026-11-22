@@ -1,0 +1,29 @@
+singleton BatteryService BatteryService.qml
+singleton BluetoothService BluetoothService.qml
+singleton CaffeineService CaffeineService.qml
+singleton CenterState CenterState.qml
+singleton HyprlandService HyprlandService.qml
+singleton MediaPlayerService MediaPlayerService.qml
+singleton MenuService MenuService.qml
+singleton NotificationService NotificationService.qml
+singleton PowerProfileService PowerProfileService.qml
+singleton ProductivityService ProductivityService.qml
+singleton QuickSettingsService QuickSettingsService.qml
+singleton ResourceService ResourceService.qml
+singleton Variables Variables.qml
+singleton VolumeService VolumeService.qml
+singleton WallpaperService WallpaperService.qml
+singleton WifiService WifiService.qml
+singleton WeatherService WeatherService.qml
+singleton DynamicIslandService DynamicIslandService.qml
+singleton TodoistService TodoistService.qml
+singleton MailService MailService.qml
+singleton HardwareService HardwareService.qml
+singleton IdleService IdleService.qml
+singleton LockService LockService.qml
+singleton ThemeService ThemeService.qml
+singleton PowerToolsService PowerToolsService.qml
+singleton SystemServicesService SystemServicesService.qml
+
+
+

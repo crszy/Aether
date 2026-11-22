@@ -1,0 +1,35 @@
+Aether
+======
+Linux desktop shells running on Windows: Caelestia, end-4 (illogical-impulse), DankMaterialShell, Noctalia and
+Zenith, mixed however you like. Made for fun by a friend - as is, no warranty.
+
+Start:      Caelestia.exe (the installer adds it to the Start menu). Run it again to open Aether settings.
+Settings:   Super+Comma. "Make it yours" in the settings sidebar runs the first-start setup again.
+Quit:       Caelestia.exe --stop          Uninstall: Settings > Apps, or "Uninstall Aether" in the Start menu.
+
+What is inside, and its license
+-------------------------------
+  Caelestia shell + CLI     GPL-3.0        github.com/caelestia-dots/shell          config\LICENSE, cli\LICENSE
+  quickshell for Windows    LGPL-3.0       github.com/nunreasonable/quickshell-windows   qs\LICENSE*
+  end-4 illogical-impulse   GPL-3.0        github.com/end-4/dots-hyprland           config\end4\LICENSE
+  DankMaterialShell (Dux)   MIT            github.com/duxlabs-dev/dux-shell         config\dms\LICENSE
+  Noctalia v4               MIT            github.com/noctalia-dev/noctalia-shell   config\noctalia\LICENSE
+  Zenith                    Unlicense      github.com/zaeemali272/zenith-shell      config\zenith\LICENSE
+  M3Shapes                  Apache-2.0     github.com/soramanew/m3shapes
+  VirtualDesktopAccessor    MIT            github.com/Ciantic/VirtualDesktopAccessor qs\licenses\
+  Qt 6.11                   LGPL-3.0       qt.io
+  Microsoft Visual C++ runtime DLLs (qs\vcruntime*, msvcp*) - redistributable files from Visual Studio.
+
+Source code: the shells are QML and ship as source (the config folder). The compiled parts - quickshell for
+Windows (with Aether's changes), the Caelestia plugin and the launcher - are in source.zip.
+
+AetherWM (extras\aether-tiling), Aether's window manager, grew out of a fork of komorebi by LGUG2Z
+(github.com/LGUG2Z/komorebi) and stays under the Komorebi License 2.0 (extras\aether-tiling\LICENSE.md): personal
+use only, and it may only be shared as source code. It is NOT built or turned on unless you tick the license box
+(in setup or in Aether settings > Extras); it is then built on your own PC with Rust's GNU toolchain, which the build
+window installs if needed - no Visual Studio. For that build, extras\aether-tiling\gnu-as holds the GNU
+assembler from WinLibs (binutils, GPL-3.0, with its LGPL/zlib/BSD/MIT helper DLLs); its README lists the
+licenses and where the source code is.
+
+Screenshots and showcase videos in setup-ui\media and config\modules\rice\looks are each project's own, from its
+README / repository (Caelestia, end-4, DankMaterialShell, Noctalia, Zenith) - shown to present that project.

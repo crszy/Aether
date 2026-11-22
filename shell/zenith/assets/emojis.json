@@ -1,0 +1,3944 @@
+[
+  {
+    "char": "😀",
+    "name": "grinning face",
+    "cat": "Smileys",
+    "tags": "smile happy joy"
+  },
+  {
+    "char": "😃",
+    "name": "grinning face with big eyes",
+    "cat": "Smileys",
+    "tags": "smile happy joy"
+  },
+  {
+    "char": "😄",
+    "name": "grinning face with smiling eyes",
+    "cat": "Smileys",
+    "tags": "smile happy laugh"
+  },
+  {
+    "char": "😁",
+    "name": "beaming face with smiling eyes",
+    "cat": "Smileys",
+    "tags": "smile happy grin"
+  },
+  {
+    "char": "😆",
+    "name": "grinning squinting face",
+    "cat": "Smileys",
+    "tags": "laugh xD happy"
+  },
+  {
+    "char": "😅",
+    "name": "grinning face with sweat",
+    "cat": "Smileys",
+    "tags": "sweat relief phew"
+  },
+  {
+    "char": "🤣",
+    "name": "rolling on the floor laughing",
+    "cat": "Smileys",
+    "tags": "rofl laugh lol"
+  },
+  {
+    "char": "😂",
+    "name": "face with tears of joy",
+    "cat": "Smileys",
+    "tags": "cry laugh joy lol"
+  },
+  {
+    "char": "🙂",
+    "name": "slightly smiling face",
+    "cat": "Smileys",
+    "tags": "smile ok fine"
+  },
+  {
+    "char": "🙃",
+    "name": "upside-down face",
+    "cat": "Smileys",
+    "tags": "silly sarcasm joke"
+  },
+  {
+    "char": "😉",
+    "name": "winking face",
+    "cat": "Smileys",
+    "tags": "wink flirt secret"
+  },
+  {
+    "char": "😊",
+    "name": "smiling face with smiling eyes",
+    "cat": "Smileys",
+    "tags": "blush sweet happy"
+  },
+  {
+    "char": "😇",
+    "name": "smiling face with halo",
+    "cat": "Smileys",
+    "tags": "angel innocent pure"
+  },
+  {
+    "char": "🥰",
+    "name": "smiling face with hearts",
+    "cat": "Smileys",
+    "tags": "love adore hearts"
+  },
+  {
+    "char": "😍",
+    "name": "smiling face with heart-eyes",
+    "cat": "Smileys",
+    "tags": "love heart eyes"
+  },
+  {
+    "char": "🤩",
+    "name": "star-struck",
+    "cat": "Smileys",
+    "tags": "star wow amazed"
+  },
+  {
+    "char": "😘",
+    "name": "face blowing a kiss",
+    "cat": "Smileys",
+    "tags": "kiss love flirt"
+  },
+  {
+    "char": "😗",
+    "name": "kissing face",
+    "cat": "Smileys",
+    "tags": "kiss smooch"
+  },
+  {
+    "char": "😚",
+    "name": "kissing face with closed eyes",
+    "cat": "Smileys",
+    "tags": "kiss love"
+  },
+  {
+    "char": "😙",
+    "name": "kissing face with smiling eyes",
+    "cat": "Smileys",
+    "tags": "kiss cute"
+  },
+  {
+    "char": "😋",
+    "name": "face savoring food",
+    "cat": "Smileys",
+    "tags": "yum delicious food"
+  },
+  {
+    "char": "😛",
+    "name": "face with tongue",
+    "cat": "Smileys",
+    "tags": "tongue silly playful"
+  },
+  {
+    "char": "😜",
+    "name": "winking face with tongue",
+    "cat": "Smileys",
+    "tags": "wink tongue crazy"
+  },
+  {
+    "char": "🤪",
+    "name": "zany face",
+    "cat": "Smileys",
+    "tags": "wild goofy crazy"
+  },
+  {
+    "char": "😝",
+    "name": "squinting face with tongue",
+    "cat": "Smileys",
+    "tags": "tongue funny lol"
+  },
+  {
+    "char": "🤑",
+    "name": "money-mouth face",
+    "cat": "Smileys",
+    "tags": "money cash rich"
+  },
+  {
+    "char": "🤗",
+    "name": "smiling face with open hands",
+    "cat": "Smileys",
+    "tags": "hug warmth kindness"
+  },
+  {
+    "char": "🤭",
+    "name": "face with hand over mouth",
+    "cat": "Smileys",
+    "tags": "oops giggle secret"
+  },
+  {
+    "char": "🤫",
+    "name": "shushing face",
+    "cat": "Smileys",
+    "tags": "shh quiet silence"
+  },
+  {
+    "char": "🤔",
+    "name": "thinking face",
+    "cat": "Smileys",
+    "tags": "think ponder hmm"
+  },
+  {
+    "char": "🤐",
+    "name": "zipper-mouth face",
+    "cat": "Smileys",
+    "tags": "zip secret mute"
+  },
+  {
+    "char": "🤨",
+    "name": "face with raised eyebrow",
+    "cat": "Smileys",
+    "tags": "skeptical doubt hmm"
+  },
+  {
+    "char": "😐",
+    "name": "neutral face",
+    "cat": "Smileys",
+    "tags": "pokerface meh plain"
+  },
+  {
+    "char": "😑",
+    "name": "expressionless face",
+    "cat": "Smileys",
+    "tags": "bored blank unamused"
+  },
+  {
+    "char": "😶",
+    "name": "face without mouth",
+    "cat": "Smileys",
+    "tags": "silent no words"
+  },
+  {
+    "char": "😏",
+    "name": "smirking face",
+    "cat": "Smileys",
+    "tags": "smirk sly flirt"
+  },
+  {
+    "char": "😒",
+    "name": "unamused face",
+    "cat": "Smileys",
+    "tags": "annoyed unimpressed"
+  },
+  {
+    "char": "🙄",
+    "name": "face with rolling eyes",
+    "cat": "Smileys",
+    "tags": "eyeroll whatever bored"
+  },
+  {
+    "char": "😬",
+    "name": "grimacing face",
+    "cat": "Smileys",
+    "tags": "awkward eek Yikes"
+  },
+  {
+    "char": "🤥",
+    "name": "lying face",
+    "cat": "Smileys",
+    "tags": "pinocchio lie fake"
+  },
+  {
+    "char": "😌",
+    "name": "relieved face",
+    "cat": "Smileys",
+    "tags": "peace relaxed chill"
+  },
+  {
+    "char": "😔",
+    "name": "pensive face",
+    "cat": "Smileys",
+    "tags": "sad regret moody"
+  },
+  {
+    "char": "😪",
+    "name": "sleepy face",
+    "cat": "Smileys",
+    "tags": "tired sleep snot"
+  },
+  {
+    "char": "🤤",
+    "name": "drooling face",
+    "cat": "Smileys",
+    "tags": "drool desire tasty"
+  },
+  {
+    "char": "😴",
+    "name": "sleeping face",
+    "cat": "Smileys",
+    "tags": "zzz sleep night"
+  },
+  {
+    "char": "😷",
+    "name": "face with medical mask",
+    "cat": "Smileys",
+    "tags": "sick mask covid"
+  },
+  {
+    "char": "🤒",
+    "name": "face with thermometer",
+    "cat": "Smileys",
+    "tags": "sick fever ill"
+  },
+  {
+    "char": "🤕",
+    "name": "face with head-bandage",
+    "cat": "Smileys",
+    "tags": "hurt injury pain"
+  },
+  {
+    "char": "🤢",
+    "name": "nauseated face",
+    "cat": "Smileys",
+    "tags": "sick gross vomit"
+  },
+  {
+    "char": "🤮",
+    "name": "face vomiting",
+    "cat": "Smileys",
+    "tags": "puke vomit gross"
+  },
+  {
+    "char": "🤧",
+    "name": "sneezing face",
+    "cat": "Smileys",
+    "tags": "achoo cold allergy"
+  },
+  {
+    "char": "🥵",
+    "name": "hot face",
+    "cat": "Smileys",
+    "tags": "heat summer warm"
+  },
+  {
+    "char": "🥶",
+    "name": "cold face",
+    "cat": "Smileys",
+    "tags": "freezing ice winter"
+  },
+  {
+    "char": "🥴",
+    "name": "woozy face",
+    "cat": "Smileys",
+    "tags": "drunk dizzy tipsy"
+  },
+  {
+    "char": "😵",
+    "name": "knocked-out face",
+    "cat": "Smileys",
+    "tags": "dizzy dead faint"
+  },
+  {
+    "char": "🤯",
+    "name": "exploding head",
+    "cat": "Smileys",
+    "tags": "mind blown shocked"
+  },
+  {
+    "char": "🤠",
+    "name": "cowboy hat face",
+    "cat": "Smileys",
+    "tags": "yeehaw western cowboy"
+  },
+  {
+    "char": "🥳",
+    "name": "partying face",
+    "cat": "Smileys",
+    "tags": "party celebrate bday"
+  },
+  {
+    "char": "😎",
+    "name": "smiling face with sunglasses",
+    "cat": "Smileys",
+    "tags": "cool shades chill"
+  },
+  {
+    "char": "🤓",
+    "name": "nerd face",
+    "cat": "Smileys",
+    "tags": "geek glasses smart"
+  },
+  {
+    "char": "🧐",
+    "name": "face with monocle",
+    "cat": "Smileys",
+    "tags": "inspect curious study"
+  },
+  {
+    "char": "😕",
+    "name": "confused face",
+    "cat": "Smileys",
+    "tags": "huh lost puzzle"
+  },
+  {
+    "char": "😟",
+    "name": "worried face",
+    "cat": "Smileys",
+    "tags": "anxious concern scared"
+  },
+  {
+    "char": "🙁",
+    "name": "slightly frowning face",
+    "cat": "Smileys",
+    "tags": "sad frown bummed"
+  },
+  {
+    "char": "😮",
+    "name": "face with open mouth",
+    "cat": "Smileys",
+    "tags": "surprised wow gasp"
+  },
+  {
+    "char": "😯",
+    "name": "hushed face",
+    "cat": "Smileys",
+    "tags": "surprised shocked silent"
+  },
+  {
+    "char": "😲",
+    "name": "astonished face",
+    "cat": "Smileys",
+    "tags": "omg shocked amazed"
+  },
+  {
+    "char": "😳",
+    "name": "flushed face",
+    "cat": "Smileys",
+    "tags": "embarrassed blush eyes"
+  },
+  {
+    "char": "🥺",
+    "name": "pleading face",
+    "cat": "Smileys",
+    "tags": "beg puppy eyes please"
+  },
+  {
+    "char": "😦",
+    "name": "frowning face with open mouth",
+    "cat": "Smileys",
+    "tags": "yikes scared"
+  },
+  {
+    "char": "😨",
+    "name": "fearful face",
+    "cat": "Smileys",
+    "tags": "scared afraid panic"
+  },
+  {
+    "char": "😰",
+    "name": "anxious face with sweat",
+    "cat": "Smileys",
+    "tags": "nervous sweat stress"
+  },
+  {
+    "char": "😥",
+    "name": "sad but relieved face",
+    "cat": "Smileys",
+    "tags": "whew sad phew"
+  },
+  {
+    "char": "😢",
+    "name": "crying face",
+    "cat": "Smileys",
+    "tags": "tear sad cry"
+  },
+  {
+    "char": "😭",
+    "name": "loudly crying face",
+    "cat": "Smileys",
+    "tags": "sob cry tears wail"
+  },
+  {
+    "char": "😱",
+    "name": "face screaming in fear",
+    "cat": "Smileys",
+    "tags": "scream fear horror"
+  },
+  {
+    "char": "😖",
+    "name": "confounded face",
+    "cat": "Smileys",
+    "tags": "frustrated upset suffering"
+  },
+  {
+    "char": "😣",
+    "name": "persevering face",
+    "cat": "Smileys",
+    "tags": "struggle suffer try"
+  },
+  {
+    "char": "😞",
+    "name": "disappointed face",
+    "cat": "Smileys",
+    "tags": "sad upset letdown"
+  },
+  {
+    "char": "😓",
+    "name": "downcast face with sweat",
+    "cat": "Smileys",
+    "tags": "hard work sweat stress"
+  },
+  {
+    "char": "😩",
+    "name": "weary face",
+    "cat": "Smileys",
+    "tags": "tired exhausted ugh"
+  },
+  {
+    "char": "😫",
+    "name": "tired face",
+    "cat": "Smileys",
+    "tags": "tired fed up groan"
+  },
+  {
+    "char": "🥱",
+    "name": "yawning face",
+    "cat": "Smileys",
+    "tags": "sleepy bored yawn"
+  },
+  {
+    "char": "😤",
+    "name": "face with steam from nose",
+    "cat": "Smileys",
+    "tags": "triumph hmph angry"
+  },
+  {
+    "char": "😡",
+    "name": "enraged face",
+    "cat": "Smileys",
+    "tags": "angry rage mad"
+  },
+  {
+    "char": "😠",
+    "name": "angry face",
+    "cat": "Smileys",
+    "tags": "mad annoyed rage"
+  },
+  {
+    "char": "🤬",
+    "name": "face with symbols on mouth",
+    "cat": "Smileys",
+    "tags": "curse swear angry"
+  },
+  {
+    "char": "😈",
+    "name": "smiling face with horns",
+    "cat": "Smileys",
+    "tags": "devil evil mischief"
+  },
+  {
+    "char": "👿",
+    "name": "angry face with horns",
+    "cat": "Smileys",
+    "tags": "demon rage evil"
+  },
+  {
+    "char": "💀",
+    "name": "skull",
+    "cat": "Smileys",
+    "tags": "dead death skeleton lol"
+  },
+  {
+    "char": "💩",
+    "name": "pile of poo",
+    "cat": "Smileys",
+    "tags": "poop poopoo funny"
+  },
+  {
+    "char": "🤡",
+    "name": "clown face",
+    "cat": "Smileys",
+    "tags": "clown joker foolish"
+  },
+  {
+    "char": "👹",
+    "name": "ogre",
+    "cat": "Smileys",
+    "tags": "japanese monster red"
+  },
+  {
+    "char": "👺",
+    "name": "goblin",
+    "cat": "Smileys",
+    "tags": "mask red nose"
+  },
+  {
+    "char": "👻",
+    "name": "ghost",
+    "cat": "Smileys",
+    "tags": "spooky halloween boo"
+  },
+  {
+    "char": "👽",
+    "name": "alien",
+    "cat": "Smileys",
+    "tags": "ufo space extraterrestrial"
+  },
+  {
+    "char": "👾",
+    "name": "alien monster",
+    "cat": "Smileys",
+    "tags": "pixel retro arcade game"
+  },
+  {
+    "char": "🤖",
+    "name": "robot",
+    "cat": "Smileys",
+    "tags": "bot AI tech automation"
+  },
+  {
+    "char": "👋",
+    "name": "waving hand",
+    "cat": "People",
+    "tags": "wave hello goodbye hi"
+  },
+  {
+    "char": "🤚",
+    "name": "raised back of hand",
+    "cat": "People",
+    "tags": "stop high five"
+  },
+  {
+    "char": "🖐️",
+    "name": "hand with fingers splayed",
+    "cat": "People",
+    "tags": "hand five stop"
+  },
+  {
+    "char": "✋",
+    "name": "raised hand",
+    "cat": "People",
+    "tags": "stop high five halt"
+  },
+  {
+    "char": "🖖",
+    "name": "vulcan salute",
+    "cat": "People",
+    "tags": "spock live long prosper"
+  },
+  {
+    "char": "👌",
+    "name": "OK hand",
+    "cat": "People",
+    "tags": "ok perfect fine good"
+  },
+  {
+    "char": "🤏",
+    "name": "pinching hand",
+    "cat": "People",
+    "tags": "small tiny little bit"
+  },
+  {
+    "char": "✌️",
+    "name": "victory hand",
+    "cat": "People",
+    "tags": "peace victory v sign"
+  },
+  {
+    "char": "🤞",
+    "name": "crossed fingers",
+    "cat": "People",
+    "tags": "luck hope wish"
+  },
+  {
+    "char": "🤟",
+    "name": "love-you gesture",
+    "cat": "People",
+    "tags": "ily love rock"
+  },
+  {
+    "char": "🤘",
+    "name": "sign of the horns",
+    "cat": "People",
+    "tags": "rock on metal"
+  },
+  {
+    "char": "🤙",
+    "name": "call me hand",
+    "cat": "People",
+    "tags": "shaka phone hang loose"
+  },
+  {
+    "char": "👈",
+    "name": "backhand index pointing left",
+    "cat": "People",
+    "tags": "point left direction"
+  },
+  {
+    "char": "👉",
+    "name": "backhand index pointing right",
+    "cat": "People",
+    "tags": "point right direction"
+  },
+  {
+    "char": "👆",
+    "name": "backhand index pointing up",
+    "cat": "People",
+    "tags": "point up top above"
+  },
+  {
+    "char": "🖕",
+    "name": "middle finger",
+    "cat": "People",
+    "tags": "fuck off rude flip"
+  },
+  {
+    "char": "👇",
+    "name": "backhand index pointing down",
+    "cat": "People",
+    "tags": "point down below"
+  },
+  {
+    "char": "☝️",
+    "name": "index pointing up",
+    "cat": "People",
+    "tags": "one first point"
+  },
+  {
+    "char": "👍",
+    "name": "thumbs up",
+    "cat": "People",
+    "tags": "yes approve good agree"
+  },
+  {
+    "char": "👎",
+    "name": "thumbs down",
+    "cat": "People",
+    "tags": "no disapprove bad"
+  },
+  {
+    "char": "✊",
+    "name": "raised fist",
+    "cat": "People",
+    "tags": "power solid punch"
+  },
+  {
+    "char": "👊",
+    "name": "oncoming fist",
+    "cat": "People",
+    "tags": "fist bump punch"
+  },
+  {
+    "char": "🤛",
+    "name": "left-facing fist",
+    "cat": "People",
+    "tags": "fist bump left"
+  },
+  {
+    "char": "🤜",
+    "name": "right-facing fist",
+    "cat": "People",
+    "tags": "fist bump right"
+  },
+  {
+    "char": "👏",
+    "name": "clapping hands",
+    "cat": "People",
+    "tags": "bravo applause praise"
+  },
+  {
+    "char": "🙌",
+    "name": "raising hands",
+    "cat": "People",
+    "tags": "celebrate yay praise"
+  },
+  {
+    "char": "👐",
+    "name": "open hands",
+    "cat": "People",
+    "tags": "hug open welcome"
+  },
+  {
+    "char": "🤲",
+    "name": "palms up together",
+    "cat": "People",
+    "tags": "pray offer hold"
+  },
+  {
+    "char": "🤝",
+    "name": "handshake",
+    "cat": "People",
+    "tags": "deal agree partnership"
+  },
+  {
+    "char": "🙏",
+    "name": "folded hands",
+    "cat": "People",
+    "tags": "pray thanks please hope"
+  },
+  {
+    "char": "✍️",
+    "name": "writing hand",
+    "cat": "People",
+    "tags": "write sign pencil note"
+  },
+  {
+    "char": "💅",
+    "name": "nail polish",
+    "cat": "People",
+    "tags": "beauty nails sassy"
+  },
+  {
+    "char": "🤳",
+    "name": "selfie",
+    "cat": "People",
+    "tags": "photo camera phone"
+  },
+  {
+    "char": "💪",
+    "name": "flexed biceps",
+    "cat": "People",
+    "tags": "strong muscle power gym"
+  },
+  {
+    "char": "🧠",
+    "name": "brain",
+    "cat": "People",
+    "tags": "mind smart memory think"
+  },
+  {
+    "char": "👁️",
+    "name": "eye",
+    "cat": "People",
+    "tags": "see look watch vision"
+  },
+  {
+    "char": "👀",
+    "name": "eyes",
+    "cat": "People",
+    "tags": "look watch sneak curious"
+  },
+  {
+    "char": "🗣️",
+    "name": "speaking head",
+    "cat": "People",
+    "tags": "talk speak voice shouting"
+  },
+  {
+    "char": "🐶",
+    "name": "dog face",
+    "cat": "Animals",
+    "tags": "dog puppy pet canine"
+  },
+  {
+    "char": "🐱",
+    "name": "cat face",
+    "cat": "Animals",
+    "tags": "cat kitten pet feline"
+  },
+  {
+    "char": "🐭",
+    "name": "mouse face",
+    "cat": "Animals",
+    "tags": "mouse rat rodent"
+  },
+  {
+    "char": "🐹",
+    "name": "hamster face",
+    "cat": "Animals",
+    "tags": "hamster pet cute"
+  },
+  {
+    "char": "🐰",
+    "name": "rabbit face",
+    "cat": "Animals",
+    "tags": "bunny rabbit easter"
+  },
+  {
+    "char": "🦊",
+    "name": "fox face",
+    "cat": "Animals",
+    "tags": "fox cunning wild"
+  },
+  {
+    "char": "🐻",
+    "name": "bear face",
+    "cat": "Animals",
+    "tags": "bear teddy wild"
+  },
+  {
+    "char": "🐼",
+    "name": "panda face",
+    "cat": "Animals",
+    "tags": "panda china cute"
+  },
+  {
+    "char": "🐨",
+    "name": "koala",
+    "cat": "Animals",
+    "tags": "koala australia cute"
+  },
+  {
+    "char": "🐯",
+    "name": "tiger face",
+    "cat": "Animals",
+    "tags": "tiger wild cat roar"
+  },
+  {
+    "char": "🦁",
+    "name": "lion face",
+    "cat": "Animals",
+    "tags": "lion king roar wild"
+  },
+  {
+    "char": "🐮",
+    "name": "cow face",
+    "cat": "Animals",
+    "tags": "cow farm milk moo"
+  },
+  {
+    "char": "🐷",
+    "name": "pig face",
+    "cat": "Animals",
+    "tags": "pig oink farm bacon"
+  },
+  {
+    "char": "🐸",
+    "name": "frog face",
+    "cat": "Animals",
+    "tags": "frog toad amphibian"
+  },
+  {
+    "char": "🐵",
+    "name": "monkey face",
+    "cat": "Animals",
+    "tags": "monkey ape banana"
+  },
+  {
+    "char": "🐔",
+    "name": "chicken",
+    "cat": "Animals",
+    "tags": "rooster bird farm cluck"
+  },
+  {
+    "char": "🐧",
+    "name": "penguin",
+    "cat": "Animals",
+    "tags": "penguin bird ice tux"
+  },
+  {
+    "char": "🐦",
+    "name": "bird",
+    "cat": "Animals",
+    "tags": "bird fly tweet twitter"
+  },
+  {
+    "char": "🦅",
+    "name": "eagle",
+    "cat": "Animals",
+    "tags": "eagle bird predator freedom"
+  },
+  {
+    "char": "🦆",
+    "name": "duck",
+    "cat": "Animals",
+    "tags": "duck quack bird"
+  },
+  {
+    "char": "🦉",
+    "name": "owl",
+    "cat": "Animals",
+    "tags": "owl bird night wisdom"
+  },
+  {
+    "char": "🦇",
+    "name": "bat",
+    "cat": "Animals",
+    "tags": "bat vampire night halloween"
+  },
+  {
+    "char": "🐺",
+    "name": "wolf",
+    "cat": "Animals",
+    "tags": "wolf howl wild pack"
+  },
+  {
+    "char": "🐗",
+    "name": "boar",
+    "cat": "Animals",
+    "tags": "boar pig wild"
+  },
+  {
+    "char": "🐴",
+    "name": "horse face",
+    "cat": "Animals",
+    "tags": "horse pony wild"
+  },
+  {
+    "char": "🦄",
+    "name": "unicorn face",
+    "cat": "Animals",
+    "tags": "unicorn magic fantasy"
+  },
+  {
+    "char": "🐝",
+    "name": "honeybee",
+    "cat": "Animals",
+    "tags": "bee honey insect buzz"
+  },
+  {
+    "char": "🐛",
+    "name": "bug",
+    "cat": "Animals",
+    "tags": "caterpillar bug insect"
+  },
+  {
+    "char": "🦋",
+    "name": "butterfly",
+    "cat": "Animals",
+    "tags": "butterfly nature fly beauty"
+  },
+  {
+    "char": "🐌",
+    "name": "snail",
+    "cat": "Animals",
+    "tags": "snail slow shell"
+  },
+  {
+    "char": "🐞",
+    "name": "lady beetle",
+    "cat": "Animals",
+    "tags": "ladybug bug insect luck"
+  },
+  {
+    "char": "🐜",
+    "name": "ant",
+    "cat": "Animals",
+    "tags": "ant insect work"
+  },
+  {
+    "char": "🦟",
+    "name": "mosquito",
+    "cat": "Animals",
+    "tags": "mosquito bug bite malaria"
+  },
+  {
+    "char": "🐢",
+    "name": "turtle",
+    "cat": "Animals",
+    "tags": "turtle tortoise slow shell"
+  },
+  {
+    "char": "🐍",
+    "name": "snake",
+    "cat": "Animals",
+    "tags": "snake viper python hiss"
+  },
+  {
+    "char": "🦎",
+    "name": "lizard",
+    "cat": "Animals",
+    "tags": "lizard reptile gecko"
+  },
+  {
+    "char": "🐙",
+    "name": "octopus",
+    "cat": "Animals",
+    "tags": "octopus sea tentacle"
+  },
+  {
+    "char": "🦑",
+    "name": "squid",
+    "cat": "Animals",
+    "tags": "squid sea ocean"
+  },
+  {
+    "char": "🦐",
+    "name": "shrimp",
+    "cat": "Animals",
+    "tags": "shrimp seafood ocean"
+  },
+  {
+    "char": "🦀",
+    "name": "crab",
+    "cat": "Animals",
+    "tags": "crab ocean beach pinch"
+  },
+  {
+    "char": "🐡",
+    "name": "blowfish",
+    "cat": "Animals",
+    "tags": "fish sea ocean"
+  },
+  {
+    "char": "🐠",
+    "name": "tropical fish",
+    "cat": "Animals",
+    "tags": "fish sea ocean swim"
+  },
+  {
+    "char": "🐟",
+    "name": "fish",
+    "cat": "Animals",
+    "tags": "fish seafood ocean"
+  },
+  {
+    "char": "🐬",
+    "name": "dolphin",
+    "cat": "Animals",
+    "tags": "dolphin ocean sea swim"
+  },
+  {
+    "char": "🐳",
+    "name": "spouting whale",
+    "cat": "Animals",
+    "tags": "whale sea ocean big"
+  },
+  {
+    "char": "🦈",
+    "name": "shark",
+    "cat": "Animals",
+    "tags": "shark ocean predator jaws"
+  },
+  {
+    "char": "🐊",
+    "name": "crocodile",
+    "cat": "Animals",
+    "tags": "alligator croc reptile"
+  },
+  {
+    "char": "🐆",
+    "name": "leopard",
+    "cat": "Animals",
+    "tags": "cat wild spots fast"
+  },
+  {
+    "char": "🐅",
+    "name": "tiger",
+    "cat": "Animals",
+    "tags": "tiger cat wild stripes"
+  },
+  {
+    "char": "🐘",
+    "name": "elephant",
+    "cat": "Animals",
+    "tags": "elephant trunk africa big"
+  },
+  {
+    "char": "🦏",
+    "name": "rhinoceros",
+    "cat": "Animals",
+    "tags": "rhino africa horn"
+  },
+  {
+    "char": "🦛",
+    "name": "hippopotamus",
+    "cat": "Animals",
+    "tags": "hippo water river"
+  },
+  {
+    "char": "🐪",
+    "name": "camel",
+    "cat": "Animals",
+    "tags": "desert camel hump"
+  },
+  {
+    "char": "🦒",
+    "name": "giraffe",
+    "cat": "Animals",
+    "tags": "giraffe tall africa"
+  },
+  {
+    "char": "🦘",
+    "name": "kangaroo",
+    "cat": "Animals",
+    "tags": "kangaroo australia hop"
+  },
+  {
+    "char": "🌲",
+    "name": "evergreen tree",
+    "cat": "Animals",
+    "tags": "tree forest pine nature"
+  },
+  {
+    "char": "🌳",
+    "name": "deciduous tree",
+    "cat": "Animals",
+    "tags": "tree green forest park"
+  },
+  {
+    "char": "🌴",
+    "name": "palm tree",
+    "cat": "Animals",
+    "tags": "beach summer tropical island"
+  },
+  {
+    "char": "🌵",
+    "name": "cactus",
+    "cat": "Animals",
+    "tags": "desert plant prickly"
+  },
+  {
+    "char": "🌾",
+    "name": "sheaf of rice",
+    "cat": "Animals",
+    "tags": "crop wheat farm plant"
+  },
+  {
+    "char": "☘️",
+    "name": "shamrock",
+    "cat": "Animals",
+    "tags": "clover st patrick ireland"
+  },
+  {
+    "char": "🍀",
+    "name": "four leaf clover",
+    "cat": "Animals",
+    "tags": "luck clover green"
+  },
+  {
+    "char": "🍁",
+    "name": "maple leaf",
+    "cat": "Animals",
+    "tags": "canada autumn fall leaf"
+  },
+  {
+    "char": "🍂",
+    "name": "fallen leaf",
+    "cat": "Animals",
+    "tags": "autumn fall leaves nature"
+  },
+  {
+    "char": "🍃",
+    "name": "leaf fluttering in wind",
+    "cat": "Animals",
+    "tags": "wind green leaf nature"
+  },
+  {
+    "char": "🌺",
+    "name": "hibiscus",
+    "cat": "Animals",
+    "tags": "flower hawaii pink bloom"
+  },
+  {
+    "char": "🌻",
+    "name": "sunflower",
+    "cat": "Animals",
+    "tags": "flower yellow sun summer"
+  },
+  {
+    "char": "🌹",
+    "name": "rose",
+    "cat": "Animals",
+    "tags": "flower red love valentine"
+  },
+  {
+    "char": "🌷",
+    "name": "tulip",
+    "cat": "Animals",
+    "tags": "flower spring pink bloom"
+  },
+  {
+    "char": "🍏",
+    "name": "green apple",
+    "cat": "Food",
+    "tags": "apple fruit green healthy"
+  },
+  {
+    "char": "🍎",
+    "name": "red apple",
+    "cat": "Food",
+    "tags": "apple fruit red healthy"
+  },
+  {
+    "char": "🍐",
+    "name": "pear",
+    "cat": "Food",
+    "tags": "pear fruit healthy"
+  },
+  {
+    "char": "🍊",
+    "name": "tangerine",
+    "cat": "Food",
+    "tags": "orange citrus fruit"
+  },
+  {
+    "char": "🍋",
+    "name": "lemon",
+    "cat": "Food",
+    "tags": "lemon sour yellow citrus"
+  },
+  {
+    "char": "🍌",
+    "name": "banana",
+    "cat": "Food",
+    "tags": "banana fruit yellow monkey"
+  },
+  {
+    "char": "🍉",
+    "name": "watermelon",
+    "cat": "Food",
+    "tags": "melon fruit summer red"
+  },
+  {
+    "char": "🍇",
+    "name": "grapes",
+    "cat": "Food",
+    "tags": "grape fruit wine purple"
+  },
+  {
+    "char": "🍓",
+    "name": "strawberry",
+    "cat": "Food",
+    "tags": "berry fruit red sweet"
+  },
+  {
+    "char": "🫐",
+    "name": "blueberries",
+    "cat": "Food",
+    "tags": "berry fruit blue healthy"
+  },
+  {
+    "char": "🍈",
+    "name": "melon",
+    "cat": "Food",
+    "tags": "fruit green honeydew"
+  },
+  {
+    "char": "🍒",
+    "name": "cherries",
+    "cat": "Food",
+    "tags": "cherry fruit red sweet"
+  },
+  {
+    "char": "🍑",
+    "name": "peach",
+    "cat": "Food",
+    "tags": "peach fruit butt sweet"
+  },
+  {
+    "char": "🥭",
+    "name": "mango",
+    "cat": "Food",
+    "tags": "mango fruit tropical sweet"
+  },
+  {
+    "char": "🍍",
+    "name": "pineapple",
+    "cat": "Food",
+    "tags": "fruit tropical yellow hawaii"
+  },
+  {
+    "char": "🥥",
+    "name": "coconut",
+    "cat": "Food",
+    "tags": "nut tropical beach milk"
+  },
+  {
+    "char": "🥝",
+    "name": "kiwi fruit",
+    "cat": "Food",
+    "tags": "kiwi fruit green brown"
+  },
+  {
+    "char": "🍅",
+    "name": "tomato",
+    "cat": "Food",
+    "tags": "tomato vegetable red salad"
+  },
+  {
+    "char": "🥑",
+    "name": "avocado",
+    "cat": "Food",
+    "tags": "guacamole healthy green vegetable"
+  },
+  {
+    "char": "🍆",
+    "name": "eggplant",
+    "cat": "Food",
+    "tags": "eggplant purple vegetable dick"
+  },
+  {
+    "char": "🌶️",
+    "name": "hot pepper",
+    "cat": "Food",
+    "tags": "chili spicy pepper red"
+  },
+  {
+    "char": "🥒",
+    "name": "cucumber",
+    "cat": "Food",
+    "tags": "pickle vegetable green"
+  },
+  {
+    "char": "🥬",
+    "name": "leafy green",
+    "cat": "Food",
+    "tags": "salad lettuce healthy vegetable"
+  },
+  {
+    "char": "🥦",
+    "name": "broccoli",
+    "cat": "Food",
+    "tags": "green vegetable healthy"
+  },
+  {
+    "char": "🌽",
+    "name": "ear of corn",
+    "cat": "Food",
+    "tags": "maize yellow popcorn farm"
+  },
+  {
+    "char": "🥕",
+    "name": "carrot",
+    "cat": "Food",
+    "tags": "orange vegetable bunny healthy"
+  },
+  {
+    "char": "🧄",
+    "name": "garlic",
+    "cat": "Food",
+    "tags": "garlic cooking food spice"
+  },
+  {
+    "char": "🧅",
+    "name": "onion",
+    "cat": "Food",
+    "tags": "onion vegetable cry cook"
+  },
+  {
+    "char": "🥔",
+    "name": "potato",
+    "cat": "Food",
+    "tags": "fries potato food vegetable"
+  },
+  {
+    "char": "🍠",
+    "name": "roasted sweet potato",
+    "cat": "Food",
+    "tags": "yam sweet potato food"
+  },
+  {
+    "char": "🥐",
+    "name": "croissant",
+    "cat": "Food",
+    "tags": "bread pastry france bakery"
+  },
+  {
+    "char": "🍞",
+    "name": "bread",
+    "cat": "Food",
+    "tags": "loaf toast bakery food"
+  },
+  {
+    "char": "🥖",
+    "name": "baguette bread",
+    "cat": "Food",
+    "tags": "french bread bakery"
+  },
+  {
+    "char": "🥨",
+    "name": "pretzel",
+    "cat": "Food",
+    "tags": "snack bakery salt knot"
+  },
+  {
+    "char": "🧀",
+    "name": "cheese wedge",
+    "cat": "Food",
+    "tags": "cheese dairy Swiss cheddar"
+  },
+  {
+    "char": "🥚",
+    "name": "egg",
+    "cat": "Food",
+    "tags": "egg breakfast cook white"
+  },
+  {
+    "char": "🍳",
+    "name": "cooking",
+    "cat": "Food",
+    "tags": "fried egg breakfast pan"
+  },
+  {
+    "char": "🥞",
+    "name": "pancakes",
+    "cat": "Food",
+    "tags": "pancake breakfast syrup"
+  },
+  {
+    "char": "🧇",
+    "name": "waffle",
+    "cat": "Food",
+    "tags": "waffle syrup breakfast"
+  },
+  {
+    "char": "🥓",
+    "name": "bacon",
+    "cat": "Food",
+    "tags": "meat breakfast pork crispy"
+  },
+  {
+    "char": "🥩",
+    "name": "cut of meat",
+    "cat": "Food",
+    "tags": "steak beef meat grill"
+  },
+  {
+    "char": "🍗",
+    "name": "poultry leg",
+    "cat": "Food",
+    "tags": "chicken turkey drumstick food"
+  },
+  {
+    "char": "🍖",
+    "name": "meat on bone",
+    "cat": "Food",
+    "tags": "meat bone food BBQ"
+  },
+  {
+    "char": "🌭",
+    "name": "hot dog",
+    "cat": "Food",
+    "tags": "sausage mustard fastfood"
+  },
+  {
+    "char": "🍔",
+    "name": "hamburger",
+    "cat": "Food",
+    "tags": "burger cheeseburger fastfood"
+  },
+  {
+    "char": "🍟",
+    "name": "french fries",
+    "cat": "Food",
+    "tags": "fries mcdonalds fastfood"
+  },
+  {
+    "char": "🍕",
+    "name": "pizza",
+    "cat": "Food",
+    "tags": "slice cheese pepperoni fastfood"
+  },
+  {
+    "char": "🥪",
+    "name": "sandwich",
+    "cat": "Food",
+    "tags": "lunch bread deli"
+  },
+  {
+    "char": "🥙",
+    "name": "stuffed flatbread",
+    "cat": "Food",
+    "tags": "gyro shawarma kebab falafel"
+  },
+  {
+    "char": "🌮",
+    "name": "taco",
+    "cat": "Food",
+    "tags": "mexican food spicy taco"
+  },
+  {
+    "char": "🌯",
+    "name": "burrito",
+    "cat": "Food",
+    "tags": "mexican wrap food"
+  },
+  {
+    "char": "🍜",
+    "name": "steaming bowl",
+    "cat": "Food",
+    "tags": "ramen noodles soup asian"
+  },
+  {
+    "char": "🍝",
+    "name": "spaghetti",
+    "cat": "Food",
+    "tags": "pasta italian noodle sauce"
+  },
+  {
+    "char": "🍣",
+    "name": "sushi",
+    "cat": "Food",
+    "tags": "japan fish rice seafood"
+  },
+  {
+    "char": "🍱",
+    "name": "bento box",
+    "cat": "Food",
+    "tags": "japanese lunch box meal"
+  },
+  {
+    "char": "🥟",
+    "name": "dumpling",
+    "cat": "Food",
+    "tags": "dim sum potsticker gyoza"
+  },
+  {
+    "char": "🍤",
+    "name": "fried shrimp",
+    "cat": "Food",
+    "tags": "tempura seafood prawn"
+  },
+  {
+    "char": "🍙",
+    "name": "rice ball",
+    "cat": "Food",
+    "tags": "onigiri japan rice nori"
+  },
+  {
+    "char": "🍚",
+    "name": "cooked rice",
+    "cat": "Food",
+    "tags": "bowl rice asian grain"
+  },
+  {
+    "char": "🍘",
+    "name": "rice cracker",
+    "cat": "Food",
+    "tags": "senbei japan snack"
+  },
+  {
+    "char": "🍧",
+    "name": "shaved ice",
+    "cat": "Food",
+    "tags": "dessert ice syrup summer"
+  },
+  {
+    "char": "🍨",
+    "name": "ice cream",
+    "cat": "Food",
+    "tags": "dessert sweet cold bowl"
+  },
+  {
+    "char": "🍦",
+    "name": "soft ice cream",
+    "cat": "Food",
+    "tags": "cone ice cream sweet summer"
+  },
+  {
+    "char": "🥧",
+    "name": "pie",
+    "cat": "Food",
+    "tags": "dessert bakery apple pie"
+  },
+  {
+    "char": "🧁",
+    "name": "cupcake",
+    "cat": "Food",
+    "tags": "cake dessert sweet frosting"
+  },
+  {
+    "char": "🍰",
+    "name": "shortcake",
+    "cat": "Food",
+    "tags": "cake dessert slice birthday"
+  },
+  {
+    "char": "🎂",
+    "name": "birthday cake",
+    "cat": "Food",
+    "tags": "bday party candles cake"
+  },
+  {
+    "char": "🍮",
+    "name": "custard",
+    "cat": "Food",
+    "tags": "pudding flan dessert"
+  },
+  {
+    "char": "🍭",
+    "name": "lollipop",
+    "cat": "Food",
+    "tags": "candy sweet sugar treat"
+  },
+  {
+    "char": "🍬",
+    "name": "candy",
+    "cat": "Food",
+    "tags": "sweet sugar treat wrapper"
+  },
+  {
+    "char": "🍫",
+    "name": "chocolate bar",
+    "cat": "Food",
+    "tags": "sweet cocoa candy bar"
+  },
+  {
+    "char": "🍿",
+    "name": "popcorn",
+    "cat": "Food",
+    "tags": "movie theater snack corn"
+  },
+  {
+    "char": "🍩",
+    "name": "doughnut",
+    "cat": "Food",
+    "tags": "donut dessert sweet breakfast"
+  },
+  {
+    "char": "🍪",
+    "name": "cookie",
+    "cat": "Food",
+    "tags": "biscuit chocolate chip sweet"
+  },
+  {
+    "char": "☕",
+    "name": "hot beverage",
+    "cat": "Food",
+    "tags": "coffee tea espresso drink"
+  },
+  {
+    "char": "🍵",
+    "name": "teacup without handle",
+    "cat": "Food",
+    "tags": "green tea matcha asian"
+  },
+  {
+    "char": "🥤",
+    "name": "cup with straw",
+    "cat": "Food",
+    "tags": "soda juice drink fastfood"
+  },
+  {
+    "char": "🧃",
+    "name": "beverage box",
+    "cat": "Food",
+    "tags": "juice box drink kid"
+  },
+  {
+    "char": "🧉",
+    "name": "mate",
+    "cat": "Food",
+    "tags": "drink tea herbal south america"
+  },
+  {
+    "char": "🍺",
+    "name": "beer mug",
+    "cat": "Food",
+    "tags": "alcohol drink pub brew"
+  },
+  {
+    "char": "🍻",
+    "name": "clinking beer mugs",
+    "cat": "Food",
+    "tags": "cheers beer drink party"
+  },
+  {
+    "char": "🥂",
+    "name": "clinking glasses",
+    "cat": "Food",
+    "tags": "champagne toast celebration"
+  },
+  {
+    "char": "🍷",
+    "name": "wine glass",
+    "cat": "Food",
+    "tags": "red wine alcohol drink"
+  },
+  {
+    "char": "🥃",
+    "name": "tumbler glass",
+    "cat": "Food",
+    "tags": "whiskey bourbon liquor drink"
+  },
+  {
+    "char": "🍸",
+    "name": "cocktail glass",
+    "cat": "Food",
+    "tags": "martini drink bar alcohol"
+  },
+  {
+    "char": "🍹",
+    "name": "tropical drink",
+    "cat": "Food",
+    "tags": "cocktail beach summer drink"
+  },
+  {
+    "char": "🍾",
+    "name": "bottle with popping cork",
+    "cat": "Food",
+    "tags": "champagne party celebrate"
+  },
+  {
+    "char": "⚽",
+    "name": "soccer ball",
+    "cat": "Activities",
+    "tags": "football sports game play"
+  },
+  {
+    "char": "🏀",
+    "name": "basketball",
+    "cat": "Activities",
+    "tags": "nba sports hoop game"
+  },
+  {
+    "char": "🏈",
+    "name": "american football",
+    "cat": "Activities",
+    "tags": "nfl sports superbowl"
+  },
+  {
+    "char": "⚾",
+    "name": "baseball",
+    "cat": "Activities",
+    "tags": "mlb sports game bat"
+  },
+  {
+    "char": "🥎",
+    "name": "softball",
+    "cat": "Activities",
+    "tags": "sports ball game pitch"
+  },
+  {
+    "char": "🎾",
+    "name": "tennis",
+    "cat": "Activities",
+    "tags": "racket sports ball match"
+  },
+  {
+    "char": "🏐",
+    "name": "volleyball",
+    "cat": "Activities",
+    "tags": "beach sports ball net"
+  },
+  {
+    "char": "🏉",
+    "name": "rugby football",
+    "cat": "Activities",
+    "tags": "sports ball game tackle"
+  },
+  {
+    "char": "🥏",
+    "name": "flying disc",
+    "cat": "Activities",
+    "tags": "frisbee ultimate park game"
+  },
+  {
+    "char": "🎱",
+    "name": "pool 8 ball",
+    "cat": "Activities",
+    "tags": "billiards game eight"
+  },
+  {
+    "char": "🏓",
+    "name": "ping pong",
+    "cat": "Activities",
+    "tags": "table tennis paddle match"
+  },
+  {
+    "char": "🏸",
+    "name": "badminton",
+    "cat": "Activities",
+    "tags": "shuttlecock racket game"
+  },
+  {
+    "char": "🏒",
+    "name": "ice hockey",
+    "cat": "Activities",
+    "tags": "puck stick sports rink"
+  },
+  {
+    "char": "⛳",
+    "name": "flag in hole",
+    "cat": "Activities",
+    "tags": "golf green course hole"
+  },
+  {
+    "char": "🎯",
+    "name": "bullseye",
+    "cat": "Activities",
+    "tags": "dart target accuracy goal"
+  },
+  {
+    "char": "🎮",
+    "name": "video game",
+    "cat": "Activities",
+    "tags": "controller joystick gamer gaming"
+  },
+  {
+    "char": "🎲",
+    "name": "game die",
+    "cat": "Activities",
+    "tags": "dice boardgame random chance"
+  },
+  {
+    "char": "🧩",
+    "name": "puzzle piece",
+    "cat": "Activities",
+    "tags": "jigsaw solve piece strategy"
+  },
+  {
+    "char": "🎨",
+    "name": "artist palette",
+    "cat": "Activities",
+    "tags": "art paint draw color design"
+  },
+  {
+    "char": "🎭",
+    "name": "performing arts",
+    "cat": "Activities",
+    "tags": "theater mask drama acting"
+  },
+  {
+    "char": "🎬",
+    "name": "clapper board",
+    "cat": "Activities",
+    "tags": "movie film cinema director"
+  },
+  {
+    "char": "🎤",
+    "name": "microphone",
+    "cat": "Activities",
+    "tags": "sing karaoke music voice"
+  },
+  {
+    "char": "🎧",
+    "name": "headphone",
+    "cat": "Activities",
+    "tags": "music audio listen sound"
+  },
+  {
+    "char": "🎷",
+    "name": "saxophone",
+    "cat": "Activities",
+    "tags": "jazz music instrument"
+  },
+  {
+    "char": "🎸",
+    "name": "guitar",
+    "cat": "Activities",
+    "tags": "rock music instrument string"
+  },
+  {
+    "char": "🎹",
+    "name": "musical keyboard",
+    "cat": "Activities",
+    "tags": "piano music keys notes"
+  },
+  {
+    "char": "🚗",
+    "name": "automobile",
+    "cat": "Travel",
+    "tags": "car vehicle drive road"
+  },
+  {
+    "char": "🚕",
+    "name": "taxi",
+    "cat": "Travel",
+    "tags": "cab vehicle yellow car"
+  },
+  {
+    "char": "🚙",
+    "name": "sport utility vehicle",
+    "cat": "Travel",
+    "tags": "suv car vehicle drive"
+  },
+  {
+    "char": "🚌",
+    "name": "bus",
+    "cat": "Travel",
+    "tags": "transit vehicle transport route"
+  },
+  {
+    "char": "🚎",
+    "name": "trolleybus",
+    "cat": "Travel",
+    "tags": "bus transit electric vehicle"
+  },
+  {
+    "char": "🏎️",
+    "name": "racing car",
+    "cat": "Travel",
+    "tags": "formula1 f1 race speed car"
+  },
+  {
+    "char": "🚓",
+    "name": "police car",
+    "cat": "Travel",
+    "tags": "cop emergency vehicle siren"
+  },
+  {
+    "char": "🚑",
+    "name": "ambulance",
+    "cat": "Travel",
+    "tags": "hospital emergency medical"
+  },
+  {
+    "char": "🚒",
+    "name": "fire engine",
+    "cat": "Travel",
+    "tags": "fire truck emergency siren"
+  },
+  {
+    "char": "🚚",
+    "name": "delivery truck",
+    "cat": "Travel",
+    "tags": "cargo shipping transport lorry"
+  },
+  {
+    "char": "🚜",
+    "name": "tractor",
+    "cat": "Travel",
+    "tags": "farm agriculture vehicle"
+  },
+  {
+    "char": "🛵",
+    "name": "motor scooter",
+    "cat": "Travel",
+    "tags": "scooter vespa bike ride"
+  },
+  {
+    "char": "🚲",
+    "name": "bicycle",
+    "cat": "Travel",
+    "tags": "bike cycle pedal exercise"
+  },
+  {
+    "char": "🛴",
+    "name": "kick scooter",
+    "cat": "Travel",
+    "tags": "scooter ride skate"
+  },
+  {
+    "char": "🚨",
+    "name": "police car light",
+    "cat": "Travel",
+    "tags": "siren alarm alert emergency"
+  },
+  {
+    "char": "✈️",
+    "name": "airplane",
+    "cat": "Travel",
+    "tags": "flight plane fly airport travel"
+  },
+  {
+    "char": "🚀",
+    "name": "rocket",
+    "cat": "Travel",
+    "tags": "space launch ship cosmos"
+  },
+  {
+    "char": "🛸",
+    "name": "flying saucer",
+    "cat": "Travel",
+    "tags": "ufo alien space saucer"
+  },
+  {
+    "char": "🚁",
+    "name": "helicopter",
+    "cat": "Travel",
+    "tags": "chopper flight fly copter"
+  },
+  {
+    "char": "⛵",
+    "name": "sailboat",
+    "cat": "Travel",
+    "tags": "boat sea ocean yacht"
+  },
+  {
+    "char": "🚤",
+    "name": "speedboat",
+    "cat": "Travel",
+    "tags": "boat fast ocean motor"
+  },
+  {
+    "char": "🚢",
+    "name": "ship",
+    "cat": "Travel",
+    "tags": "cruise vessel ocean sea"
+  },
+  {
+    "char": "🗼",
+    "name": "tokyo tower",
+    "cat": "Travel",
+    "tags": "japan paris landmark tower"
+  },
+  {
+    "char": "🗽",
+    "name": "statue of liberty",
+    "cat": "Travel",
+    "tags": "nyc usa landmark freedom"
+  },
+  {
+    "char": "🛕",
+    "name": "hindu temple",
+    "cat": "Travel",
+    "tags": "temple India worship"
+  },
+  {
+    "char": "🕌",
+    "name": "mosque",
+    "cat": "Travel",
+    "tags": "islamic muslim worship minaret"
+  },
+  {
+    "char": "⛩️",
+    "name": "shinto shrine",
+    "cat": "Travel",
+    "tags": "japan gate torii temple"
+  },
+  {
+    "char": "🕋",
+    "name": "kaaba",
+    "cat": "Travel",
+    "tags": "mecca islam pilgrimage hajj"
+  },
+  {
+    "char": "💻",
+    "name": "laptop",
+    "cat": "Objects",
+    "tags": "computer pc mac code tech"
+  },
+  {
+    "char": "🖥️",
+    "name": "desktop computer",
+    "cat": "Objects",
+    "tags": "monitor screen pc setup"
+  },
+  {
+    "char": "🖨️",
+    "name": "printer",
+    "cat": "Objects",
+    "tags": "print paper document office"
+  },
+  {
+    "char": "📱",
+    "name": "mobile phone",
+    "cat": "Objects",
+    "tags": "iphone smartphone call cell"
+  },
+  {
+    "char": "☎️",
+    "name": "telephone",
+    "cat": "Objects",
+    "tags": "phone dial call retro"
+  },
+  {
+    "char": "📷",
+    "name": "camera",
+    "cat": "Objects",
+    "tags": "photo picture snap lens"
+  },
+  {
+    "char": "🎥",
+    "name": "movie camera",
+    "cat": "Objects",
+    "tags": "video film cinema record"
+  },
+  {
+    "char": "💡",
+    "name": "light bulb",
+    "cat": "Objects",
+    "tags": "idea bright electricity lamp"
+  },
+  {
+    "char": "🔦",
+    "name": "flashlight",
+    "cat": "Objects",
+    "tags": "torch light dark beam"
+  },
+  {
+    "char": "📖",
+    "name": "open book",
+    "cat": "Objects",
+    "tags": "read study story library"
+  },
+  {
+    "char": "📚",
+    "name": "books",
+    "cat": "Objects",
+    "tags": "school education study knowledge"
+  },
+  {
+    "char": "📜",
+    "name": "scroll",
+    "cat": "Objects",
+    "tags": "paper history document old"
+  },
+  {
+    "char": "📝",
+    "name": "memo",
+    "cat": "Objects",
+    "tags": "pencil write note paper"
+  },
+  {
+    "char": "💼",
+    "name": "briefcase",
+    "cat": "Objects",
+    "tags": "work business office suit"
+  },
+  {
+    "char": "📅",
+    "name": "calendar",
+    "cat": "Objects",
+    "tags": "date schedule event month"
+  },
+  {
+    "char": "📦",
+    "name": "package",
+    "cat": "Objects",
+    "tags": "box delivery parcel Amazon"
+  },
+  {
+    "char": "🔒",
+    "name": "locked",
+    "cat": "Objects",
+    "tags": "security key privacy lock"
+  },
+  {
+    "char": "🔓",
+    "name": "unlocked",
+    "cat": "Objects",
+    "tags": "open security access key"
+  },
+  {
+    "char": "🔑",
+    "name": "key",
+    "cat": "Objects",
+    "tags": "password unlock access security"
+  },
+  {
+    "char": "🔨",
+    "name": "hammer",
+    "cat": "Objects",
+    "tags": "tool build repair fix"
+  },
+  {
+    "char": "🛠️",
+    "name": "hammer and wrench",
+    "cat": "Objects",
+    "tags": "tools fix build settings"
+  },
+  {
+    "char": "⚙️",
+    "name": "gear",
+    "cat": "Objects",
+    "tags": "settings cog process engine"
+  },
+  {
+    "char": "💣",
+    "name": "bomb",
+    "cat": "Objects",
+    "tags": "boom explosion danger TNT"
+  },
+  {
+    "char": "🔫",
+    "name": "water pistol",
+    "cat": "Objects",
+    "tags": "gun weapon squirt toy"
+  },
+  {
+    "char": "🛡️",
+    "name": "shield",
+    "cat": "Objects",
+    "tags": "protection defense security armor"
+  },
+  {
+    "char": "🔑",
+    "name": "keychain",
+    "cat": "Objects",
+    "tags": "keys car house lock"
+  },
+  {
+    "char": "💰",
+    "name": "money bag",
+    "cat": "Objects",
+    "tags": "cash dollar wealth rich"
+  },
+  {
+    "char": "💳",
+    "name": "credit card",
+    "cat": "Objects",
+    "tags": "bank visa mastercard payment"
+  },
+  {
+    "char": "❤️",
+    "name": "red heart",
+    "cat": "Symbols",
+    "tags": "love red like passion"
+  },
+  {
+    "char": "🧡",
+    "name": "orange heart",
+    "cat": "Symbols",
+    "tags": "love orange warm"
+  },
+  {
+    "char": "💛",
+    "name": "yellow heart",
+    "cat": "Symbols",
+    "tags": "love yellow friendship"
+  },
+  {
+    "char": "💚",
+    "name": "green heart",
+    "cat": "Symbols",
+    "tags": "love green nature envy"
+  },
+  {
+    "char": "💙",
+    "name": "blue heart",
+    "cat": "Symbols",
+    "tags": "love blue trust peace"
+  },
+  {
+    "char": "💜",
+    "name": "purple heart",
+    "cat": "Symbols",
+    "tags": "love purple BTS honor"
+  },
+  {
+    "char": "🖤",
+    "name": "black heart",
+    "cat": "Symbols",
+    "tags": "love black dark goth"
+  },
+  {
+    "char": "🤍",
+    "name": "white heart",
+    "cat": "Symbols",
+    "tags": "love white pure peace"
+  },
+  {
+    "char": "🤎",
+    "name": "brown heart",
+    "cat": "Symbols",
+    "tags": "love brown chocolate"
+  },
+  {
+    "char": "💔",
+    "name": "broken heart",
+    "cat": "Symbols",
+    "tags": "sad heartbreak breakup pain"
+  },
+  {
+    "char": "❣️",
+    "name": "heart exclamation",
+    "cat": "Symbols",
+    "tags": "love punctuation red"
+  },
+  {
+    "char": "💕",
+    "name": "two hearts",
+    "cat": "Symbols",
+    "tags": "love pink cute passion"
+  },
+  {
+    "char": "💞",
+    "name": "revolving hearts",
+    "cat": "Symbols",
+    "tags": "love emotion pink"
+  },
+  {
+    "char": "💓",
+    "name": "beating heart",
+    "cat": "Symbols",
+    "tags": "pulse love heart beat"
+  },
+  {
+    "char": "💗",
+    "name": "growing heart",
+    "cat": "Symbols",
+    "tags": "love affection pulse"
+  },
+  {
+    "char": "💖",
+    "name": "sparkling heart",
+    "cat": "Symbols",
+    "tags": "love shine sparkle"
+  },
+  {
+    "char": "✨",
+    "name": "sparkles",
+    "cat": "Symbols",
+    "tags": "magic shiny star clean clean"
+  },
+  {
+    "char": "⭐️",
+    "name": "star",
+    "cat": "Symbols",
+    "tags": "rating fav yellow space"
+  },
+  {
+    "char": "🌟",
+    "name": "glowing star",
+    "cat": "Symbols",
+    "tags": "shine bright magic star"
+  },
+  {
+    "char": "💥",
+    "name": "collision",
+    "cat": "Symbols",
+    "tags": "boom bang clash impact"
+  },
+  {
+    "char": "🔥",
+    "name": "fire",
+    "cat": "Symbols",
+    "tags": "flame hot lit warm burn"
+  },
+  {
+    "char": "⚡",
+    "name": "high voltage",
+    "cat": "Symbols",
+    "tags": "zap thunder lightning power"
+  },
+  {
+    "char": "🎉",
+    "name": "party popper",
+    "cat": "Symbols",
+    "tags": "tada celebrate party bday"
+  },
+  {
+    "char": "🎊",
+    "name": "confetti ball",
+    "cat": "Symbols",
+    "tags": "party celebrate festival"
+  },
+  {
+    "char": "💯",
+    "name": "hundred points",
+    "cat": "Symbols",
+    "tags": "100 perfect score top"
+  },
+  {
+    "char": "⚠️",
+    "name": "warning",
+    "cat": "Symbols",
+    "tags": "caution danger alert sign"
+  },
+  {
+    "char": "⛔",
+    "name": "no entry",
+    "cat": "Symbols",
+    "tags": "stop forbidden sign red"
+  },
+  {
+    "char": "🚫",
+    "name": "prohibited",
+    "cat": "Symbols",
+    "tags": "no ban restricted illegal"
+  },
+  {
+    "char": "✅",
+    "name": "check mark button",
+    "cat": "Symbols",
+    "tags": "ok green yes done success"
+  },
+  {
+    "char": "❌",
+    "name": "cross mark",
+    "cat": "Symbols",
+    "tags": "x red no wrong error"
+  },
+  {
+    "char": "🌀",
+    "name": "cyclone",
+    "cat": "Symbols",
+    "tags": "swirl spiral hurricane"
+  },
+  {
+    "char": "🌐",
+    "name": "globe with meridians",
+    "cat": "Symbols",
+    "tags": "internet world web earth"
+  },
+  {
+    "char": "🏁",
+    "name": "chequered flag",
+    "cat": "Flags",
+    "tags": "finish race flag f1"
+  },
+  {
+    "char": "🇦🇫",
+    "name": "flag afghanistan",
+    "cat": "Flags",
+    "tags": "flag country afghanistan af"
+  },
+  {
+    "char": "🇦🇱",
+    "name": "flag albania",
+    "cat": "Flags",
+    "tags": "flag country albania al"
+  },
+  {
+    "char": "🇩🇿",
+    "name": "flag algeria",
+    "cat": "Flags",
+    "tags": "flag country algeria dz"
+  },
+  {
+    "char": "🇦🇸",
+    "name": "flag american samoa",
+    "cat": "Flags",
+    "tags": "flag country american samoa as"
+  },
+  {
+    "char": "🇦🇩",
+    "name": "flag andorra",
+    "cat": "Flags",
+    "tags": "flag country andorra ad"
+  },
+  {
+    "char": "🇦🇴",
+    "name": "flag angola",
+    "cat": "Flags",
+    "tags": "flag country angola ao"
+  },
+  {
+    "char": "🇦🇮",
+    "name": "flag anguilla",
+    "cat": "Flags",
+    "tags": "flag country anguilla ai"
+  },
+  {
+    "char": "🇦🇶",
+    "name": "flag antarctica",
+    "cat": "Flags",
+    "tags": "flag country antarctica aq"
+  },
+  {
+    "char": "🇦🇬",
+    "name": "flag antigua & barbuda",
+    "cat": "Flags",
+    "tags": "flag country antigua & barbuda ag"
+  },
+  {
+    "char": "🇦🇷",
+    "name": "flag argentina",
+    "cat": "Flags",
+    "tags": "flag country argentina ar"
+  },
+  {
+    "char": "🇦🇲",
+    "name": "flag armenia",
+    "cat": "Flags",
+    "tags": "flag country armenia am"
+  },
+  {
+    "char": "🇦🇼",
+    "name": "flag aruba",
+    "cat": "Flags",
+    "tags": "flag country aruba aw"
+  },
+  {
+    "char": "🇦🇺",
+    "name": "flag australia",
+    "cat": "Flags",
+    "tags": "flag country australia au"
+  },
+  {
+    "char": "🇦🇹",
+    "name": "flag austria",
+    "cat": "Flags",
+    "tags": "flag country austria at"
+  },
+  {
+    "char": "🇦🇿",
+    "name": "flag azerbaijan",
+    "cat": "Flags",
+    "tags": "flag country azerbaijan az"
+  },
+  {
+    "char": "🇧🇸",
+    "name": "flag bahamas",
+    "cat": "Flags",
+    "tags": "flag country bahamas bs"
+  },
+  {
+    "char": "🇧🇭",
+    "name": "flag bahrain",
+    "cat": "Flags",
+    "tags": "flag country bahrain bh"
+  },
+  {
+    "char": "🇧🇩",
+    "name": "flag bangladesh",
+    "cat": "Flags",
+    "tags": "flag country bangladesh bd"
+  },
+  {
+    "char": "🇧🇧",
+    "name": "flag barbados",
+    "cat": "Flags",
+    "tags": "flag country barbados bb"
+  },
+  {
+    "char": "🇧🇾",
+    "name": "flag belarus",
+    "cat": "Flags",
+    "tags": "flag country belarus by"
+  },
+  {
+    "char": "🇧🇪",
+    "name": "flag belgium",
+    "cat": "Flags",
+    "tags": "flag country belgium be"
+  },
+  {
+    "char": "🇧🇿",
+    "name": "flag belize",
+    "cat": "Flags",
+    "tags": "flag country belize bz"
+  },
+  {
+    "char": "🇧🇯",
+    "name": "flag benin",
+    "cat": "Flags",
+    "tags": "flag country benin bj"
+  },
+  {
+    "char": "🇧🇲",
+    "name": "flag bermuda",
+    "cat": "Flags",
+    "tags": "flag country bermuda bm"
+  },
+  {
+    "char": "🇧🇹",
+    "name": "flag bhutan",
+    "cat": "Flags",
+    "tags": "flag country bhutan bt"
+  },
+  {
+    "char": "🇧🇴",
+    "name": "flag bolivia",
+    "cat": "Flags",
+    "tags": "flag country bolivia bo"
+  },
+  {
+    "char": "🇧🇦",
+    "name": "flag bosnia & herzegovina",
+    "cat": "Flags",
+    "tags": "flag country bosnia & herzegovina ba"
+  },
+  {
+    "char": "🇧🇼",
+    "name": "flag botswana",
+    "cat": "Flags",
+    "tags": "flag country botswana bw"
+  },
+  {
+    "char": "🇧🇻",
+    "name": "flag bouvet island",
+    "cat": "Flags",
+    "tags": "flag country bouvet island bv"
+  },
+  {
+    "char": "🇧🇷",
+    "name": "flag brazil",
+    "cat": "Flags",
+    "tags": "flag country brazil br"
+  },
+  {
+    "char": "🇮🇴",
+    "name": "flag british indian ocean territory",
+    "cat": "Flags",
+    "tags": "flag country british indian ocean territory io"
+  },
+  {
+    "char": "🇻🇬",
+    "name": "flag british virgin islands",
+    "cat": "Flags",
+    "tags": "flag country british virgin islands vg"
+  },
+  {
+    "char": "🇧🇳",
+    "name": "flag brunei",
+    "cat": "Flags",
+    "tags": "flag country brunei bn"
+  },
+  {
+    "char": "🇧🇬",
+    "name": "flag bulgaria",
+    "cat": "Flags",
+    "tags": "flag country bulgaria bg"
+  },
+  {
+    "char": "🇧🇫",
+    "name": "flag burkina faso",
+    "cat": "Flags",
+    "tags": "flag country burkina faso bf"
+  },
+  {
+    "char": "🇧🇮",
+    "name": "flag burundi",
+    "cat": "Flags",
+    "tags": "flag country burundi bi"
+  },
+  {
+    "char": "🇰🇭",
+    "name": "flag cambodia",
+    "cat": "Flags",
+    "tags": "flag country cambodia kh"
+  },
+  {
+    "char": "🇨🇲",
+    "name": "flag cameroon",
+    "cat": "Flags",
+    "tags": "flag country cameroon cm"
+  },
+  {
+    "char": "🇨🇦",
+    "name": "flag canada",
+    "cat": "Flags",
+    "tags": "flag country canada ca"
+  },
+  {
+    "char": "🇨🇻",
+    "name": "flag cape verde",
+    "cat": "Flags",
+    "tags": "flag country cape verde cv"
+  },
+  {
+    "char": "🇧🇶",
+    "name": "flag caribbean netherlands",
+    "cat": "Flags",
+    "tags": "flag country caribbean netherlands bq"
+  },
+  {
+    "char": "🇰🇾",
+    "name": "flag cayman islands",
+    "cat": "Flags",
+    "tags": "flag country cayman islands ky"
+  },
+  {
+    "char": "🇨🇫",
+    "name": "flag central african republic",
+    "cat": "Flags",
+    "tags": "flag country central african republic cf"
+  },
+  {
+    "char": "🇹🇩",
+    "name": "flag chad",
+    "cat": "Flags",
+    "tags": "flag country chad td"
+  },
+  {
+    "char": "🇨🇱",
+    "name": "flag chile",
+    "cat": "Flags",
+    "tags": "flag country chile cl"
+  },
+  {
+    "char": "🇨🇳",
+    "name": "flag china",
+    "cat": "Flags",
+    "tags": "flag country china cn"
+  },
+  {
+    "char": "🇨🇽",
+    "name": "flag christmas island",
+    "cat": "Flags",
+    "tags": "flag country christmas island cx"
+  },
+  {
+    "char": "🇨🇨",
+    "name": "flag cocos islands",
+    "cat": "Flags",
+    "tags": "flag country cocos islands cc"
+  },
+  {
+    "char": "🇨🇴",
+    "name": "flag colombia",
+    "cat": "Flags",
+    "tags": "flag country colombia co"
+  },
+  {
+    "char": "🇰🇲",
+    "name": "flag comoros",
+    "cat": "Flags",
+    "tags": "flag country comoros km"
+  },
+  {
+    "char": "🇨🇬",
+    "name": "flag congo",
+    "cat": "Flags",
+    "tags": "flag country congo cg"
+  },
+  {
+    "char": "🇨🇩",
+    "name": "flag congo (drc)",
+    "cat": "Flags",
+    "tags": "flag country congo (drc) cd"
+  },
+  {
+    "char": "🇨🇰",
+    "name": "flag cook islands",
+    "cat": "Flags",
+    "tags": "flag country cook islands ck"
+  },
+  {
+    "char": "🇨🇷",
+    "name": "flag costa rica",
+    "cat": "Flags",
+    "tags": "flag country costa rica cr"
+  },
+  {
+    "char": "🇭🇷",
+    "name": "flag croatia",
+    "cat": "Flags",
+    "tags": "flag country croatia hr"
+  },
+  {
+    "char": "🇨🇺",
+    "name": "flag cuba",
+    "cat": "Flags",
+    "tags": "flag country cuba cu"
+  },
+  {
+    "char": "🇨🇼",
+    "name": "flag curaçao",
+    "cat": "Flags",
+    "tags": "flag country curaçao cw"
+  },
+  {
+    "char": "🇨🇾",
+    "name": "flag cyprus",
+    "cat": "Flags",
+    "tags": "flag country cyprus cy"
+  },
+  {
+    "char": "🇨🇿",
+    "name": "flag czechia",
+    "cat": "Flags",
+    "tags": "flag country czechia cz"
+  },
+  {
+    "char": "🇨🇮",
+    "name": "flag côte d’ivoire",
+    "cat": "Flags",
+    "tags": "flag country côte d’ivoire ci"
+  },
+  {
+    "char": "🇩🇰",
+    "name": "flag denmark",
+    "cat": "Flags",
+    "tags": "flag country denmark dk"
+  },
+  {
+    "char": "🇩🇯",
+    "name": "flag djibouti",
+    "cat": "Flags",
+    "tags": "flag country djibouti dj"
+  },
+  {
+    "char": "🇩🇲",
+    "name": "flag dominica",
+    "cat": "Flags",
+    "tags": "flag country dominica dm"
+  },
+  {
+    "char": "🇩🇴",
+    "name": "flag dominican republic",
+    "cat": "Flags",
+    "tags": "flag country dominican republic do"
+  },
+  {
+    "char": "🇪🇨",
+    "name": "flag ecuador",
+    "cat": "Flags",
+    "tags": "flag country ecuador ec"
+  },
+  {
+    "char": "🇪🇬",
+    "name": "flag egypt",
+    "cat": "Flags",
+    "tags": "flag country egypt eg"
+  },
+  {
+    "char": "🇸🇻",
+    "name": "flag el salvador",
+    "cat": "Flags",
+    "tags": "flag country el salvador sv"
+  },
+  {
+    "char": "🇬🇶",
+    "name": "flag equatorial guinea",
+    "cat": "Flags",
+    "tags": "flag country equatorial guinea gq"
+  },
+  {
+    "char": "🇪🇷",
+    "name": "flag eritrea",
+    "cat": "Flags",
+    "tags": "flag country eritrea er"
+  },
+  {
+    "char": "🇪🇪",
+    "name": "flag estonia",
+    "cat": "Flags",
+    "tags": "flag country estonia ee"
+  },
+  {
+    "char": "🇸🇿",
+    "name": "flag eswatini",
+    "cat": "Flags",
+    "tags": "flag country eswatini sz"
+  },
+  {
+    "char": "🇪🇹",
+    "name": "flag ethiopia",
+    "cat": "Flags",
+    "tags": "flag country ethiopia et"
+  },
+  {
+    "char": "🇫🇰",
+    "name": "flag falkland islands",
+    "cat": "Flags",
+    "tags": "flag country falkland islands fk"
+  },
+  {
+    "char": "🇫🇴",
+    "name": "flag faroe islands",
+    "cat": "Flags",
+    "tags": "flag country faroe islands fo"
+  },
+  {
+    "char": "🇫🇯",
+    "name": "flag fiji",
+    "cat": "Flags",
+    "tags": "flag country fiji fj"
+  },
+  {
+    "char": "🇫🇮",
+    "name": "flag finland",
+    "cat": "Flags",
+    "tags": "flag country finland fi"
+  },
+  {
+    "char": "🇫🇷",
+    "name": "flag france",
+    "cat": "Flags",
+    "tags": "flag country france fr"
+  },
+  {
+    "char": "🇬🇫",
+    "name": "flag french guiana",
+    "cat": "Flags",
+    "tags": "flag country french guiana gf"
+  },
+  {
+    "char": "🇵🇫",
+    "name": "flag french polynesia",
+    "cat": "Flags",
+    "tags": "flag country french polynesia pf"
+  },
+  {
+    "char": "🇹🇫",
+    "name": "flag french southern territories",
+    "cat": "Flags",
+    "tags": "flag country french southern territories tf"
+  },
+  {
+    "char": "🇬🇦",
+    "name": "flag gabon",
+    "cat": "Flags",
+    "tags": "flag country gabon ga"
+  },
+  {
+    "char": "🇬🇲",
+    "name": "flag gambia",
+    "cat": "Flags",
+    "tags": "flag country gambia gm"
+  },
+  {
+    "char": "🇬🇪",
+    "name": "flag georgia",
+    "cat": "Flags",
+    "tags": "flag country georgia ge"
+  },
+  {
+    "char": "🇩🇪",
+    "name": "flag germany",
+    "cat": "Flags",
+    "tags": "flag country germany de"
+  },
+  {
+    "char": "🇬🇭",
+    "name": "flag ghana",
+    "cat": "Flags",
+    "tags": "flag country ghana gh"
+  },
+  {
+    "char": "🇬🇮",
+    "name": "flag gibraltar",
+    "cat": "Flags",
+    "tags": "flag country gibraltar gi"
+  },
+  {
+    "char": "🇬🇷",
+    "name": "flag greece",
+    "cat": "Flags",
+    "tags": "flag country greece gr"
+  },
+  {
+    "char": "🇬🇱",
+    "name": "flag greenland",
+    "cat": "Flags",
+    "tags": "flag country greenland gl"
+  },
+  {
+    "char": "🇬🇩",
+    "name": "flag grenada",
+    "cat": "Flags",
+    "tags": "flag country grenada gd"
+  },
+  {
+    "char": "🇬🇵",
+    "name": "flag guadeloupe",
+    "cat": "Flags",
+    "tags": "flag country guadeloupe gp"
+  },
+  {
+    "char": "🇬🇺",
+    "name": "flag guam",
+    "cat": "Flags",
+    "tags": "flag country guam gu"
+  },
+  {
+    "char": "🇬🇹",
+    "name": "flag guatemala",
+    "cat": "Flags",
+    "tags": "flag country guatemala gt"
+  },
+  {
+    "char": "🇬🇬",
+    "name": "flag guernsey",
+    "cat": "Flags",
+    "tags": "flag country guernsey gg"
+  },
+  {
+    "char": "🇬🇳",
+    "name": "flag guinea",
+    "cat": "Flags",
+    "tags": "flag country guinea gn"
+  },
+  {
+    "char": "🇬🇼",
+    "name": "flag guinea-bissau",
+    "cat": "Flags",
+    "tags": "flag country guinea-bissau gw"
+  },
+  {
+    "char": "🇬🇾",
+    "name": "flag guyana",
+    "cat": "Flags",
+    "tags": "flag country guyana gy"
+  },
+  {
+    "char": "🇭🇹",
+    "name": "flag haiti",
+    "cat": "Flags",
+    "tags": "flag country haiti ht"
+  },
+  {
+    "char": "🇭🇲",
+    "name": "flag heard island",
+    "cat": "Flags",
+    "tags": "flag country heard island hm"
+  },
+  {
+    "char": "🇭🇳",
+    "name": "flag honduras",
+    "cat": "Flags",
+    "tags": "flag country honduras hn"
+  },
+  {
+    "char": "🇭🇰",
+    "name": "flag hong kong",
+    "cat": "Flags",
+    "tags": "flag country hong kong hk"
+  },
+  {
+    "char": "🇭🇺",
+    "name": "flag hungary",
+    "cat": "Flags",
+    "tags": "flag country hungary hu"
+  },
+  {
+    "char": "🇮🇸",
+    "name": "flag iceland",
+    "cat": "Flags",
+    "tags": "flag country iceland is"
+  },
+  {
+    "char": "🇮🇳",
+    "name": "flag india",
+    "cat": "Flags",
+    "tags": "flag country india in"
+  },
+  {
+    "char": "🇮🇩",
+    "name": "flag indonesia",
+    "cat": "Flags",
+    "tags": "flag country indonesia id"
+  },
+  {
+    "char": "🇮🇷",
+    "name": "flag iran",
+    "cat": "Flags",
+    "tags": "flag country iran ir"
+  },
+  {
+    "char": "🇮🇶",
+    "name": "flag iraq",
+    "cat": "Flags",
+    "tags": "flag country iraq iq"
+  },
+  {
+    "char": "🇮🇪",
+    "name": "flag ireland",
+    "cat": "Flags",
+    "tags": "flag country ireland ie"
+  },
+  {
+    "char": "🇮🇲",
+    "name": "flag isle of man",
+    "cat": "Flags",
+    "tags": "flag country isle of man im"
+  },
+  {
+    "char": "🇮🇱",
+    "name": "flag israel",
+    "cat": "Flags",
+    "tags": "flag country israel il"
+  },
+  {
+    "char": "🇮🇹",
+    "name": "flag italy",
+    "cat": "Flags",
+    "tags": "flag country italy it"
+  },
+  {
+    "char": "🇯🇲",
+    "name": "flag jamaica",
+    "cat": "Flags",
+    "tags": "flag country jamaica jm"
+  },
+  {
+    "char": "🇯🇵",
+    "name": "flag japan",
+    "cat": "Flags",
+    "tags": "flag country japan jp"
+  },
+  {
+    "char": "🇯🇪",
+    "name": "flag jersey",
+    "cat": "Flags",
+    "tags": "flag country jersey je"
+  },
+  {
+    "char": "🇯🇴",
+    "name": "flag jordan",
+    "cat": "Flags",
+    "tags": "flag country jordan jo"
+  },
+  {
+    "char": "🇰🇿",
+    "name": "flag kazakhstan",
+    "cat": "Flags",
+    "tags": "flag country kazakhstan kz"
+  },
+  {
+    "char": "🇰🇪",
+    "name": "flag kenya",
+    "cat": "Flags",
+    "tags": "flag country kenya ke"
+  },
+  {
+    "char": "🇰🇮",
+    "name": "flag kiribati",
+    "cat": "Flags",
+    "tags": "flag country kiribati ki"
+  },
+  {
+    "char": "🇽🇰",
+    "name": "flag kosovo",
+    "cat": "Flags",
+    "tags": "flag country kosovo xk"
+  },
+  {
+    "char": "🇰🇼",
+    "name": "flag kuwait",
+    "cat": "Flags",
+    "tags": "flag country kuwait kw"
+  },
+  {
+    "char": "🇰🇬",
+    "name": "flag kyrgyzstan",
+    "cat": "Flags",
+    "tags": "flag country kyrgyzstan kg"
+  },
+  {
+    "char": "🇱🇦",
+    "name": "flag laos",
+    "cat": "Flags",
+    "tags": "flag country laos la"
+  },
+  {
+    "char": "🇱🇻",
+    "name": "flag latvia",
+    "cat": "Flags",
+    "tags": "flag country latvia lv"
+  },
+  {
+    "char": "🇱🇧",
+    "name": "flag lebanon",
+    "cat": "Flags",
+    "tags": "flag country lebanon lb"
+  },
+  {
+    "char": "🇱🇸",
+    "name": "flag lesotho",
+    "cat": "Flags",
+    "tags": "flag country lesotho ls"
+  },
+  {
+    "char": "🇱🇷",
+    "name": "flag liberia",
+    "cat": "Flags",
+    "tags": "flag country liberia lr"
+  },
+  {
+    "char": "🇱🇾",
+    "name": "flag libya",
+    "cat": "Flags",
+    "tags": "flag country libya ly"
+  },
+  {
+    "char": "🇱🇮",
+    "name": "flag liechtenstein",
+    "cat": "Flags",
+    "tags": "flag country liechtenstein li"
+  },
+  {
+    "char": "🇱🇹",
+    "name": "flag lithuania",
+    "cat": "Flags",
+    "tags": "flag country lithuania lt"
+  },
+  {
+    "char": "🇱🇺",
+    "name": "flag luxembourg",
+    "cat": "Flags",
+    "tags": "flag country luxembourg lu"
+  },
+  {
+    "char": "🇲🇴",
+    "name": "flag macau",
+    "cat": "Flags",
+    "tags": "flag country macau mo"
+  },
+  {
+    "char": "🇲🇬",
+    "name": "flag madagascar",
+    "cat": "Flags",
+    "tags": "flag country madagascar mg"
+  },
+  {
+    "char": "🇲🇼",
+    "name": "flag malawi",
+    "cat": "Flags",
+    "tags": "flag country malawi mw"
+  },
+  {
+    "char": "🇲🇾",
+    "name": "flag malaysia",
+    "cat": "Flags",
+    "tags": "flag country malaysia my"
+  },
+  {
+    "char": "🇲🇻",
+    "name": "flag maldives",
+    "cat": "Flags",
+    "tags": "flag country maldives mv"
+  },
+  {
+    "char": "🇲🇱",
+    "name": "flag mali",
+    "cat": "Flags",
+    "tags": "flag country mali ml"
+  },
+  {
+    "char": "🇲🇹",
+    "name": "flag malta",
+    "cat": "Flags",
+    "tags": "flag country malta mt"
+  },
+  {
+    "char": "🇲🇭",
+    "name": "flag marshall islands",
+    "cat": "Flags",
+    "tags": "flag country marshall islands mh"
+  },
+  {
+    "char": "🇲🇶",
+    "name": "flag martinique",
+    "cat": "Flags",
+    "tags": "flag country martinique mq"
+  },
+  {
+    "char": "🇲🇷",
+    "name": "flag mauritania",
+    "cat": "Flags",
+    "tags": "flag country mauritania mr"
+  },
+  {
+    "char": "🇲🇺",
+    "name": "flag mauritius",
+    "cat": "Flags",
+    "tags": "flag country mauritius mu"
+  },
+  {
+    "char": "🇾🇹",
+    "name": "flag mayotte",
+    "cat": "Flags",
+    "tags": "flag country mayotte yt"
+  },
+  {
+    "char": "🇲🇽",
+    "name": "flag mexico",
+    "cat": "Flags",
+    "tags": "flag country mexico mx"
+  },
+  {
+    "char": "🇫🇲",
+    "name": "flag micronesia",
+    "cat": "Flags",
+    "tags": "flag country micronesia fm"
+  },
+  {
+    "char": "🇲🇩",
+    "name": "flag moldova",
+    "cat": "Flags",
+    "tags": "flag country moldova md"
+  },
+  {
+    "char": "🇲🇨",
+    "name": "flag monaco",
+    "cat": "Flags",
+    "tags": "flag country monaco mc"
+  },
+  {
+    "char": "🇲🇳",
+    "name": "flag mongolia",
+    "cat": "Flags",
+    "tags": "flag country mongolia mn"
+  },
+  {
+    "char": "🇲🇪",
+    "name": "flag montenegro",
+    "cat": "Flags",
+    "tags": "flag country montenegro me"
+  },
+  {
+    "char": "🇲🇸",
+    "name": "flag montserrat",
+    "cat": "Flags",
+    "tags": "flag country montserrat ms"
+  },
+  {
+    "char": "🇲🇦",
+    "name": "flag morocco",
+    "cat": "Flags",
+    "tags": "flag country morocco ma"
+  },
+  {
+    "char": "🇲🇿",
+    "name": "flag mozambique",
+    "cat": "Flags",
+    "tags": "flag country mozambique mz"
+  },
+  {
+    "char": "🇲🇲",
+    "name": "flag myanmar",
+    "cat": "Flags",
+    "tags": "flag country myanmar mm"
+  },
+  {
+    "char": "🇳🇦",
+    "name": "flag namibia",
+    "cat": "Flags",
+    "tags": "flag country namibia na"
+  },
+  {
+    "char": "🇳🇷",
+    "name": "flag nauru",
+    "cat": "Flags",
+    "tags": "flag country nauru nr"
+  },
+  {
+    "char": "🇳🇵",
+    "name": "flag nepal",
+    "cat": "Flags",
+    "tags": "flag country nepal np"
+  },
+  {
+    "char": "🇳🇱",
+    "name": "flag netherlands",
+    "cat": "Flags",
+    "tags": "flag country netherlands nl"
+  },
+  {
+    "char": "🇳🇨",
+    "name": "flag new caledonia",
+    "cat": "Flags",
+    "tags": "flag country new caledonia nc"
+  },
+  {
+    "char": "🇳🇿",
+    "name": "flag new zealand",
+    "cat": "Flags",
+    "tags": "flag country new zealand nz"
+  },
+  {
+    "char": "🇳🇮",
+    "name": "flag nicaragua",
+    "cat": "Flags",
+    "tags": "flag country nicaragua ni"
+  },
+  {
+    "char": "🇳🇪",
+    "name": "flag niger",
+    "cat": "Flags",
+    "tags": "flag country niger ne"
+  },
+  {
+    "char": "🇳🇬",
+    "name": "flag nigeria",
+    "cat": "Flags",
+    "tags": "flag country nigeria ng"
+  },
+  {
+    "char": "🇳🇺",
+    "name": "flag niue",
+    "cat": "Flags",
+    "tags": "flag country niue nu"
+  },
+  {
+    "char": "🇳🇫",
+    "name": "flag norfolk island",
+    "cat": "Flags",
+    "tags": "flag country norfolk island nf"
+  },
+  {
+    "char": "🇰🇵",
+    "name": "flag north korea",
+    "cat": "Flags",
+    "tags": "flag country north korea kp"
+  },
+  {
+    "char": "🇲🇰",
+    "name": "flag north macedonia",
+    "cat": "Flags",
+    "tags": "flag country north macedonia mk"
+  },
+  {
+    "char": "🇲🇵",
+    "name": "flag northern mariana islands",
+    "cat": "Flags",
+    "tags": "flag country northern mariana islands mp"
+  },
+  {
+    "char": "🇳🇴",
+    "name": "flag norway",
+    "cat": "Flags",
+    "tags": "flag country norway no"
+  },
+  {
+    "char": "🇴🇲",
+    "name": "flag oman",
+    "cat": "Flags",
+    "tags": "flag country oman om"
+  },
+  {
+    "char": "🇵🇰",
+    "name": "flag pakistan",
+    "cat": "Flags",
+    "tags": "flag country pakistan pk"
+  },
+  {
+    "char": "🇵🇼",
+    "name": "flag palau",
+    "cat": "Flags",
+    "tags": "flag country palau pw"
+  },
+  {
+    "char": "🇵🇸",
+    "name": "flag palestine",
+    "cat": "Flags",
+    "tags": "flag country palestine ps"
+  },
+  {
+    "char": "🇵🇦",
+    "name": "flag panama",
+    "cat": "Flags",
+    "tags": "flag country panama pa"
+  },
+  {
+    "char": "🇵🇬",
+    "name": "flag papua new guinea",
+    "cat": "Flags",
+    "tags": "flag country papua new guinea pg"
+  },
+  {
+    "char": "🇵🇾",
+    "name": "flag paraguay",
+    "cat": "Flags",
+    "tags": "flag country paraguay py"
+  },
+  {
+    "char": "🇵🇪",
+    "name": "flag peru",
+    "cat": "Flags",
+    "tags": "flag country peru pe"
+  },
+  {
+    "char": "🇵🇭",
+    "name": "flag philippines",
+    "cat": "Flags",
+    "tags": "flag country philippines ph"
+  },
+  {
+    "char": "🇵🇳",
+    "name": "flag pitcairn islands",
+    "cat": "Flags",
+    "tags": "flag country pitcairn islands pn"
+  },
+  {
+    "char": "🇵🇱",
+    "name": "flag poland",
+    "cat": "Flags",
+    "tags": "flag country poland pl"
+  },
+  {
+    "char": "🇵🇹",
+    "name": "flag portugal",
+    "cat": "Flags",
+    "tags": "flag country portugal pt"
+  },
+  {
+    "char": "🇵🇷",
+    "name": "flag puerto rico",
+    "cat": "Flags",
+    "tags": "flag country puerto rico pr"
+  },
+  {
+    "char": "🇶🇦",
+    "name": "flag qatar",
+    "cat": "Flags",
+    "tags": "flag country qatar qa"
+  },
+  {
+    "char": "🇷🇴",
+    "name": "flag romania",
+    "cat": "Flags",
+    "tags": "flag country romania ro"
+  },
+  {
+    "char": "🇷🇺",
+    "name": "flag russia",
+    "cat": "Flags",
+    "tags": "flag country russia ru"
+  },
+  {
+    "char": "🇷🇼",
+    "name": "flag rwanda",
+    "cat": "Flags",
+    "tags": "flag country rwanda rw"
+  },
+  {
+    "char": "🇷🇪",
+    "name": "flag réunion",
+    "cat": "Flags",
+    "tags": "flag country réunion re"
+  },
+  {
+    "char": "🇼🇸",
+    "name": "flag samoa",
+    "cat": "Flags",
+    "tags": "flag country samoa ws"
+  },
+  {
+    "char": "🇸🇲",
+    "name": "flag san marino",
+    "cat": "Flags",
+    "tags": "flag country san marino sm"
+  },
+  {
+    "char": "🇸🇦",
+    "name": "flag saudi arabia",
+    "cat": "Flags",
+    "tags": "flag country saudi arabia sa"
+  },
+  {
+    "char": "🇸🇳",
+    "name": "flag senegal",
+    "cat": "Flags",
+    "tags": "flag country senegal sn"
+  },
+  {
+    "char": "🇷🇸",
+    "name": "flag serbia",
+    "cat": "Flags",
+    "tags": "flag country serbia rs"
+  },
+  {
+    "char": "🇸🇨",
+    "name": "flag seychelles",
+    "cat": "Flags",
+    "tags": "flag country seychelles sc"
+  },
+  {
+    "char": "🇸🇱",
+    "name": "flag sierra leone",
+    "cat": "Flags",
+    "tags": "flag country sierra leone sl"
+  },
+  {
+    "char": "🇸🇬",
+    "name": "flag singapore",
+    "cat": "Flags",
+    "tags": "flag country singapore sg"
+  },
+  {
+    "char": "🇸🇽",
+    "name": "flag sint maarten",
+    "cat": "Flags",
+    "tags": "flag country sint maarten sx"
+  },
+  {
+    "char": "🇸🇰",
+    "name": "flag slovakia",
+    "cat": "Flags",
+    "tags": "flag country slovakia sk"
+  },
+  {
+    "char": "🇸🇮",
+    "name": "flag slovenia",
+    "cat": "Flags",
+    "tags": "flag country slovenia si"
+  },
+  {
+    "char": "🇸🇧",
+    "name": "flag solomon islands",
+    "cat": "Flags",
+    "tags": "flag country solomon islands sb"
+  },
+  {
+    "char": "🇸🇴",
+    "name": "flag somalia",
+    "cat": "Flags",
+    "tags": "flag country somalia so"
+  },
+  {
+    "char": "🇿🇦",
+    "name": "flag south africa",
+    "cat": "Flags",
+    "tags": "flag country south africa za"
+  },
+  {
+    "char": "🇬🇸",
+    "name": "flag south georgia",
+    "cat": "Flags",
+    "tags": "flag country south georgia gs"
+  },
+  {
+    "char": "🇰🇷",
+    "name": "flag south korea",
+    "cat": "Flags",
+    "tags": "flag country south korea kr"
+  },
+  {
+    "char": "🇸🇸",
+    "name": "flag south sudan",
+    "cat": "Flags",
+    "tags": "flag country south sudan ss"
+  },
+  {
+    "char": "🇪🇸",
+    "name": "flag spain",
+    "cat": "Flags",
+    "tags": "flag country spain es"
+  },
+  {
+    "char": "🇱🇰",
+    "name": "flag sri lanka",
+    "cat": "Flags",
+    "tags": "flag country sri lanka lk"
+  },
+  {
+    "char": "🇧🇱",
+    "name": "flag st. barthélemy",
+    "cat": "Flags",
+    "tags": "flag country st. barthélemy bl"
+  },
+  {
+    "char": "🇸🇭",
+    "name": "flag st. helena",
+    "cat": "Flags",
+    "tags": "flag country st. helena sh"
+  },
+  {
+    "char": "🇰🇳",
+    "name": "flag st. kitts & nevis",
+    "cat": "Flags",
+    "tags": "flag country st. kitts & nevis kn"
+  },
+  {
+    "char": "🇱🇨",
+    "name": "flag st. lucia",
+    "cat": "Flags",
+    "tags": "flag country st. lucia lc"
+  },
+  {
+    "char": "🇲🇫",
+    "name": "flag st. martin",
+    "cat": "Flags",
+    "tags": "flag country st. martin mf"
+  },
+  {
+    "char": "🇵🇲",
+    "name": "flag st. pierre & miquelon",
+    "cat": "Flags",
+    "tags": "flag country st. pierre & miquelon pm"
+  },
+  {
+    "char": "🇻🇨",
+    "name": "flag st. vincent & grenadines",
+    "cat": "Flags",
+    "tags": "flag country st. vincent & grenadines vc"
+  },
+  {
+    "char": "🇸🇩",
+    "name": "flag sudan",
+    "cat": "Flags",
+    "tags": "flag country sudan sd"
+  },
+  {
+    "char": "🇸🇷",
+    "name": "flag suriname",
+    "cat": "Flags",
+    "tags": "flag country suriname sr"
+  },
+  {
+    "char": "🇸🇯",
+    "name": "flag svalbard & jan mayen",
+    "cat": "Flags",
+    "tags": "flag country svalbard & jan mayen sj"
+  },
+  {
+    "char": "🇸🇪",
+    "name": "flag sweden",
+    "cat": "Flags",
+    "tags": "flag country sweden se"
+  },
+  {
+    "char": "🇨🇭",
+    "name": "flag switzerland",
+    "cat": "Flags",
+    "tags": "flag country switzerland ch"
+  },
+  {
+    "char": "🇸🇾",
+    "name": "flag syria",
+    "cat": "Flags",
+    "tags": "flag country syria sy"
+  },
+  {
+    "char": "🇸🇹",
+    "name": "flag são tomé & príncipe",
+    "cat": "Flags",
+    "tags": "flag country são tomé & príncipe st"
+  },
+  {
+    "char": "🇹🇼",
+    "name": "flag taiwan",
+    "cat": "Flags",
+    "tags": "flag country taiwan tw"
+  },
+  {
+    "char": "🇹🇯",
+    "name": "flag tajikistan",
+    "cat": "Flags",
+    "tags": "flag country tajikistan tj"
+  },
+  {
+    "char": "🇹🇿",
+    "name": "flag tanzania",
+    "cat": "Flags",
+    "tags": "flag country tanzania tz"
+  },
+  {
+    "char": "🇹🇭",
+    "name": "flag thailand",
+    "cat": "Flags",
+    "tags": "flag country thailand th"
+  },
+  {
+    "char": "🇹🇱",
+    "name": "flag timor-leste",
+    "cat": "Flags",
+    "tags": "flag country timor-leste tl"
+  },
+  {
+    "char": "🇹🇬",
+    "name": "flag togo",
+    "cat": "Flags",
+    "tags": "flag country togo tg"
+  },
+  {
+    "char": "🇹🇰",
+    "name": "flag tokelau",
+    "cat": "Flags",
+    "tags": "flag country tokelau tk"
+  },
+  {
+    "char": "🇹🇴",
+    "name": "flag tonga",
+    "cat": "Flags",
+    "tags": "flag country tonga to"
+  },
+  {
+    "char": "🇹🇹",
+    "name": "flag trinidad & tobago",
+    "cat": "Flags",
+    "tags": "flag country trinidad & tobago tt"
+  },
+  {
+    "char": "🇹🇳",
+    "name": "flag tunisia",
+    "cat": "Flags",
+    "tags": "flag country tunisia tn"
+  },
+  {
+    "char": "🇹🇷",
+    "name": "flag turkey",
+    "cat": "Flags",
+    "tags": "flag country turkey tr"
+  },
+  {
+    "char": "🇹🇲",
+    "name": "flag turkmenistan",
+    "cat": "Flags",
+    "tags": "flag country turkmenistan tm"
+  },
+  {
+    "char": "🇹🇨",
+    "name": "flag turks & caicos islands",
+    "cat": "Flags",
+    "tags": "flag country turks & caicos islands tc"
+  },
+  {
+    "char": "🇹🇻",
+    "name": "flag tuvalu",
+    "cat": "Flags",
+    "tags": "flag country tuvalu tv"
+  },
+  {
+    "char": "🇺🇲",
+    "name": "flag u.s. outlying islands",
+    "cat": "Flags",
+    "tags": "flag country u.s. outlying islands um"
+  },
+  {
+    "char": "🇻🇮",
+    "name": "flag u.s. virgin islands",
+    "cat": "Flags",
+    "tags": "flag country u.s. virgin islands vi"
+  },
+  {
+    "char": "🇺🇬",
+    "name": "flag uganda",
+    "cat": "Flags",
+    "tags": "flag country uganda ug"
+  },
+  {
+    "char": "🇺🇦",
+    "name": "flag ukraine",
+    "cat": "Flags",
+    "tags": "flag country ukraine ua"
+  },
+  {
+    "char": "🇦🇪",
+    "name": "flag united arab emirates",
+    "cat": "Flags",
+    "tags": "flag country united arab emirates ae"
+  },
+  {
+    "char": "🇬🇧",
+    "name": "flag united kingdom",
+    "cat": "Flags",
+    "tags": "flag country united kingdom gb"
+  },
+  {
+    "char": "🇺🇸",
+    "name": "flag united states",
+    "cat": "Flags",
+    "tags": "flag country united states us"
+  },
+  {
+    "char": "🇺🇾",
+    "name": "flag uruguay",
+    "cat": "Flags",
+    "tags": "flag country uruguay uy"
+  },
+  {
+    "char": "🇺🇿",
+    "name": "flag uzbekistan",
+    "cat": "Flags",
+    "tags": "flag country uzbekistan uz"
+  },
+  {
+    "char": "🇻🇺",
+    "name": "flag vanuatu",
+    "cat": "Flags",
+    "tags": "flag country vanuatu vu"
+  },
+  {
+    "char": "🇻🇦",
+    "name": "flag vatican city",
+    "cat": "Flags",
+    "tags": "flag country vatican city va"
+  },
+  {
+    "char": "🇻🇪",
+    "name": "flag venezuela",
+    "cat": "Flags",
+    "tags": "flag country venezuela ve"
+  },
+  {
+    "char": "🇻🇳",
+    "name": "flag vietnam",
+    "cat": "Flags",
+    "tags": "flag country vietnam vn"
+  },
+  {
+    "char": "🇼🇫",
+    "name": "flag wallis & futuna",
+    "cat": "Flags",
+    "tags": "flag country wallis & futuna wf"
+  },
+  {
+    "char": "🇪🇭",
+    "name": "flag western sahara",
+    "cat": "Flags",
+    "tags": "flag country western sahara eh"
+  },
+  {
+    "char": "🇾🇪",
+    "name": "flag yemen",
+    "cat": "Flags",
+    "tags": "flag country yemen ye"
+  },
+  {
+    "char": "🇿🇲",
+    "name": "flag zambia",
+    "cat": "Flags",
+    "tags": "flag country zambia zm"
+  },
+  {
+    "char": "🇿🇼",
+    "name": "flag zimbabwe",
+    "cat": "Flags",
+    "tags": "flag country zimbabwe zw"
+  },
+  {
+    "char": "🇦🇽",
+    "name": "flag åland islands",
+    "cat": "Flags",
+    "tags": "flag country åland islands ax"
+  }
+]

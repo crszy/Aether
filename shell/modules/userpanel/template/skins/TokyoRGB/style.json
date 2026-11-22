@@ -1,0 +1,23 @@
+{
+    "_about": "TokyoRGB skin: neon pink + cyan on deep night blue. Any m3* colour name works here; radius = corner size. Delete a line to keep Aether's normal value.",
+    "m3primary": "#ff2bd6",
+    "m3onPrimary": "#1a0016",
+    "m3primaryContainer": "#5a0a52",
+    "m3onPrimaryContainer": "#ffd6f6",
+    "m3secondary": "#7df9ff",
+    "m3onSecondary": "#00262b",
+    "m3secondaryContainer": "#123a52",
+    "m3onSecondaryContainer": "#c8fbff",
+    "m3tertiary": "#00e5ff",
+    "m3surface": "#0a0716",
+    "m3surfaceContainerLowest": "#07050f",
+    "m3surfaceContainerLow": "#100b22",
+    "m3surfaceContainer": "#140f2a",
+    "m3surfaceContainerHigh": "#1c1538",
+    "m3surfaceContainerHighest": "#251c47",
+    "m3onSurface": "#f2e9ff",
+    "m3onSurfaceVariant": "#b9a8e0",
+    "m3outline": "#6a5aa0",
+    "m3outlineVariant": "#3a2e66",
+    "radius": 22
+}

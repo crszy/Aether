@@ -1,0 +1,72 @@
+[package]
+name = "komorebi"
+version = "0.1.41"
+description = "A tiling window manager for Windows"
+repository = "https://github.com/LGUG2Z/komorebi"
+edition = "2024"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+# AetherWM: the window manager is aetherwm.exe (the crate keeps its komorebi name inside the source)
+[[bin]]
+name = "aetherwm"
+path = "src/main.rs"
+
+[dependencies]
+komorebi-layouts = { path = "../komorebi-layouts", features = ["win32"] }
+komorebi-themes = { path = "../komorebi-themes" }
+
+base64 = "0.22"
+bitflags = { version = "2", features = ["serde"] }
+clap = { workspace = true }
+chrono = { workspace = true }
+color-eyre = { workspace = true }
+crossbeam-channel = { workspace = true }
+crossbeam-utils = { workspace = true }
+ctrlc = { version = "3", features = ["termination"] }
+dirs = { workspace = true }
+ed25519-dalek = "2"
+hotwatch = { workspace = true }
+lazy_static = { workspace = true }
+miow = "0.6"
+nanoid = "0.4"
+net2 = "0.2"
+os_info = "3.10"
+parking_lot = { workspace = true }
+paste = { workspace = true }
+powershell_script = "1.0"
+regex = "1"
+reqwest = { version = "0.12", features = ["blocking"] }
+schemars = { workspace = true, optional = true }
+serde = { workspace = true }
+serde_json = { workspace = true, features = ["preserve_order"] }
+serde_yaml = { workspace = true }
+shadow-rs = { workspace = true }
+strum = { workspace = true }
+sysinfo = { workspace = true }
+tracing = { workspace = true }
+tracing-appender = { workspace = true }
+tracing-subscriber = { workspace = true }
+uds_windows = { workspace = true }
+which = { workspace = true }
+win32-display-data = { workspace = true }
+windows = { workspace = true }
+windows-core = { workspace = true }
+windows-numerics = { workspace = true }
+windows-implement = { workspace = true }
+windows-interface = { workspace = true }
+winput = "0.2"
+winreg = "0.56"
+serde_with = { version = "3.12", features = ["schemars_1"] }
+
+[build-dependencies]
+shadow-rs = { workspace = true }
+
+[dev-dependencies]
+reqwest = { version = "0.12", features = ["blocking"] }
+uuid = { version = "1", features = ["v4"] }
+
+[features]
+default = ["schemars"]
+deadlock_detection = ["parking_lot/deadlock_detection"]
+schemars = ["dep:schemars", "komorebi-layouts/schemars"]

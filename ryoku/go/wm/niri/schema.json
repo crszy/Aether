@@ -1,0 +1,370 @@
+[
+  {
+    "tab": "Layout",
+    "group": "SETTINGS WINDOW",
+    "key": "wm.niri.settingsWindow.mode",
+    "label": "Settings window size",
+    "desc": "Fill the work area or use a custom centred size",
+    "ctl": "seg",
+    "src": "desktop.json",
+    "opts": ["full", "custom"],
+    "optLabels": {"full": "Full page", "custom": "Custom"},
+    "page": "windowmanager"
+  },
+  {
+    "tab": "Layout",
+    "group": "SETTINGS WINDOW",
+    "key": "wm.niri.settingsWindow.width",
+    "label": "Settings width",
+    "desc": "Share of the monitor work area; never smaller than the Settings layout needs",
+    "ctl": "slid",
+    "src": "desktop.json",
+    "lo": 0.25,
+    "hi": 1,
+    "unit": "%",
+    "pct": true,
+    "page": "windowmanager",
+    "when": {"wm.niri.settingsWindow.mode": ["custom"]}
+  },
+  {
+    "tab": "Layout",
+    "group": "SETTINGS WINDOW",
+    "key": "wm.niri.settingsWindow.height",
+    "label": "Settings height",
+    "desc": "Share of the monitor work area; never smaller than the Settings layout needs",
+    "ctl": "slid",
+    "src": "desktop.json",
+    "lo": 0.25,
+    "hi": 1,
+    "unit": "%",
+    "pct": true,
+    "page": "windowmanager",
+    "when": {"wm.niri.settingsWindow.mode": ["custom"]}
+  },
+  {
+    "tab": "Layout",
+    "group": "WINDOW WIDTH",
+    "key": "wm.niri.defaultColumnWidth",
+    "label": "New window width",
+    "desc": "Screen fraction a new window fills",
+    "ctl": "slid",
+    "src": "desktop.json",
+    "lo": 0.25,
+    "hi": 1,
+    "unit": "%",
+    "pct": true,
+    "page": "windowmanager"
+  },
+  {
+    "tab": "Layout",
+    "group": "WINDOW WIDTH",
+    "key": "wm.niri.presetColumnWidths",
+    "label": "Widths Super+R steps through",
+    "desc": "Widths Super+R cycles a window through instead of dragging",
+    "ctl": "chips",
+    "src": "desktop.json",
+    "page": "windowmanager",
+    "opts": [
+      "0.33333, 0.66667",
+      "0.33333, 0.5, 0.66667",
+      "0.25, 0.5, 0.75"
+    ],
+    "optLabels": {
+      "0.33333, 0.66667": "Thirds",
+      "0.33333, 0.5, 0.66667": "Thirds and half",
+      "0.25, 0.5, 0.75": "Quarters"
+    }
+  },
+  {
+    "tab": "Layout",
+    "group": "COLUMN FOCUS",
+    "key": "wm.niri.centerFocusedColumn",
+    "label": "Keep the focused window centred",
+    "desc": "Slide the window you focus into the middle of the screen",
+    "ctl": "chips",
+    "src": "desktop.json",
+    "page": "windowmanager",
+    "opts": [
+      "never",
+      "always",
+      "on-overflow"
+    ],
+    "optLabels": {
+      "never": "Never",
+      "always": "Always",
+      "on-overflow": "When it won't fit"
+    }
+  },
+  {
+    "tab": "Layout",
+    "group": "COLUMN FOCUS",
+    "key": "wm.niri.alwaysCenterSingleColumn",
+    "label": "Centre a lone window",
+    "desc": "Open a lone window centred; it scrolls once another joins",
+    "ctl": "sw",
+    "src": "desktop.json",
+    "page": "windowmanager"
+  },
+  {
+    "tab": "Layout",
+    "group": "TABBED COLUMNS",
+    "key": "wm.niri.tabIndicatorWidth",
+    "label": "Tab strip thickness",
+    "desc": "Width of the tab strip shown for a stacked column",
+    "ctl": "step",
+    "src": "desktop.json",
+    "lo": 0,
+    "hi": 16,
+    "unit": "px",
+    "page": "windowmanager"
+  },
+  {
+    "tab": "Layout",
+    "group": "TABBED COLUMNS",
+    "key": "wm.niri.tabIndicatorHideSingle",
+    "label": "Hide the tab strip for a lone window",
+    "desc": "Show the tab strip only when a column holds two or more",
+    "ctl": "sw",
+    "src": "desktop.json",
+    "page": "windowmanager"
+  },
+  {
+    "tab": "Layout",
+    "group": "DRAG AND DROP",
+    "key": "wm.niri.insertHint",
+    "label": "Show where a dragged window will land",
+    "desc": "Highlight the slot a dragged window will drop into",
+    "ctl": "sw",
+    "src": "desktop.json",
+    "page": "windowmanager"
+  },
+  {
+    "tab": "Layout",
+    "group": "URGENT WINDOWS",
+    "key": "wm.niri.urgentColor",
+    "label": "Urgent window colour",
+    "desc": "Outline colour for a background window wanting attention",
+    "ctl": "color",
+    "src": "desktop.json",
+    "page": "windowmanager"
+  },
+  {
+    "tab": "Layout",
+    "group": "ROOM FOR BARS AND DOCKS",
+    "key": "wm.niri.struts.left",
+    "label": "Left edge",
+    "desc": "Room kept for a bar or dock",
+    "ctl": "step",
+    "src": "desktop.json",
+    "lo": 0,
+    "hi": 256,
+    "unit": "px",
+    "page": "windowmanager"
+  },
+  {
+    "tab": "Layout",
+    "group": "ROOM FOR BARS AND DOCKS",
+    "key": "wm.niri.struts.right",
+    "label": "Right edge",
+    "desc": "Room kept for a bar or dock",
+    "ctl": "step",
+    "src": "desktop.json",
+    "lo": 0,
+    "hi": 256,
+    "unit": "px",
+    "page": "windowmanager"
+  },
+  {
+    "tab": "Layout",
+    "group": "ROOM FOR BARS AND DOCKS",
+    "key": "wm.niri.struts.top",
+    "label": "Top edge",
+    "desc": "Room kept for a bar or dock",
+    "ctl": "step",
+    "src": "desktop.json",
+    "lo": 0,
+    "hi": 256,
+    "unit": "px",
+    "page": "windowmanager"
+  },
+  {
+    "tab": "Layout",
+    "group": "ROOM FOR BARS AND DOCKS",
+    "key": "wm.niri.struts.bottom",
+    "label": "Bottom edge",
+    "desc": "Room kept for a bar or dock",
+    "ctl": "step",
+    "src": "desktop.json",
+    "lo": 0,
+    "hi": 256,
+    "unit": "px",
+    "page": "windowmanager"
+  },
+  {
+    "tab": "Look",
+    "group": "TITLE BARS",
+    "key": "wm.niri.preferNoCsd",
+    "label": "Hide app title bars",
+    "desc": "Asks apps to remove their own decorations. GTK apps without server-side decoration support may keep them; reopen apps after changing this.",
+    "keywords": "titlebar titlebars csd client-side decorations",
+    "ctl": "sw",
+    "src": "desktop.json",
+    "page": "windowmanager"
+  },
+  {
+    "tab": "Behaviour",
+    "group": "OVERVIEW",
+    "key": "wm.niri.overviewZoom",
+    "label": "Overview zoom",
+    "desc": "How far the overview pulls back; lower fits more",
+    "ctl": "slid",
+    "src": "desktop.json",
+    "lo": 0.1,
+    "hi": 0.75,
+    "unit": "%",
+    "pct": true,
+    "page": "windowmanager"
+  },
+  {
+    "tab": "Behaviour",
+    "group": "OVERVIEW",
+    "key": "wm.niri.hotCorners",
+    "label": "Hot corners",
+    "desc": "Push the pointer into a screen corner to open the overview",
+    "ctl": "sw",
+    "src": "desktop.json",
+    "page": "windowmanager"
+  },
+  {
+    "tab": "Behaviour",
+    "group": "MOTION",
+    "key": "wm.niri.animationSlowdown",
+    "label": "Animation slowdown",
+    "desc": "Scales every animation; above 1 slower, below snappier",
+    "ctl": "slid",
+    "src": "desktop.json",
+    "lo": 0.25,
+    "hi": 3,
+    "unit": "\u00d7",
+    "adv": true,
+    "page": "windowmanager"
+  },
+  {
+    "tab": "Behaviour",
+    "group": "STARTUP",
+    "key": "wm.niri.hotkeyOverlaySkip",
+    "label": "Skip hotkey overlay",
+    "desc": "Don't show the keybind cheat sheet when the session starts",
+    "ctl": "sw",
+    "src": "desktop.json",
+    "page": "windowmanager"
+  },
+  {
+    "tab": "Behaviour",
+    "group": "SCREENSHOTS",
+    "key": "wm.niri.screenshotPath",
+    "label": "Save screenshots to",
+    "desc": "Where niri saves screenshots; %Y %m %d become the date",
+    "ctl": "text",
+    "src": "desktop.json",
+    "eg": "~/Pictures/Screenshots/Screenshot %Y-%m-%d.png",
+    "page": "windowmanager",
+    "adv": true
+  },
+  {
+    "tab": "Behaviour",
+    "group": "PRIVACY",
+    "key": "wm.niri.blockOutApps",
+    "label": "Hide apps from screen sharing",
+    "desc": "App IDs (comma separated) niri blanks from shares",
+    "ctl": "text",
+    "src": "desktop.json",
+    "eg": "org.keepassxc.KeePassXC, org.gnome.World.Secrets",
+    "page": "windowmanager"
+  },
+  {
+    "tab": "Behaviour",
+    "group": "KEY SOUNDS",
+    "key": "",
+    "label": "Keyboard sounds",
+    "desc": "A sound on every key press, in every app, for niri. Installs a small engine that reads the keyboard directly and adds nothing to niri's own workload.",
+    "ctl": "install",
+    "pkg": "ryoku-keysounds-niri",
+    "launch": "ryoku-keysounds",
+    "actionLabel": "Install engine",
+    "src": "desktop.json",
+    "page": "windowmanager"
+  },
+  {
+    "tab": "Behaviour",
+    "group": "KEY SOUNDS",
+    "key": "wm.niri.keysounds.enabled",
+    "label": "Play a sound on every key press",
+    "desc": "One engine covers every window with no per-app hook and nothing grabbing your input",
+    "ctl": "sw",
+    "src": "desktop.json",
+    "page": "windowmanager"
+  },
+  {
+    "tab": "Behaviour",
+    "group": "KEY SOUNDS",
+    "key": "wm.niri.keysounds.profile",
+    "label": "Sound profile",
+    "desc": "Which switch you hear; import Mechvibes packs as profiles with ryoku-keysounds-import",
+    "ctl": "seg",
+    "src": "desktop.json",
+    "opts": [
+      "cherry-mx-blue",
+      "cherry-mx-brown",
+      "cherry-mx-black",
+      "cherry-mx-red",
+      "topre",
+      "creamy",
+      "nk-cream",
+      "holy-panda",
+      "tealios",
+      "crystal-purple",
+      "oreo"
+    ],
+    "when": {
+      "wm.niri.keysounds.enabled": [
+        true
+      ]
+    },
+    "page": "windowmanager"
+  },
+  {
+    "tab": "Behaviour",
+    "group": "KEY SOUNDS",
+    "key": "wm.niri.keysounds.volume",
+    "label": "Volume",
+    "desc": "How loud the samples play, relative to how they were made",
+    "ctl": "slid",
+    "src": "desktop.json",
+    "lo": 0,
+    "hi": 1,
+    "unit": "%",
+    "pct": true,
+    "when": {
+      "wm.niri.keysounds.enabled": [
+        true
+      ]
+    },
+    "page": "windowmanager"
+  },
+  {
+    "tab": "Behaviour",
+    "group": "KEY SOUNDS",
+    "key": "wm.niri.keysounds.release",
+    "label": "Key release sound",
+    "desc": "Also play a softer sample when a key comes back up",
+    "ctl": "sw",
+    "src": "desktop.json",
+    "when": {
+      "wm.niri.keysounds.enabled": [
+        true
+      ]
+    },
+    "page": "windowmanager"
+  }
+]

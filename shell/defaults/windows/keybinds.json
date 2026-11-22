@@ -1,0 +1,17 @@
+{
+  "userFile": "caelestia/keybinds.json",
+  "binds": [
+    {"keys": "Super", "action": "global", "name": "caelestia:launcher", "onRelease": true},
+    {"keys": "Super+A", "action": "global", "name": "caelestia:dashboard"},
+    {"keys": "Super+N", "action": "global", "name": "caelestia:sidebar"},
+    {"keys": "Super+U", "action": "global", "name": "caelestia:utilities"},
+    {"keys": "Super+Comma", "action": "global", "name": "caelestia:nexus"},
+    {"keys": "Super+Shift+Comma", "action": "global", "name": "caelestia:nexusAether"},
+    {"keys": "Super+Escape", "action": "global", "name": "caelestia:session"},
+    {"keys": "Super+Shift+L", "action": "global", "name": "caelestia:lock"},
+    {"keys": "Alt+Tab", "action": "global", "name": "caelestia:switcher"},
+    {"keys": "Alt+Shift+Tab", "action": "global", "name": "caelestia:switcherBack"},
+    {"keys": "Super+Tab", "action": "global", "name": "caelestia:taskview"},
+    {"keys": "Super+Shift+R", "action": "reload"}
+  ]
+}

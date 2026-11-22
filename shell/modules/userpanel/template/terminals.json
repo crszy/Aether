@@ -1,0 +1,33 @@
+{
+    "_help": "Your terminals in your colours. Aether rewrites them whenever your colours (wallpaper) or this file change. A colour: \"\" = from your scheme, \"#ff88cc\" = that colour, or a scheme colour name: primary, secondary, tertiary, onSurface, surface, primaryContainer, term0 ... term15. 'colours' is for every terminal; 'alacrittyColours' / 'windowsTerminalColours' / 'templatesColours' only for that one (they win). Set alacritty / windowsTerminal to false to leave that terminal alone.",
+
+    "alacritty": true,
+    "windowsTerminal": true,
+    "windowsTerminalDefault": true,
+
+    "colours": {
+        "foreground": "",
+        "background": "",
+        "cursor": "",
+        "cursorText": "",
+        "selectionText": "",
+        "selectionBackground": "",
+        "black": "", "red": "", "green": "", "yellow": "", "blue": "", "magenta": "", "cyan": "", "white": "",
+        "brightBlack": "", "brightRed": "", "brightGreen": "", "brightYellow": "", "brightBlue": "", "brightMagenta": "", "brightCyan": "", "brightWhite": ""
+    },
+
+    "alacrittyColours": {
+    },
+
+    "windowsTerminalColours": {
+    },
+
+    "_zenHelp": "Zen browser: set zen to true and Aether colours it (chrome/aether-colours.css in your Zen profile, imported from userChrome.css; your mods stay). Restart Zen to see changes. zenColours names: accent, accentContainer, onAccentContainer, secondary, background, surface, surfaceHigh, surfaceHighest, text, border.",
+    "zen": false,
+    "zenColours": {
+    },
+
+    "_templatesHelp": "Any other terminal or app: a file of yours with {{foreground}}, {{background}}, {{cursor}}, {{red}}, {{brightBlue}}, {{term4}}, {{m3primary}} ... and where to write it. ~ = your home, %APPDATA% / %LOCALAPPDATA% work too.",
+    "templates": [
+    ]
+}

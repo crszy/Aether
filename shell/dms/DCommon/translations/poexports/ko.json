@@ -1,0 +1,392 @@
+{
+  "%1 items": {
+    "%1 items": ""
+  },
+  "%1 of %2": {
+    "%1 of %2": ""
+  },
+  "%1 selected": {
+    "%1 selected": ""
+  },
+  "%1 × %2": {
+    "%1 × %2": ""
+  },
+  "%1, %2": {
+    "%1, %2": ""
+  },
+  "1 item": {
+    "1 item": ""
+  },
+  "1 selected": {
+    "1 selected": ""
+  },
+  "A file with this name already exists. Do you want to overwrite it?": {
+    "A file with this name already exists. Do you want to overwrite it?": "같은 이름의 파일이 이미 있습니다. 덮어쓰시겠습니까?"
+  },
+  "A name cannot be empty or contain a slash": {
+    "A name cannot be empty or contain a slash": ""
+  },
+  "AM": {
+    "AM": "오전"
+  },
+  "Actions": {
+    "Actions": "작업"
+  },
+  "Ascending": {
+    "Ascending": "오름차순"
+  },
+  "B": {
+    "B": ""
+  },
+  "Back": {
+    "Back": "뒤로"
+  },
+  "Backspace": {
+    "Backspace": ""
+  },
+  "Binary file": {
+    "Binary file": ""
+  },
+  "Broken link": {
+    "Broken link": ""
+  },
+  "Cancel": {
+    "Cancel": "취소"
+  },
+  "Choose icon": {
+    "Choose icon": "아이콘 선택"
+  },
+  "Clear": {
+    "Clear": "지우기"
+  },
+  "Clear the selection": {
+    "Clear the selection": ""
+  },
+  "Close": {
+    "Close": "닫기"
+  },
+  "Color": {
+    "Color": "색상"
+  },
+  "Communication": {
+    "Communication": "커뮤니케이션"
+  },
+  "Confirm": {
+    "Confirm": "확인"
+  },
+  "Copy path": {
+    "Copy path": "경로 복사"
+  },
+  "Create": {
+    "Create": "생성"
+  },
+  "Created": {
+    "Created": ""
+  },
+  "Decrease": {
+    "Decrease": "줄이기"
+  },
+  "Deleted": {
+    "Deleted": ""
+  },
+  "Descending": {
+    "Descending": "내림차순"
+  },
+  "Development": {
+    "Development": "개발"
+  },
+  "Dimensions": {
+    "Dimensions": ""
+  },
+  "Drag to reorder": {
+    "Drag to reorder": "드래그하여 순서 변경"
+  },
+  "Edit": {
+    "Edit": "편집"
+  },
+  "Enter": {
+    "Enter": ""
+  },
+  "Enter filename...": {
+    "Enter filename...": "파일 이름 입력..."
+  },
+  "File": {
+    "File": "파일"
+  },
+  "File Already Exists": {
+    "File Already Exists": "파일이 이미 있음"
+  },
+  "File System": {
+    "File System": ""
+  },
+  "Files - %1": {
+    "Files - %1": "파일 - %1"
+  },
+  "Files are unavailable because the file service is not running": {
+    "Files are unavailable because the file service is not running": ""
+  },
+  "First %1 of %2": {
+    "First %1 of %2": ""
+  },
+  "Folder": {
+    "Folder": "폴더"
+  },
+  "Folder name": {
+    "Folder name": ""
+  },
+  "Forward": {
+    "Forward": ""
+  },
+  "Fun": {
+    "Fun": "재미"
+  },
+  "GB": {
+    "GB": ""
+  },
+  "Grid view": {
+    "Grid view": ""
+  },
+  "Hibernate": {
+    "Hibernate": "최대 절전 모드"
+  },
+  "Hide keyboard": {
+    "Hide keyboard": ""
+  },
+  "Hide password": {
+    "Hide password": "비밀번호 숨기기"
+  },
+  "Hide preview": {
+    "Hide preview": ""
+  },
+  "Hold longer to confirm": {
+    "Hold longer to confirm": "확인하려면 더 오래 누르세요"
+  },
+  "Hold to confirm (%1 ms)": {
+    "Hold to confirm (%1 ms)": "길게 눌러 확인(%1 ms)"
+  },
+  "Hold to confirm (%1s)": {
+    "Hold to confirm (%1s)": "길게 눌러 확인(%1초)"
+  },
+  "Home": {
+    "Home": "홈"
+  },
+  "Hour": {
+    "Hour": ""
+  },
+  "Increase": {
+    "Increase": "증가"
+  },
+  "Jump to a folder you visited": {
+    "Jump to a folder you visited": ""
+  },
+  "Last used": {
+    "Last used": ""
+  },
+  "List view": {
+    "List view": ""
+  },
+  "Location": {
+    "Location": "위치"
+  },
+  "Log Out": {
+    "Log Out": "로그아웃"
+  },
+  "MB": {
+    "MB": ""
+  },
+  "Maximize": {
+    "Maximize": "최대화"
+  },
+  "Media": {
+    "Media": "미디어"
+  },
+  "Minimize": {
+    "Minimize": "최소화"
+  },
+  "Minute": {
+    "Minute": ""
+  },
+  "Modified": {
+    "Modified": "수정됨"
+  },
+  "Move to Trash": {
+    "Move to Trash": "휴지통으로 이동"
+  },
+  "Name": {
+    "Name": "이름"
+  },
+  "Navigation": {
+    "Navigation": "탐색"
+  },
+  "New folder": {
+    "New folder": ""
+  },
+  "No locations found": {
+    "No locations found": ""
+  },
+  "Nothing is at this location": {
+    "Nothing is at this location": ""
+  },
+  "Numbers": {
+    "Numbers": "숫자"
+  },
+  "OK": {
+    "OK": "확인"
+  },
+  "Open": {
+    "Open": "열기"
+  },
+  "Original location": {
+    "Original location": ""
+  },
+  "Overwrite": {
+    "Overwrite": "덮어쓰기"
+  },
+  "Owner": {
+    "Owner": ""
+  },
+  "PM": {
+    "PM": "오후"
+  },
+  "Permissions": {
+    "Permissions": ""
+  },
+  "Power Off": {
+    "Power Off": "전원 끄기"
+  },
+  "Power Options": {
+    "Power Options": "전원 옵션"
+  },
+  "Quick Access": {
+    "Quick Access": "빠른 접근"
+  },
+  "Reboot": {
+    "Reboot": "재부팅"
+  },
+  "Refresh": {
+    "Refresh": "새로 고침"
+  },
+  "Rename": {
+    "Rename": "이름 바꾸기"
+  },
+  "Restore": {
+    "Restore": "복원"
+  },
+  "Review changes": {
+    "Review changes": ""
+  },
+  "Saturation %1%, brightness %2%": {
+    "Saturation %1%, brightness %2%": ""
+  },
+  "Save": {
+    "Save": "저장"
+  },
+  "Search for a location...": {
+    "Search for a location...": "위치 검색..."
+  },
+  "Search...": {
+    "Search...": "검색..."
+  },
+  "Searching...": {
+    "Searching...": ""
+  },
+  "Select File": {
+    "Select File": "파일 선택"
+  },
+  "Select time": {
+    "Select time": ""
+  },
+  "Shift": {
+    "Shift": ""
+  },
+  "Show hidden files": {
+    "Show hidden files": ""
+  },
+  "Show password": {
+    "Show password": "비밀번호 표시"
+  },
+  "Size": {
+    "Size": "크기"
+  },
+  "Sort By": {
+    "Sort By": "정렬 기준"
+  },
+  "Space": {
+    "Space": ""
+  },
+  "Status": {
+    "Status": "상태"
+  },
+  "Suspend": {
+    "Suspend": "절전"
+  },
+  "Switch User": {
+    "Switch User": "사용자 전환"
+  },
+  "System": {
+    "System": "시스템"
+  },
+  "TB": {
+    "TB": ""
+  },
+  "This folder could not be opened": {
+    "This folder could not be opened": ""
+  },
+  "This folder is empty": {
+    "This folder is empty": ""
+  },
+  "This folder no longer exists": {
+    "This folder no longer exists": ""
+  },
+  "This item already exists": {
+    "This item already exists": ""
+  },
+  "This item cannot be moved here directly": {
+    "This item cannot be moved here directly": ""
+  },
+  "This item could not be handled": {
+    "This item could not be handled": ""
+  },
+  "This item is in use": {
+    "This item is in use": ""
+  },
+  "This item no longer exists": {
+    "This item no longer exists": ""
+  },
+  "This kind of location is not supported": {
+    "This kind of location is not supported": ""
+  },
+  "Today, %1": {
+    "Today, %1": ""
+  },
+  "Type": {
+    "Type": "유형"
+  },
+  "Type a path, ~ or an address such as sftp://host": {
+    "Type a path, ~ or an address such as sftp://host": ""
+  },
+  "Unknown": {
+    "Unknown": "알 수 없음"
+  },
+  "Use this folder": {
+    "Use this folder": "이 폴더 사용"
+  },
+  "Use ~ for your own home folder or type the full path": {
+    "Use ~ for your own home folder or type the full path": ""
+  },
+  "Workspace": {
+    "Workspace": "워크스페이스"
+  },
+  "Yesterday, %1": {
+    "Yesterday, %1": ""
+  },
+  "You do not have permission to do this": {
+    "You do not have permission to do this": ""
+  },
+  "You do not have permission to view this folder": {
+    "You do not have permission to view this folder": ""
+  },
+  "kB": {
+    "kB": ""
+  }
+}

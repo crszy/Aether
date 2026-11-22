@@ -1,0 +1,10 @@
+import QtQuick
+import Quickshell.Wayland
+import qs.dms.Common
+
+FadeOverlayWindow {
+    WlrLayershell.namespace: "dms:fade-to-lock"
+    fadeEnabled: SettingsData.fadeToLockEnabled
+    gracePeriod: SettingsData.fadeToLockGracePeriod
+    holdsAfterCompletion: true
+}

@@ -1,0 +1,15 @@
+{
+  "userFile": "ryoku/windows-keybinds.json",
+  "binds": [
+    {"keys": "Super+Space", "action": "ipc", "target": "shell", "function": "openSurface", "args": ["", "launcher"]},
+    {"keys": "Super+K", "action": "ipc", "target": "shell", "function": "openSurface", "args": ["", "cheatsheet"]},
+    {"keys": "Super+Shift+G", "action": "ipc", "target": "shell", "function": "openSurface", "args": ["", "gamebar"]},
+    {"keys": "Super+M", "action": "ipc", "target": "shell", "function": "openSurface", "args": ["", "visualizer"]},
+    {"keys": "Super+Shift+M", "action": "ipc", "target": "shell", "function": "openSurface", "args": ["", "visualizer-overlay"]},
+    {"keys": "Super+Alt+M", "action": "ipc", "target": "shell", "function": "openSurface", "args": ["", "visualizer-place"]},
+    {"keys": "Super+W", "action": "exec", "command": "\"%RYOKU_DIR%/bin/ryogami.exe\" wallpaper ui"},
+    {"keys": "Super+Shift+W", "action": "exec", "command": "\"%RYOKU_DIR%/bin/ryogami.exe\" wallpaper random"},
+    {"keys": "Super+Shift+D", "action": "exec", "command": "\"%RYOKU_DIR%/bin/ryoku-shell.exe\" hub open widgets"},
+    {"keys": "Super+Shift+S", "action": "exec", "command": "\"%AETHER_QS_DIR%/qsw.exe\" -p \"%RYOKU_DIR%/apps/ryoshot/shell.qml\""}
+  ]
+}

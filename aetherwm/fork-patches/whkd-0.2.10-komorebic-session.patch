@@ -1,0 +1,56 @@
+diff --git a/src/main.rs b/src/main.rs
+index 10f3bcf..df6af6f 100644
+--- a/src/main.rs
++++ b/src/main.rs
+@@ -40,6 +40,40 @@ lazy_static! {
+         whkd_parser::load(&home).unwrap_or_else(|_| panic!("could not load whkdrc from {home:?}"))
+     };
+     static ref SESSION_STDIN: Mutex<Option<ChildStdin>> = Mutex::new(None);
++    static ref KOMOREBIC_STDIN: Mutex<Option<ChildStdin>> = Mutex::new(None);
++}
++
++/// Starting a process costs ~100ms on some machines, and the shell session runs commands one
++/// after another, so rapid key presses used to queue up for seconds. `komorebic` commands are
++/// instead written to one long-running `komorebic session`, which keeps them in order.
++fn send_to_komorebic(cmd: &str) -> bool {
++    let Some(args) = cmd.trim_start().strip_prefix("komorebic ") else {
++        return false;
++    };
++
++    let mut session = KOMOREBIC_STDIN.lock();
++    for _ in 0..2 {
++        if session.is_none() {
++            *session = Command::new("komorebic")
++                .arg("session")
++                .stdin(Stdio::piped())
++                .spawn()
++                .ok()
++                .and_then(|mut process| process.stdin.take());
++        }
++
++        let Some(stdin) = session.as_mut() else {
++            return false;
++        };
++
++        if writeln!(stdin, "{args}").and_then(|()| stdin.flush()).is_ok() {
++            return true;
++        }
++
++        *session = None;
++    }
++
++    false
+ }
+ 
+ #[derive(Debug, Clone)]
+@@ -55,6 +89,10 @@ impl HkmData {
+         let cmd = self.command.clone();
+ 
+         if let Err(error) = hkm.register_hotkey(self.vkey, self.mod_keys.as_slice(), move || {
++            if send_to_komorebic(&cmd) {
++                return;
++            }
++
+             let mut retry_with_new_session = false;
+ 
+             if let Some(session_stdin) = SESSION_STDIN.lock().as_mut() {

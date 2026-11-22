@@ -1,0 +1,6 @@
+module Quickshell.Networking
+singleton Networking 1.0 Networking.qml
+WifiSecurityType 1.0 WifiSecurityType.qml
+DeviceType 1.0 DeviceType.qml
+WifiNetwork 1.0 WifiNetwork.qml
+WifiDevice 1.0 WifiDevice.qml

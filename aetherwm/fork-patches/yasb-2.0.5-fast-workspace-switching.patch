@@ -1,0 +1,162 @@
+diff --git a/src/core/widgets/komorebi/workspaces.py b/src/core/widgets/komorebi/workspaces.py
+index 190d7de..809e85c 100644
+--- a/src/core/widgets/komorebi/workspaces.py
++++ b/src/core/widgets/komorebi/workspaces.py
+@@ -60,19 +60,27 @@ class WorkspaceButton(QPushButton):
+             current_class = button.property("class")
+             new_class = " ".join([cls for cls in current_class.split() if not cls.startswith("button-")])
+             new_class = f"{new_class} button-{index + 1}"
+-            button.setProperty("class", new_class)
+-            refresh_widget_style(button)
++            # every class write restarts the CSS transitions of the button, and komorebi sends
++            # many events while switching workspaces, so unchanged classes are left alone
++            if new_class != current_class:
++                button.setProperty("class", new_class)
++                refresh_widget_style(button)
+ 
+     def update_and_redraw(self, status: WorkspaceStatus):
+         self.status = status
+-        self.setProperty("class", f"ws-btn {status.lower()}")
++        # keep the button-N class, so that a status change is a single class write
++        current_class = self.property("class") or ""
++        button_classes = [cls for cls in current_class.split() if cls.startswith("button-")]
++        new_class = " ".join(["ws-btn", status.lower(), *button_classes])
+         if status == WORKSPACE_STATUS_ACTIVE:
+             self.setText(self.active_label)
+         elif status == WORKSPACE_STATUS_POPULATED:
+             self.setText(self.populated_label)
+         else:
+             self.setText(self.default_label)
+-        refresh_widget_style(self)
++        if new_class != current_class:
++            self.setProperty("class", new_class)
++            refresh_widget_style(self)
+ 
+     def activate_workspace(self):
+         try:
+@@ -348,8 +356,15 @@ class WorkspaceWidget(BaseWidget):
+                             self._try_remove_workspace_button(workspace_index)
+                 self._add_or_update_buttons()
+             elif event["type"] in self._workspace_focus_events or self._has_active_workspace_index_changed():
+-                # send workspace_update event to active_window widgets
+-                self._event_service.emit_event("workspace_update", event["type"])
++                # komorebi announces a workspace switch before carrying it out, so active_window
++                # widgets are told which window is about to be focused instead of reading the
++                # foreground window, which still belongs to the previous workspace
++                predicted_hwnd = self._predicted_focused_hwnd(state)
++                if predicted_hwnd is not None:
++                    self._event_service.emit_event("komorebi_focus_predicted", predicted_hwnd)
++                else:
++                    # send workspace_update event to active_window widgets
++                    self._event_service.emit_event("workspace_update", event["type"])
+                 try:
+                     prev_workspace_button = self._workspace_buttons[self._prev_workspace_index]
+                     self._update_button(prev_workspace_button)
+@@ -425,6 +440,27 @@ class WorkspaceWidget(BaseWidget):
+     def _get_focused_workspace(self):
+         return self._komorebic.get_focused_workspace(self._komorebi_screen)
+ 
++    def _predicted_focused_hwnd(self, state: dict) -> int | None:
++        """The window komorebi focuses on the focused workspace of this screen (0 when the
++        workspace is empty), or None when this screen isn't the focused one"""
++        try:
++            if state["monitors"]["focused"] != self._komorebi_screen["index"]:
++                return None
++            workspace = self._get_focused_workspace()
++            monocle = self._komorebic.get_monocle_container(workspace)
++            if monocle:
++                return self._komorebic.get_focused_window(monocle)["hwnd"]
++            maximized = workspace.get("maximized_window")
++            if isinstance(maximized, dict):
++                return maximized["hwnd"]
++            containers = workspace["containers"]
++            if containers["elements"]:
++                container = containers["elements"][containers["focused"]]
++                return self._komorebic.get_focused_window(container)["hwnd"]
++            return 0
++        except KeyError, TypeError, IndexError:
++            return None
++
+     def _has_active_workspace_index_changed(self):
+         return self._prev_workspace_index != self._curr_workspace_index
+ 
+diff --git a/src/core/widgets/services/komorebi/event_listener.py b/src/core/widgets/services/komorebi/event_listener.py
+index aaece3c..479ba1e 100644
+--- a/src/core/widgets/services/komorebi/event_listener.py
++++ b/src/core/widgets/services/komorebi/event_listener.py
+@@ -72,7 +72,8 @@ class KomorebiEventListener(QThread):
+                     try:
+                         buffer, bytes_to_read, result = win32pipe.PeekNamedPipe(self.pipe, 1)
+                         if not bytes_to_read:
+-                            if self._stop_event.wait(0.05):
++                            # short poll, so that the bar follows rapid workspace switches
++                            if self._stop_event.wait(0.005):
+                                 break
+                             continue
+ 
+diff --git a/src/core/widgets/yasb/active_window.py b/src/core/widgets/yasb/active_window.py
+index 9f30b38..a7df6dc 100644
+--- a/src/core/widgets/yasb/active_window.py
++++ b/src/core/widgets/yasb/active_window.py
+@@ -44,6 +44,7 @@ class ActiveWindowWidget(BaseWidget):
+     window_name_change = pyqtSignal(int, WinEvent)
+     window_destroy = pyqtSignal(int, WinEvent)
+     focus_change_workspaces = pyqtSignal(str)
++    focus_predicted = pyqtSignal(object)
+     validation_schema = ActiveWindowConfig
+     event_listener = SystemEventListener
+ 
+@@ -53,6 +54,7 @@ class ActiveWindowWidget(BaseWidget):
+         self.dpi = None
+         self._win_info = None
+         self._tracked_hwnd = None
++        self._predicted_hwnd = None
+         self._show_alt = False
+         self._active_label = config.label
+         self._event_service = EventService()
+@@ -97,6 +99,9 @@ class ActiveWindowWidget(BaseWidget):
+         self.focus_change_workspaces.connect(self._on_focus_change_workspaces)
+         self._event_service.register_event("workspace_update", self.focus_change_workspaces)
+ 
++        self.focus_predicted.connect(self._on_focus_predicted)
++        self._event_service.register_event("komorebi_focus_predicted", self.focus_predicted)
++
+         # Parent timer to widget so it auto-stops/cleans up on deletion
+         self._window_update_timer = QTimer(self)
+         self._window_update_timer.setSingleShot(True)
+@@ -121,6 +126,7 @@ class ActiveWindowWidget(BaseWidget):
+             self._event_service.unregister_event(WinEvent.EventObjectNameChange, self.window_name_change)
+             self._event_service.unregister_event(WinEvent.EventObjectStateChange, self.window_name_change)
+             self._event_service.unregister_event("workspace_update", self.focus_change_workspaces)
++            self._event_service.unregister_event("komorebi_focus_predicted", self.focus_predicted)
+         except Exception:
+             pass
+ 
+@@ -179,6 +185,18 @@ class ActiveWindowWidget(BaseWidget):
+         else:
+             self._set_no_window_or_hide()
+ 
++    def _on_focus_predicted(self, hwnd: int) -> None:
++        """komorebi is switching workspaces and is about to focus this window (0: none)"""
++        if hwnd:
++            # the window isn't in the foreground yet, so it is let through just this once
++            self._predicted_hwnd = hwnd
++            try:
++                self._on_focus_change_event(hwnd, WinEvent.WinEventOutOfContext)
++            finally:
++                self._predicted_hwnd = None
++        else:
++            self._set_no_window_or_hide()
++
+     def _on_window_destroy_event(self, hwnd: int, event: WinEvent) -> None:
+         """Handle top-level window destruction. Only react when the destroyed HWND matches the tracked window."""
+         try:
+@@ -271,7 +289,7 @@ class ActiveWindowWidget(BaseWidget):
+ 
+     def _update_window_title(self, hwnd: int, win_info: dict, event: WinEvent) -> None:
+         try:
+-            if hwnd != win32gui.GetForegroundWindow():
++            if hwnd != win32gui.GetForegroundWindow() and hwnd != self._predicted_hwnd:
+                 return
+             title = win_info["title"]
+             process = win_info["process"]

@@ -1,0 +1,16 @@
+diff --git a/qt_css_engine/engine.py b/qt_css_engine/engine.py
+index 46ac4c0..39a3447 100644
+--- a/qt_css_engine/engine.py
++++ b/qt_css_engine/engine.py
+@@ -773,7 +773,10 @@ class TransitionEngine(QObject):
+         anim_obj: Animation | None,
+     ) -> bool:
+         """Snapshot the widget's current rendered size into css_anim_props for size props."""
+-        if anim_obj or prop in ctx.css_anim_props or prop not in SIZE_PROPS:
++        # a finished animation has removed its value already, so without the snapshot the new
++        # class would show at its full size for a frame before animating from the old one
++        running = anim_obj is not None and anim_obj.anim.state() == QAbstractAnimation.State.Running
++        if running or prop in ctx.css_anim_props or prop not in SIZE_PROPS:
+             return False
+         current_raw = self._resolve_current_raw(widget, ctx, prop, base_props, base_props.get(prop, "auto"))
+         if not current_raw or current_raw == "auto":

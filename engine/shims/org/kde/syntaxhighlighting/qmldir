@@ -1,0 +1,3 @@
+module org.kde.syntaxhighlighting
+singleton Repository 1.0 Repository.qml
+SyntaxHighlighter 1.0 SyntaxHighlighter.qml

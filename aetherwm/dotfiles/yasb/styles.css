@@ -1,0 +1,785 @@
+/* Black / white acrylic theme */
+:root {
+  --rosewater: #ffffff;
+  --flamingo: #f2f2f2;
+  --pink: #e6e6e6;
+  --mauve: #d6d6d6;
+  --red: #d0d0d0;
+  --maroon: #b8b8b8;
+  --peach: #e0e0e0;
+  --yellow: #f2f2f2;
+  --green: #d0d0d0;
+  --teal: #c8c8c8;
+  --sky: #d8d8d8;
+  --sapphire: #c4c4c4;
+  --blue: #d0d0d0;
+  --lavender: #eeeeee;
+  --text: #ffffff;
+  --subtext1: #dcdcdc;
+  --subtext0: #b8b8b8;
+  --overlay2: #8a8a8a;
+  --overlay1: #666666;
+  --overlay0: #4a4a4a;
+  --surface2: #2e2e2e;
+  --surface1: #222222;
+  --surface0: #1a1a1a;
+  --base: #111111;
+  --mantle: rgba(10, 10, 10, 0.78);
+  --crust: rgba(0, 0, 0, 0.72);
+}
+* {
+  font-size: 12px;
+  color: var(--subtext0);
+  font-weight: 600;
+  font-family: "JetBrainsMono NFP";
+  margin: 0;
+  padding: 0;
+}
+.yasb-bar {
+  padding: 0;
+  margin: 0;
+  background-color: rgba(10, 10, 10, 0.18);
+  border-radius: 10px;
+  border: none;
+}
+
+.icon {
+  font-size: 16px;
+}
+.widget .label {
+  padding: 0px 2px;
+}
+
+.komorebi-active-layout .label {
+  font-weight: 600;
+  padding: 2px 0 0 0;
+}
+
+.komorebi-active-layout .widget-container {
+  background-color: rgba(0, 0, 0, 0.48);
+  margin: 4px 3px 4px 0;
+  border-radius: 12px;
+  border: 0px solid var(--surface1);
+  padding: 0 8 0 8;
+}
+
+.apps-widget .label {
+  font-size: 14px;
+  padding: 0 5px;
+  color: rgba(245, 245, 245, 0.82);
+}
+.apps-widget .label:hover {
+  color: var(--text);
+}
+.uptime {
+  font-size: 14px;
+  margin-bottom: 10px;
+  color: var(--surface2);
+  font-weight: 600;
+}
+.power-menu-widget .label {
+  color: var(--red);
+  padding: 0px 3px 0px 3px;
+  margin: 0px 0px 0px 0;
+  font-size: 13px;
+}
+.power-menu-popup { background-color: rgba(16, 16, 18, 0.42); }
+.power-menu-popup .button {
+  padding: 0;
+  width: 180px;
+  height: 230px;
+  border-radius: 8px;
+  background-color: var(--base);
+  color: var(--text);
+  border-left: 4px solid rgba(61, 61, 61, 0);
+  border-right: 4px solid rgba(61, 61, 61, 0);
+  border-top: 8px solid rgba(61, 61, 61, 0);
+  border-bottom: 8px solid rgba(61, 61, 61, 0);
+  margin: 0px;
+}
+.power-menu-popup .button.hover {
+  background-color: var(--surface0);
+  border-left: 4px solid var(--surface0);
+  border-right: 4px solid var(--surface0);
+  border-top: 8px solid var(--surface0);
+  border-bottom: 8px solid var(--surface0);
+}
+.power-menu-popup .button .label {
+  margin-bottom: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--surface2);
+}
+.power-menu-popup .button .icon {
+  font-size: 64px;
+  padding-top: 32px;
+  color: var(--surface2);
+}
+.power-menu-popup .button.cancel .icon {
+  padding: 0;
+  margin: 0;
+}
+.power-menu-popup .button.cancel .label {
+  color: var(--red);
+  margin: 0;
+}
+.power-menu-popup .button.cancel {
+  height: 32px;
+  border-radius: 4px;
+}
+.volume-widget .icon {
+  color: var(--blue);
+  margin: 1px 2px 0 0;
+}
+
+.github-widget .icon {
+  font-size: 14px;
+  color: var(--text);
+}
+.github-widget .icon.new-notification {
+  color: var(--red);
+}
+
+.weather-widget .icon {
+  font-size: 18px;
+  margin: 0 2px 1px 0;
+  color: #d8d8d8;
+}
+
+.weather-widget .weather-glyph {
+  font-family: "Segoe UI Symbol", "Segoe UI Emoji", "Noto Sans Symbols 2";
+  font-size: 17px;
+  font-weight: 700;
+  color: #eeeeee;
+}
+.ai-widget {
+  padding: 0 4px 0 4px;
+  margin: 0;
+}
+.ai-widget .widget-container {
+  margin: 4px 0 4px 0;
+  border-radius: 12px;
+}
+.ai-widget .icon {
+  color: var(--sky);
+  padding: 0 5px;
+  font-size: 16px;
+  margin: 0;
+}
+.ai-widget .icon:hover {
+  color: var(--text);
+}
+.taskbar-widget {
+  padding: 0;
+  margin: 0;
+  border: none;
+}
+.taskbar-widget .widget-container {
+  padding: 0 0px;
+}
+.taskbar-widget .app-container {
+  padding: 0 0px;
+  border: none;
+  margin: 0 6px;
+}
+.taskbar-widget .app-container .app-title {
+  padding-left: 0px;
+}
+.taskbar-widget .app-container.foreground {
+  background-color: rgba(0, 0, 0, 0.48);
+  border-radius: 12px;
+  border: 0px solid var(--surface1);
+  padding: 0 6;
+  margin: 5 0;
+}
+.taskbar-widget .app-container.flashing {
+  background-color: rgba(0, 0, 0, 0.48);
+  border-radius: 12px;
+  border: 0px solid var(--surface1);
+  padding: 0 6;
+  margin: 5 0;
+}
+.whkd-widget {
+  padding: 0 6px 0 6px;
+}
+.whkd-widget .icon {
+  font-size: 14px;
+}
+
+.wallpapers-gallery-window {
+  background-color: rgba(65, 65, 65, 0.01);
+  border: 0;
+  margin: 0;
+}
+.wallpapers-gallery-buttons {
+  background-color: rgba(255, 255, 255, 0);
+  color: var(--text);
+  border: none;
+  font-size: 14px;
+  padding: 8px 0;
+  border-radius: 8px;
+  margin: 0 8px 8px 8px;
+  width: 600px;
+}
+.wallpapers-gallery-buttons:hover {
+  background-color: rgba(255, 255, 255, 0.10);
+}
+.wallpapers-gallery-image {
+  border: 4px solid transparent;
+  border-radius: 10px;
+}
+.wallpapers-gallery-image:hover {
+  border: 4px solid var(--sapphire);
+}
+.wallpapers-gallery-image.focused {
+  border: 4px solid var(--sapphire);
+}
+
+.update-check-widget {
+  padding: 0 0px 0 0px;
+}
+.update-check-widget .icon {
+  font-size: 14px;
+}
+.update-check-widget .widget-container.winget,
+.update-check-widget .widget-container.windows {
+  background: var(--maroon);
+  margin: 7px 2px 7px 2px;
+  border-radius: 9px;
+  border: 2px solid var(--red);
+}
+.update-check-widget .widget-container.windows {
+  background: var(--lavender);
+  margin: 7px 2px 7px 2px;
+  border-radius: 9px;
+  border: 2px solid var(--blue);
+}
+/* Restored bar grouping from the pre-brightness layout */
+.clock-widget .widget-container {
+  padding: 0 8px;
+  margin: 4px 5px;
+  border-radius: 12px;
+}
+
+.apps-widget .widget-container {
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0 4px;
+  margin: 4px 2px;
+}
+
+.active-window-widget .widget-container,
+.traffic-widget .widget-container,
+.cava-widget .widget-container,
+.media-widget .widget-container,
+.cpu-widget .widget-container,
+.memory-widget .widget-container,
+.weather-widget .widget-container,
+.volume-widget .widget-container,
+.language-widget .widget-container,
+.systray .widget-container {
+  margin: 4px 5px;
+  border-radius: 12px;
+}
+
+.media-widget .label {
+  color: var(--subtext0);
+  padding: 0 4px;
+}
+
+.media-widget .btn {
+  color: var(--subtext0);
+  padding: 0 3px;
+  margin: 0;
+}
+
+.media-widget .btn:hover,
+.media-widget .label:hover {
+  color: var(--text);
+}
+
+.cpu-widget .icon,
+.memory-widget .icon,
+.language-widget .label,
+.systray .label {
+  color: var(--subtext0);
+}
+
+.home-widget .widget-container {
+  margin: 4px 5px 4px 10px;
+  border-radius: 12px;
+}
+/* Media popup and smooth label polish */
+.media-widget .widget-container {
+  padding: 0 7px;
+}
+
+.media-widget .label {
+  min-width: 0;
+  padding: 0 8px;
+}
+
+.media-menu {
+  min-width: 440px;
+  max-width: 440px;
+  background-color: rgba(16, 16, 18, 0.42);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
+  padding: 10px 12px 12px 12px;
+}
+
+.media-menu .thumbnail {
+  border-radius: 6px;
+  margin: 0 12px 8px 0;
+}
+
+.media-menu .title {
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 700;
+  margin: 0 0 2px 0;
+}
+
+.media-menu .artist {
+  color: var(--subtext0);
+  font-size: 12px;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+}
+
+.media-menu .source {
+  color: var(--text);
+  background-color: rgba(255, 255, 255, 0.10);
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-size: 11px;
+  font-weight: 700;
+  margin: 2px 0 0 0;
+}
+
+.media-menu .btn {
+  color: var(--subtext0);
+  background-color: transparent;
+  border-radius: 10px;
+  min-width: 28px;
+  min-height: 28px;
+  margin: 2px 3px;
+}
+
+.media-menu .btn:hover,
+.media-menu .btn.play {
+  color: var(--text);
+  background-color: rgba(255, 255, 255, 0.10);
+}
+
+.media-menu .playback-time {
+  color: var(--subtext0);
+  font-size: 11px;
+  min-width: 42px;
+  margin: 4px 0 2px 0;
+}
+
+.media-menu .media-timeline-container {
+  margin-top: 6px;
+}
+
+.media-menu .progress-slider {
+  height: 12px;
+  margin: 2px 0 0 0;
+  border-radius: 3px;
+}
+
+.media-menu .progress-slider::groove {
+  background: rgba(255, 255, 255, 0.14);
+  height: 3px;
+  border-radius: 3px;
+}
+
+.media-menu .progress-slider::sub-page {
+  background: rgba(245, 245, 245, 0.86);
+  height: 3px;
+  border-radius: 3px;
+}
+
+.media-menu .progress-slider::handle {
+  background: rgba(245, 245, 245, 0.90);
+  width: 10px;
+  height: 10px;
+  margin: -4px 0;
+  border-radius: 5px;
+}
+/* Right edge spacing fix */
+.power-menu-widget .widget-container {
+  margin: 4px 10px 4px 5px;
+}
+
+.cava-widget .widget-container {
+  min-width: 42px;
+}
+
+/* Codex menu/tray/media fixes */
+.home-menu {
+  background-color: rgba(16, 16, 18, 0.42);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 12px;
+  padding: 6px;
+}
+
+.home-menu::item,
+.home-menu .menu-item,
+.home-menu .button {
+  color: var(--subtext1);
+  background-color: transparent;
+  border-radius: 9px;
+  padding: 7px 12px;
+  margin: 2px 0;
+}
+
+.home-menu::item:selected,
+.home-menu .menu-item:hover,
+.home-menu .menu-item.hover,
+.home-menu .button:hover,
+.home-menu .button.hover {
+  color: var(--text);
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+.home-menu::separator {
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.12);
+  margin: 5px 8px;
+}
+
+.systray .button,
+.systray .label {
+  color: var(--subtext0);
+  background-color: transparent;
+  border-radius: 8px;
+}
+
+.systray .button:hover,
+.systray .button:checked,
+.systray .button:pressed,
+.systray .button.open,
+.systray .button.active {
+  color: var(--subtext0);
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.systray-popup {
+  background-color: rgba(16, 16, 18, 0.42);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 12px;
+}
+
+.media-menu .btn {
+  font-family: "Segoe Fluent Icons", "Segoe MDL2 Assets";
+  font-size: 15px;
+  color: var(--subtext0);
+}
+
+.media-menu .btn:hover,
+.media-menu .btn.play {
+  color: var(--text);
+}
+/* Codex traffic/tray refinements */
+.traffic-menu {
+  background-color: rgba(16, 16, 18, 0.42);
+  border: 1px solid rgba(255, 255, 255, 0.20);
+  border-radius: 12px;
+  padding: 8px 10px;
+  min-width: 136px;
+}
+
+.traffic-menu QLabel,
+.traffic-menu .label,
+.traffic-menu .text-label,
+.traffic-menu .value-label,
+.traffic-menu .header-label,
+.traffic-menu .interface-label,
+.traffic-menu .label-prefix {
+  color: var(--subtext1);
+  background-color: transparent;
+  border: none;
+  padding: 1px 0;
+}
+
+.traffic-menu .title,
+.traffic-menu .header-label,
+.traffic-menu .value-label {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.traffic-menu .reset-button,
+.traffic-menu QPushButton {
+  color: var(--subtext1);
+  background-color: transparent;
+  border: none;
+  border-radius: 9px;
+  padding: 5px 9px;
+  margin: 0 0 4px 6px;
+}
+
+.traffic-menu .reset-button:hover,
+.traffic-menu QPushButton:hover {
+  color: var(--text);
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+.systray .widget-container QPushButton,
+.systray .widget-container .button,
+.systray .widget-container .label {
+  color: var(--subtext0);
+  background-color: transparent;
+  border: none;
+  border-radius: 8px;
+}
+
+.systray .widget-container QPushButton:hover,
+.systray .widget-container QPushButton:checked,
+.systray .widget-container QPushButton:pressed,
+.systray .widget-container .button:hover,
+.systray .widget-container .button:checked,
+.systray .widget-container .button:pressed,
+.systray .widget-container .button.open,
+.systray .widget-container .button.active {
+  color: var(--subtext0);
+  background-color: rgba(255, 255, 255, 0.08);
+  border: none;
+}
+/* Codex power menu compact final */
+.power-menu-compact {
+  min-width: 172px;
+  background-color: rgba(16, 16, 18, 0.42);
+  border: 1px solid rgba(255, 255, 255, 0.20);
+  border-radius: 12px;
+  padding: 8px;
+}
+
+.power-menu-compact .profile-info {
+  background-color: transparent;
+  padding: 12px 6px 10px 6px;
+  margin: 0 0 6px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.power-menu-compact .profile-info .profile-avatar {
+  border-radius: 32px;
+  min-width: 64px;
+  max-width: 64px;
+  min-height: 64px;
+  max-height: 64px;
+  margin: 2px 0 8px 0;
+}
+
+.power-menu-compact .profile-info .profile-username {
+  color: var(--text);
+  font-size: 12px;
+  font-weight: 700;
+  margin-top: 2px;
+}
+
+.power-menu-compact .profile-info .profile-account-type,
+.power-menu-compact .profile-info .profile-email {
+  color: var(--subtext1);
+  font-size: 11px;
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+.power-menu-compact .profile-info .manage-accounts {
+  color: var(--subtext1);
+  background-color: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  padding: 3px 8px;
+  margin-top: 8px;
+}
+
+.power-menu-compact .profile-info .manage-accounts:hover {
+  color: var(--text);
+  background-color: rgba(255, 255, 255, 0.16);
+}
+
+.power-menu-compact .buttons {
+  background-color: transparent;
+  border-radius: 10px;
+  margin: 0;
+  padding: 2px 0;
+}
+
+.power-menu-compact .button {
+  background-color: transparent;
+  border: none;
+  border-radius: 9px;
+  padding: 6px 10px;
+  margin: 1px 0;
+}
+
+.power-menu-compact .button.hover {
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+.power-menu-compact .button .icon {
+  color: var(--subtext1);
+  font-family: "Segoe Fluent Icons", "Segoe MDL2 Assets", "JetBrainsMono NFP";
+  font-size: 14px;
+  min-width: 18px;
+  padding-right: 8px;
+}
+
+.power-menu-compact .button .label {
+  color: var(--subtext1);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.power-menu-compact .button.hover .icon,
+.power-menu-compact .button.hover .label,
+.power-menu-compact .icon.hover,
+.power-menu-compact .label.hover {
+  color: var(--text);
+}
+
+/* Clock calendar refresh */
+QCalendarWidget {
+  background-color: rgba(16, 16, 18, 0.42);
+  color: var(--subtext1);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
+  padding: 10px;
+  outline: 0;
+}
+
+QCalendarWidget QWidget#qt_calendar_navigationbar {
+  background-color: rgba(255, 255, 255, 0.08);
+  border: none;
+  border-radius: 10px;
+  margin: 0 0 8px 0;
+  padding: 4px 6px;
+}
+
+QCalendarWidget QToolButton {
+  color: var(--text);
+  background-color: transparent;
+  border: none;
+  border-radius: 8px;
+  padding: 6px 10px;
+  margin: 0 2px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+QCalendarWidget QToolButton:hover {
+  background-color: rgba(255, 255, 255, 0.10);
+}
+
+QCalendarWidget QToolButton#qt_calendar_prevmonth,
+QCalendarWidget QToolButton#qt_calendar_nextmonth {
+  min-width: 24px;
+  font-size: 14px;
+}
+
+QCalendarWidget QMenu,
+QCalendarWidget QSpinBox {
+  background-color: rgba(10, 10, 10, 0.98);
+  color: var(--text);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  selection-background-color: rgba(255, 255, 255, 0.16);
+  selection-color: var(--text);
+}
+
+QCalendarWidget QHeaderView::section {
+  color: var(--text);
+  background-color: rgba(255, 255, 255, 0.10);
+  border: none;
+  border-radius: 8px;
+  padding: 6px 0;
+  margin: 0 2px 6px 2px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+QCalendarWidget QAbstractItemView:enabled {
+  color: var(--subtext1);
+  background-color: transparent;
+  alternate-background-color: transparent;
+  selection-background-color: rgba(255, 255, 255, 0.18);
+  selection-color: var(--text);
+  outline: 0;
+}
+
+QCalendarWidget QAbstractItemView:enabled:hover {
+  color: var(--text);
+}
+
+QCalendarWidget QAbstractItemView::item {
+  border-radius: 8px;
+  padding: 6px;
+  margin: 2px;
+}
+
+QCalendarWidget QAbstractItemView::item:hover {
+  background-color: rgba(255, 255, 255, 0.10);
+  color: var(--text);
+}
+
+QCalendarWidget QAbstractItemView::item:selected {
+  background-color: rgba(245, 245, 245, 0.32);
+  color: #ffffff;
+}
+
+QCalendarWidget QAbstractItemView::item:selected:active,
+QCalendarWidget QAbstractItemView::item:selected:!active,
+QCalendarWidget QTableView::item:selected,
+QCalendarWidget QTableView::item:selected:active,
+QCalendarWidget QTableView::item:selected:!active {
+  background-color: rgba(245, 245, 245, 0.32);
+  color: #ffffff;
+  border-radius: 8px;
+}
+
+QCalendarWidget QAbstractItemView {
+  selection-background-color: rgba(245, 245, 245, 0.32);
+  color: var(--text);
+}
+
+/* Komorebi workspaces: smooth pixel-aligned acrylic indicators */
+.komorebi-workspaces .widget-container {
+  background-color: transparent;
+  border: none;
+  border-radius: 12px;
+  margin: 4px 5px;
+  padding: 0 8px;
+}
+
+.komorebi-workspaces .ws-btn {
+  color: transparent;
+  background-color: rgba(255, 255, 255, 0.14);
+  border: none;
+  border-radius: 4px;
+  min-width: 8px;
+  max-width: 8px;
+  min-height: 8px;
+  max-height: 8px;
+  margin: 0 3px;
+  padding: 0;
+  transition: all 180ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.komorebi-workspaces .ws-btn.populated {
+  background-color: rgba(255, 255, 255, 0.45);
+}
+
+.komorebi-workspaces .ws-btn.active {
+  background-color: rgba(255, 255, 255, 0.92);
+  min-width: 24px;
+  max-width: 24px;
+}
+
+.komorebi-workspaces .ws-btn:hover {
+  background-color: rgba(255, 255, 255, 0.70);
+}

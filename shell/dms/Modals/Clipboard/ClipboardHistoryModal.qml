@@ -1,0 +1,137 @@
+pragma ComponentBehavior: Bound
+
+import QtQuick
+import qs.dms.Common
+import qs.dms.Modals.Clipboard
+import qs.dms.Modals.Common
+import qs.dms.Services
+
+DModal {
+    id: clipboardHistoryModal
+
+    layerNamespace: "dms:clipboard"
+
+    function toggle() {
+        if (shouldBeVisible) {
+            hide();
+            return;
+        }
+        show();
+    }
+
+    function show() {
+        open();
+
+        Qt.callLater(function () {
+            if (contentLoader.item) {
+                contentLoader.item.resetState();
+            }
+            if (clipboardHistoryModal.clipboardAvailable) {
+                if (Theme.isConnectedEffect) {
+                    Qt.callLater(() => {
+                        if (clipboardHistoryModal.shouldBeVisible) {
+                            ClipboardService.refresh();
+                        }
+                    });
+                } else {
+                    ClipboardService.refresh();
+                }
+            }
+            if (contentLoader.item?.searchField) {
+                contentLoader.item.searchField.text = "";
+                contentLoader.item.searchField.forceActiveFocus();
+            }
+        });
+    }
+
+    function releaseTextInputFocus() {
+        contentLoader.item?.releaseTextInputFocus();
+    }
+
+    function hide() {
+        releaseTextInputFocus();
+        Qt.callLater(function () {
+            clipboardHistoryModal.close();
+        });
+    }
+
+    function instantHide() {
+        releaseTextInputFocus();
+        Qt.callLater(function () {
+            clipboardHistoryModal.instantClose();
+        });
+    }
+
+    onDialogClosed: {
+        if (contentLoader.item) {
+            contentLoader.item.resetState();
+        }
+    }
+
+    readonly property bool clipboardAvailable: ClipboardService.clipboardAvailable
+
+    visible: false
+    keepContentLoaded: true
+    useOverlayLayer: SettingsData.clipboardUseOverlayLayer
+    modalWidth: Math.min(ClipboardConstants.sizeWidth(SettingsData.clipboardSize), screenWidth - Theme.spacingXL * 2)
+    modalHeight: Math.min(ClipboardConstants.sizeHeight(SettingsData.clipboardSize), screenHeight - Theme.spacingXL * 2)
+    backgroundColor: Theme.floatingWindowSurface
+    enableShadow: true
+    closeOnEscapeKey: (contentLoader.item?.mode ?? "history") === "history"
+    onBackgroundClicked: hide()
+    onShouldBeVisibleChanged: {
+        if (!shouldBeVisible) {
+            releaseTextInputFocus();
+        }
+    }
+
+    Ref {
+        service: ClipboardService
+        active: clipboardHistoryModal.shouldBeVisible
+    }
+
+    ConfirmModal {
+        id: clearConfirmDialog
+        confirmButtonText: I18n.tr("Clear All")
+        useOverlayLayer: true
+        onShouldBeVisibleChanged: {
+            if (shouldBeVisible) {
+                clipboardHistoryModal.shouldHaveFocus = false;
+                return;
+            }
+            Qt.callLater(function () {
+                if (!clipboardHistoryModal.shouldBeVisible) {
+                    return;
+                }
+                clipboardHistoryModal.shouldHaveFocus = Qt.binding(() => clipboardHistoryModal.shouldBeVisible);
+                clipboardHistoryModal.modalFocusScope.forceActiveFocus();
+                if (clipboardHistoryModal.contentLoader.item?.searchField) {
+                    clipboardHistoryModal.contentLoader.item.searchField.forceActiveFocus();
+                }
+            });
+        }
+        Connections {
+            target: clearConfirmDialog.modalFocusScope.Keys
+            function onPressed(event) {
+                const dialog = clearConfirmDialog.contentLoader.item?.dialog;
+                if (!clearConfirmDialog.shouldBeVisible || event.key !== Qt.Key_Backtab || !dialog) {
+                    return;
+                }
+                dialog.selectedButton = 1 - dialog.selectedButton;
+                dialog.keyboardNavigation = true;
+                dialog.focusSelection();
+                event.accepted = true;
+            }
+        }
+    }
+
+    content: Component {
+        ClipboardHistoryContent {
+            surfaceHost: clipboardHistoryModal
+            transientSurfaceTracker: clipboardHistoryModal.transientSurfaceTracker
+            clearConfirmDialog: clearConfirmDialog
+            onCloseRequested: clipboardHistoryModal.hide()
+            onInstantCloseRequested: clipboardHistoryModal.instantHide()
+        }
+    }
+}

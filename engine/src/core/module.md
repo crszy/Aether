@@ -1,0 +1,33 @@
+name = "Quickshell"
+description = "Core Quickshell types"
+headers = [
+	"qmlglobal.hpp",
+	"qmlscreen.hpp",
+	"reload.hpp",
+	"shell.hpp",
+	"variants.hpp",
+	"region.hpp",
+	"../window/proxywindow.hpp",
+	"persistentprops.hpp",
+	"../window/windowinterface.hpp",
+	"../window/panelinterface.hpp",
+	"../window/floatingwindow.hpp",
+	"../window/popupwindow.hpp",
+	"singleton.hpp",
+	"lazyloader.hpp",
+	"easingcurve.hpp",
+	"transformwatcher.hpp",
+	"boundcomponent.hpp",
+	"model.hpp",
+	"elapsedtimer.hpp",
+	"desktopentry.hpp",
+	"qsmenu.hpp",
+	"retainable.hpp",
+	"popupanchor.hpp",
+	"types.hpp",
+	"qsmenuanchor.hpp",
+	"clock.hpp",
+	"scriptmodel.hpp",
+	"colorquantizer.hpp",
+]
+-----

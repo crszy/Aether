@@ -1,0 +1,4 @@
+module AetherCompat
+singleton RyokuCompat 1.0 RyokuCompat.qml
+singleton AetherParts 1.0 AetherParts.qml
+singleton AetherUser 1.0 AetherUser.qml

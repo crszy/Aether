@@ -1,0 +1,394 @@
+{
+    "_about": "AetherStore list. Aether reads https://raw.githubusercontent.com/crszy/aether/main/store/index.json (falls back to the copy it ships with). Each entry is installed straight from its own repo; 'parts' (optional) tells the store where things are when the repo doesn't use the usual .config layout. Types: hypr, caelestia, noctalia, ryoku, dms, end4, quickshell, kitty, foot, alacritty, wezterm, fastfetch (into = sub-folder), starship, cava, waybar, fish, wallpapers, chrome, wt, wtscheme, aether, hyprlock (a folder with hyprlock.conf; style packs are found by themselves, one part per style). chrome parts may add app (firefox | zen: only that browser), only (list of files/folders under path), into (a sub-folder of chrome/ that userChrome.css / userContent.css @import) and userjs (a user.js whose prefs are added). Category shell = a whole Quickshell config: installed with install-config.ps1 into ~/.config/quickshell/<config>, no parts. preview: an image path relative to this file (store/previews/<id>.jpg), or a full https link.",
+    "version": 1,
+    "categories": [
+        {
+            "id": "rice",
+            "name": "Rices",
+            "icon": "auto_awesome",
+            "about": "Whole Linux setups: Hyprland -> AetherWM, the shells' settings, prompt, terminal colours, wallpapers"
+        },
+        {
+            "id": "terminal",
+            "name": "Terminals",
+            "icon": "terminal",
+            "about": "Colour schemes and configs for Windows Terminal and friends"
+        },
+        {
+            "id": "fastfetch",
+            "name": "fastfetch",
+            "icon": "info",
+            "about": "fastfetch looks"
+        },
+        {
+            "id": "browser",
+            "name": "Browsers",
+            "icon": "language",
+            "about": "Zen and Firefox themes"
+        },
+        {
+            "id": "shell",
+            "name": "Shells",
+            "icon": "code",
+            "about": "Whole Quickshell configs"
+        },
+        {
+            "id": "lock",
+            "name": "Lock screens",
+            "icon": "lock",
+            "about": "Lock screens for Aether"
+        }
+    ],
+    "items": [
+        {
+            "id": "end4-dots-hyprland",
+            "name": "illogical-impulse",
+            "author": "end-4",
+            "category": "rice",
+            "url": "https://github.com/end-4/dots-hyprland",
+            "license": "GPL-3.0",
+            "about": "Usability-first Hyprland dotfiles. Its shell is already in Aether as end-4 (pick the end-4 look); this brings the Hyprland setup, prompt and more.",
+            "preview": "previews/end4-dots-hyprland.jpg"
+        },
+        {
+            "id": "caelestia-dots",
+            "name": "Caelestia dots",
+            "author": "caelestia-dots",
+            "category": "rice",
+            "url": "https://github.com/caelestia-dots/caelestia",
+            "license": "GPL-3.0",
+            "about": "The dotfiles around the Caelestia shell (Aether's base): Hyprland, fish, fastfetch, Starship, browser theme."
+        },
+        {
+            "id": "hyde",
+            "name": "HyDE",
+            "author": "HyDE-Project",
+            "category": "rice",
+            "url": "https://github.com/HyDE-Project/HyDE",
+            "license": "GPL-3.0",
+            "about": "A big, themeable Hyprland desktop.",
+            "preview": "previews/hyde.jpg"
+        },
+        {
+            "id": "ml4w-dotfiles",
+            "name": "ML4W",
+            "author": "mylinuxforwork",
+            "category": "rice",
+            "url": "https://github.com/mylinuxforwork/dotfiles",
+            "license": "GPL-3.0",
+            "about": "An advanced, full-featured Hyprland configuration.",
+            "preview": "previews/ml4w-dotfiles.jpg"
+        },
+        {
+            "id": "jakoolit-hyprland-dots",
+            "name": "JaKooLit Hyprland-Dots",
+            "author": "JaKooLit",
+            "category": "rice",
+            "url": "https://github.com/JaKooLit/Hyprland-Dots",
+            "license": "GPL-3.0",
+            "about": "Popular Hyprland dotfiles with lots of wallpapers.",
+            "preview": "previews/jakoolit-hyprland-dots.jpg"
+        },
+        {
+            "id": "catppuccin-windows-terminal",
+            "name": "Catppuccin",
+            "author": "catppuccin",
+            "category": "terminal",
+            "url": "https://github.com/catppuccin/windows-terminal",
+            "license": "MIT",
+            "about": "Soothing pastel colour schemes (Latte, Frappe, Macchiato, Mocha) for Windows Terminal.",
+            "preview": "previews/catppuccin-windows-terminal.jpg",
+            "parts": [
+                {
+                    "type": "wtscheme",
+                    "path": ""
+                }
+            ]
+        },
+        {
+            "id": "rose-pine-windows-terminal",
+            "name": "Rose Pine",
+            "author": "rose-pine",
+            "category": "terminal",
+            "url": "https://github.com/rose-pine/windows-terminal",
+            "license": "MIT",
+            "about": "Soho vibes for Windows Terminal: Rose Pine, Moon and Dawn.",
+            "preview": "previews/rose-pine-windows-terminal.jpg",
+            "parts": [
+                {
+                    "type": "wtscheme",
+                    "path": ""
+                }
+            ]
+        },
+        {
+            "id": "dracula-windows-terminal",
+            "name": "Dracula",
+            "author": "dracula",
+            "category": "terminal",
+            "url": "https://github.com/dracula/windows-terminal",
+            "license": "MIT",
+            "about": "The dark Dracula scheme for Windows Terminal.",
+            "preview": "previews/dracula-windows-terminal.jpg",
+            "parts": [
+                {
+                    "type": "wtscheme",
+                    "path": "dracula.json"
+                }
+            ]
+        },
+        {
+            "id": "lierb-fastfetch",
+            "name": "LierB presets",
+            "author": "LierB",
+            "category": "fastfetch",
+            "url": "https://github.com/LierB/fastfetch",
+            "license": "none stated (installed from the author's repo)",
+            "about": "fastfetch presets made for a Hyprland rice: run fastfetch --config groups, minimal, hypr ...",
+            "preview": "previews/lierb-fastfetch.jpg",
+            "parts": [
+                {
+                    "type": "fastfetch",
+                    "path": "presets"
+                },
+                {
+                    "type": "fastfetch",
+                    "path": "ascii",
+                    "into": "ascii"
+                },
+                {
+                    "type": "fastfetch",
+                    "path": "images",
+                    "into": "images"
+                }
+            ]
+        },
+        {
+            "id": "catppuccin-zen",
+            "name": "Catppuccin for Zen (Mocha, Mauve)",
+            "author": "catppuccin",
+            "category": "browser",
+            "url": "https://github.com/catppuccin/zen-browser",
+            "license": "MIT",
+            "about": "Soothing pastel theme for Zen Browser. Restart Zen after installing.",
+            "preview": "previews/catppuccin-zen.webp",
+            "parts": [
+                {
+                    "type": "chrome",
+                    "path": "themes/Mocha/Mauve",
+                    "app": "zen"
+                }
+            ]
+        },
+        {
+            "id": "rose-pine-zen",
+            "name": "Rose Pine for Zen",
+            "author": "rose-pine",
+            "category": "browser",
+            "url": "https://github.com/rose-pine/zen-browser",
+            "license": "MIT",
+            "about": "All natural pine, faux fur and a bit of soho vibes for Zen Browser. Main by default; Moon and Dawn come with it (change the @import line in chrome/userChrome.css). Restart Zen after installing.",
+            "preview": "previews/rose-pine-zen.jpg",
+            "parts": [
+                {
+                    "type": "chrome",
+                    "path": "dist",
+                    "app": "zen"
+                }
+            ]
+        },
+        {
+            "id": "justadumbprsn-zen-nebula",
+            "name": "Nebula for Zen",
+            "author": "JustAdumbPrsn",
+            "category": "browser",
+            "url": "https://github.com/JustAdumbPrsn/Zen-Nebula",
+            "license": "GPL-3.0",
+            "about": "Zen: a minimal glass-look theme with new animations, blur and gradients (the CSS theme; its optional Sine script extras are not installed). For real see-through blur on Windows 11 the author suggests MicaForEveryone. Restart Zen after installing.",
+            "preview": "previews/justadumbprsn-zen-nebula.jpg",
+            "parts": [
+                {
+                    "type": "chrome",
+                    "path": "",
+                    "app": "zen",
+                    "only": ["userChrome.css", "userContent.css", "nebula"]
+                }
+            ]
+        },
+        {
+            "id": "ikoshura-fluent-zen",
+            "name": "Fluent for Zen",
+            "author": "ikoshura",
+            "category": "browser",
+            "url": "https://github.com/ikoshura/Fluent-Zen-Theme",
+            "license": "none stated (installed from the author's repo)",
+            "about": "Zen: a slim, compact layout in the Windows 11 Fluent style. Set Zen's URL bar to 'Always floating' (Settings > Look and Feel). Restart Zen after installing.",
+            "preview": "previews/ikoshura-fluent-zen.jpg",
+            "parts": [
+                {
+                    "type": "chrome",
+                    "path": "",
+                    "app": "zen",
+                    "only": ["userChrome.css"]
+                }
+            ]
+        },
+        {
+            "id": "andreasgrafen-cascade",
+            "name": "Cascade",
+            "author": "andreasgrafen",
+            "category": "browser",
+            "url": "https://github.com/andreasgrafen/cascade",
+            "license": "MIT",
+            "about": "Firefox: a calm, one-line layout - tabs, address bar and buttons in a single row. Restart Firefox after installing.",
+            "preview": "previews/andreasgrafen-cascade.jpg",
+            "parts": [
+                {
+                    "type": "chrome",
+                    "path": "chrome",
+                    "app": "firefox"
+                }
+            ]
+        },
+        {
+            "id": "naezr-shyfox",
+            "name": "ShyFox",
+            "author": "Naezr",
+            "category": "browser",
+            "url": "https://github.com/Naezr/ShyFox",
+            "license": "MPL-2.0",
+            "about": "Firefox: hidden-until-hovered toolbars and sidebar, floating search. Needs the Sidebery extension (its settings are in the repo). Restart Firefox after installing.",
+            "preview": "previews/naezr-shyfox.jpg",
+            "parts": [
+                {
+                    "type": "chrome",
+                    "path": "chrome",
+                    "app": "firefox",
+                    "userjs": "user.js"
+                }
+            ]
+        },
+        {
+            "id": "rafaelmardojai-firefox-gnome-theme",
+            "name": "Firefox GNOME theme",
+            "author": "rafaelmardojai",
+            "category": "browser",
+            "url": "https://github.com/rafaelmardojai/firefox-gnome-theme",
+            "license": "Unlicense",
+            "about": "Firefox: looks like GNOME's own apps (Adwaita), light and dark. Restart Firefox after installing.",
+            "preview": "previews/rafaelmardojai-firefox-gnome-theme.jpg",
+            "parts": [
+                {
+                    "type": "chrome",
+                    "path": "",
+                    "app": "firefox",
+                    "into": "firefox-gnome-theme",
+                    "only": ["userChrome.css", "userContent.css", "theme"],
+                    "userjs": "configuration/user.js"
+                }
+            ]
+        },
+        {
+            "id": "greeeen-dev-natsumi-browser",
+            "name": "Natsumi Browser",
+            "author": "greeeen-dev",
+            "category": "browser",
+            "url": "https://github.com/greeeen-dev/natsumi-browser",
+            "license": "GPL-3.0",
+            "about": "Firefox: a modern, Zen-like skin with its own settings page (the CSS part; Natsumi Append is not installed). Restart Firefox after installing.",
+            "preview": "previews/greeeen-dev-natsumi-browser.jpg",
+            "parts": [
+                {
+                    "type": "chrome",
+                    "path": "",
+                    "app": "firefox",
+                    "only": ["userChrome.css", "userContent.css", "natsumi-config.css", "natsumi"]
+                }
+            ]
+        },
+        {
+            "id": "axenide-ambxst",
+            "name": "Ambxst",
+            "author": "Axenide",
+            "category": "shell",
+            "config": "ambxst",
+            "url": "https://github.com/Axenide/Ambxst",
+            "license": "AGPL-3.0",
+            "about": "An extremely customizable shell: a notch-style panel, dashboard, launcher. Made for Linux (Hyprland). On Windows (tested 2026-11-21): starts; its Linux helper program isn't there, so parts that need it stay empty.",
+            "preview": "previews/axenide-ambxst.jpg"
+        },
+        {
+            "id": "diinki-linux-retroism",
+            "name": "Linux Retroism",
+            "author": "diinki",
+            "category": "shell",
+            "config": "retroism",
+            "url": "https://github.com/diinki/linux-retroism",
+            "license": "MIT",
+            "about": "A 1990s retro desktop: grey bevelled windows, pixel icons. Made for Linux (Hyprland / Sway). On Windows (tested 2026-11-21): starts; workspaces come from AetherWM.",
+            "preview": "previews/diinki-linux-retroism.jpg"
+        },
+        {
+            "id": "ahmedsaadi0-nibrasshell",
+            "name": "NibrasShell",
+            "author": "AhmedSaadi0",
+            "category": "shell",
+            "config": "nibras",
+            "url": "https://github.com/AhmedSaadi0/NibrasShell",
+            "license": "MIT",
+            "about": "A modern shell with an AI assistant and many themes. Made for Linux (Hyprland). On Windows (tested 2026-11-21): starts; the Wi-Fi list stays empty and weather doesn't load yet. A few Linux audio presets are skipped (their names aren't allowed on Windows).",
+            "preview": "previews/ahmedsaadi0-nibrasshell.jpg"
+        },
+        {
+            "id": "nucleus-hq-nucleus-shell",
+            "name": "Nucleus Shell",
+            "author": "nucleus-hq",
+            "category": "shell",
+            "config": "nucleus",
+            "url": "https://github.com/nucleus-hq/nucleus-shell",
+            "license": "GPL-3.0",
+            "about": "A flexible, extensible desktop shell (QML, C++ and JavaScript). Made for Linux. On Windows (tested 2026-11-21): starts."
+        },
+        {
+            "id": "duxlabs-dev-dux-shell",
+            "name": "Dux Shell",
+            "author": "duxlabs-dev",
+            "category": "shell",
+            "config": "dux",
+            "url": "https://github.com/duxlabs-dev/dux-shell",
+            "license": "MIT",
+            "about": "A desktop shell for Wayland compositors. Made for Linux, with a Go helper program that isn't built for Windows. On Windows (tested 2026-11-21): starts; parts that need the Go helper stay empty.",
+            "preview": "previews/duxlabs-dev-dux-shell.jpg"
+        },
+        {
+            "id": "mrvivekrajan-hyprlock-styles",
+            "name": "Hyprlock Styles (10 styles)",
+            "author": "MrVivekRajan",
+            "category": "lock",
+            "url": "https://github.com/MrVivekRajan/Hyprlock-Styles",
+            "license": "GPL-3.0",
+            "about": "Ten hyprlock.conf lock screens with their pictures and fonts. Pick one style after Get, then Lock screen > Hyprlock draws it.",
+            "preview": "previews/mrvivekrajan-hyprlock-styles.jpg"
+        },
+        {
+            "id": "shadowww-dev-darkshadowshell",
+            "name": "DarkShadowShell",
+            "author": "shadowww-dev",
+            "category": "shell",
+            "builtin": "dss",
+            "url": "https://github.com/shadowww-dev/DarkShadowShell",
+            "license": "MIT",
+            "about": "A dark shell with a dynamic island bar, desktop clock, weather and resource cards, a dock and a big settings panel. Built into Aether (ported, MIT, Copyright (c) 2026 shadowww-dev): Open goes to its pages in Aether settings; pick its parts in Mix & match. Hidden while a distro look (like Debian) is on."
+        },
+        {
+            "id": "ilyamiro-serpantinum",
+            "name": "serpantinum",
+            "author": "ilyamiro (Illia Miroshnichenko)",
+            "category": "shell",
+            "builtin": "serp",
+            "url": "https://github.com/ilyamiro/serpantinum",
+            "license": "AGPL-3.0",
+            "about": "A widget bar with floating panels and a guide. Built into Aether (ported, AGPL-3.0, Copyright (C) 2026 Illia Miroshnichenko; the AI chat is left out): Open goes to its page in Aether settings; pick its parts in Mix & match. Hidden while a distro look (like Debian) is on."
+        }
+    ]
+}

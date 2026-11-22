@@ -1,0 +1,28 @@
+{
+    "commands": [
+        {
+            "name": "profile",
+            "description": "My profile card (panels/profile.qml - edit it!)",
+            "icon": "person",
+            "panel": "profile"
+        },
+        {
+            "name": "terminal",
+            "description": "Open Windows Terminal",
+            "icon": "terminal",
+            "exec": ["wt.exe"]
+        },
+        {
+            "name": "game mode off",
+            "description": "Example of changing a setting: turn automatic game mode off",
+            "icon": "sports_esports",
+            "set": { "autoGameMode": false }
+        },
+        {
+            "name": "quickshell docs",
+            "description": "Example of opening a link: the Quickshell documentation",
+            "icon": "menu_book",
+            "url": "https://quickshell.org/docs/"
+        }
+    ]
+}

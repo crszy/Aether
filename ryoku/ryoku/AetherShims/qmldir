@@ -1,0 +1,5 @@
+module AetherShims
+IdleMonitor 1.0 IdleMonitor.qml
+PamContext 1.0 PamContext.qml
+PamResult 1.0 PamResult.qml
+singleton AetherKey 1.0 AetherKey.qml

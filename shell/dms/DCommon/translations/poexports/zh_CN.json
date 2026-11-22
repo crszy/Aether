@@ -1,0 +1,392 @@
+{
+  "%1 items": {
+    "%1 items": "%1 项"
+  },
+  "%1 of %2": {
+    "%1 of %2": ""
+  },
+  "%1 selected": {
+    "%1 selected": "已选择 %1 项"
+  },
+  "%1 × %2": {
+    "%1 × %2": ""
+  },
+  "%1, %2": {
+    "%1, %2": ""
+  },
+  "1 item": {
+    "1 item": "1 项"
+  },
+  "1 selected": {
+    "1 selected": "已选择 1 项"
+  },
+  "A file with this name already exists. Do you want to overwrite it?": {
+    "A file with this name already exists. Do you want to overwrite it?": "已存在同名文件。要覆盖它吗？"
+  },
+  "A name cannot be empty or contain a slash": {
+    "A name cannot be empty or contain a slash": "名称不能为空或包含斜杠"
+  },
+  "AM": {
+    "AM": "上午"
+  },
+  "Actions": {
+    "Actions": "操作"
+  },
+  "Ascending": {
+    "Ascending": "升序"
+  },
+  "B": {
+    "B": "B"
+  },
+  "Back": {
+    "Back": "返回"
+  },
+  "Backspace": {
+    "Backspace": "Backspace"
+  },
+  "Binary file": {
+    "Binary file": "二进制文件"
+  },
+  "Broken link": {
+    "Broken link": "失效链接"
+  },
+  "Cancel": {
+    "Cancel": "取消"
+  },
+  "Choose icon": {
+    "Choose icon": "选择图标"
+  },
+  "Clear": {
+    "Clear": "清除"
+  },
+  "Clear the selection": {
+    "Clear the selection": "清除选择"
+  },
+  "Close": {
+    "Close": "关闭"
+  },
+  "Color": {
+    "Color": "颜色"
+  },
+  "Communication": {
+    "Communication": "通信"
+  },
+  "Confirm": {
+    "Confirm": "确认"
+  },
+  "Copy path": {
+    "Copy path": "复制路径"
+  },
+  "Create": {
+    "Create": "创建"
+  },
+  "Created": {
+    "Created": "创建时间"
+  },
+  "Decrease": {
+    "Decrease": "减小"
+  },
+  "Deleted": {
+    "Deleted": ""
+  },
+  "Descending": {
+    "Descending": "降序"
+  },
+  "Development": {
+    "Development": "开发"
+  },
+  "Dimensions": {
+    "Dimensions": ""
+  },
+  "Drag to reorder": {
+    "Drag to reorder": "拖动以重新排序"
+  },
+  "Edit": {
+    "Edit": "编辑"
+  },
+  "Enter": {
+    "Enter": "Enter"
+  },
+  "Enter filename...": {
+    "Enter filename...": "输入文件名…"
+  },
+  "File": {
+    "File": "文件"
+  },
+  "File Already Exists": {
+    "File Already Exists": "文件已存在"
+  },
+  "File System": {
+    "File System": "文件系统"
+  },
+  "Files - %1": {
+    "Files - %1": "文件 - %1"
+  },
+  "Files are unavailable because the file service is not running": {
+    "Files are unavailable because the file service is not running": "文件服务未运行，文件不可用"
+  },
+  "First %1 of %2": {
+    "First %1 of %2": "前 %1 项，共 %2 项"
+  },
+  "Folder": {
+    "Folder": "文件夹"
+  },
+  "Folder name": {
+    "Folder name": "文件夹名称"
+  },
+  "Forward": {
+    "Forward": "前进"
+  },
+  "Fun": {
+    "Fun": "趣味"
+  },
+  "GB": {
+    "GB": "GB"
+  },
+  "Grid view": {
+    "Grid view": "网格视图"
+  },
+  "Hibernate": {
+    "Hibernate": "休眠"
+  },
+  "Hide keyboard": {
+    "Hide keyboard": "隐藏键盘"
+  },
+  "Hide password": {
+    "Hide password": "隐藏密码"
+  },
+  "Hide preview": {
+    "Hide preview": ""
+  },
+  "Hold longer to confirm": {
+    "Hold longer to confirm": "按住更长时间以确认"
+  },
+  "Hold to confirm (%1 ms)": {
+    "Hold to confirm (%1 ms)": "按住以确认（%1 ms）"
+  },
+  "Hold to confirm (%1s)": {
+    "Hold to confirm (%1s)": "按住以确认（%1s）"
+  },
+  "Home": {
+    "Home": "主目录"
+  },
+  "Hour": {
+    "Hour": "小时"
+  },
+  "Increase": {
+    "Increase": "增大"
+  },
+  "Jump to a folder you visited": {
+    "Jump to a folder you visited": ""
+  },
+  "Last used": {
+    "Last used": ""
+  },
+  "List view": {
+    "List view": "列表视图"
+  },
+  "Location": {
+    "Location": "位置"
+  },
+  "Log Out": {
+    "Log Out": "注销"
+  },
+  "MB": {
+    "MB": "MB"
+  },
+  "Maximize": {
+    "Maximize": "最大化"
+  },
+  "Media": {
+    "Media": "媒体"
+  },
+  "Minimize": {
+    "Minimize": "最小化"
+  },
+  "Minute": {
+    "Minute": "分钟"
+  },
+  "Modified": {
+    "Modified": "已修改"
+  },
+  "Move to Trash": {
+    "Move to Trash": "移到回收站"
+  },
+  "Name": {
+    "Name": "名称"
+  },
+  "Navigation": {
+    "Navigation": "导航"
+  },
+  "New folder": {
+    "New folder": "新建文件夹"
+  },
+  "No locations found": {
+    "No locations found": "未找到位置"
+  },
+  "Nothing is at this location": {
+    "Nothing is at this location": ""
+  },
+  "Numbers": {
+    "Numbers": "数字"
+  },
+  "OK": {
+    "OK": "OK"
+  },
+  "Open": {
+    "Open": "打开"
+  },
+  "Original location": {
+    "Original location": ""
+  },
+  "Overwrite": {
+    "Overwrite": "覆盖"
+  },
+  "Owner": {
+    "Owner": "所有者"
+  },
+  "PM": {
+    "PM": "下午"
+  },
+  "Permissions": {
+    "Permissions": "权限"
+  },
+  "Power Off": {
+    "Power Off": "关机"
+  },
+  "Power Options": {
+    "Power Options": "电源选项"
+  },
+  "Quick Access": {
+    "Quick Access": "快速访问"
+  },
+  "Reboot": {
+    "Reboot": "重启"
+  },
+  "Refresh": {
+    "Refresh": "刷新"
+  },
+  "Rename": {
+    "Rename": "重命名"
+  },
+  "Restore": {
+    "Restore": "还原"
+  },
+  "Review changes": {
+    "Review changes": "检查更改"
+  },
+  "Saturation %1%, brightness %2%": {
+    "Saturation %1%, brightness %2%": "饱和度 %1%，亮度 %2%"
+  },
+  "Save": {
+    "Save": "保存"
+  },
+  "Search for a location...": {
+    "Search for a location...": "搜索位置…"
+  },
+  "Search...": {
+    "Search...": "搜索…"
+  },
+  "Searching...": {
+    "Searching...": "正在搜索…"
+  },
+  "Select File": {
+    "Select File": "选择文件"
+  },
+  "Select time": {
+    "Select time": "选择时间"
+  },
+  "Shift": {
+    "Shift": "Shift"
+  },
+  "Show hidden files": {
+    "Show hidden files": "显示隐藏文件"
+  },
+  "Show password": {
+    "Show password": "显示密码"
+  },
+  "Size": {
+    "Size": "尺寸"
+  },
+  "Sort By": {
+    "Sort By": "排序方式"
+  },
+  "Space": {
+    "Space": "Space"
+  },
+  "Status": {
+    "Status": "状态"
+  },
+  "Suspend": {
+    "Suspend": "挂起"
+  },
+  "Switch User": {
+    "Switch User": "切换用户"
+  },
+  "System": {
+    "System": "系统"
+  },
+  "TB": {
+    "TB": "TB"
+  },
+  "This folder could not be opened": {
+    "This folder could not be opened": "无法打开此文件夹"
+  },
+  "This folder is empty": {
+    "This folder is empty": "此文件夹为空"
+  },
+  "This folder no longer exists": {
+    "This folder no longer exists": "此文件夹已不存在"
+  },
+  "This item already exists": {
+    "This item already exists": "此项目已存在"
+  },
+  "This item cannot be moved here directly": {
+    "This item cannot be moved here directly": "无法将此项目直接移动到这里"
+  },
+  "This item could not be handled": {
+    "This item could not be handled": "无法处理此项目"
+  },
+  "This item is in use": {
+    "This item is in use": "此项目正在使用中"
+  },
+  "This item no longer exists": {
+    "This item no longer exists": "此项目已不存在"
+  },
+  "This kind of location is not supported": {
+    "This kind of location is not supported": ""
+  },
+  "Today, %1": {
+    "Today, %1": ""
+  },
+  "Type": {
+    "Type": "类型"
+  },
+  "Type a path, ~ or an address such as sftp://host": {
+    "Type a path, ~ or an address such as sftp://host": ""
+  },
+  "Unknown": {
+    "Unknown": "未知"
+  },
+  "Use this folder": {
+    "Use this folder": "使用此文件夹"
+  },
+  "Use ~ for your own home folder or type the full path": {
+    "Use ~ for your own home folder or type the full path": ""
+  },
+  "Workspace": {
+    "Workspace": "工作区"
+  },
+  "Yesterday, %1": {
+    "Yesterday, %1": ""
+  },
+  "You do not have permission to do this": {
+    "You do not have permission to do this": "你没有执行此操作的权限"
+  },
+  "You do not have permission to view this folder": {
+    "You do not have permission to view this folder": "你没有查看此文件夹的权限"
+  },
+  "kB": {
+    "kB": "kB"
+  }
+}

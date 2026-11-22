@@ -1,0 +1,6 @@
+SettingRow SettingRow.qml
+MaterialSwitch MaterialSwitch.qml
+MaterialSlider MaterialSlider.qml
+NumberInput NumberInput.qml
+SelectionBox SelectionBox.qml
+TextInputBox TextInputBox.qml

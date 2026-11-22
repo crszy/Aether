@@ -1,0 +1,25 @@
+pragma ComponentBehavior: Bound
+import QtQuick
+import QtQuick.Controls
+import Quickshell
+import Quickshell.Hyprland
+import qs.end4.modules.common
+import qs.end4.modules.common.functions
+import qs.end4.modules.waffle.looks
+
+Rectangle {
+    id: root
+
+    required property var target
+    z: 0
+
+    anchors {
+        fill: target
+        margins: -border.width
+    }
+
+    border.color: Looks.colors.ambientShadow
+    border.width: 1
+    color: "transparent"
+    radius: target.radius + border.width
+}

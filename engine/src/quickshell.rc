@@ -1,0 +1,42 @@
+#include "version_info.h"
+
+#ifndef QS_EXTERNAL_MANIFEST
+1 24 "quickshell.manifest"
+#endif
+
+#ifdef QS_WINDOWS_GUI_EXE
+#define QS_RC_FILE_DESCRIPTION QS_RC_PRODUCT_NAME " shell"
+#define QS_RC_FILE_NAME "qsw.exe"
+#else
+#define QS_RC_FILE_DESCRIPTION QS_RC_PRODUCT_NAME " shell (console)"
+#define QS_RC_FILE_NAME "qs.exe"
+#endif
+
+1 VERSIONINFO
+FILEVERSION QS_RC_VERSION_NUMBERS
+PRODUCTVERSION QS_RC_VERSION_NUMBERS
+FILEFLAGSMASK 0x3fL
+FILEFLAGS 0x0L
+FILEOS 0x40004L
+FILETYPE 0x1L
+FILESUBTYPE 0x0L
+BEGIN
+	BLOCK "StringFileInfo"
+	BEGIN
+		BLOCK "040904b0"
+		BEGIN
+			VALUE "CompanyName", QS_RC_COMPANY_NAME
+			VALUE "FileDescription", QS_RC_FILE_DESCRIPTION
+			VALUE "FileVersion", QS_RC_PRODUCT_VERSION
+			VALUE "InternalName", QS_RC_FILE_NAME
+			VALUE "LegalCopyright", "LGPL-3.0, Quickshell contributors"
+			VALUE "OriginalFilename", QS_RC_FILE_NAME
+			VALUE "ProductName", QS_RC_PRODUCT_NAME
+			VALUE "ProductVersion", QS_RC_PRODUCT_VERSION
+		END
+	END
+	BLOCK "VarFileInfo"
+	BEGIN
+		VALUE "Translation", 0x409, 1200
+	END
+END

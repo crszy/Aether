@@ -1,0 +1,5 @@
+Network Network.qml
+Resources Resources.qml
+Tray Tray.qml
+TrayItem TrayItem.qml
+QuickSettingsCluster QuickSettingsCluster.qml
