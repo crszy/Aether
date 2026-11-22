@@ -328,6 +328,26 @@ pub fn dwindle_action(wm: &Arc<Mutex<WindowManager>>, dispatcher: &str, arg: &st
     if len < 2 {
         return true;
     }
+    // a workspace with a split tree (a window was placed by the mouse): change the tree
+    {
+        let mut parts = arg.split_whitespace();
+        let dx: f32 = parts.next().and_then(|v| v.trim_end_matches("px").parse().ok()).unwrap_or(0.0);
+        let dy: f32 = parts.next().and_then(|v| v.trim_end_matches("px").parse().ok()).unwrap_or(0.0);
+        let ids: Vec<String> = workspace.containers().iter().map(|c| c.id.clone()).collect();
+        let tiles = &workspace.latest_layout;
+        let left = tiles.iter().map(|r| r.left).min().unwrap_or(0);
+        let top = tiles.iter().map(|r| r.top).min().unwrap_or(0);
+        let right = tiles.iter().map(|r| r.left + r.right).max().unwrap_or(0);
+        let bottom = tiles.iter().map(|r| r.top + r.bottom).max().unwrap_or(0);
+        let area = crate::core::Rect { left, top, right: right - left, bottom: bottom - top };
+        if matches!(dispatcher, "togglesplit" | "resizeactive")
+            && crate::dwindle_tree::action(&ids, &ids[focused], &area, crate::dwindle_tree::Params::from(&options), dispatcher, dx, dy)
+        {
+            let follow = wm.mouse_follows_focus;
+            let _ = wm.update_focused_workspace(follow, false);
+            return true;
+        }
+    }
     match dispatcher {
         "togglesplit" => {
             // the split that made the focused window's place (the last window shares the one before)

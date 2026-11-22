@@ -748,6 +748,20 @@ impl Workspace {
                     effective_layout_options,
                     &self.latest_layout,
                 );
+                // Aether: Hyprland's dwindle tree (windows placed anywhere by the mouse, see dwindle_tree.rs)
+                if matches!(self.layout, Layout::Default(DefaultLayout::BSP)) {
+                    if let Some(d) = effective_layout_options.and_then(|o| o.dwindle) {
+                        let ids: Vec<String> = self.containers().iter().map(|c| c.id.clone()).collect();
+                        if let Some(tree) = crate::dwindle_tree::layout(
+                            &ids,
+                            &adjusted_work_area,
+                            container_padding,
+                            crate::dwindle_tree::Params::from(&d),
+                        ) {
+                            layouts = tree;
+                        }
+                    }
+                }
                 // Aether: niri's columns - each its own width, the view scrolling in pixels (see niri.rs)
                 if matches!(self.layout, Layout::Default(DefaultLayout::Scrolling)) {
                     let widths: Vec<Option<f32>> = self.containers().iter().map(|c| c.column_width).collect();
@@ -1338,6 +1352,7 @@ impl Workspace {
     }
 
     pub fn new_container_for_window(&mut self, window: Window) {
+        let mut pending_tree = None;
         let next_idx = if let Some(idx) = self.preselected_container_idx {
             let next = idx;
             self.preselected_container_idx = None;
@@ -1351,26 +1366,41 @@ impl Workspace {
             let target = self
                 .container_idx_from_current_point()
                 .unwrap_or_else(|| self.focused_container_idx());
+            // the side: the edge of the hovered tile the mouse is nearest to (Hyprland's smart_split), so a window can
+            // go above, below, left or right of any window - e.g. top-left = hover the top-left window's top edge
+            let rect = self.latest_layout.get(target).copied();
+            let (side_by_side, before) = match (rect, WindowsApi::cursor_pos().ok()) {
+                (Some(r), Some(p)) if r.right > 0 && r.bottom > 0 => {
+                    let dx = (p.x - (r.left + r.right / 2)) as f32 / r.right as f32;
+                    let dy = (p.y - (r.top + r.bottom / 2)) as f32 / r.bottom as f32;
+                    if dx.abs() >= dy.abs() { (true, dx < 0.0) } else { (false, dy < 0.0) }
+                }
+                (Some(r), _) => (r.right >= r.bottom, false),
+                _ => (true, false),
+            };
             let before = match crate::animation::FORCE_SPLIT.load(std::sync::atomic::Ordering::Relaxed) {
                 1 => true,
                 2 => false,
-                _ => match (self.latest_layout.get(target), WindowsApi::cursor_pos().ok()) {
-                    (Some(r), Some(p)) => {
-                        if r.right >= r.bottom {
-                            p.x < r.left + r.right / 2
-                        } else {
-                            p.y < r.top + r.bottom / 2
-                        }
-                    }
-                    _ => false,
-                },
+                _ => before,
             };
             let next = if before { target } else { target + 1 };
+            let dwindle = matches!(self.layout, Layout::Default(DefaultLayout::BSP))
+                .then(|| self.layout_options.and_then(|o| o.dwindle))
+                .flatten();
+            if let Some(d) = dwindle {
+                pending_tree = Some((
+                    self.containers().iter().map(|c| c.id.clone()).collect::<Vec<_>>(),
+                    self.containers()[target].id.clone(),
+                    side_by_side,
+                    before,
+                    d,
+                ));
+            }
             // Aether: several windows opened quickly arrive before the retile that refreshes latest_layout, so the
             // second one looked up the mouse in a stale layout (wrong tile, indices shifted) - "only works once".
             // Split the target's rect here right away, so the next new window already sees this one's tile.
-            if let Some(r) = self.latest_layout.get(target).copied() {
-                let (keep, new) = if r.right >= r.bottom {
+            if let Some(r) = rect {
+                let (keep, new) = if side_by_side {
                     let half = r.right / 2;
                     let left = Rect { left: r.left, top: r.top, right: half, bottom: r.bottom };
                     let right = Rect { left: r.left + half, top: r.top, right: r.right - half, bottom: r.bottom };
@@ -1390,8 +1420,14 @@ impl Workspace {
 
         let mut container = Container::default();
         container.add_window(window);
+        let new_id = container.id.clone();
 
         self.insert_container_at_idx(next_idx, container);
+
+        if let Some((before_ids, target_id, side_by_side, new_first, d)) = pending_tree {
+            let after: Vec<String> = self.containers().iter().map(|c| c.id.clone()).collect();
+            crate::dwindle_tree::insert(&before_ids, &after, &target_id, &new_id, side_by_side, new_first, d.flips, &d.ratios);
+        }
     }
 
     pub fn new_floating_window(&mut self) -> eyre::Result<()> {

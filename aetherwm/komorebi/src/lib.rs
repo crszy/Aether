@@ -13,6 +13,7 @@ pub mod lockable_sequence;
 pub mod monitor;
 pub mod monitor_reconciliator;
 pub mod niri;
+pub mod dwindle_tree;
 pub mod park;
 pub mod overview;
 pub mod progman;
