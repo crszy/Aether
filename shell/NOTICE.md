@@ -44,3 +44,10 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
+
+## Settings card headers and logos — `modules/aethersettings/headers/`, `logos/`
+Each Looks card shows that project's own published screenshot, used to identify it and credited to its authors:
+Caelestia (caelestia-dots/shell README), DankMaterialShell (AvengeMedia/DankMaterialShell README), end-4
+(end-4/dots-hyprland README), Noctalia (noctalia.dev), Ryoku (ryoku.dev showroom), serpantinum
+(ilyamiro/serpantinum docs/assets/previews), DarkShadowShell (shadowww-dev/DarkShadowShell assets, also `logos/dss.png`),
+Zenith (its own `assets/screenshots/main.png`). Aether's banner and icon are by fora.

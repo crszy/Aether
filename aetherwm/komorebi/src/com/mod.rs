@@ -41,6 +41,7 @@ thread_local! {
     static COM_INIT: ComInit = ComInit::new();
 }
 
+#[allow(dead_code)]
 fn get_iservice_provider() -> IServiceProvider {
     COM_INIT.with(|_| unsafe { CoCreateInstance(&CLSID_ImmersiveShell, None, CLSCTX_ALL).unwrap() })
 }
@@ -70,13 +71,25 @@ fn get_iapplication_view_collection(provider: &IServiceProvider) -> IApplication
 pub fn cloak_available() -> bool {
     use windows::Win32::UI::WindowsAndMessaging::FindWindowW;
     use windows::core::w;
-    unsafe { FindWindowW(w!("Progman"), windows::core::PCWSTR::null()) }.is_ok()
+    // Aether: our own stand-in Progman (progman.rs, for Wallpaper Engine) doesn't count - only Explorer's
+    match unsafe { FindWindowW(w!("Progman"), windows::core::PCWSTR::null()) } {
+        Ok(h) => {
+            let mut pid = 0u32;
+            unsafe { windows::Win32::UI::WindowsAndMessaging::GetWindowThreadProcessId(h, Some(&mut pid)) };
+            pid != std::process::id()
+        }
+        Err(_) => false,
+    }
 }
 
 #[unsafe(no_mangle)]
 pub extern "C" fn SetCloak(hwnd: HWND, cloak_type: u32, flags: i32) {
     COM_INIT.with(|_| {
-        let provider = get_iservice_provider();
+        // Aether: never panic when Explorer's immersive shell isn't there
+        let Ok(provider) = (unsafe { CoCreateInstance::<_, IServiceProvider>(&CLSID_ImmersiveShell, None, CLSCTX_ALL) }) else {
+            tracing::warn!("cloak: Explorer's immersive shell isn't running");
+            return;
+        };
         let view_collection = get_iapplication_view_collection(&provider);
         let mut view = None;
         unsafe {

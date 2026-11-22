@@ -1,10 +1,10 @@
-// A shell's or look's mark in a round tile: the live Aether logo for "aether", the shell's own logo from logos/
-// when there is one, otherwise its Material icon on its colour (the old look).
+// A shell's or look's own logo (from logos/) filling a rounded square, or its Material icon when it has none.
+// Square icons with their own background (.png/.jpg) cover the tile; marks (.svg) sit on a dark backing.
 import QtQuick
-import qs.modules.aether as Ae
+import QtQuick.Effects
 import "catalog.js" as Cat
 
-Rectangle {
+Item {
     id: sl
 
     property string shell: ""
@@ -13,44 +13,70 @@ Rectangle {
     property real size: 48
     property bool chosen: false
     readonly property string file: Cat.logoFile(shell)
-    readonly property bool drawn: shell === "aether"
-    readonly property bool hasLogo: drawn || file !== ""
+    readonly property bool hasLogo: file !== ""
+    readonly property real corner: size * 0.24
 
     width: size
     height: size
-    radius: chosen ? size / 3 : size / 2
-    color: !hasLogo ? colour : Cat.darkLogos[shell] ? "#e6e3e8" : M3.surfaceHighest
-    border.width: hasLogo ? Math.max(1, Math.round(size / 24)) : 0
-    border.color: M3.alpha(colour, 0.7)
-    Behavior on radius { NumberAnimation { duration: M3.d(300); easing.type: M3.springy } }
 
-    Image {
-        visible: !sl.drawn && sl.file !== ""
-        anchors.centerIn: parent
-        width: sl.size * 0.64
-        height: width
-        source: sl.file ? "logos/" + sl.file : ""
-        sourceSize.width: Math.ceil(width * 2)
-        sourceSize.height: Math.ceil(height * 2)
-        fillMode: Image.PreserveAspectFit
-        smooth: true
-        mipmap: true
-        asynchronous: true
-    }
-    Loader {
-        active: sl.drawn
-        anchors.centerIn: parent
-        sourceComponent: Ae.AetherLogo {
-            size: sl.size * 0.46
-            arcColour: M3.primary
+    Item {
+        id: content
+        anchors.fill: parent
+        layer.enabled: true
+        layer.effect: MultiEffect {
+            maskEnabled: true
+            maskSource: mask
+            maskThresholdMin: 0.5
+            maskSpreadAtMin: 1
+        }
+
+        Rectangle {   // backing: dark for every mark so light and dark logos read the same
+            anchors.fill: parent
+            color: Qt.tint("#16181c", M3.alpha(sl.colour, 0.22))
+        }
+        Image {
+            visible: sl.file !== ""
+            anchors.centerIn: parent
+            // square icons with their own background cover the tile; marks fill it with a thin margin
+            readonly property bool fullBleed: sl.file.slice(-4) !== ".svg"
+            width: sl.size * (fullBleed ? 1 : 0.86)
+            height: width
+            source: sl.file ? "logos/" + sl.file : ""
+            sourceSize.width: Math.ceil(width * 2)
+            sourceSize.height: Math.ceil(height * 2)
+            fillMode: fullBleed ? Image.PreserveAspectCrop : Image.PreserveAspectFit
+            smooth: true
+            mipmap: true
+            asynchronous: true
+            layer.enabled: Cat.darkLogos[sl.shell] === true
+            layer.effect: MultiEffect { brightness: 0.9 }
+        }
+        Icon {
+            visible: !sl.hasLogo
+            anchors.centerIn: parent
+            name: sl.icon
+            glyph: "●"
+            size: sl.size * 0.8
+            color: sl.colour
         }
     }
-    Icon {
-        visible: !sl.hasLogo
-        anchors.centerIn: parent
-        name: sl.icon
-        glyph: "●"
-        size: sl.size * 0.46
-        color: "#1b1b1f"
+    Item {
+        id: mask
+        visible: false
+        anchors.fill: parent
+        layer.enabled: true
+        Rectangle {
+            anchors.fill: parent
+            radius: sl.corner
+            antialiasing: true
+        }
+    }
+    Rectangle {   // outline; the chosen look gets a thick primary one
+        anchors.fill: parent
+        radius: sl.corner
+        color: "transparent"
+        border.width: sl.chosen ? Math.max(2, Math.round(sl.size / 20)) : Math.max(1, Math.round(sl.size / 48))
+        border.color: sl.chosen ? M3.primary : M3.alpha(sl.colour, 0.35)
+        Behavior on border.width { NumberAnimation { duration: 150 } }
     }
 }

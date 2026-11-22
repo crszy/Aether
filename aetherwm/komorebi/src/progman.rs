@@ -6,9 +6,8 @@
 //! icons (SHELLDLL_DefView). We make the same: a Progman at the very bottom of the z-order covering every screen,
 //! a hidden SHELLDLL_DefView child (hidden so Aether's own desktop layer doesn't treat it as the icons), and the
 //! WorkerW child on 0x052C. Nothing is made when a real Progman exists (Explorer is the shell).
-//! OFF by default: with it on, komorebi's virtual-desktop COM code panics ("Class not registered", com/mod.rs) because
-//! a Progman exists but Explorer's ImmersiveShell does not. `aether { desktop_window = true }` turns it on - unsafe until
-//! com/mod.rs handles that error.
+//! `aether { desktop_window = false }` turns it off. com/mod.rs ignores this window when it checks for Explorer (it
+//! used to crash on it).
 
 use std::sync::Once;
 use windows::Win32::Foundation::HWND;
