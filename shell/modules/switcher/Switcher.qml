@@ -16,6 +16,7 @@ import qs.components
 import qs.components.misc
 import qs.services
 import qs.utils
+import qs.modules.aetherbar as AB
 
 Scope {
     id: root
@@ -87,29 +88,10 @@ Scope {
         onPressed: root.open ? root.cancel() : root.show(true, 0)
     }
 
-    // "wallpaper": open the launcher straight in its wallpaper picker
+    // "wallpaper" (IPC): Aether's wallpaper picker. The key itself is handled in daemons/Shortcuts.qml only - a
+    // second "wallpaper" shortcut here also opened Caelestia's launcher list on another monitor (two pickers).
     function openWallpaperPicker(): void {
-        ShellState.forActive().launcher = true;
-        wallpaperTimer.restart();
-    }
-
-    Timer {
-        id: wallpaperTimer
-
-        interval: 120
-        onTriggered: {
-            const search = ShellState.componentsForActive()?.find("launcherSearch");
-            if (search) {
-                search.text = `${GlobalConfig.launcher.actionPrefix}wallpaper `;
-                search.forceActiveFocus();
-            }
-        }
-    }
-
-    CustomShortcut {
-        name: "wallpaper"
-        description: "Open the wallpaper picker"
-        onPressed: root.openWallpaperPicker()
+        AB.AetherBarConfig.pickerTap();
     }
 
     IpcHandler {
