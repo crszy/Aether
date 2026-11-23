@@ -154,6 +154,14 @@ Singleton {
     // and pause it in game mode (Settings > Game mode > wallpaper) so it uses no GPU or CPU while you play.
     onWallpaperEngineRunningChanged: if (wallpaperEngineRunning) weOpenT.restart()
     onWeWantedChanged: if (wallpaperEngineRunning) weOpenT.restart()
+    // AetherWM's stand-in desktop (for WE) is black when WE isn't drawing: hide it then, or it covers every wallpaper
+    onWeShownChanged: deskT.restart()
+    Timer {
+        id: deskT
+        interval: 600
+        running: true   // once at start too
+        onTriggered: root.weControl(root.weShown ? "desktop-show" : "desktop-hide")
+    }
     onGamePauseWallpaperChanged: if (weShown) weControl(gamePauseWallpaper ? "pause" : "play")
     function weControl(action) {
         Quickshell.execDetached(["powershell.exe", "-NoProfile", "-WindowStyle", "Hidden", "-ExecutionPolicy", "Bypass",
