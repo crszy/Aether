@@ -3,6 +3,7 @@
 import Quickshell
 import Quickshell.Wayland
 import QtQuick
+import qs.services as Cae
 
 // Reads how bright your wallpaper is in each part of the screen (a 64 x 36 grid) and gives it to Look.lumGrid.
 // The widgets use it to choose dark text on a light wallpaper and light text on a dark one.
@@ -15,7 +16,7 @@ PanelWindow {
     property real sh: 1080
     property real ratio: 16 / 9      // width / height of the wallpaper picture
 
-    visible: Look.adapt && path !== ""
+    visible: Look.adapt && path !== "" && !Cae.WinSettings.weShown
     implicitWidth: 2
     implicitHeight: 2
     color: "transparent"

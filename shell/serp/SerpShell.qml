@@ -42,7 +42,7 @@ Scope {
         }
     }
     Loader {
-        active: !performanceMode && Cae.WinSettings.mixWallpaper === "serp"
+        active: !performanceMode && Cae.WinSettings.wallpaperLayer === "serp"   // off while Wallpaper Engine shows
         sourceComponent: WallpaperEngine {}
     }
     Loader {

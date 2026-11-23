@@ -130,7 +130,7 @@ Scope {
 
       LazyLoader {
 
-        active: Cae.WinSettings.mixWallpaper === "noctalia"
+        active: Cae.WinSettings.wallpaperLayer === "noctalia"   // off while Wallpaper Engine shows
 
         Overview {}
 

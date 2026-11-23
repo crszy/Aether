@@ -119,8 +119,10 @@ Singleton {
         }
         if (cur === adapter.weLastFile)
             return;
-        // the first time we see WE, its old selection is not a new pick (Aether's wallpaper stays)
-        adapter.weLastPickAt = adapter.weLastFile === "" ? 0 : Date.now();
+        // the first time we see WE (or after windows.json was reset), date its pick by WE's config file, not 0:
+        // a 0 put Aether's wallpaper over the WE one you picked last (the "wallpaper glitch")
+        const wc = Win.FsUtils.statPath("C:/Program Files (x86)/Steam/steamapps/common/wallpaper_engine/config.json");
+        adapter.weLastPickAt = adapter.weLastFile === "" ? (wc && wc.mtimeMs ? wc.mtimeMs : 0) : Date.now();
         adapter.weLastFile = cur;
         weCheckPick();
     }

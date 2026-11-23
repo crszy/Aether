@@ -3,6 +3,7 @@
 import Quickshell
 import Quickshell.Wayland
 import QtQuick
+import qs.services as Cae
 
 // Infinite Desktop: the wallpaper moves with the canvas, slower than the windows (parallax), so moving around feels
 // like travelling over a big picture. It is the same picture as the wallpaper, drawn over it while Infinite Desktop
@@ -24,7 +25,7 @@ PanelWindow {
     // crashed Qt's Wayland client (QWaylandWindow::calculateExposure, seen on Artix with NVIDIA)
     // V4.84: only while Infinite Desktop is on (and while it fades out): a whole-screen surface and a big picture
     // sat in memory all the time before. It is mapped once when you turn the canvas on, not on every change
-    readonly property bool needed: picture && Wm.hypr && Infinite.wallOn && !Look.lite && (Infinite.on || k > 0.001)
+    readonly property bool needed: !Cae.WinSettings.weShown && picture && Wm.hypr && Infinite.wallOn && !Look.lite && (Infinite.on || k > 0.001)
     visible: needed
     color: "transparent"
     anchors { top: true; bottom: true; left: true; right: true }

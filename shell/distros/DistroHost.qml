@@ -65,7 +65,7 @@ Scope {
     }
 
     Variants {
-        model: root.full && root.gnome ? Quickshell.screens : []
+        model: root.full && root.gnome && Cae.WinSettings.wallpaperLayer !== "off" ? Quickshell.screens : []   // steps aside for Wallpaper Engine
         GnomeWallpaper {
             required property var modelData
             screen: modelData

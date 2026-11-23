@@ -54,7 +54,7 @@ Scope {
             LockPlacementPreparer {}
 
             Loader {
-                active: SettingsData.blurredWallpaperLayer && CompositorService.isNiri
+                active: SettingsData.blurredWallpaperLayer && CompositorService.isNiri && Cae.WinSettings.wallpaperLayer !== "off"
                 asynchronous: false
                 sourceComponent: BlurredWallpaperBackground {}
             }

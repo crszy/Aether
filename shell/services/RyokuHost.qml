@@ -17,7 +17,7 @@ Singleton {
     // AetherCompat.AetherParts in Ryoku). Its lock (qylock) is its own instance and needs none of this.
     readonly property var parts: ({
         "bar": WinSettings.mixBar === "ryoku",
-        "wallpaper": WinSettings.mixWallpaper === "ryoku",
+        "wallpaper": WinSettings.wallpaperLayer === "ryoku",   // off while Wallpaper Engine shows
         "widgets": WinSettings.mixDesktopWidgets === "ryoku",
         "dock": WinSettings.mixDock === "ryoku",
         "notifs": WinSettings.mixNotifs === "ryoku",

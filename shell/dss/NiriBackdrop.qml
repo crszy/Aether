@@ -3,6 +3,7 @@
 import Quickshell
 import Quickshell.Wayland
 import QtQuick
+import qs.services as Cae
 import QtQuick.Effects
 
 // niri only: the overview's backdrop (SUPER + Tab) is your wallpaper, blurred and a little darker, behind the
@@ -12,7 +13,7 @@ PanelWindow {
     screen: Mon.screen
     id: bd
     property string path: ""
-    visible: Wm.niri && path !== ""
+    visible: Wm.niri && path !== "" && !Cae.WinSettings.weShown
     color: "#101114"
     anchors { top: true; bottom: true; left: true; right: true }
     exclusionMode: ExclusionMode.Ignore
