@@ -190,6 +190,10 @@ StyledWindow {
 
             panel: panels.launcher
             deformAmount: 0.1
+            // Aether liquid glass: the launcher draws its own glass (Wrapper.qml), so no opaque blob behind it
+            readonly property bool glassy: panels.launcher.centred && WinSettings.glass === "liquid" && !WinSettings.distroMode
+            implicitWidth: glassy ? 0 : panel.width
+            implicitHeight: glassy ? 0 : panel.height
         }
 
         PanelBg {

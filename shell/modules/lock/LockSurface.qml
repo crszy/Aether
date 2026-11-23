@@ -226,7 +226,7 @@ WlSessionLockSurface {
         id: wallpaperBackground
 
         Visual {
-            source: Wallpapers.current
+            source: Wallpapers.current ? "file:///" + Wallpapers.current.split("\\").join("/") : ""
             playing: PersistentState.wallpaperPlaying && !WinSettings.saving
         }
     }

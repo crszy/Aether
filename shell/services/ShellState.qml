@@ -2,6 +2,7 @@ pragma Singleton
 
 import QtQuick
 import Quickshell
+import Quickshell.Windows as QW
 import Caelestia
 import qs.components
 import qs.services
@@ -18,6 +19,19 @@ Singleton {
             if (s.modelData === screen)
                 return s;
         return null;
+    }
+
+    // the screen under the mouse (the monitor you clicked on), not the one with the focused app
+    function forCursor(): ScreenState {
+        for (const o of states.instances)   // already open somewhere: that one, so the key closes it
+            if (o.launcher)
+                return o;
+        const c = QW.Input.cursorPosition();
+        if (c && c.screen)
+            for (const s of states.instances)
+                if (s.modelData.name === c.screen)
+                    return s;
+        return forActive();
     }
 
     function forActive(): ScreenState {

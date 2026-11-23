@@ -66,9 +66,25 @@ Item {
             fontStyle: Tokens.font.icon.builders.extraLarge.scale(2).weight(Font.DemiBold).build()
         }
 
+        // Aether (Windows): Visual's cached still never shows here (grey tile), so stills use a plain Image;
+        // videos keep Visual for their moving preview
+        readonly property string fileUrl: root.modelData.path ? "file:///" + root.modelData.path.split("\\").join("/") : ""
+        readonly property bool isVideo: /\.(mp4|webm|mkv|mov|avi)$/i.test(root.modelData.path || "")
+
+        Image {
+            anchors.fill: parent
+            visible: !image.isVideo
+            source: image.isVideo ? "" : image.fileUrl
+            sourceSize: Qt.size(width * 2, height * 2)
+            fillMode: Image.PreserveAspectCrop
+            asynchronous: true
+            cache: true
+        }
+
         Visual {
             anchors.fill: parent
-            source: root.modelData.path
+            visible: image.isVideo
+            source: image.isVideo ? image.fileUrl : ""
             playing: (root.PathView.isCurrentItem && PersistentState.wallpaperPlaying) || stateLayer.containsMouse
         }
     }

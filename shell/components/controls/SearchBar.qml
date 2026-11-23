@@ -51,6 +51,7 @@ TextFieldBase {
         opacity: root.text ? 0 : 1
 
         Behavior on opacity {
+            enabled: !root.text // hide at once on the first key, the fade lagged behind typing
             Anim {
                 type: Anim.DefaultEffects
             }

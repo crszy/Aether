@@ -8,6 +8,7 @@ import qs.components
 import qs.components.controls
 import qs.services
 import qs.modules.launcher.services
+import qs.modules.aetherbar
 
 Item {
     id: root
@@ -26,7 +27,7 @@ Item {
         id: listWrapper
 
         implicitWidth: list.width
-        implicitHeight: list.height + root.padding
+        implicitHeight: list.height + (list.idle ? 0 : root.padding)
 
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.bottom: search.top
@@ -121,6 +122,19 @@ Item {
             }
 
             target: root.screenState
+        }
+
+        // Aether: the wallpaper picker key (Super+W / `aether walls`) while the launcher is up hands over to
+        // Aether's own picker (same wallpaper folder, Paths.wallsdir): the launcher shrinks back into the middle
+        // of the screen as the picker grows out of it, so the one panel seems to morph into the other.
+        Connections {
+            function onPickerOpenChanged(): void {
+                if (!AetherBarConfig.pickerOpen || !root.screenState.launcher)
+                    return;
+                root.screenState.launcher = false;
+            }
+
+            target: AetherBarConfig
         }
     }
 }

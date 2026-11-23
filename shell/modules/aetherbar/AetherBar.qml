@@ -10,6 +10,7 @@ import QtQuick.Effects
 import Quickshell
 import Quickshell.Wayland
 import qs.services
+import qs.components.effects
 
 Variants {
     model: Screens.screens
@@ -59,6 +60,7 @@ Variants {
         }
 
         component Island: Rectangle {
+            id: isl
             radius: bar.full ? 0 : Math.max(AetherBarConfig.radius, Math.min(bar.h / 2, bar.frameR - bar.gap))
             topLeftRadius: bar.full ? bar.frameR : radius
             topRightRadius: bar.full ? bar.frameR : radius
@@ -75,7 +77,7 @@ Variants {
                 radius: parent.radius
                 topLeftRadius: parent.topLeftRadius
                 topRightRadius: parent.topRightRadius
-                color: parent.color
+                color: Qt.alpha(AetherStyle.surface, Math.max(parent.color.a, 0.5))
                 layer.enabled: visible
                 layer.effect: MultiEffect {
                     shadowEnabled: true
@@ -83,6 +85,21 @@ Variants {
                     shadowOpacity: 0.35
                     shadowBlur: 0.6
                     shadowVerticalOffset: 3
+                }
+            }
+            // Liquid Glass (windows.json "glass": "liquid", Settings > Appearance): the wallpaper behind the island,
+            // lensed and blurred, tinted with the bar colour at the bar's opacity. Drawn over the island's flat fill.
+            Loader {
+                anchors.fill: parent
+                active: WinSettings.glass === "liquid" && !WinSettings.distroMode
+                sourceComponent: LiquidGlass {
+                    radius: bar.full ? 0 : isl.radius
+                    bezel: 10
+                    refraction: 8
+                    source: Wallpapers.current ? "file:///" + Wallpapers.current.split("\\").join("/") : ""
+                    screenSize: Qt.size(bar.modelData.width, bar.modelData.height)
+                    windowOrigin: Qt.point(0, 0)
+                    tint: Qt.alpha(AetherStyle.surface, Math.min(0.55, AetherBarConfig.barOpacity * 0.45))
                 }
             }
         }
