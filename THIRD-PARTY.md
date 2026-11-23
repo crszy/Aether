@@ -2,7 +2,7 @@
 
 | Where | Project | Licence |
 | --- | --- | --- |
-| `shell/` (base) | [Caelestia shell](https://github.com/caelestia-dots/shell) | GPL-3.0 (`shell/LICENSE`) |
+| `shell/` (base) | [Caelestia shell](https://github.com/caelestia-dots/shell) | GPL-3.0 (`shell/LICENSE-GPL-3.0`); Aether's shell is AGPL-3.0-or-later (`shell/LICENSE`, `shell/NOTICE.md`) |
 | `shell/end4/` | [end-4 / dots-hyprland](https://github.com/end-4/dots-hyprland) | GPL-3.0 (`shell/end4/LICENSE`) |
 | `shell/dms/` | [DankMaterialShell](https://github.com/AvengeMedia/DankMaterialShell) | MIT (`shell/dms/LICENSE`) |
 | `shell/noctalia/` | [Noctalia](https://github.com/noctalia-dev/noctalia-shell) | MIT (`shell/noctalia/LICENSE`) |

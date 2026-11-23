@@ -95,8 +95,8 @@ Licences: see [THIRD-PARTY.md](THIRD-PARTY.md).
 
 ## Licence
 
-GPL-3.0 (`LICENSE`), except `aetherwm/` (Komorebi License 2.0.0, personal non-commercial use, see
+AGPL-3.0-or-later (`LICENSE`; the GPL-3.0 text it builds on is kept as `LICENSE-GPL-3.0`), except `aetherwm/` (Komorebi License 2.0.0, personal non-commercial use, see
 `aetherwm/LICENSE.md`), `engine/` (LGPL-3.0, like Quickshell), and ported code, which keeps its own licence (DMS and
-Noctalia MIT, Zenith public domain, `tools/m3shapes` Apache-2.0).
+Noctalia MIT, DarkShadowShell MIT, serpantinum AGPL-3.0, Zenith public domain, `tools/m3shapes` Apache-2.0).
 
 The old native ImGui Aether (v1.x) is on the [`native-v1`](https://github.com/crszy/aether/tree/native-v1) branch.
