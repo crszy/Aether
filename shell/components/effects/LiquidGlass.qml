@@ -1,5 +1,6 @@
 import QtQuick
 import Quickshell
+import qs.services as Cae
 
 // Apple-style Liquid Glass background for one of Aether's own panels (windows.json "glass": "liquid").
 // Aether knows which wallpaper is behind its panels, so the glass samples that picture directly: lens edges,
@@ -55,7 +56,8 @@ Item {
         Image {
             id: pic
             anchors.fill: parent
-            source: root.source
+            // while Wallpaper Engine shows, reflect a still of the live wallpaper, not the hidden static one
+            source: Cae.WinSettings.weShown && Cae.WinSettings.wePreview !== "" ? "file:///" + Cae.WinSettings.wePreview : root.source
             sourceSize: root.screenSize
             fillMode: Image.PreserveAspectCrop
             asynchronous: true

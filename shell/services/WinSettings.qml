@@ -95,6 +95,21 @@ Singleton {
     // wallpaper/path.txt. Pick a normal wallpaper in Aether and WE is stopped, so it holds no memory or GPU.
     property bool weWanted: false
     readonly property bool weShown: wallpaperEngineRunning && weWanted
+    // a still of the live wallpaper (its workshop preview), so Liquid Glass reflects WE instead of the static picture
+    readonly property string wePreview: wePreviewFor(adapter.weLastFile)
+    function wePreviewFor(sel) {
+        const m = /(?:^|\|)Monitor0=([^|]+)/.exec(sel || "") || /=([^|]+)/.exec(sel || "");
+        if (!m || typeof Win.FsUtils.statPath !== "function")
+            return "";
+        const f = m[1].split(String.fromCharCode(92)).join("/");
+        const dir = f.substring(0, f.lastIndexOf("/"));
+        for (const n of ["preview.jpg", "preview.png", "preview.gif", "preview.jpeg"]) {
+            const s = Win.FsUtils.statPath(dir + "/" + n);
+            if (s && s.mtimeMs)
+                return dir + "/" + n;
+        }
+        return /\.(jpg|jpeg|png|bmp|webp)$/i.test(f) ? f : "";
+    }
     FileView {
         path: "C:/Program Files (x86)/Steam/steamapps/common/wallpaper_engine/config.json"
         watchChanges: true
@@ -119,6 +134,11 @@ Singleton {
         }
         if (cur === adapter.weLastFile)
             return;
+        if (cur === "") {   // WE was emptied (Aether's "stop" after you picked a normal wallpaper): not a WE pick
+            adapter.weLastFile = "";
+            weCheckPick();
+            return;
+        }
         // the first time we see WE (or after windows.json was reset), date its pick by WE's config file, not 0:
         // a 0 put Aether's wallpaper over the WE one you picked last (the "wallpaper glitch")
         const wc = Win.FsUtils.statPath("C:/Program Files (x86)/Steam/steamapps/common/wallpaper_engine/config.json");

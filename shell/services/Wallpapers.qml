@@ -116,7 +116,15 @@ Searcher {
         warmProc.running = true;
     }
 
-    onActualCurrentChanged: warmTimer.restart()
+    onActualCurrentChanged: {
+        warmTimer.restart();
+        // a whole distro (Debian) draws its own wallpaper: the one you pick anywhere in Aether goes there too
+        if (WinSettings.loaded && WinSettings.distroMode && actualCurrent !== "") {
+            const p = String(actualCurrent).split(String.fromCharCode(92)).join("/");
+            if (WinSettings.distroWallpaper !== p)
+                WinSettings.distroWallpaper = p;
+        }
+    }
     onListChanged: warmTimer.restart()
 
     Timer {
